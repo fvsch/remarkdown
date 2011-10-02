@@ -10,7 +10,7 @@ rather flexible.
 -   `rmd-h1-uppercase`: uppercase H1.
 -   `rmd-h1-underline`: add a line of “=” signs to H1.
 -   `rmd-h2-underline`: add a line of “-” signs to H2.
--   `rmd-em-star: use “*” signs for emphasis (default).
+-   `rmd-em-star`: use “*” signs for emphasis (default).
 -   `rmd-em-underscore`: use “_” signs for emphasis.
 -   `rmd-strong-star`: use “*” signs for strong emphasis (default).
 -   `rmd-strong-underscore`: use “_” signs for strong emphasis.
