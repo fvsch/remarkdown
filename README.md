@@ -43,5 +43,5 @@ See `OPTIONS.md` and `ISSUES.md` for details.
 
 Both `remarkdown.css` and the optional script `rmd-print.js` are free software under the [DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE][WTFPL].
 
-[CPINFO_RMD]: http://covertprestige.info/css/remarkdown/
-[WTFPL]: http://covertprestige.info/css/remarkdown/COPYING
+[CPINFO_RMD]: http://fvsch.com/code/remarkdown/
+[WTFPL]: http://fvsch.com/code/remarkdown/COPYING
