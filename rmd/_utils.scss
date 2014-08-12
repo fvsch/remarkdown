@@ -1,0 +1,47 @@
+// ------------------------
+// Utilities for ReMarkdown
+// ------------------------
+
+// Output a selector including the option name, depending on
+// the content of $defaults and the value of $output_all_styles.
+// May output an unused placeholder selector (%rmd-void) if
+// $output_all_styles is false and the option is not in
+// $defaults, which drops the entire block from the output.
+@function sel($option:null) {
+	$value: "%rmd-void";
+	@if $option == null {
+		$value: "[" + $attr + "]";
+	}
+	@else {
+		$query: "[" + $attr + "~=" + $option + "]";
+		@if index($defaults, $option) {
+			$value: "[" + $attr + "], " + $query;
+		}
+		@else if $output_all_styles {
+			@return $query;
+		}
+	}
+	@return $value;
+}
+
+// Get a margin value in em from $margins.
+// If not set, returns a value of 1 line.
+@function get-margin($element, $direction) {
+	$elmargins: map-get($margins, $element);
+	@if $elmargins != null {
+		$num: map-get($elmargins, $direction);
+		@if $num != null {
+			@return $line * $num;
+		}
+	}
+	@return $line * 1;
+}
+
+// Small utility to repeat a string
+@function multi($string, $times) {
+	$result: "";
+	@for $i from 1 through $times {
+		$result: $result + $string;
+	}
+	@return $result;
+}

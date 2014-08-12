@@ -1,0 +1,43 @@
+
+// ----------------
+// Option fallbacks
+// ----------------
+
+// Spacing
+
+$lineratio: 1.5 !default;
+$margins: (h1:(top:2), h2:(top:2)) !default;
+
+// Style alternatives
+
+$defaults: hn-hash ul-hyphen em-star strong-star a-bracket pre-indent code-tick hr-star !default;
+
+// Fonts
+
+$set_font_family: true !default;
+$reset_font_styles: true !default;
+// Not just "monospace" once
+// -> http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/
+$font: monospace, monospace !default;
+$font_code: inherit !default;
+
+// Output type
+
+$attr: "data-rmd" !default;
+$output_all_styles: true !default;
+$header_comment: true !default;
+
+// Markers
+
+$hr_stars:     "* * * *" !default;
+$hr_hyphens:   "-------" !default;
+
+// ---------------
+// Other variables
+// ---------------
+
+$version: "2.0.0b";
+$line: $lineratio * 1em;
+$hn_hash:      "#";
+$h1_underline: "==========";
+$h2_underline: "----------";

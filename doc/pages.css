@@ -1,0 +1,86 @@
+/*
+	Useful styles to complete the ReMarkdown look.
+*/
+::before, ::after {
+	opacity: .5;
+}
+
+body, [data-rmd] {
+	font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
+}
+pre, [data-rmd] pre,
+code, [data-rmd] code {
+	font-family: Courier, "Courier New", monospace;
+}
+pre, [data-rmd] pre {
+	white-space: pre-wrap;
+}
+@media (max-width: 700px) {
+	[data-rmd][data-rmd] pre {
+		margin-left: 0;
+	}
+}
+
+/*
+	Page styles, unrelated to ReMarkdown
+*/
+
+html {
+	background-color: white;
+	color: #202020;
+	font-size: 100%;
+}
+
+body {
+	max-width: 660px;
+	margin: 30px auto;
+	padding: 40px 80px;
+}
+
+@media (min-width: 901px) {
+	html {
+		background-color: #EEE;
+	}
+	body {
+		background-color: white;
+		border: 1px solid #DDD;
+		box-shadow: 3px 3px 3px -2px #DDD;
+	}
+}
+
+@media (max-width: 900px) {
+	body { margin: 0 auto; }
+}
+
+@media (max-width: 700px) {
+	body { padding: 30px; }
+}
+
+a {
+	color: green;
+	text-decoration: none;
+}
+
+nav {
+	margin: 0 0 4em;
+	text-align: right;
+}
+nav > span {
+	float: left;
+}
+@media (max-width: 450px) {
+	nav > * { display: block; padding-bottom: .4em; }
+}
+
+.example {
+	margin: 1.5em -30px;
+	padding: .5em 30px;
+	background: #EEF;
+}
+
+.example code {
+	font-family: inherit;
+	padding: 1px .5ch;
+	background-color: white;
+	border: solid 1px #CCC;
+}

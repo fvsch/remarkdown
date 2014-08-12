@@ -1,77 +1,73 @@
 /*
 	ReMarkdown 2.0.0b - http://fvsch.com/code/remarkdown/
 	[license] WTFPL - http://fvsch.com/code/remarkdown/COPYING
-	[build info] Styles: all. Defaults: hn-hash ul-hyphen em-star strong-star a-bracket pre-indent code-tick hr-star
+	[build info] Styles: all. Defaults: none
 */
-[data-rmd] {
+[data-rmd-test] {
   line-height: 1.5;
-  font-family: monospace, monospace;
 }
-[data-rmd] h1, [data-rmd] h2, [data-rmd] h3, [data-rmd] h4, [data-rmd] h5, [data-rmd] h6 {
+[data-rmd-test] h1, [data-rmd-test] h2, [data-rmd-test] h3, [data-rmd-test] h4, [data-rmd-test] h5, [data-rmd-test] h6 {
   font-size: inherit;
   font-weight: inherit;
 }
-[data-rmd] h1 {
-  margin-top: 3em;
-  margin-bottom: 1.5em;
-}
-[data-rmd] h2 {
-  margin-top: 3em;
-  margin-bottom: 1.5em;
-}
-[data-rmd] h3, [data-rmd] h4, [data-rmd] h5, [data-rmd] h6 {
+[data-rmd-test] h1 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-[data-rmd] p {
+[data-rmd-test] h2 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-[data-rmd] ul {
+[data-rmd-test] h3, [data-rmd-test] h4, [data-rmd-test] h5, [data-rmd-test] h6 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-[data-rmd] ol {
+[data-rmd-test] p {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-[data-rmd] ul, [data-rmd] ol {
+[data-rmd-test] ul {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+[data-rmd-test] ol {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+[data-rmd-test] ul, [data-rmd-test] ol {
   margin-left: 3ch;
   padding: 0;
   list-style: none;
 }
-[data-rmd] ul > li::before {
+[data-rmd-test] ul > li::before {
   float: left;
   margin-left: -3ch;
   width: 1ch;
 }
-[data-rmd] ol {
+[data-rmd-test] ol {
   counter-reset: item;
 }
-[data-rmd] ol > li {
+[data-rmd-test] ol > li {
   counter-increment: item;
 }
-[data-rmd] ol > li::before {
+[data-rmd-test] ol > li::before {
   float: left;
   margin-left: -4ch;
   width: 3ch;
   text-align: right;
   content: counter(item) ".";
 }
-[data-rmd] em, [data-rmd] strong {
+[data-rmd-test] em, [data-rmd-test] strong {
   font-style: normal;
   font-weight: normal;
 }
-[data-rmd] pre, [data-rmd] code, [data-rmd] kbd, [data-rmd] samp, [data-rmd] tt {
-  font-family: inherit;
-}
-[data-rmd] pre {
+[data-rmd-test] pre {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   -moz-tab-size: 4;
   tab-size: 4;
 }
-[data-rmd] blockquote {
+[data-rmd-test] blockquote {
   position: relative;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -80,7 +76,7 @@
   padding: 0;
   padding-left: 3ch;
 }
-[data-rmd] blockquote::before {
+[data-rmd-test] blockquote::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -89,7 +85,7 @@
   white-space: pre;
   content: ">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A";
 }
-[data-rmd] hr {
+[data-rmd-test] hr {
   height: 1.5em;
   line-height: 1.5em;
   margin-top: 1.5em;
@@ -98,64 +94,64 @@
   color: inherit;
 }
 
-[data-rmd] h1::before, [data-rmd~=hn-hash] h1::before {
+[data-rmd-test~=hn-hash] h1::before {
   content: "# ";
 }
 
-[data-rmd~=hn-close] h1::after {
+[data-rmd-test~=hn-close] h1::after {
   content: " #";
 }
 
-[data-rmd] h2::before, [data-rmd~=hn-hash] h2::before {
+[data-rmd-test~=hn-hash] h2::before {
   content: "## ";
 }
 
-[data-rmd~=hn-close] h2::after {
+[data-rmd-test~=hn-close] h2::after {
   content: " ##";
 }
 
-[data-rmd] h3::before, [data-rmd~=hn-hash] h3::before {
+[data-rmd-test~=hn-hash] h3::before {
   content: "### ";
 }
 
-[data-rmd~=hn-close] h3::after {
+[data-rmd-test~=hn-close] h3::after {
   content: " ###";
 }
 
-[data-rmd] h4::before, [data-rmd~=hn-hash] h4::before {
+[data-rmd-test~=hn-hash] h4::before {
   content: "#### ";
 }
 
-[data-rmd~=hn-close] h4::after {
+[data-rmd-test~=hn-close] h4::after {
   content: " ####";
 }
 
-[data-rmd] h5::before, [data-rmd~=hn-hash] h5::before {
+[data-rmd-test~=hn-hash] h5::before {
   content: "##### ";
 }
 
-[data-rmd~=hn-close] h5::after {
+[data-rmd-test~=hn-close] h5::after {
   content: " #####";
 }
 
-[data-rmd] h6::before, [data-rmd~=hn-hash] h6::before {
+[data-rmd-test~=hn-hash] h6::before {
   content: "###### ";
 }
 
-[data-rmd~=hn-close] h6::after {
+[data-rmd-test~=hn-close] h6::after {
   content: " ######";
 }
 
-[data-rmd~=h1-underline] h1, [data-rmd~=h2-underline] h2 {
+[data-rmd-test~=h1-underline] h1, [data-rmd-test~=h2-underline] h2 {
   display: table;
   overflow: hidden;
   position: relative;
   padding-bottom: 1.5em;
 }
-[data-rmd~=h1-underline] h1::before, [data-rmd~=h2-underline] h2::before {
+[data-rmd-test~=h1-underline] h1::before, [data-rmd-test~=h2-underline] h2::before {
   content: none;
 }
-[data-rmd~=h1-underline] h1::after, [data-rmd~=h2-underline] h2::after {
+[data-rmd-test~=h1-underline] h1::after, [data-rmd-test~=h2-underline] h2::after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -165,85 +161,84 @@
   word-break: break-all;
 }
 
-[data-rmd~=h1-underline] h1::after {
+[data-rmd-test~=h1-underline] h1::after {
   content: "========================================================================================================================";
 }
 
-[data-rmd~=h2-underline] h2::after {
+[data-rmd-test~=h2-underline] h2::after {
   content: "------------------------------------------------------------------------------------------------------------------------";
 }
 
-[data-rmd] em::before, [data-rmd] em::after, [data-rmd~=em-star] em::before, [data-rmd~=em-star] em::after {
+[data-rmd-test~=em-star] em::before, [data-rmd-test~=em-star] em::after {
   content: "*";
 }
 
-[data-rmd~=em-underscore] em::before, [data-rmd~=em-underscore] em::after {
+[data-rmd-test~=em-underscore] em::before, [data-rmd-test~=em-underscore] em::after {
   content: "_";
 }
 
-[data-rmd] strong::before, [data-rmd] strong::after, [data-rmd~=strong-star] strong::before, [data-rmd~=strong-star] strong::after {
+[data-rmd-test~=strong-star] strong::before, [data-rmd-test~=strong-star] strong::after {
   content: "**";
 }
 
-[data-rmd~=strong-underscore] strong::before, [data-rmd~=strong-underscore] strong::after {
+[data-rmd-test~=strong-underscore] strong::before, [data-rmd-test~=strong-underscore] strong::after {
   content: "__";
 }
 
-[data-rmd] a::before, [data-rmd~=a-bracket] a::before {
+[data-rmd-test~=a-bracket] a::before {
   content: "[";
 }
-[data-rmd] a::after, [data-rmd~=a-bracket] a::after {
+[data-rmd-test~=a-bracket] a::after {
   content: "]";
 }
 
-[data-rmd~=a-showurl] a[href]::before {
+[data-rmd-test~=a-showurl] a[href]::before {
   content: "[";
 }
-[data-rmd~=a-showurl] a[href]::after {
+[data-rmd-test~=a-showurl] a[href]::after {
   content: "](" attr(href) ")";
   word-break: break-all;
 }
 
-[data-rmd~=ul-star] ul > li::before {
+[data-rmd-test~=ul-star] ul > li::before {
   content: "*";
 }
 
-[data-rmd~=ul-plus] ul > li::before {
+[data-rmd-test~=ul-plus] ul > li::before {
   content: "+";
 }
 
-[data-rmd] ul > li::before, [data-rmd~=ul-hyphen] ul > li::before {
+[data-rmd-test~=ul-hyphen] ul > li::before {
   content: "-";
 }
 
-[data-rmd] pre, [data-rmd~=pre-indent] pre {
+[data-rmd-test~=pre-indent] pre {
   margin-left: 4ch;
 }
 
-[data-rmd] :not(pre) > code::before,
-[data-rmd] :not(pre) > code::after, [data-rmd~=code-tick] :not(pre) > code::before,
-[data-rmd~=code-tick] :not(pre) > code::after {
+[data-rmd-test~=code-tick] :not(pre) > code::before,
+[data-rmd-test~=code-tick] :not(pre) > code::after {
   content: "`";
 }
 
-[data-rmd~=hr-center] hr {
+[data-rmd-test~=hr-center] hr {
   text-align: center;
 }
 
-[data-rmd] hr::before, [data-rmd~=hr-star] hr::before {
+[data-rmd-test~=hr-star] hr::before {
   content: "* * * *";
 }
 
-[data-rmd~=hr-hyphen] hr::before {
+[data-rmd-test~=hr-hyphen] hr::before {
   content: "-------";
 }
 
-[data-rmd~=table-marker] table {
+[data-rmd-test~=table-marker] table {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   border-collapse: collapse;
 }
-[data-rmd~=table-marker] td, [data-rmd~=table-marker] th {
+[data-rmd-test~=table-marker] td, [data-rmd-test~=table-marker] th {
   overflow: hidden;
   position: relative;
   padding: 0;
@@ -251,10 +246,10 @@
   vertical-align: top;
   font-weight: normal;
 }
-[data-rmd~=table-marker] th {
+[data-rmd-test~=table-marker] th {
   padding-bottom: 1.5em;
 }
-[data-rmd~=table-marker] th::after {
+[data-rmd-test~=table-marker] th::after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -262,15 +257,15 @@
   word-break: break-all;
   height: 1.5em;
 }
-[data-rmd~=table-marker] tr > :nth-child(1n+2) {
+[data-rmd-test~=table-marker] tr > :nth-child(1n+2) {
   padding-left: 3ch;
 }
-[data-rmd~=table-marker] tr > :nth-child(1n+2)::before {
+[data-rmd-test~=table-marker] tr > :nth-child(1n+2)::before {
   content: "|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A";
   position: absolute;
   left: 1ch;
   white-space: pre;
 }
-[data-rmd~=table-marker] tr > th:nth-child(1n+2)::after {
+[data-rmd-test~=table-marker] tr > th:nth-child(1n+2)::after {
   left: 3ch;
 }

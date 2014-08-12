@@ -1,0 +1,19 @@
+// --------------
+// Header comment
+// --------------
+
+@if $header_comment {
+	$output_all_styles_label: "";
+	@if $output_all_styles {
+		$output_all_styles_label: "all";
+	}
+	@else {
+		$output_all_styles_label: "defaults only";
+	}
+
+	/*
+		ReMarkdown #{$version} - http://fvsch.com/code/remarkdown/
+		[license] WTFPL - http://fvsch.com/code/remarkdown/COPYING
+		[build info] Styles: #{$output_all_styles_label}. Defaults: #{$defaults}
+	*/
+}

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ReMarkdown.css — HTML that looks like Markdown text</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="remarkdown.css">
+	<link rel="stylesheet" href="doc/pages.css">
+</head>
+<body>
+
+<nav data-rmd>
+	<span>ReMarkdown</span>
+	<em>about</em>
+	<a href="styles">styles</a>
+	<a href="config">config</a>
+</nav>
+
+<article data-rmd="h1-underline h2-underline">
+
+<h1>
+	You should use ReMarkdown!
+</h1>
+
+<p>
+	Is your HTML content looking all HTML-y and CSS-y? I bet it has great typography and carefully crafted negative space?
+</p>
+<p>
+	<em>Such ennui!</em> Ditch all this <code>@font-face</code> and <code>font-size</code> nonsense, and go with a good old plain text look instead!
+</p>
+
+<p>
+	That’s what ReMarkdown does: it takes your HTML and paints it so that it looks like <a href="http://daringfireball.net/projects/markdown/">Markdown</a>. Pretty nerdy, uh? By the way, the text you’re reading right now is not plain text, it’s good old HTML with H1s and Ps and BLOCKQUOTEs etc. Just do “Inspect Element” and you’ll see.
+</p>
+
+<p>
+	Using ReMarkdown is as simple as downloading <a href="remarkdown.css">remarkdown.css</a>, and declaring it like this:
+</p>
+
+<pre><code>&lt;!doctype html>
+&lt;html lang="en">
+&lt;head>
+	&lt;title>Using ReMarkdown&lt;/title>
+	<b>&lt;link rel="stylesheet" href="remarkdown.css"></b>
+&lt;/head>
+&lt;body <b>data-rmd</b>>
+	&lt;h1>Hello World&lt;/h1>
+	&lt;p>A paragraph.&lt;/p>
+&lt;/body>
+&lt;/html></code></pre>
+
+<p>
+	There’s a bunch of <a href="styles">alternative styles</a>. You can define your prefered styles using the <code>data-rmd</code> attribute, or when compiling from the Sass source. See the <a href="config">configuration guide</a> for details.
+</p>
+
+<h2>
+	Technicalities
+</h2>
+
+<p>
+	<a href="https://github.com/fvsch/remarkdown">ReMarkdown is on Github</a>, report bugs there if any.
+	The <a href="COPYING">DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE</a> applies.
+</p>
+
+<h3>
+	Browser support
+</h3>
+
+<p>
+	I’m targetting the most current browsers (mid-2014). Theoretically it should work on IE9+, but that’s a very much untested assertion.
+</p>
+
+<p>
+	I’m keeping around a <a href="legacy/">legacy ReMarkdown 1.0</a>. Released in 2011, it had partial IE8 support and used a different syntax. It will not be updated.
+</p>
+
+<h3>
+	Not a converter
+</h3>
+
+<p>
+	ReMarkdown is a <strong>stylesheet</strong>, not an HTML-to-Markdown converter. If you’re looking for one, there’s <a href="http://johnmacfarlane.net/pandoc/">pandoc</a> for instance.
+</p>
+
+</article>
+
+<?php include(dirname(__FILE__) . '/../analytics'); ?>
+
+</body>
+</html>
