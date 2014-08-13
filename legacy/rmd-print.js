@@ -1,4 +1,4 @@
-/* This script is a companion to remarkdown.css, by fvsch.com
+/* This script is a companion to remarkdown.css (1.0)
    License: Do What The Fuck You Want To Public License (WTFPL), Version 2
    http://fvsch.com/code/remarkdown/COPYING */
 
