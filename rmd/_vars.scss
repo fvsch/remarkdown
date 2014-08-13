@@ -14,11 +14,9 @@ $defaults: hn-hash ul-hyphen em-star strong-star a-bracket pre-indent code-tick 
 
 // Fonts
 
-$set_font_family: true !default;
-$reset_font_styles: true !default;
-// Not just "monospace" once
-// -> http://code.stephenmorley.org/html-and-css/fixing-browsers-broken-monospace-font-handling/
-$font: monospace, monospace !default;
+$set_font_styles: true !default;
+// Not just "monospace" or the font-size will shrink to 13px in most browsers!
+$font: MyFaveMonospaceFont, monospace !default;
 $font_code: inherit !default;
 
 // Output type

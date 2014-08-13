@@ -64,14 +64,11 @@ $font: monospace, monospace;
 // For elements that are traditionnaly monospace, use a different font?
 // $font_code: SomethingElse, monospace;
 
-// Should ReMarkdown try to define a font-family? It's generally useful
-// but if you want to define your fonts separately, set to false.
+// Should ReMarkdown try to define a font-family, and reset font sizes, styles
+// and weights? It's generally useful but if you want to define your fonts
+// styles separately, set this to false.
 // If false, $font and $font_code are ignored.
-$set_font_family: true;
-
-// Should ReMarkdown reset font sizes, styles and weights for elements
-// such as headings, EM, STRONG, etc.?
-$reset_font_styles: true;
+$set_font_styles: true;
 
 // Attribute name
 $attr: "data-rmd";

@@ -3,6 +3,23 @@
 	[license] WTFPL - http://fvsch.com/code/remarkdown/COPYING
 	[build info] Styles: all. Defaults: none
 */
+/*
+	These parts are easy to customize.
+	Maybe try a different font, or change the color or opacity of the
+	Markdown syntax markers (::before and ::after pseudo-elements)?
+*/
+[data-rmd-test] {
+  font-family: MyFaveMonospaceFont, monospace;
+}
+[data-rmd-test] ::before, [data-rmd-test] ::after {
+  /* e.g. color: red; opacity: .5; */
+}
+
+/*
+	Everything else is better left alone. Quite a few things can be
+	customized by making your own CSS build of ReMarkdown.
+	See http://fvsch.com/code/remarkdown/config
+*/
 [data-rmd-test] {
   line-height: 1.5;
 }
@@ -60,6 +77,9 @@
 [data-rmd-test] em, [data-rmd-test] strong {
   font-style: normal;
   font-weight: normal;
+}
+[data-rmd-test] pre, [data-rmd-test] code, [data-rmd-test] kbd, [data-rmd-test] samp, [data-rmd-test] tt {
+  font-family: inherit;
 }
 [data-rmd-test] pre {
   margin-top: 1.5em;

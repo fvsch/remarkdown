@@ -3,9 +3,25 @@
 	[license] WTFPL - http://fvsch.com/code/remarkdown/COPYING
 	[build info] Styles: all. Defaults: hn-hash ul-hyphen em-star strong-star a-bracket pre-indent code-tick hr-star
 */
+/*
+	These parts are easy to customize.
+	Maybe try a different font, or change the color or opacity of the
+	Markdown syntax markers (::before and ::after pseudo-elements)?
+*/
+[data-rmd] {
+  font-family: MyFaveMonospaceFont, monospace;
+}
+[data-rmd] ::before, [data-rmd] ::after {
+  /* e.g. color: red; opacity: .5; */
+}
+
+/*
+	Everything else is better left alone. Quite a few things can be
+	customized by making your own CSS build of ReMarkdown.
+	See http://fvsch.com/code/remarkdown/config
+*/
 [data-rmd] {
   line-height: 1.5;
-  font-family: monospace, monospace;
 }
 [data-rmd] h1, [data-rmd] h2, [data-rmd] h3, [data-rmd] h4, [data-rmd] h5, [data-rmd] h6 {
   font-size: inherit;
