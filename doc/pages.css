@@ -1,28 +1,37 @@
 /*
 	Useful styles to complete the ReMarkdown look.
 */
+
+/* Make the Markdown-like markers look cool */
 ::before, ::after {
-	opacity: .5;
+	opacity: .6;
+}
+:not(a)::before, :not(a)::after {
+	color: #205080;
 }
 
-body, [data-rmd] {
+/* Our own font-family. Also setting one for code elements */
+body, [data-rmd], [data-rmd-test] {
 	font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
 }
-pre, [data-rmd] pre,
-code, [data-rmd] code {
+pre, [data-rmd] pre, [data-rmd-test] pre,
+code, [data-rmd] code, [data-rmd-test] code {
 	font-family: Courier, "Courier New", monospace;
 }
-pre, [data-rmd] pre {
+
+/* Avoid losing space to display code examples on small screens */
+pre, [data-rmd] pre, [data-rmd-test] pre {
 	white-space: pre-wrap;
 }
 @media (max-width: 700px) {
-	[data-rmd][data-rmd] pre {
-		margin-left: 0;
+	[data-rmd] pre,
+	[data-rmd-test] pre {
+		margin-left: 0 !important;
 	}
 }
 
 /*
-	Page styles, unrelated to ReMarkdown
+	Other page styles, unrelated to ReMarkdown
 */
 
 html {
@@ -57,7 +66,15 @@ body {
 }
 
 a {
-	color: green;
+	color: #F02050;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+a:focus, a:active {
+	color: white;
+	background-color: #F02050;
 	text-decoration: none;
 }
 
