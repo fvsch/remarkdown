@@ -16,13 +16,11 @@
 	<em>config</em>
 </nav>
 
-<article data-rmd="h1-underline table-marker">
+<article data-rmd="h1-underline h2-underline">
 
 <h1>
 	ReMarkdown configuration
 </h1>
-
-<p>WARNING: THIS PAGE IS OUTDATED AND IN NEED OF A REWRITE</p>
 
 <h2>
 	HTML options for alternate styles
@@ -40,101 +38,78 @@
 &lt;/div></code></pre>
 
 <p>
-	Here is a list of all available styles. Note that if you use the <a href="remarkdown.css">default ReMarkdown build</a>, all the styles specified as “Default” are already active, so you don’t need to add them to the value of the <code>data-rmd</code> attribute.
+	The <a href="styles">Styles page</a> has a list and a preview of all available styles. Note that if you use the <a href="markdown.css">default ReMarkdown build</a> (aka <code>remarkdown.css</code>), all styles specified as “Default” are already active, so you don’t need to add them to the value of the <code>data-rmd</code> attribute.
 </p>
 
-<table>
-	<tr>
-		<th scope="col">Style name</th>
-		<th scope="col">Default?</th>
-		<th scope="col">Description</th>
-	</tr>
-	<tr>
-		<td>hn-hash</td>
-		<td>Yes</td>
-		<td>Add hashes at the start of titles</td>
-	</tr>
-	<tr>
-		<td>hn-close</td>
-		<td>—</td>
-		<td>Add hashes at the end of titles</td>
-	</tr>
-	<tr>
-		<td>h1-underline</td>
-		<td>—</td>
-		<td>Underline H1s with equals</td>
-	</tr>
-	<tr>
-		<td>h2-underline</td>
-		<td>—</td>
-		<td>Underline H2s with hyphens</td>
-	</tr>
-	<tr>
-		<td>ul-hyphen</td>
-		<td>Yes</td>
-		<td>Use “-” for bullets</td>
-	</tr>
-	<tr>
-		<td>ul-star</td>
-		<td>—</td>
-		<td>Use “*” for bullets</td>
-	</tr>
-	<tr>
-		<td>ul-plus</td>
-		<td>—</td>
-		<td>Use “+” for bullets</td>
-	</tr>
-	<tr>
-		<td>em-star</td>
-		<td>Yes</td>
-		<td>Use “*” signs for emphasis</td>
-	</tr>
-	<tr>
-		<td>em-underscore</td>
-		<td>—</td>
-		<td>Use “_” signs for emphasis</td>
-	</tr>
-	<tr>
-		<td>strong-star</td>
-		<td>Yes</td>
-		<td>Use “*” signs for strong emphasis</td>
-	</tr>
-	<tr>
-		<td>strong-underscore</td>
-		<td>—</td>
-		<td>Use “_” signs for strong emphasis</td>
-	</tr>
-	<tr>
-		<td>a-bracket</td>
-		<td>Yes</td>
-		<td>Add square brackets around links.</td>
-	</tr>
-	<tr>
-		<td>a-showurl</td>
-		<td>—</td>
-		<td>Show URLs after links</td>
-	</tr>
-	<tr>
-		<td>hr-center</td>
-		<td>—</td>
-		<td>Horizontally center the HR</td>
-	</tr>
-	<tr>
-		<td>del-gfm</td>
-		<td>—</td>
-		<td>GitHub-flavored Markdown style for DEL elements</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-</table>
+<h2>
+	Add your own CSS
+</h2>
+
+<p>
+	I strive to make ReMarkdown free of cosmetic choices. For instance, the layout and colors of this demo are <em>not</em> handled by <a href="remarkdown.css">remarkdown&shy;.css</a>. So you probably want to add a few CSS styles of your own to make the end result prettier. Here are a few suggestions.
+</p>
+
+<h3>
+	Make markers pop out
+</h3>
+
+<pre><code>[data-rmd] ::before,
+[data-rmd] ::after {
+	color: rgba(255, 0, 0, .5);
+}</code></pre>
+
+<h3>
+	Specify you own fonts
+</h3>
+
+<p>
+	ReMarkdown tells browsers to use their default <code>monospace</code> font, but you can always specify your own, as I did here:
+</p>
+
+<pre><code>/* remarkdown.css must be declared BEFORE this */
+
+[data-rmd] {
+	font-family: Menlo, Monaco, "DejaVu Sans Mono",
+		Consolas, monospace;
+}
+[data-rmd] pre {
+	font-family: Courier, "Courier New", monospace;
+}</code></pre>
+
+<p>
+	In this example I’m using two different monospace font-stacks, one without serifs (Menlo etc.) and one with slab serifs (Courier etc.), to differentiate between ordinary text and code blocks.
+</p>
+
+<p>
+	You could also use a font that is not monospace. A variable-width font whose design is not too tight (think: NOT HELVETICA) should give interesting results.
+</p>
+
+<h3>
+	Make titles big again
+</h3>
+
+<p>
+	ReMarkdown sets the <code>font-size</code> of headings to <code>1em</code> to better achieve that plain text look (since plain text editors and file formats use the same font size for all text). But if you want big titles anyway, it’s easy:
+</p>
+
+<pre><code>[data-rmd] h1 { font-size: 1.5em; }
+[data-rmd] h2 { font-size: 1.2em; }</code></pre>
+
+<p>
+	Alternatively, if you’re compiling your own build, there is an option to disallow ReMarkdown from setting any font style.
+</p>
+
+<h3>
+	Beware of selector specificity
+</h3>
+
+<p>
+	Most ReMarkdown selectors have a specificity of <code>0011</code> or in some cases <code>0012</code>. If your own selectors have similar weight, make sure you declare your own styles <em>after</em> <code>remarkdown.css</code>. Alternatively you can make use of id selectors or of the double-class trick:
+</p>
+
+<pre><code>[data-rmd][data-rmd] {
+	/* Selector matches and has a specificity of 0020. */
+}</code></pre>
 
 <h2>
 	Build a custom stylesheet with Sass
@@ -166,14 +141,12 @@
 </h3>
 
 <p>
-	By setting the <code>$output_all_styles</code> option to <code>false</code>, ReMarkdown will only output those styles that are listed in <code>$defaults</code>. This can be useful if you want to pick a set of default styles, don’t intend to ever declare the alternative styles for each element, and want to make a smaller CSS file.
+	By setting the <code>$output_all_styles</code> option to <code>false</code>, ReMarkdown will only output those styles that are listed in <code>$defaults</code>. This can be useful if you want to pick a set of default styles, don’t intend to ever use the alternative styles, and want to make a smaller CSS file.
 </p>
 
 <p>
 	Currently the default build with all styles included is close to 7.5 KB, while the same defaults with no alternative styles included is down to 4.0 KB.
 </p>
-
-…
 
 </article>
 

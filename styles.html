@@ -4,45 +4,181 @@
 	<meta charset="utf-8">
 	<title>ReMarkdown — Available styles</title>
 	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="remarkdown.css">
 	<link rel="stylesheet" href="doc/rmd-raw.css">
 	<link rel="stylesheet" href="doc/pages.css">
 </head>
 <body>
 
-<nav data-rmd-test="a-bracket em-star">
+<nav data-rmd>
 	<span>ReMarkdown</span>
 	<a href=".">about</a>
 	<em>styles</em>
 	<a href="config">config</a>
 </nav>
 
-<div data-rmd-test="h1-underline">
-	<h1>
-		List of available styles
-	</h1>
-	<p>
-		WARNING: THIS PAGE IS OUTDATED AND IN NEED OF A REWRITE
-	</p>
+<div data-rmd="h1-underline h2-underline table-marker">
+	<h1>List of available styles</h1>
+	<p>All styles that are listed as “Default” here will be active when using the default <a href="remarkdown.css">remarkdown.css</a> build. No need to specify <code>data-rmd="style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="config">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
+
+	<h2>Styles recap</h2>
+
+	<table>
+		<tr>
+			<th scope="col">Style name</th>
+			<th scope="col">Default</th>
+			<th scope="col">Description</th>
+		</tr>
+		<tr>
+			<td><a href="#hn-hash">hn-hash</a></td>
+			<td>Yes</td>
+			<td>Add hashes at the start of titles</td>
+		</tr>
+		<tr>
+			<td><a href="#hn-close">hn-close</a></td>
+			<td>—</td>
+			<td>Add hashes at the end of titles</td>
+		</tr>
+		<tr>
+			<td>h1-underline</td>
+			<td>—</td>
+			<td>Underline H1s with equals</td>
+		</tr>
+		<tr>
+			<td>h2-underline</td>
+			<td>—</td>
+			<td>Underline H2s with hyphens</td>
+		</tr>
+		<tr>
+			<td>ul-hyphen</td>
+			<td>Yes</td>
+			<td>Use “-” for bullets</td>
+		</tr>
+		<tr>
+			<td>ul-star</td>
+			<td>—</td>
+			<td>Use “*” for bullets</td>
+		</tr>
+		<tr>
+			<td>ul-plus</td>
+			<td>—</td>
+			<td>Use “+” for bullets</td>
+		</tr>
+		<tr>
+			<td>em-star</td>
+			<td>Yes</td>
+			<td>Use “*” signs for emphasis</td>
+		</tr>
+		<tr>
+			<td>em-underscore</td>
+			<td>—</td>
+			<td>Use “_” signs for emphasis</td>
+		</tr>
+		<tr>
+			<td>strong-star</td>
+			<td>Yes</td>
+			<td>Use “*” signs for strong emphasis</td>
+		</tr>
+		<tr>
+			<td>strong-underscore</td>
+			<td>—</td>
+			<td>Use “_” signs for strong emphasis</td>
+		</tr>
+		<tr>
+			<td>a-bracket</td>
+			<td>Yes</td>
+			<td>Add square brackets around links.</td>
+		</tr>
+		<tr>
+			<td>a-showurl</td>
+			<td>—</td>
+			<td>Show URLs after links</td>
+		</tr>
+		<tr>
+			<td>hr-star</td>
+			<td>Yes</td>
+			<td>Use “*” signs for HR</td>
+		</tr>
+		<tr>
+			<td>hr-hyphen</td>
+			<td>—</td>
+			<td>Use “-” signs for HR</td>
+		</tr>
+		<tr>
+			<td>hr-center</td>
+			<td>—</td>
+			<td>Horizontally center the HR</td>
+		</tr>
+		<tr>
+			<td>pre-indent</td>
+			<td>Yes</td>
+			<td>Left indent PRE by 4 spaces</td>
+		</tr>
+		<tr>
+			<td>code-tick</td>
+			<td>Yes</td>
+			<td>Wrap CODE in “`” (backticks)</td>
+		</tr>
+		<tr>
+			<td>del-gfm</td>
+			<td>—</td>
+			<td>Wrap DEL in “~~” (<a href="https://help.github.com/articles/github-flavored-markdown#strikethrough">GFM style</a>)</td>
+		</tr>
+		<tr>
+			<td>code-fence-tick</td>
+			<td>—</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>code-fence-tilde</td>
+			<td>—</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>code-fence-class</td>
+			<td>—</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>code-fence-wide</td>
+			<td>—</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>table-marker</td>
+			<td>—</td>
+			<td>Add markers to TABLE (<a href="https://michelf.ca/projects/php-markdown/extra/#table">syntax</a>)</td>
+		</tr>
+	</table>
+
+	<h2>Headings</h2>
+	<h3 id="hn-hash">Default: <code>hn-hash</code></h3>
 </div>
 
-<h2>Headings</h2>
-
 <div class="example" data-rmd-test="hn-hash">
-	<h1>H1 with <code>hn-hash</code> (default)</h1>
-	<h2>H2 with <code>hn-hash</code> (default)</h2>
-	<h3>H3 with <code>hn-hash</code> (default)</h3>
-	<h4>H4 with <code>hn-hash</code> (default)</h4>
-	<h5>H5 with <code>hn-hash</code> (default)</h5>
-	<h6>H6 with <code>hn-hash</code> (default)</h6>
+	<h1>Heading level 1</h1>
+	<h2>Heading level 2</h2>
+	<h3>Heading level 3</h3>
+	<h4>Heading level 4</h4>
+	<h5>Heading level 5</h5>
+	<h6>Heading level 6</h6>
+</div>
+
+<div data-rmd>
+	<h3 id="hn-close">Option: <code>hn-close</code></h3>
 </div>
 
 <div class="example" data-rmd-test="hn-hash hn-close">
-	<h1>H1 with <code>hn-hash</code> and <code>hn-close</code></h1>
-	<h2>H2 with <code>hn-hash</code> and <code>hn-close</code></h2>
-	<h3>H3 with <code>hn-hash</code> and <code>hn-close</code></h3>
-	<h4>H4 with <code>hn-hash</code> and <code>hn-close</code></h4>
-	<h5>H5 with <code>hn-hash</code> and <code>hn-close</code></h5>
-	<h6>H6 with <code>hn-hash</code> and <code>hn-close</code></h6>
+	<h1>Heading level 1</h1>
+	<h2>Heading level 2</h2>
+	<h3>Heading level 3</h3>
+	<h4>Heading level 4</h4>
+	<h5>Heading level 5</h5>
+	<h6>Heading level 6</h6>
+</div>
+
+<div data-rmd>
+	<h3>Options: <code>h1-underline</code> and <code>h2-underline</code></h3>
 </div>
 
 <div class="example" data-rmd-test="h1-underline h2-underline">
@@ -50,9 +186,20 @@
 	<h2>Underlined H2 with <code>h2-underline</code></h2>
 </div>
 
-<h2>Headings</h2>
+<div data-rmd="h2-underline">
+	<h2>Code and code blocks</h2>
+	<h3>Default: <code>code-tick</code></h3>
+</div>
 
+<div class="example" data-rmd-test="code-tick">
+	<p>Some inline code: <code>var someCode = 'lulz'</code>.</p>
+</div>
 
+<div data-rmd>
+	<h3>Options: <code>h1-underline</code> and <code>h2-underline</code></h3>
+</div>
+
+<!-- 
 
 <p>Look, a horizontal rule!</p>
 
@@ -189,6 +336,8 @@ not shown on screen. See <a href="#lol">link A</a> and
 	tab-size: 3;
 }</code></pre>
 <p>The end.</p>
+
+-->
 
 <?php include(dirname(__FILE__) . '/../analytics'); ?>
 

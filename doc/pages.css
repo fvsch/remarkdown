@@ -29,6 +29,11 @@
 	}
 }
 
+[data-rmd] table {
+	margin: 2.5em 0;
+	font-size: 95%;
+}
+
 /*
 	Other page styles, unrelated to ReMarkdown
 */
@@ -69,12 +74,11 @@ a {
 	text-decoration: none;
 }
 a:hover {
-	text-decoration: underline;
+	border-bottom: 1px solid;
 }
 a:focus, a:active {
 	color: white;
 	background-color: #F02050;
-	text-decoration: none;
 }
 
 nav {
