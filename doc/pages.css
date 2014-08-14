@@ -34,6 +34,10 @@
 	font-size: 95%;
 }
 
+#style-list tr > * {
+	white-space: nowrap;
+}
+
 /*
 	Other page styles, unrelated to ReMarkdown
 */
@@ -97,3 +101,4 @@ nav > span {
 	padding: .5em 30px;
 	background: #EEF;
 }
+
