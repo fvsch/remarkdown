@@ -8,11 +8,13 @@
 // --------
 
 // All options here are similar to the defaults used by remarkdown.scss.
-// If you want to build a custom build of ReMarkdown, you may modify the
-// options in this file and build it with Sass.
-// Not familiar with Sass? See: http://sass-lang.com/
+// If you want to build a custom build of ReMarkdown, you may:
 //
-// Any option not defined here will fallback to default values.
+// 1. Rename this file to remarkdown-custom.scss (or any other name as
+//    long as you use the .scss extension).
+// 2. Change any option you want. (Undefined options will use the same
+//    values as the default build.)
+// 3. Compile it with Sass (http://sass-lang.com/).
 
 // -----------------------
 // Available build options
@@ -49,8 +51,12 @@ $defaults:
 	// strong-underscore
 	a-bracket
 	// a-showurl
+	// del-gfm
 	pre-indent
 	code-tick
+	// code-fence
+	// code-fence-class
+	// code-fence-wide
 	hr-star
 	// hr-center
 	// hr-hyphen
@@ -91,4 +97,4 @@ $hr_hyphens:   "-------";
 // Importing the main ReMarkdown styles
 // ------------------------------------
 
-@import "all";
+@import "rmd/all";

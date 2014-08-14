@@ -3,24 +3,23 @@
 */
 
 /* Make the Markdown-like markers look cool */
-::before, ::after {
+[data-rmd] ::before, [data-rmd] ::after {
 	opacity: .6;
 }
-:not(a)::before, :not(a)::after {
+[data-rmd] :not(a)::before, [data-rmd] :not(a)::after {
 	color: #205080;
 }
 
 /* Our own font-family. Also setting one for code elements */
-body, [data-rmd], [data-rmd-test] {
+[data-rmd], [data-rmd-test] {
 	font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
 }
-pre, [data-rmd] pre, [data-rmd-test] pre,
-code, [data-rmd] code, [data-rmd-test] code {
+[data-rmd] pre, [data-rmd-test] pre {
 	font-family: Courier, "Courier New", monospace;
 }
 
 /* Avoid losing space to display code examples on small screens */
-pre, [data-rmd] pre, [data-rmd-test] pre {
+[data-rmd] pre, [data-rmd-test] pre {
 	white-space: pre-wrap;
 }
 @media (max-width: 700px) {
@@ -93,11 +92,4 @@ nav > span {
 	margin: 1.5em -30px;
 	padding: .5em 30px;
 	background: #EEF;
-}
-
-.example code {
-	font-family: inherit;
-	padding: 1px .5ch;
-	background-color: white;
-	border: solid 1px #CCC;
 }

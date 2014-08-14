@@ -16,7 +16,7 @@
 	<em>config</em>
 </nav>
 
-<article data-rmd="h1-underline">
+<article data-rmd="h1-underline table-marker">
 
 <h1>
 	ReMarkdown configuration
@@ -40,14 +40,19 @@
 &lt;/div></code></pre>
 
 <p>
-	Available styles are:
+	Here is a list of all available styles. Note that if you use the <a href="remarkdown.css">default ReMarkdown build</a>, all the styles specified as “Default” are already active, so you don’t need to add them to the value of the <code>data-rmd</code> attribute.
 </p>
 
 <table>
 	<tr>
-		<th scope="col">Option name</th>
-		<th scope="col">Default style?</th>
+		<th scope="col">Style name</th>
+		<th scope="col">Default?</th>
 		<th scope="col">Description</th>
+	</tr>
+	<tr>
+		<td>hn-hash</td>
+		<td>Yes</td>
+		<td>Add hashes at the start of titles</td>
 	</tr>
 	<tr>
 		<td>hn-close</td>
@@ -55,19 +60,69 @@
 		<td>Add hashes at the end of titles</td>
 	</tr>
 	<tr>
-		<td>h1-uppercase</td>
-		<td>—</td>
-		<td>Uppercase H1</td>
-	</tr>
-	<tr>
-		<td>rmd-h1-underline</td>
+		<td>h1-underline</td>
 		<td>—</td>
 		<td>Underline H1s with equals</td>
 	</tr>
 	<tr>
-		<td>rmd-h2-underline</td>
+		<td>h2-underline</td>
 		<td>—</td>
 		<td>Underline H2s with hyphens</td>
+	</tr>
+	<tr>
+		<td>ul-hyphen</td>
+		<td>Yes</td>
+		<td>Use “-” for bullets</td>
+	</tr>
+	<tr>
+		<td>ul-star</td>
+		<td>—</td>
+		<td>Use “*” for bullets</td>
+	</tr>
+	<tr>
+		<td>ul-plus</td>
+		<td>—</td>
+		<td>Use “+” for bullets</td>
+	</tr>
+	<tr>
+		<td>em-star</td>
+		<td>Yes</td>
+		<td>Use “*” signs for emphasis</td>
+	</tr>
+	<tr>
+		<td>em-underscore</td>
+		<td>—</td>
+		<td>Use “_” signs for emphasis</td>
+	</tr>
+	<tr>
+		<td>strong-star</td>
+		<td>Yes</td>
+		<td>Use “*” signs for strong emphasis</td>
+	</tr>
+	<tr>
+		<td>strong-underscore</td>
+		<td>—</td>
+		<td>Use “_” signs for strong emphasis</td>
+	</tr>
+	<tr>
+		<td>a-bracket</td>
+		<td>Yes</td>
+		<td>Add square brackets around links.</td>
+	</tr>
+	<tr>
+		<td>a-showurl</td>
+		<td>—</td>
+		<td>Show URLs after links</td>
+	</tr>
+	<tr>
+		<td>hr-center</td>
+		<td>—</td>
+		<td>Horizontally center the HR</td>
+	</tr>
+	<tr>
+		<td>del-gfm</td>
+		<td>—</td>
+		<td>GitHub-flavored Markdown style for DEL elements</td>
 	</tr>
 	<tr>
 		<td></td>
@@ -81,163 +136,44 @@
 	</tr>
 </table>
 
-<ul>
-
-	<li>
-		<code></code>:
-		add a line of “-” signs to H2.
-	</li>
-	<li>
-		<code>rmd-em-star</code>:
-		use “*” signs for emphasis (default).
-	</li>
-	<li>
-		<code>rmd-em-underscore</code>:
-		use “_” signs for emphasis.</li>
-	<li>
-		<code>rmd-strong-star</code>:
-		use “*” signs for strong emphasis (default).
-	</li>
-	<li>
-		<code>rmd-strong-underscore</code>:
-		use “_” signs for strong emphasis.
-	</li>
-	<li>
-		<code>rmd-a-bracket</code>:
-		add square brackets around links.
-	</li>
-	<li>
-		<code>rmd-a-showurl</code>:
-		show URLs after links (on screen and in print).
-	</li>
-	<li>
-		<code>rmd-a-printurl</code>:
-		show URLs after links when printing. No need to use this if you’re
-		already using the “showurl” option.
-	</li>
-	<li>
-		<code>rmd-a-printref</code>:
-		print URLs with reference numbers at the end of the container.
-		Don’t use this together with the “showurl” and “printurl” options.
-		Requires JS, see below.
-	</li>
-	<li>
-		<code>rmd-ul-star</code>:
-		use “*” for bullets (default).
-	</li>
-	<li>
-		<code>rmd-ul-plus</code>:
-		use “+” for bullets.
-	</li>
-	<li>
-		<code>rmd-ul-minus</code>:
-		use “-” for bullets.
-	</li>
-	<li>
-		<code>rmd-hr-star</code>:
-		use “*” signs for HR (default).
-	</li>
-	<li>
-		<code>rmd-hr-minus</code>:
-		use “-” signs for HR.
-	</li>
-	<li>
-		<code>rmd-hr-center</code>:
-		center the horizontal rule.
-	</li>
-</ul>
-
-
-
 <h2>
-	Setting options in SASS
+	Build a custom stylesheet with Sass
 </h2>
 
-
-
-
-
-
-
 <p>
-	Important notes on option classes:
+	You can recompile ReMarkdown using Sass, and there are a number of options (Sass variables) that you can use to alter the CSS output of your custom build. <a href="remarkdown-custom.template">Use this template</a> which has documentation for all the available options. Some highlights:
 </p>
 
-<ol>
-	<li>
-		Words in the class name are always singular: “bracket”, not “brackets”.
-	</li>
-	<li>
-		Each option class has an equivalent which can be used on the affected
-		element itself, and which omits the element name,
-		<abbr title="for instance">e.g.</abbr> <code>rmd-underscore</code> on
-		strong elements, <code>rmd-showurl</code> on links, etc.
-	</li>
-</ol>
+<h3>
+	Change the default styles
+</h3>
 
 <p>
-	Note that the <code>rmd-a-printref</code> option needs the <a
-	href="rmd-print.js">rmd-print.js</a> script. The script generates an
-	invisible list of URLs at the end of each container with this class, and the
-	print styles reveal this list when printing the page.
+	You can use the <code>$defaults</code> variable to change the styles that should be applied by default (i.e. when you use the <code>data-rmd</code> attribute without any explicit style).
 </p>
 
-<h2>
-	Example code
-</h2>
-
-<pre><code>&lt;!doctype html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-	&lt;title&gt;Using ReMarkdown&lt;/title&gt;
-	&lt;link rel="stylesheet" href="remarkdown.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;nav&gt;
-	Site navigation
-&lt;/nav&gt;
-&lt;article class="rmd-on rmd-h1-underline rmd-link-footnote rmd-hr-center"&gt;
-	&lt;h1 class="rmd-uppercase"&gt;Hello World&lt;/h1&gt;
-	&lt;p&gt;Goodnight, and &lt;a href="/l/"&gt;good luck&lt;/a&gt;.&lt;/p&gt;
-	&lt;hr&gt;
-	&lt;p&gt;More content.&lt;/p&gt;
-&lt;/article&gt;
-&lt;script src="rmd-print.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+<pre><code>$defaults:
+	hn-hash h1-underline h2-underline
+	ul-star em-underscore strong-underscore
+	hr-hyphen hr-center;</code></pre>
 
 <p>
-	For more examples of how you can use ReMarkdown classes, see the <a
-	href="sampler.html">sampler page</a> and take a look at the source code.
-	Note that it’ll probably be easier to set all option classes on one
-	container element, rather than on individual elements.
+	You will need to list all the styles you want to see apply by default. That can be a fairly long list (as above). For instance, if I omit both <code>em-star</code> and <code>em-underscore</code>, EM elements won’t have any visible marker (unless we explicitly set one of those styles in the HTML code).
 </p>
 
-<h2>How does it work exactly?</h2>
-
-<p>The gist of it:</p>
-
-<ul>
-	<li>
-		The stylesheet sets everything to the same monospace font, font size and
-		line height.
-	</li>
-	<li>
-		Then it adds text markers at the start and end of elements, in
-		<code>:before</code> and <code>:after</code> pseudo-elements.
-	</li>
-</ul>
+<h3>
+	Do not include alternate styles
+</h3>
 
 <p>
-	There are a few special cases, such as underlined titles, block quotes,
-	ordered lists, and print styles for links. Do read <a
-	href="remarkdown.css">remarkdown.css</a> if you speak CSS and want to know
-	more.
+	By setting the <code>$output_all_styles</code> option to <code>false</code>, ReMarkdown will only output those styles that are listed in <code>$defaults</code>. This can be useful if you want to pick a set of default styles, don’t intend to ever declare the alternative styles for each element, and want to make a smaller CSS file.
 </p>
 
 <p>
-	Note that there is a number of <a href="issues.html">known issues</a>.
+	Currently the default build with all styles included is close to 7.5 KB, while the same defaults with no alternative styles included is down to 4.0 KB.
 </p>
+
+…
 
 </article>
 
