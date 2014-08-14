@@ -102,18 +102,6 @@
 		content: counter(item) ".";
 	}
 
-	@if $set_font_styles {
-		em, strong {
-			font-style: normal;
-			font-weight: normal;
-		}
-		pre, code, kbd, samp, tt {
-			font-family: $font_code;
-			// Might be necessary for IE
-			// font-size: 100%;
-		}
-	}
-
 	pre {
 		margin-top: get-margin("pre", "top");
 		margin-bottom: get-margin("pre", "bottom");
@@ -156,6 +144,18 @@
 		margin-bottom: get-margin("hr", "bottom");
 		border: none;
 		color: inherit;
+	}
+
+	@if $set_font_styles {
+		em, strong {
+			font-style: normal;
+			font-weight: normal;
+		}
+		pre, code, kbd, samp, tt {
+			font-family: $font_code;
+			// Might be necessary for IE
+			// font-size: 100%;
+		}
 	}
 
 }

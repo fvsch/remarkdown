@@ -74,13 +74,6 @@
   text-align: right;
   content: counter(item) ".";
 }
-[data-rmd-test] em, [data-rmd-test] strong {
-  font-style: normal;
-  font-weight: normal;
-}
-[data-rmd-test] pre, [data-rmd-test] code, [data-rmd-test] kbd, [data-rmd-test] samp, [data-rmd-test] tt {
-  font-family: inherit;
-}
 [data-rmd-test] pre {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -112,6 +105,13 @@
   margin-bottom: 1.5em;
   border: none;
   color: inherit;
+}
+[data-rmd-test] em, [data-rmd-test] strong {
+  font-style: normal;
+  font-weight: normal;
+}
+[data-rmd-test] pre, [data-rmd-test] code, [data-rmd-test] kbd, [data-rmd-test] samp, [data-rmd-test] tt {
+  font-family: inherit;
 }
 
 [data-rmd-test~=hn-hash] h1::before {
@@ -239,6 +239,36 @@
 [data-rmd-test~=code-tick] :not(pre) > code::before,
 [data-rmd-test~=code-tick] :not(pre) > code::after {
   content: "`";
+  text-shadow: 0 1px;
+}
+
+[data-rmd-test~=code-fence] pre > code {
+  display: block;
+}
+[data-rmd-test~=code-fence] pre > code ::before, [data-rmd-test~=code-fence] pre > code ::after {
+  content: "```";
+  display: block;
+  width: 100%;
+  height: 1.5em;
+  overflow: hidden;
+  word-break: break-all;
+}
+
+[data-rmd-test~=code-fence-wide] pre > code::before,
+[data-rmd-test~=code-fence-wide] pre > code::after {
+  content: "````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````";
+}
+
+[data-rmd-test~=code-fence-class] pre > code::before {
+  content: "``` " attr(class);
+}
+
+[data-rmd-test~=del-gfm] del {
+  text-decoration: none;
+}
+[data-rmd-test~=del-gfm] del::before,
+[data-rmd-test~=del-gfm] del::after {
+  content: "~~";
 }
 
 [data-rmd-test~=hr-center] hr {

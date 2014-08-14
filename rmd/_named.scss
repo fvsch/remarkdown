@@ -117,6 +117,50 @@
 	:not(pre) > code::before,
 	:not(pre) > code::after {
 		content: "`";
+		// Ticks are very thin, and rarely have a "bold" variant.
+		// Trying to make them a bit easier to see.
+		text-shadow: 0 1px;
+	}
+}
+
+// CODE: code-fence, code-fence-wide, code-fence-class
+
+#{sel(code-fence)} {
+	pre > code {
+		display: block;
+		::before, ::after {
+			content: "```";
+			display: block;
+			width: 100%;
+			height: $line;
+			overflow: hidden;
+			word-break: break-all;
+		}
+	}
+}
+
+#{sel(code-fence-wide)} {
+	pre > code::before,
+	pre > code::after {
+		content: multi("``````````", 12); 
+	}
+}
+
+#{sel(code-fence-class)} {
+	pre > code::before {
+		content: "``` " attr(class); 
+	}
+}
+
+// DEL: del-gfm
+
+#{sel(del-gfm)} {
+	del {
+		text-decoration: none;
+	}
+	del::before,
+	del::after {
+		content: "~~";
 	}
 }
 
