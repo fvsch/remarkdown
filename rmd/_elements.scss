@@ -80,6 +80,14 @@
 		list-style: none;
 	}
 
+	ul ul, ul ol,
+	ol ul, ol ol {
+		// margin-top: $line / 2;
+		// margin-bottom: $line / 2;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
 	ul > li::before {
 		float: left;
 		margin-left: -3ch;
@@ -127,6 +135,7 @@
 		overflow: hidden;
 		white-space: pre;
 		content: multi(">\A",100);
+		cursor: default;
 	}
 
 	// FIXME: do we need those?

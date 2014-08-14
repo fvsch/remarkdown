@@ -34,6 +34,7 @@
 		width: 100%;
 		overflow: hidden;
 		word-break: break-all;
+		cursor: default;
 	}
 }
 
@@ -128,27 +129,34 @@
 #{sel(code-fence)} {
 	pre > code {
 		display: block;
-		::before, ::after {
-			content: "```";
-			display: block;
-			width: 100%;
-			height: $line;
-			overflow: hidden;
-			word-break: break-all;
-		}
 	}
-}
-
-#{sel(code-fence-wide)} {
 	pre > code::before,
 	pre > code::after {
-		content: multi("``````````", 12); 
+		position: relative;
+		top: .3em;
+		content: "```";
+		display: block;
+		width: 100%;
+		height: $line;
+		overflow: hidden;
+		word-break: break-all;
+		cursor: default;
 	}
 }
 
-#{sel(code-fence-class)} {
-	pre > code::before {
-		content: "``` " attr(class); 
+#{sel(code-fence-tilde)} {
+	pre > code::before,
+	pre > code::after {
+		top: 0;
+		content: "~~~";
+	}
+}
+
+#{sel(code-fence-full)} {
+	pre > code::before,
+	pre > code::after {
+		top: 0;
+		content: multi("~~~~~~~~~~", 12);
 	}
 }
 
@@ -186,35 +194,51 @@
 		margin-bottom: get-margin("table", "bottom");
 		border-collapse: collapse;
 	}
-	td, th {
-		overflow: hidden;
+	tr > * {
+		min-width: 3ch;
 		position: relative;
 		padding: 0;
-		text-align: left;
+		text-align: inherit;
 		vertical-align: top;
 		font-weight: normal;
+		border: none;
 	}
-	th {
+	tr > * + * {
+		padding-left: 3ch;
+	}
+	tr:first-child > th:not([scope="row"]) {
 		padding-bottom: $line;
 	}
-	th::after {
+	tr:first-child > th:not([scope="row"])::after {
+		content: multi("-----------", 10);
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		content: multi("-----------", 10);
+		right: 0;
+		overflow: hidden;
 		word-break: break-all;
 		height: $line;
 	}
-	tr > :nth-child(1n+2) {
-		padding-left: 3ch;
+	tr:first-child > * + th:not([scope="row"])::after {
+		left: 3ch;
 	}
-	tr > :nth-child(1n+2)::before {
+	tr > * + *::before {
 		content: multi("|\A", 10);
 		position: absolute;
+		overflow: hidden;
 		left: 1ch;
+		top: 0;
+		bottom: 0;
 		white-space: pre;
 	}
-	tr > th:nth-child(1n+2)::after {
-		left: 3ch;
+	th[scope="row"],
+	tr + tr > th:first-child {
+		padding-right: 1ch;
+	}
+	th[scope="row"]::after,
+	tr + tr > th:first-child::after {
+		position: absolute;
+		right: -1ch;
+		content: ":";
 	}
 }

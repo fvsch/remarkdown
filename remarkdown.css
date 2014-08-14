@@ -56,6 +56,11 @@
   padding: 0;
   list-style: none;
 }
+[data-rmd] ul ul, [data-rmd] ul ol,
+[data-rmd] ol ul, [data-rmd] ol ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 [data-rmd] ul > li::before {
   float: left;
   margin-left: -3ch;
@@ -97,6 +102,7 @@
   overflow: hidden;
   white-space: pre;
   content: ">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A";
+  cursor: default;
 }
 [data-rmd] hr {
   height: 1.5em;
@@ -179,6 +185,7 @@
   width: 100%;
   overflow: hidden;
   word-break: break-all;
+  cursor: default;
 }
 
 [data-rmd~=h1-underline] h1::after {
@@ -246,22 +253,29 @@
 [data-rmd~=code-fence] pre > code {
   display: block;
 }
-[data-rmd~=code-fence] pre > code ::before, [data-rmd~=code-fence] pre > code ::after {
+[data-rmd~=code-fence] pre > code::before,
+[data-rmd~=code-fence] pre > code::after {
+  position: relative;
+  top: .3em;
   content: "```";
   display: block;
   width: 100%;
   height: 1.5em;
   overflow: hidden;
   word-break: break-all;
+  cursor: default;
 }
 
-[data-rmd~=code-fence-wide] pre > code::before,
-[data-rmd~=code-fence-wide] pre > code::after {
-  content: "````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````";
+[data-rmd~=code-fence-tilde] pre > code::before,
+[data-rmd~=code-fence-tilde] pre > code::after {
+  top: 0;
+  content: "~~~";
 }
 
-[data-rmd~=code-fence-class] pre > code::before {
-  content: "``` " attr(class);
+[data-rmd~=code-fence-full] pre > code::before,
+[data-rmd~=code-fence-full] pre > code::after {
+  top: 0;
+  content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 }
 
 [data-rmd~=del-gfm] del {
@@ -289,34 +303,50 @@
   margin-bottom: 1.5em;
   border-collapse: collapse;
 }
-[data-rmd~=table-marker] td, [data-rmd~=table-marker] th {
-  overflow: hidden;
+[data-rmd~=table-marker] tr > * {
+  min-width: 3ch;
   position: relative;
   padding: 0;
-  text-align: left;
+  text-align: inherit;
   vertical-align: top;
   font-weight: normal;
+  border: none;
 }
-[data-rmd~=table-marker] th {
+[data-rmd~=table-marker] tr > * + * {
+  padding-left: 3ch;
+}
+[data-rmd~=table-marker] tr:first-child > th:not([scope="row"]) {
   padding-bottom: 1.5em;
 }
-[data-rmd~=table-marker] th::after {
+[data-rmd~=table-marker] tr:first-child > th:not([scope="row"])::after {
+  content: "--------------------------------------------------------------------------------------------------------------";
   position: absolute;
   bottom: 0;
   left: 0;
-  content: "--------------------------------------------------------------------------------------------------------------";
+  right: 0;
+  overflow: hidden;
   word-break: break-all;
   height: 1.5em;
 }
-[data-rmd~=table-marker] tr > :nth-child(1n+2) {
-  padding-left: 3ch;
+[data-rmd~=table-marker] tr:first-child > * + th:not([scope="row"])::after {
+  left: 3ch;
 }
-[data-rmd~=table-marker] tr > :nth-child(1n+2)::before {
+[data-rmd~=table-marker] tr > * + *::before {
   content: "|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A";
   position: absolute;
+  overflow: hidden;
   left: 1ch;
+  top: 0;
+  bottom: 0;
   white-space: pre;
 }
-[data-rmd~=table-marker] tr > th:nth-child(1n+2)::after {
-  left: 3ch;
+[data-rmd~=table-marker] th[scope="row"],
+[data-rmd~=table-marker] tr + tr > th:first-child {
+  padding-right: 1ch;
+}
+[data-rmd~=table-marker] th[scope="row"]::after,
+[data-rmd~=table-marker] tr + tr > th:first-child::after {
+  position: absolute;
+  right: -1ch;
+  content: ":";
 }
