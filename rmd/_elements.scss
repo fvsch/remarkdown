@@ -106,8 +106,15 @@
 		float: left;
 		margin-left: -4ch;
 		width: 3ch;
+		overflow: hidden;
 		text-align: right;
 		content: counter(item) ".";
+	}
+
+	ol > li[value]::before {
+		content: attr(value) ".";
+		// For values like <li value=" 12 ">, resulting in " 12 ."
+		word-spacing: -1ch;
 	}
 
 	pre {

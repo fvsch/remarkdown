@@ -76,8 +76,13 @@
   float: left;
   margin-left: -4ch;
   width: 3ch;
+  overflow: hidden;
   text-align: right;
   content: counter(item) ".";
+}
+[data-rmd] ol > li[value]::before {
+  content: attr(value) ".";
+  word-spacing: -1ch;
 }
 [data-rmd] pre {
   margin-top: 1.5em;
