@@ -63,57 +63,57 @@
 			<td>Use “+” for bullets</td>
 		</tr>
 		<tr>
-			<td>em-star</td>
+			<td><a href="#em-star">em-star</a></td>
 			<td>Yes</td>
 			<td>Use “*” signs for emphasis</td>
 		</tr>
 		<tr>
-			<td>em-underscore</td>
+			<td><a href="#em-underscore">em-underscore</a></td>
 			<td>—</td>
 			<td>Use “_” signs for emphasis</td>
 		</tr>
 		<tr>
-			<td>strong-star</td>
+			<td><a href="#strong-star">strong-star</a></td>
 			<td>Yes</td>
 			<td>Use “*” signs for strong emphasis</td>
 		</tr>
 		<tr>
-			<td>strong-underscore</td>
+			<td><a href="#strong-underscore">strong-underscore</a></td>
 			<td>—</td>
 			<td>Use “_” signs for strong emphasis</td>
 		</tr>
 		<tr>
-			<td>a-bracket</td>
+			<td><a href="#a-bracket">a-bracket</a></td>
 			<td>Yes</td>
 			<td>Add square brackets around links.</td>
 		</tr>
 		<tr>
-			<td>a-showurl</td>
+			<td><a href="#a-showurl">a-showurl</a></td>
 			<td>—</td>
 			<td>Show URLs after links</td>
 		</tr>
 		<tr>
-			<td>del-gfm</td>
+			<td><a href="#del-gfm">del-gfm</a></td>
 			<td>—</td>
 			<td>Wrap DEL in “~~” (<a href="https://help.github.com/articles/github-flavored-markdown#strikethrough">GFM style</a>)</td>
 		</tr>
 		<tr>
-			<td>hr-star</td>
+			<td><a href="#hr-star">hr-star</a></td>
 			<td>Yes</td>
 			<td>Use “*” signs for HR</td>
 		</tr>
 		<tr>
-			<td>hr-hyphen</td>
+			<td><a href="#hr-hyphen">hr-hyphen</a></td>
 			<td>—</td>
 			<td>Use “-” signs for HR</td>
 		</tr>
 		<tr>
-			<td>hr-center</td>
+			<td><a href="#hr-center">hr-center</a></td>
 			<td>—</td>
 			<td>Horizontally center the HR</td>
 		</tr>
 		<tr>
-			<td><a href="#code-fence">code-tick</a></td>
+			<td><a href="#code-tick">code-tick</a></td>
 			<td>Yes</td>
 			<td>Wrap CODE in “`” (backticks)</td>
 		</tr>
@@ -181,6 +181,23 @@
 
 <div data-rmd="h2-underline">
 	<h2>Lists</h2>
+	<h3>Default: ordered list (no option name)</h3>
+</div>
+
+<div class="example" data-rmd-test>
+	<ol>
+		<li>This is a list.</li>
+		<li>With a second item.
+			<ol>
+				<li>Nested lists work too.</li>
+				<li>This is so cool.</li>
+			</ol>
+		</li>
+		<li>And a third one.</li>
+	</ol>
+</div>
+
+<div data-rmd>
 	<h3 id="ul-hyphen">Default: <code>ul-hyphen</code></h3>
 </div>
 
@@ -221,10 +238,108 @@
 	</ul>
 </div>
 
-<!--
-	FIXME
-	Add remaining examples here.
--->
+<div data-rmd="h2-underline">
+	<h3 id="ul-plus">Option: <code>ul-plus</code></h3>
+</div>
+
+<div class="example" data-rmd-test="ul-plus">
+	<ul>
+		<li>This is a list.</li>
+		<li>With a second item.</li>
+		<li>And a third one.</li>
+	</ul>
+</div>
+
+<div data-rmd="h2-underline">
+	<h2>Emphasis</h2>
+	<h3 id="em-star">Default: <code>em-star</code></h3>
+</div>
+
+<div class="example" data-rmd-test="em-star">
+	<p>This is <em>literally</em> figurative!</p>
+</div>
+
+<div data-rmd>
+	<h3 id="em-underscore">Option: <code>em-underscore</code></h3>
+</div>
+
+<div class="example" data-rmd-test="em-underscore">
+	<p>This is <em>literally</em> figurative!</p>
+</div>
+
+<div data-rmd>
+	<h3 id="strong-star">Default: <code>strong-star</code></h3>
+</div>
+
+<div class="example" data-rmd-test="strong-star">
+	<p>This is figurative. <strong>Literally.</strong></p>
+</div>
+
+<div data-rmd>
+	<h3 id="strong-underscore">Option: <code>strong-underscore</code></h3>
+</div>
+
+<div class="example" data-rmd-test="strong-underscore">
+	<p>This is figurative. <strong>Literally.</strong></p>
+</div>
+
+<div data-rmd="h2-underline">
+	<h2>Links</h2>
+	<h3 id="a-bracket">Default: <code>a-bracket</code></h3>
+</div>
+
+<div class="example" data-rmd-test="a-bracket">
+	<p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
+	and let me play among the stars.
+	Let me see what spring is like
+	on a-Jupiter and Mars.</p>
+</div>
+
+<div data-rmd>
+	<h3 id="a-showurl">Option: <code>a-showurl</code></h3>
+</div>
+
+<div class="example" data-rmd-test="a-showurl">
+	<p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
+	and let me play among the stars.
+	Let me see what spring is like
+	on a-Jupiter and Mars.</p>
+</div>
+
+<div data-rmd="h2-underline">
+	<h2>Other</h2>
+	<h3 id="del-gfm">Option: <code>del-gfm</code></h3>
+</div>
+
+<div class="example" data-rmd-test="del-gfm">
+	<p>This is <del>a mistake</del> awesome.</p>
+</div>
+
+<div data-rmd="h2-underline">
+	<h2>Horizontal rules</h2>
+	<h3 id="hr-star">Default: <code>hr-star</code></h3>
+</div>
+
+<div class="example" data-rmd-test="hr-star">
+	<hr>
+</div>
+
+<div data-rmd>
+	<h3 id="hr-hyphen">Option: <code>hr-hyphen</code></h3>
+</div>
+
+<div class="example" data-rmd-test="hr-hyphen">
+	<hr>
+</div>
+
+<div data-rmd>
+	<h3 id="hr-center">Option: <code>hr-center</code></h3>
+</div>
+
+<div class="example">
+	<div data-rmd-test="hr-center hr-star"><hr></div>
+	<div data-rmd-test="hr-center hr-hyphen"><hr></div>
+</div>
 
 <div data-rmd="h2-underline">
 	<h2>Code and code blocks</h2>
@@ -272,7 +387,8 @@
 	<pre><code>A code block</code></pre>
 </div>
 
-<div data-rmd>
+<div data-rmd="h2-underline">
+	<h2>Tables</h2>
 	<h3 id="table-marker">Option: <code>table-marker</code></h3>
 </div>
 
