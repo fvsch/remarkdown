@@ -2,47 +2,22 @@
 // Basic ReMarkdown styles for elements
 // ------------------------------------
 
-// Info for users tweaking the default CSS build:
-/*
-	These parts are easy to customize.
-	Maybe try a different font, or change the color or opacity of the
-	Markdown syntax markers (::before and ::after pseudo-elements)?
-*/
-
-[#{$attr}] {
-
-	& {
-		@if $set_font_styles {
-			font-family: $font;
-		}
-	}
-	::before, ::after {
-		/* e.g. color: red; opacity: .5; */
-	}
-
-}
-
-// Warning for CSS tweakers:
-/*
-	Everything else is better left alone. Quite a few things can be
-	customized by making your own CSS build of ReMarkdown.
-	See http://fvsch.com/code/remarkdown/config
-*/
-
 [#{$attr}] {
 
 	// Base
 	& {
 		line-height: $lineratio;
-
+		@if $set_font_styles {
+			font-family: $font;
+		}
 	}
 
-	@if set_font_styles {
+	@if $set_font_styles {
 		h1, h2, h3, h4, h5, h6 {
 			font-size: inherit;
 			font-weight: inherit;
 		}
-	} 
+	}
 
 	h1 {
 		margin-top: get-margin("h1", "top");
@@ -62,6 +37,10 @@
 	p {
 		margin-top: get-margin("p", "top");
 		margin-bottom: get-margin("p", "bottom");
+	}
+
+	figure {
+		margin: get-margin("figure", "top") 0 get-margin("figure", "bottom");
 	}
 
 	ul {
@@ -141,7 +120,7 @@
 		bottom: 0;
 		overflow: hidden;
 		white-space: pre;
-		content: multi(">\A",100);
+		content: multi(">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A", 20);
 		cursor: default;
 	}
 
