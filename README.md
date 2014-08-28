@@ -14,6 +14,12 @@ See the [online demo and documentation](http://fvsch.com/code/remarkdown/).
 - [ ] Browser tests: IE 9-11, what support do we have?
 - [x] Documentation: rewrite config page
 - [x] Documentation: rewrite styles page
-- [ ] Documentation: make sure inline documentation is okay
+- [x] Documentation: make sure inline documentation is okay
 
-- [ ] Tumblr theme?
+## Tumblr theme todo
+
+- [x] Base HTML and styles
+- [x] Tumblr tags
+- [ ] Theme options
+- [ ] Improve the photoset display (looping on images)
+- [ ] Documentation (making index.html into a demo + doc page)
