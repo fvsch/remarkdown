@@ -65,7 +65,7 @@ $defaults:
 
 // Font stack to use.
 // AVOID using "monospace" only, browsers react strangely to that.
-$font: monospace, monospace;
+$font: MyFaveMonospaceFont, monospace;
 
 // For elements that are traditionnaly monospace, use a different font?
 // $font_code: SomethingElse, monospace;
