@@ -1,0 +1,272 @@
+// ===========================
+// ReMarkdown theme for Tumblr
+// ===========================
+
+// -------------------------------
+// Configure and import ReMarkdown
+// -------------------------------
+
+$lineratio: 1.4;
+
+$margins: (
+	h1: (top: 2, bottom: 1),
+	h2: (top: 2, bottom: 1),
+	hr: (top: 2, bottom: 2),
+	blockquote: (top: 1, bottom: 1),
+	table: (top: 2, bottom: 2),
+);
+
+$defaults:
+	hn-hash
+	a-bracket
+	ul-plus
+	em-star
+	strong-underscore
+	pre-indent
+	code-tick
+	hr-star
+	hr-center
+	table-marker
+;
+
+$header_comment: false;
+$set_font_styles: false;
+
+@import "rmd/all";
+
+// -----------------------------------------
+// Customizations and tumblr-specific styles
+// -----------------------------------------
+
+$smallwidth: 500px;
+$pagewidth: 700px;
+$alternate_blockquote_color: true;
+
+// Page
+
+html {
+	background: #F6F6F6;
+	color: #202020;
+}
+
+body {
+	max-width: $pagewidth;
+	margin: 0 auto;
+	padding: 2em;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	@media (max-width: $smallwidth) {
+		padding: 1em;
+	}
+}
+
+// Fonts
+
+body {
+	font-family: "Source Code Pro", Menlo, Monaco, Consolas, "DejaVu Mono", monospace;
+}
+
+blockquote,
+pre, code, samp, kbd {
+	font-family: "Courier", "Courier New", monospace;
+}
+
+// Main elements
+
+h1, h2, h3, h4, h5, h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	max-width: 100%;
+}
+
+figure img {
+	display: block;
+	margin: 0 auto;
+}
+
+@media (max-width: $smallwidth) {
+	.container figure {
+		overflow: hidden;
+		margin-left: -1em;
+		margin-right: -1em;
+	}
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background: none;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: none;
+}
+
+// Site header (index pages)
+
+#sitebanner {
+	margin-top: $line * 2;
+	margin-bottom: $line * 2;
+	text-align: center;
+}
+
+#sitebanner h1 {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#sitebanner h1 a::before,
+#sitebanner h1 a::after {
+	content: "";
+}
+
+#sitebanner h1 a:not(:hover):not(:focus) {
+	color: inherit;
+}
+
+// Site nav (permalink pages)
+
+#sitenav {
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: $line * 3;
+}
+
+// Other Tumblr UI
+
+.tag-header h2 {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.pagination {
+	text-align: center;
+}
+
+.pagination .prev a::before {
+	content: "[<- ";
+}
+
+.pagination .next a::after {
+	content: " ->]";
+}
+
+// Post headers
+
+.post-title h1,
+.post-title h2 {
+	font-weight: bold;
+}
+
+.post-title h1::after,
+.post-title h2::before {
+	font-weight: normal;
+}
+
+.post-title h1 {
+	max-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.post-title a::before,
+.post-title a::after {
+	content: "";
+}
+
+.text .post-title h2 a:not(:hover):not(:focus) {
+	color: inherit;
+}
+
+.link .post-title h2::before {
+	display: none;
+}
+
+.link .post-title a::before {
+	content: "[->] ";
+}
+
+.text .more a::after {
+	content: " ->]";
+}
+
+// Blockquotes
+// Trying to do something about Tumblr’s deeply nested quotes
+
+@media (max-width: $pagewidth) {
+	.container blockquote {
+		// padding-left: 2ch;
+	}
+	.container blockquote > blockquote {
+		margin-left: -2ch;
+	}
+}
+
+@if ($alternate_blockquote_color) {
+	:not(blockquote) > p > .quote-toggle,
+	:not(blockquote) > blockquote {
+		color: #404040; }
+
+	:not(blockquote) > blockquote > p > .quote-toggle,
+	:not(blockquote) > blockquote > blockquote {
+		color: #008040; }
+
+	:not(blockquote) > blockquote > blockquote > p > .quote-toggle,
+	:not(blockquote) > blockquote > blockquote > blockquote {
+		color: #404040; }
+
+	:not(blockquote) > blockquote > blockquote > blockquote > p > .quote-toggle,
+	:not(blockquote) > blockquote > blockquote > blockquote > blockquote {
+		color: #804000; }
+
+	:not(blockquote) > blockquote > blockquote > blockquote > blockquote > p > .quote-toggle,
+	:not(blockquote) > blockquote > blockquote > blockquote > blockquote > blockquote {
+		color: #404040; }
+
+	blockquote > blockquote > blockquote > blockquote > blockquote .quote-toggle,
+	blockquote > blockquote > blockquote > blockquote > blockquote > blockquote {
+		color: #008040; }
+}
+
+// Blockquote show-hide
+
+.quote-toggle {
+	display: inline-block;
+	width: 5ch;
+	white-space: pre;
+	overflow: hidden;
+}
+
+.quote-toggle:hover,
+.quote-toggle:focus {
+	width: auto;
+}
+
+.quote-toggle:focus {
+	outline: dotted 1px;
+}
+
+.quote-toggle span + span,
+.quote-toggle.hidden span:first-child {
+	display: none;
+}
+
+.quote-toggle.hidden span + span,
+.quote-toggle span:first-child {
+	display: inline;
+}
+
+blockquote.hidden {
+	display: none;
+}
