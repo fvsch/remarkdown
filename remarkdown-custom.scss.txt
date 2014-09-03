@@ -79,12 +79,6 @@ $set_font_styles: true;
 // Attribute name
 $attr: "data-rmd";
 
-// Whether we should include styles for ALL alternative styles (true),
-// or only for styles listed in $defaults (false).
-// If false, the CSS build will be smaller, but setting options in
-// HTML with the `data-rmd` attribute will be impossible.
-$output_all_styles: true;
-
 // Whether to output a comment with information about ReMarkdown
 // the main build options that were used.
 $header_comment: true;
@@ -92,6 +86,16 @@ $header_comment: true;
 // HR patterns
 $hr_stars:     "* * * *";
 $hr_hyphens:   "-------";
+
+// By default we use the `em` unit for vertical spacing.
+// This low-level option allows using `rem` instead.
+$use_rem: false;
+
+// Whether we should include styles for ALL alternative styles (true),
+// or only for styles listed in $defaults (false).
+// If false, the CSS build will be smaller, but setting options in
+// HTML with the `data-rmd` attribute will be impossible.
+$output_all_styles: true;
 
 // ------------------------------------
 // Importing the main ReMarkdown styles

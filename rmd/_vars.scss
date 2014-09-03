@@ -22,6 +22,7 @@ $font_code: inherit !default;
 // Output type
 
 $attr: "data-rmd" !default;
+$use_rem: false !default;
 $output_all_styles: true !default;
 $header_comment: true !default;
 
@@ -34,8 +35,12 @@ $hr_hyphens:   "-------" !default;
 // Other variables
 // ---------------
 
-$version: "2.0.0b";
-$line: $lineratio * 1em;
+$version: "2.0.0";
 $hn_hash:      "#";
 $h1_underline: "==========";
 $h2_underline: "----------";
+
+$line: $lineratio * 1em;
+@if ($use_rem) {
+	$line: $lineratio * 1rem;
+}
