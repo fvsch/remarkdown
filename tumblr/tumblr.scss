@@ -8,6 +8,8 @@
 
 $lineratio: 1.4;
 
+$attr: "remarkdown";
+
 $margins: (
 	h1: (top: 2, bottom: 1),
 	h2: (top: 2, bottom: 1),
@@ -18,10 +20,11 @@ $margins: (
 
 $defaults:
 	hn-hash
-	a-bracket
+	h1-underline
+	h2-underline
 	ul-plus
-	em-star
-	strong-underscore
+	em-underscore
+	strong-star
 	pre-indent
 	code-tick
 	hr-star
@@ -31,6 +34,8 @@ $defaults:
 
 $header_comment: false;
 $set_font_styles: false;
+$output_all_styles: false;
+$use_rem: false;
 
 @import "../rmd/all";
 
@@ -40,13 +45,21 @@ $set_font_styles: false;
 
 $smallwidth: 500px;
 $pagewidth: 700px;
-$alternate_blockquote_color: true;
 
 // Page
 
 html {
-	background: #F6F6F6;
-	color: #202020;
+	background-color: #{"{color:Background color}"};
+	color: #{"{color:Text color}"};
+}
+
+::-moz-selection {
+	background-color: #{"{color:Base quote color}"};
+	color: #{"{color:Background color}"};
+}
+::selection {
+	background-color: #{"{color:Base quote color}"};
+	color: #{"{color:Background color}"};
 }
 
 body {
@@ -56,19 +69,50 @@ body {
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	@media (max-width: $smallwidth) {
-		padding: 1em;
+		padding: 2em 1em 1em;
 	}
+}
+
+
+// Options
+
+body.text-biggest  { font-size: 115%; }
+body.text-bigger   { font-size: 108%; }
+body.text-normal   { font-size: 100%; }
+body.text-smaller  { font-size: 93.75%; }
+body.text-smallest { font-size: 87.5%; }
+
+body.col-wide   { max-width: 900px; }
+body.col-normal { max-width: $pagewidth; }
+body.col-narrow { max-width: $smallwidth; }
+
+.link-underline a { border-bottom: 1px solid; }
+
+.link-brackets [class~="[]"] a::before,
+.link-brackets .maintext a::before {
+	content: "[";
+}
+.link-brackets [class~="[]"] a::after,
+.link-brackets .maintext a::after {
+	content: "]";
 }
 
 // Fonts
 
 body {
-	font-family: "Source Code Pro", Menlo, Monaco, Consolas, "DejaVu Mono", monospace;
+	font-family: Source Code Pro, Menlo, Monaco, Consolas, monospace;
 }
 
 blockquote,
 pre, code, samp, kbd {
-	font-family: "Courier", "Courier New", monospace;
+	font-family: Courier, Courier New, monospace;
+}
+
+// Styling markers
+
+h1::after, h2::after,
+blockquote::before {
+	opacity: .5;
 }
 
 // Main elements
@@ -79,24 +123,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
+	color: #{"{color:Link color}"};
 	text-decoration: none;
-}
-
-img {
-	max-width: 100%;
-}
-
-figure img {
-	display: block;
-	margin: 0 auto;
-}
-
-@media (max-width: $smallwidth) {
-	.container figure {
-		overflow: hidden;
-		margin-left: -1em;
-		margin-right: -1em;
-	}
 }
 
 button {
@@ -115,56 +143,191 @@ button::-moz-focus-inner {
 // Site header (index pages)
 
 #sitebanner {
-	margin-top: $line * 2;
 	margin-bottom: $line * 2;
 	text-align: center;
 }
 
-#sitebanner h1 {
-	margin-left: auto;
-	margin-right: auto;
+#sitebanner .avatar {
+	display: block;
 }
 
-#sitebanner h1 a::before,
-#sitebanner h1 a::after {
-	content: "";
+#sitebanner .avatar.circle {
+	border-radius: 50%;
 }
 
-#sitebanner h1 a:not(:hover):not(:focus) {
-	color: inherit;
+#sitebanner p {
+	margin-top: $line;
+	margin-bottom: $line;
 }
 
-// Site nav (permalink pages)
-
-#sitenav {
+#sitebanner nav {
+	margin-top: $line;
 	text-align: center;
-	margin-top: 0;
-	margin-bottom: $line * 3;
+}
+
+#sitebanner nav a {
+	white-space: nowrap;
+}
+
+// Link back home: avatar (for Permalink pages)
+
+#sitebanner .home-avatar {
+	display: inline-block;
+	padding: $line;
+	border: 1px solid transparent;
+}
+
+#sitebanner .home-avatar:hover,
+#sitebanner .home-avatar:focus {
+	border-color: currentColor;
+}
+
+// Link back home: title (for Permalink pages)
+
+#sitebanner .home-title {
+	display: inline-block;
+	margin-bottom: $line;
+}
+
+// Link back home as header (for Index pages)
+
+#sitebanner .main {
+	display: inline-block;
+	padding: 0 $line;
+	border: 1px solid transparent;
+}
+
+#sitebanner.hasHeaderImage .main {
+	display: block;
+}
+
+#sitebanner .main {
+	color: #{"{color:Text color}"};
+}
+
+#sitebanner .main:hover,
+#sitebanner .main:focus {
+	color: #{"{color:Link color}"};
+	border-color: currentColor;
+}
+
+#sitebanner .main:hover h1::after,
+#sitebanner .main:focus h1::after {
+	content: none !important;
+}
+
+#sitebanner .main .avatar {
+	margin: $line auto;
+}
+
+#sitebanner .main h1 {
+	margin: $line auto 0;
+	padding-bottom: $line;
+}
+
+#sitebanner .main .avatar + h1 {
+	margin-top: $line * 2;
+}
+
+/* {block:ShowHeaderImage} */
+@media (max-width: $pagewidth + 60) {
+	#sitebanner.hasHeaderImage .main {
+		margin: -2em -2em 0;
+		padding-top: $line;
+	}
+}
+@media (max-width: $smallwidth) {
+	#sitebanner.hasHeaderImage .main {
+		margin-left: -1em;
+		margin-right: -1em;
+	}
+}
+#sitebanner.hasHeaderImage .main {
+	position: relative;
+	color: #{"{color:Title color for header image}"};
+	background: url("{HeaderImage}") 50% 50% / cover no-repeat;
+	background-origin: border-box;
+}
+#sitebanner.hasHeaderImage .main:hover,
+#sitebanner.hasHeaderImage .main:focus {
+	color: #{"{color:Link color}"};
+	border-color: currentColor;
+	background-image: none;
+}
+#sitebanner.hasHeaderImage .main h1 > span {
+	font-size: 150%;
+	font-weight: 600;
+}
+#sitebanner.hasHeaderImage .main h1::after {
+	content: none;
+}
+/* {/block:ShowHeaderImage} */
+
+// Fixing site banner styles for special cases
+
+#sitebanner.hasHeaderImage.hasTitle:not(.hasAvatar) .main {
+	padding-top: $line * 4;
+}
+#sitebanner.hasHeaderImage.hasAvatar:not(.hasTitle) .main {
+	@media (max-width: $smallwidth) {
+		padding-top: $line;
+		padding-bottom: $line;
+	}
+}
+#sitebanner.hasHeaderImage:not(.hasAvatar):not(.hasTitle) .main {
+	min-height: $line * 7;
 }
 
 // Other Tumblr UI
 
-.tag-header h2 {
+#tag-header + hr {
+	display: none;
+}
+
+#tag-header h2 {
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.pagination {
+#pagination {
+	margin-top: $line * 2;
+	margin-bottom: $line;
 	text-align: center;
 }
 
-.pagination .prev a::before {
-	content: "[<- ";
+#pagination span {
+	padding: 0 2ch;
 }
 
-.pagination .next a::after {
-	content: " ->]";
+@media (min-width: $pagewidth) {
+	#pagination {
+		position: relative;
+	}
+	#pagination .prev {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	#pagination .next {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+}
+
+// Post container
+
+#posts > hr::before {
+	content: "{text:Separator Text}";
+}
+
+#posts > article {
+	margin-top: $line * 2;
 }
 
 // Post headers
 
-.post-title h1,
-.post-title h2 {
+.post-title h1 {
 	font-weight: bold;
 }
 
@@ -180,93 +343,262 @@ button::-moz-focus-inner {
 	text-align: center;
 }
 
-.post-title a::before,
-.post-title a::after {
-	content: "";
+.isIndexPage .post-title h2 {
+	padding-bottom: 0;
+	&::before {
+		content: "## ";
+	}
+	&::after {
+		content: none;
+	}
 }
 
-.text .post-title h2 a:not(:hover):not(:focus) {
-	color: inherit;
+.link .post-title h2 {
+	padding-bottom: 0;
+	&::before, &::after {
+		content: none;
+	}
 }
 
-.link .post-title h2::before {
-	display: none;
+// Post footer
+
+article > footer {
+	margin: $line 0;
 }
 
-.link .post-title a::before {
-	content: "[->] ";
+.isPermalinkPage article > footer {
+	margin-top: $line * 2;
 }
 
-.text .more a::after {
-	content: " ->]";
+article > footer span.date {
+	opacity: .5;
+	white-space: nowrap;
+}
+article > footer span.date::before {
+	content: "(";
+}
+article > footer span.date::after {
+	content: ")";
+}
+
+// Post content: general
+
+#posts img,
+#posts iframe {
+	max-width: 100%;
+}
+
+#posts figure img,
+#posts figure iframe {
+	display: block;
+	margin: 0 auto;
+}
+
+@media (max-width: $smallwidth) {
+	#posts figure {
+		overflow: hidden;
+		margin-left: -1em;
+		margin-right: -1em;
+	}
+	#posts figcaption {
+		padding-left: 1em;
+		padding-right: 1em;
+		text-align: left;
+	}
+}
+
+// Audio posts
+
+@media (min-width: $pagewidth) {
+	#posts > .audio {
+		max-width: 500px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+}
+
+// Video posts
+
+@media (min-width: $pagewidth) {
+	#posts > .video {
+		text-align: center;
+	}
+}
+
+// Photo posts
+
+/* {block:IfNotPhotoPostsShowFullresPhoto} */
+#posts > .photo {
+	max-width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+/* {/block:IfNotPhotoPostsShowFullresPhoto} */
+
+/* {block:IfPhotoPostsShowFullresPhoto} */
+.isPermalinkPage #posts .fullres {
+	margin-top: $line * 2;
+	margin-bottom: $line * 2;
+}
+
+// This one if for browsers not supporting calc() + vw 
+@media (min-width: $pagewidth + 200) {
+	#posts .fullres {
+		margin-left: -100px;
+		margin-right: -100px;
+	}
+}
+
+@media (min-width: $pagewidth + 20) {
+	.col-normal #posts .fullres {
+		$half: $pagewidth / 2;
+		margin-left: calc(-50vw + #{$half});
+		margin-right: calc(-50vw + #{$half});
+	}
+}
+
+@media (min-width: $smallwidth + 20) {
+	.col-narrow #posts .fullres {
+		$half: $smallwidth / 2;
+		margin-left: calc(-50vw + #{$half});
+		margin-right: calc(-50vw + #{$half});
+	}
+}
+/* {/block:IfPhotoPostsShowFullresPhoto} */
+
+// Photosets
+
+.photoset-custom {
+	margin: -10px;
+	font-size: 0;
+}
+
+.photoset-custom img {
+	width: 100%;
+}
+
+.photoset-custom a {
+	border: none;
+	display: inline-block;
+	border: none;
+	padding: 10px;
+	vertical-align: top;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	cursor: zoom-in;
+}
+
+.col-narrow .photoset-custom a {
+	width: 50%;
+}
+
+.col-normal .photoset-custom a,
+.col-wide .photoset-custom a {
+	width: 33.3%;
+}
+
+.photoset-custom[data-count="1"] a,
+.photoset-custom[data-count="2"] a,
+.photoset-custom[data-count="4"] a {
+	width: 50%;
+}
+
+@media (max-width: $pagewidth) {
+	#posts .photoset-custom a {
+		width: 50%;
+	}
+}
+
+@media (max-width: $smallwidth) {
+	#posts .photoset-custom a {
+		width: 100%;
+	}
 }
 
 // Blockquotes
 // Trying to do something about Tumblr’s deeply nested quotes
 
-@media (max-width: $pagewidth) {
-	.container blockquote {
-		// padding-left: 2ch;
-	}
-	.container blockquote > blockquote {
+#posts blockquote {
+	padding-left: 2ch;
+}
+
+@media (max-width: $smallwidth) {
+	#posts blockquote > blockquote {
 		margin-left: -2ch;
 	}
+	#posts blockquote > blockquote::before {
+		background-color: #{"{color:Background color}"};
+	}
 }
 
-@if ($alternate_blockquote_color) {
-	:not(blockquote) > p > .quote-toggle,
-	:not(blockquote) > blockquote {
-		color: #404040; }
-
-	:not(blockquote) > blockquote > p > .quote-toggle,
-	:not(blockquote) > blockquote > blockquote {
-		color: #008040; }
-
-	:not(blockquote) > blockquote > blockquote > p > .quote-toggle,
-	:not(blockquote) > blockquote > blockquote > blockquote {
-		color: #404040; }
-
-	:not(blockquote) > blockquote > blockquote > blockquote > p > .quote-toggle,
-	:not(blockquote) > blockquote > blockquote > blockquote > blockquote {
-		color: #804000; }
-
-	:not(blockquote) > blockquote > blockquote > blockquote > blockquote > p > .quote-toggle,
-	:not(blockquote) > blockquote > blockquote > blockquote > blockquote > blockquote {
-		color: #404040; }
-
-	blockquote > blockquote > blockquote > blockquote > blockquote .quote-toggle,
-	blockquote > blockquote > blockquote > blockquote > blockquote > blockquote {
-		color: #008040; }
+.quote-author {
+	color: inherit;
 }
+
+:not(blockquote) > .quote-meta,
+:not(blockquote) > blockquote {
+	color: #{"{color:Base quote color}"}; }
+
+:not(blockquote) > blockquote > .quote-meta,
+:not(blockquote) > blockquote > blockquote {
+	color: #{"{color:Alternate quote color}"}; }
+
+:not(blockquote) > blockquote > blockquote > .quote-meta,
+:not(blockquote) > blockquote > blockquote > blockquote {
+	color: #{"{color:Base quote color}"}; }
+
+:not(blockquote) > blockquote > blockquote > blockquote > .quote-meta,
+:not(blockquote) > blockquote > blockquote > blockquote > blockquote {
+	color: #{"{color:Alternate quote color}"}; }
+
+:not(blockquote) > blockquote > blockquote > blockquote > blockquote > .quote-meta,
+:not(blockquote) > blockquote > blockquote > blockquote > blockquote > blockquote {
+	color: #{"{color:Base quote color}"}; }
+
+blockquote > blockquote > blockquote > blockquote > blockquote > .quote-meta,
+blockquote > blockquote > blockquote > blockquote > blockquote > blockquote {
+	color: #{"{color:Alternate quote color}"}; }
 
 // Blockquote show-hide
 
-.quote-toggle {
-	display: inline-block;
-	width: 5ch;
-	white-space: pre;
-	overflow: hidden;
-}
-
-.quote-toggle:hover,
-.quote-toggle:focus {
-	width: auto;
-}
-
-.quote-toggle:focus {
-	outline: dotted 1px;
-}
-
-.quote-toggle span + span,
-.quote-toggle.hidden span:first-child {
-	display: none;
-}
-
-.quote-toggle.hidden span + span,
-.quote-toggle span:first-child {
-	display: inline;
-}
+/* {block:IfAddCollapseButtonsToQuotes} */
 
 blockquote.hidden {
 	display: none;
 }
+
+.quote-toggle {
+	display: inline-block;
+	margin-left: 1ch;
+}
+
+.quote-toggle:focus {
+	outline: 1px dotted;
+}
+
+.quote-toggle span {
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+}
+
+.quote-toggle::before {
+	content: "{-}";
+}
+.quote-toggle:hover::after {
+	content: " " attr(data-label-hide);
+	position: absolute;
+	margin-left: 1ch;
+	opacity: .5;
+}
+.quote-toggle.hidden::before {
+	content: "{+}";
+}
+.quote-toggle.hidden:hover::after {
+	content: " " attr(data-label-show);
+}
+
+/* {/block:IfAddCollapseButtonsToQuotes} */
+

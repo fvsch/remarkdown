@@ -7,60 +7,129 @@
 <meta charset="UTF-8">
 <title>{block:PostSummary}{PostSummary} &mdash; {/block:PostSummary}{Title}</title>
 {block:Description}<meta name="description" content="{MetaDescription}">{/block:Description}
+
+<meta name="color:Background color" content="#F6F6F6">
+<meta name="color:Text color" content="#202020">
+<meta name="color:Title color for header image" content="#000000">
+<meta name="color:Link color" content="#0050C0">
+<meta name="color:Base quote color" content="#C03000">
+<meta name="color:Alternate quote color" content="#404040">
+
+<meta name="select:Text size" content="text-normal"   title="Normal">
+<meta name="select:Text size" content="text-smaller"  title="Smaller">
+<meta name="select:Text size" content="text-smallest" title="Smallest">
+<meta name="select:Text size" content="text-bigger"   title="Bigger">
+<meta name="select:Text size" content="text-biggest"  title="Biggest">
+<meta name="select:Column width" content="col-normal" title="Normal">
+<meta name="select:Column width" content="col-narrow" title="Narrow">
+<meta name="select:Column width" content="col-wide"   title="Wide">
+<meta name="select:Link style" content="link-brackets"  title="Brackets">
+<meta name="select:Link style" content="link-underline" title="Underline">
+<meta name="select:Link style" content="link-brackets link-underline" title="Brackets + Underline">
+<meta name="select:Link style" content="link-none" title="None">
+
+<meta name="if:Use avatar as home link" content="1">
+<meta name="if:Custom photoset layout" content="1">
+<meta name="if:Photo posts show fullres photo" content="0">
+<meta name="if:Add collapse buttons to quotes" content="1">
+<meta name="if:Remove via paragraphs" content="1">
+
+<meta name="text:Additional Links" content="&lt;-- <a href=&quot;/tagged/special-tag&quot;&gt;Some special tag&lt;/a&gt; --&gt;">
+<meta name="text:Separator Text" content="* * * *">
+
+<link rel="icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 <?php
-  include('tumblr.css');
+  $css = file_get_contents("tumblr.css");
+  if ($css) {
+    $css = preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $css);
+    echo $css;
+  }
 ?>
+
+{CustomCSS}
 </style>
 </head>
 
-<body data-rmd>
+<body remarkdown class="{select:Text size} {select:Column width} {select:Link style}
+  {block:IndexPage}isIndexPage{/block:IndexPage}{block:PermalinkPage}isPermalinkPage{/block:PermalinkPage}">
 
-<div class="container">
+<header id="sitebanner"
+class="{block:ShowAvatar}hasAvatar{/block:ShowAvatar}
+  {block:ShowHeaderImage}hasHeaderImage{/block:ShowHeaderImage}
+  {block:ShowTitle}hasTitle{/block:ShowTitle}
+  {block:ShowDescription}hasDescription{/block:ShowDescription}">
+
+{block:IndexPage}
+<a href="{BlogURL}" class="main">
+  {block:ShowAvatar}
+    <img class="avatar {AvatarShape}" alt="{block:HideTitle}{Title}{/block:HideTitle}" src="{PortraitURL-128}">
+  {/block:ShowAvatar}
+  {block:ShowTitle}
+    <h1><span>{Title}</span></h1>
+  {/block:ShowTitle}
+</a>
+{/block:IndexPage}
 
 {block:PermalinkPage}
-<nav id="sitenav">
-  <a href="/">{Title}</a>
-  &nbsp;·&nbsp;
-  <a href="/tagged/✍">✍ my own posts</a>
-</nav>
+  {block:IfUseAvatarAsHomeLink}
+    {block:ShowAvatar}
+    <a href="{BlogURL}" class="home-avatar">
+      <img class="avatar {AvatarShape}" alt="{Title}" title="{Title}" src="{PortraitURL-128}">
+    </a>
+    {/block:ShowAvatar}
+    {block:HideAvatar}
+    <a href="{BlogURL}" class="home-title">&lt;&nbsp;{Title}</a>
+    {/block:HideAvatar}
+  {/block:IfUseAvatarAsHomeLink}
+  {block:IfNotUseAvatarAsHomeLink}
+  <a href="{BlogURL}" class="home-title">&lt;&nbsp;{Title}</a>
+  {/block:IfNotUseAvatarAsHomeLink}
 {/block:PermalinkPage}
 
 {block:IndexPage}
-<section id="sitebanner" data-rmd="h1-underline">
-  <h1><a href="/">{Title}</a></h1>
+{block:ShowDescription}
 {block:Description}
-  <p>{Description}</p>
+  <p class="[]">{Description}</p>
 {/block:Description}
-</section>
+{/block:ShowDescription}
+  <nav class="[]">
+  {block:HasPages}
+  {block:Pages}
+    <a href="{URL}">{Label}</a>
+  {/block:Pages}
+  {/block:HasPages}
+    {text:Additional Links}
+  </nav>
 {/block:IndexPage}
+</header>
 
-<div class="posts">
+<div id="posts">
 
 {block:NoSearchResults}
 <h2>Sorry, nothing found for &ldquo;{SearchQuery}&rdquo;.</h2>
 {/block:NoSearchResults}
 
 {block:TagPage}
-<div class="tag-header" data-rmd="h2-underline">
+<div id="tag-header">
 <h2>Posts tagged {Tag}</h2>
 </div>
 {/block:TagPage}
 
 {block:Posts}
   {block:IndexPage}<hr>{/block:IndexPage}
-  <article class="{PostType}{block:RebloggedFrom} reblog{/block:RebloggedFrom}{block:NotReblog} original{/block:NotReblog}">
+  <article class="{PostType} {block:RebloggedFrom}reblog{/block:RebloggedFrom}{block:NotReblog}original{/block:NotReblog}">
     {block:Text}
       {block:Title}
         {block:PermalinkPage}
-        <div class="post-title" data-rmd="h1-underline">
+        <div class="post-title">
           <h1>{Title}</h1>
         </div>
         {/block:PermalinkPage}
         {block:IndexPage}
-        <div class="post-title"{block:PermalinkPage} data-rmd="h2-underline"{/block:PermalinkPage}>
+        <div class="post-title">
           <h2><a href="{Permalink}">{Title}</a></h2>
         </div>
         {/block:IndexPage}
@@ -69,25 +138,49 @@
           {Body}
         </div>
       {block:More}
-      <p class="more"><a href="{Permalink}">Read More</a></p>
+      <p class="more"><a href="{Permalink}">Read More&nbsp;-&gt;</a></p>
       {/block:More}
     {/block:Text}
 
     {block:Photo}
-      <figure class="full">
-        <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}">
-        <div class="maintext">
-        {block:Caption}
-          <figcaption>{Caption}</figcaption>
-        {/block:Caption}
-        </div>
+      {block:IfPhotoPostsShowFullresPhoto}
+      <figure class="fullres">
+        <picture>
+          <source media="(min-width: 600px)" srcset="{PhotoURL-HighRes}">
+          <img alt="[image]" src="{PhotoURL-500}">
+        </picture>
       </figure>
+      {/block:IfPhotoPostsShowFullresPhoto}
+      {block:IfNotPhotoPostsShowFullresPhoto}
+      <figure class="UseTumblrLightbox">
+        {block:HighRes}<a href="{PhotoURL-HighRes}" data-lowres="{PhotoURL-500}" data-width="{PhotoWidth-HighRes}" data-height="{PhotoHeight-HighRes}">{/block:HighRes}
+          <img alt="[image]" src="{PhotoURL-500}">
+        {block:HighRes}</a>{/block:HighRes}
+      </figure>
+      {block:IfNotPhotoPostsShowFullresPhoto}
+      <div class="maintext">
+      {block:Caption}
+        {Caption}
+      {/block:Caption}
+      </div>
     {/block:Photo}
 
     {block:Photoset}
-      <figure class="full">
-        {Photoset-700}
-      </figure>
+      {block:IfNotCustomPhotosetLayout}      
+      <div class="photoset-default">
+        {Photoset}
+      </div>
+      {/block:IfNotCustomPhotosetLayout}
+      {block:IfCustomPhotosetLayout}
+      <div class="photoset-custom UseTumblrLightbox" data-count="{PhotoCount}">
+        {block:Photos}
+        <a href="{PhotoURL-HighRes}" data-lowres="{PhotoURL-400}" data-width="{PhotoWidth-HighRes}" data-height="{PhotoHeight-HighRes}">
+          <span class="dummy" style="background: url({PhotoURL-400}) 50% 50% / cover no-repeat;"></span>
+          <img alt="[image]" src="{PhotoURL-400}">
+        </a>
+        {/block:Photos}
+      </div>
+      {/block:IfCustomPhotosetLayout}
       <div class="maintext">
       {block:Caption}
         {Caption}
@@ -96,7 +189,7 @@
     {/block:Photoset}
 
     {block:Quote}
-      <blockquote class="main-quote">
+      <blockquote>
         <p>{Quote}</p>
       </blockquote>
       {block:Source}
@@ -108,7 +201,7 @@
 
     {block:Link}
       <div class="post-title">
-        <h2 class="link"><a href="{URL}" class="external">{Name}</a></h2>
+        <h2 class="link"><a href="{URL}" class="external">[-&gt;]&nbsp;{Name}</a></h2>
       </div>
       {block:Description}
       <div class="maintext">
@@ -120,7 +213,7 @@
     {block:Chat}
       {block:Title}
         {block:PermalinkPage}
-        <div class="post-title" data-rmd="h1-underline">
+        <div class="post-title">
           <h1>{Title}</h1>
         </div>
         {/block:PermalinkPage}
@@ -143,55 +236,115 @@
     {/block:Chat}
 
     {block:Audio}
-      {AudioEmbed-640}
-      {block:Caption}
-        {Caption}
-      {/block:Caption}
-    {/block:Audio}
-
-    {block:Video}
-      <figure class="full">
-      {Video-700}
-      {block:Caption}
+      <figure class="maintext">
+        {AudioEmbed-500}
+        {block:Caption}
         <figcaption>
           {Caption}
         </figcaption>
-      {/block:Caption}
+        {/block:Caption}
+      </figure>
+    {/block:Audio}
+
+    {block:Video}
+      <figure class="maintext">
+        {Video-700}
+        {block:Caption}
+        <figcaption class="maintext">
+          {Caption}
+        </figcaption>
+        {/block:Caption}
       </figure>
     {/block:Video}
 
+    <footer class="[]">
     {block:Date}
-      <footer class="meta">
-        <p>
-          <a href="{Permalink}">{TimeAgo}</a>
-          {block:RebloggedFrom}
-          — <a href="{ReblogRootURL}">by {ReblogRootName}</a>
-          {/block:RebloggedFrom}
-          {block:HasTags}
-          {block:Tags}
-          <span class="tag"><a href="{TagURL}">#{Tag}</a></span>
-          {/block:Tags}
-          {/block:HasTags}
-        </p>
-      </footer>
+      {block:PermalinkPage}
+        <span class="date">{DayOfMonth} {ShortMonth} {Year}</span>
+      {/block:PermalinkPage}
+      {block:IndexPage}
+        <a class="date" href="{Permalink}">{TimeAgo}</a>
+      {/block:IndexPage}
     {/block:Date}
+      {block:RebloggedFrom}
+        <a class="reblog-root" href="{ReblogRootURL}">&gt;&nbsp;{ReblogRootName}</a>
+      {/block:RebloggedFrom}
+      {block:HasTags}
+        {block:Tags}
+        <a class="tag" href="{TagURL}">#{Tag}</a>
+        {/block:Tags}
+      {/block:HasTags}
+    </footer>
 
   </article>
 
 {/block:Posts}
 
-</div><!--.posts-->
+</div><!--#posts-->
         
 {block:Pagination}
-<p class="pagination">
-  {block:PreviousPage}<span class="prev"><a href="{PreviousPage}" class="previous">Previous</a> &nbsp;·&nbsp;</span>{/block:PreviousPage}
+<footer id="pagination" class="[]">
+{block:PreviousPage}
+  <a class="prev" href="{PreviousPage}">&lt;&lt;&nbsp;Previous</a>
+{/block:PreviousPage}
   <span class="page-numbers">Page&nbsp;{CurrentPage}&thinsp;/&thinsp;{TotalPages}</span>
-  {block:NextPage}<span class="next">&nbsp;·&nbsp; <a href="{NextPage}">Next</a></span>{/block:NextPage}
-</p>
+{block:NextPage}
+  <a class="next" href="{NextPage}">Next&nbsp;&gt;&gt;</a>
+{/block:NextPage}
+</footer>
 {/block:Pagination}
 
-</div><!--.container-->
+{block:IfPhotoPostsShowFullresPhoto}
+<script>
+void function stupid_picture_polyfill() {
+  // Expects <picture><source media="(media_query)" srcset="big"><img src="small"></picture>
+  var pics = document.querySelectorAll('.fullres > picture > source + img');
+  if (!pics || 'currentSrc' in pics[0] || !'matchMedia' in window) return;
+  for (var i=0; i < pics.length; i++) {
+    var pic = pics[i], source = pic.previousElementSibling;
+    var mq = source.getAttribute('media');
+    var newsrc = source.getAttribute('srcset');
+    if (newsrc && window.matchMedia(mq).matches) {
+      pic.src = newsrc;
+    }
+  }
+}();
+</script>
+{/block:IfPhotoPostsShowFullresPhoto}
 
+<script>
+void function attach_tumblr_lightbox() {
+  function getImgInfo(link) {
+    return {
+      'width': link.getAttribute('data-width'),
+      'height': link.getAttribute('data-height'),
+      'low_res': link.getAttribute('data-lowres'),
+      'high_res': link.href
+    }
+  }
+  function callLightbox(event) {
+    var set = [], thisIndex = 1;
+    var thisLink = event.currentTarget;
+    var links = thisLink.parentElement.querySelectorAll('a');
+    for (var i=0; i<links.length; i++) {
+      if (links[i] === thisLink) {
+        thisIndex = i + 1;
+      }
+      set.push(getImgInfo(links[i]));
+    }
+    if (Tumblr.Lightbox && set.length > 0) {
+      event.preventDefault();
+      Tumblr.Lightbox.init(set, thisIndex);
+    }
+  }
+  var imgLinks = document.querySelectorAll('.UseTumblrLightbox > a');
+  for (var i=0, l=imgLinks.length; i<l; i++) {
+    imgLinks[i].addEventListener('click', callLightbox);
+  }
+}();
+</script>
+
+{block:IfRemoveViaParagraphs}
 <script>
 void function remove_pesky_via() {
   var sel = '.maintext > p:nth-last-child(-1n+2), .maintext > * > p:nth-last-child(-1n+2)';
@@ -203,13 +356,19 @@ void function remove_pesky_via() {
     }
   }
 }();
+</script>
+{/block:IfRemoveViaParagraphs}
 
+{block:IfAddCollapseButtonsToQuotes}
+<script>
 void function toggle_those_blockquotes() {
   var makeBtn = function(para) {
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'quote-toggle';
-    btn.innerHTML = '<span> {-} Hide quote </span><span> {+} Show quote </span>';
+    btn.innerHTML = '<span>Toggle quote</span>';
+    btn.setAttribute('data-label-hide', 'Hide quote');
+    btn.setAttribute('data-label-show', 'Show quote');
     btn.addEventListener('click', function(event){
       var btn = event.currentTarget;
       var quote = btn.parentElement.nextElementSibling;
@@ -221,11 +380,13 @@ void function toggle_those_blockquotes() {
   var test = function(para) {
     // looking for the <p><a>someone</a>:</p> pattern.
     var link = para.querySelector('a:last-of-type');
-    if (link !== null && /[a-z0-9]+/.test(link.textContent.trim())) {
+    if (link !== null && /[a-z0-9-]+/.test(link.textContent.trim())) {
       var nxt = link.nextSibling;
       var end = para.lastChild;
       if (nxt !== end) return;
       if (end.textContent.trim() === ':') {
+        para.className += ' quote-meta';
+        link.className += ' quote-author';
         makeBtn(para);
       }
     }
@@ -236,6 +397,7 @@ void function toggle_those_blockquotes() {
   }
 }();
 </script>
+{/block:IfAddCollapseButtonsToQuotes}
 
 </body>
 </html>

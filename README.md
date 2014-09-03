@@ -20,6 +20,10 @@ See the [online demo and documentation](http://fvsch.com/code/remarkdown/).
 
 - [x] Base HTML and styles
 - [x] Tumblr tags
-- [ ] Theme options
-- [ ] Improve the photoset display (looping on images)
+- [x] Theme options (a bazillion options)
+- [-] Improve the photoset display (looping on images)
+- [x] Photoset display for single images
+- [-] Fullres option for photo posts
+- [x] Fix the audio post display
 - [ ] Documentation (making index.html into a demo + doc page)
+- [ ] Submit to Tumblr Theme Garden or whatever
