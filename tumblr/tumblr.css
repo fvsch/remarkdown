@@ -191,11 +191,11 @@ article > footer { margin: 1.4em 0; }
 
 .isPermalinkPage article > footer { margin-top: 2.8em; }
 
-article > footer span.date { opacity: .5; white-space: nowrap; }
+article > footer span { opacity: .5; white-space: nowrap; }
 
-article > footer span.date::before { content: "("; }
+article > footer span::before { content: "("; }
 
-article > footer span.date::after { content: ")"; }
+article > footer span::after { content: ")"; }
 
 #posts img, #posts iframe { max-width: 100%; }
 
@@ -205,10 +205,6 @@ article > footer span.date::after { content: ")"; }
   #posts figcaption { padding-left: 1em; padding-right: 1em; text-align: left; } }
 @media (min-width: 700px) { #posts > .audio { max-width: 500px; margin-left: auto; margin-right: auto; text-align: center; } }
 @media (min-width: 700px) { #posts > .video { text-align: center; } }
-/* {block:IfNotPhotoPostsShowFullresPhoto} */
-#posts > .photo { max-width: 500px; margin-left: auto; margin-right: auto; }
-
-/* {/block:IfNotPhotoPostsShowFullresPhoto} */
 /* {block:IfPhotoPostsShowFullresPhoto} */
 .isPermalinkPage #posts .fullres { margin-top: 2.8em; margin-bottom: 2.8em; }
 
@@ -253,16 +249,30 @@ blockquote.hidden { display: none; }
 
 .quote-toggle { display: inline-block; margin-left: 1ch; }
 
+.quote-meta.short .quote-toggle { display: none; }
+
 .quote-toggle:focus { outline: 1px dotted; }
 
 .quote-toggle span { position: absolute; width: 0px; height: 0px; overflow: hidden; }
 
 .quote-toggle::before { content: "{-}"; }
 
-.quote-toggle:hover::after { content: " " attr(data-label-hide); position: absolute; margin-left: 1ch; opacity: .5; }
-
 .quote-toggle.hidden::before { content: "{+}"; }
 
-.quote-toggle.hidden:hover::after { content: " " attr(data-label-show); }
-
 /* {/block:IfAddCollapseButtonsToQuotes} */
+/* {block:IfNotHideNotesLink} */
+.notes-container { margin-top: 2.8em; }
+
+.notes-container ol.notes { margin: 0; }
+
+.notes-container ol.notes li::before { content: none; }
+
+.notes-container .more_notes_link_container { margin-top: 1.4em; }
+
+.notes-container ol.notes blockquote { margin: 1.4em; }
+
+.notes-container ol.notes blockquote a { color: inherit; border: none; }
+
+.notes-container .avatar_frame { display: none; }
+
+/* {/block:IfNotHideNotesLink} */

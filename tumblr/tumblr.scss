@@ -370,14 +370,14 @@ article > footer {
 	margin-top: $line * 2;
 }
 
-article > footer span.date {
+article > footer span {
 	opacity: .5;
 	white-space: nowrap;
 }
-article > footer span.date::before {
+article > footer span::before {
 	content: "(";
 }
-article > footer span.date::after {
+article > footer span::after {
 	content: ")";
 }
 
@@ -427,14 +427,6 @@ article > footer span.date::after {
 }
 
 // Photo posts
-
-/* {block:IfNotPhotoPostsShowFullresPhoto} */
-#posts > .photo {
-	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
-}
-/* {/block:IfNotPhotoPostsShowFullresPhoto} */
 
 /* {block:IfPhotoPostsShowFullresPhoto} */
 .isPermalinkPage #posts .fullres {
@@ -563,7 +555,6 @@ blockquote > blockquote > blockquote > blockquote > blockquote > blockquote {
 // Blockquote show-hide
 
 /* {block:IfAddCollapseButtonsToQuotes} */
-
 blockquote.hidden {
 	display: none;
 }
@@ -571,6 +562,10 @@ blockquote.hidden {
 .quote-toggle {
 	display: inline-block;
 	margin-left: 1ch;
+}
+
+.quote-meta.short .quote-toggle {
+	display: none;
 }
 
 .quote-toggle:focus {
@@ -587,18 +582,34 @@ blockquote.hidden {
 .quote-toggle::before {
 	content: "{-}";
 }
-.quote-toggle:hover::after {
-	content: " " attr(data-label-hide);
-	position: absolute;
-	margin-left: 1ch;
-	opacity: .5;
-}
 .quote-toggle.hidden::before {
 	content: "{+}";
 }
-.quote-toggle.hidden:hover::after {
-	content: " " attr(data-label-show);
-}
-
 /* {/block:IfAddCollapseButtonsToQuotes} */
 
+// Styling notes
+
+/* {block:IfNotHideNotesLink} */
+.notes-container {
+	margin-top: $line * 2;
+}
+.notes-container ol.notes {
+	margin: 0;
+}
+.notes-container ol.notes li::before {
+	content: none;
+}
+.notes-container .more_notes_link_container {
+	margin-top: $line;
+}
+.notes-container ol.notes blockquote {
+	margin: $line;
+}
+.notes-container ol.notes blockquote a {
+	color: inherit;
+	border: none;
+}
+.notes-container .avatar_frame {
+	display: none;
+}
+/* {/block:IfNotHideNotesLink} */
