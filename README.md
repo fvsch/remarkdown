@@ -27,8 +27,22 @@ See the [online demo and documentation](http://fvsch.com/code/remarkdown/).
 - [x] Fix the audio post display
 - [x] Use localization strings
 - [x] Notes integration
-- [ ] Other [submission requirements](https://www.tumblr.com/docs/en/theme_submission_guidelines)
-- [ ] Documentation: make a demo tumblog
-- [ ] Documentation: make a blog post (fvsch.com)
-- [ ] Move to a separate repository
+- [-] Other [submission requirements](https://www.tumblr.com/docs/en/theme_submission_guidelines)
+
+	- [x] Support all post types.
+	- [x] Support note counts and the display of notes.
+	- [x] Use standard Tumblr template tags.
+	- [x] Use localized strings when possible.
+	- [x] Not rely on third party widgets.
+	- [-] Display well in all modern browsers.
+	- [x] Host all files, like style sheets and images, on Tumblr’s static file uploader.
+	- [x] Correctly link images and other assets.
+	- [x] Avoid spammy stuff like music players, blinged-out cursors, and weird scripts.
+	- [x] Be fully original. Don’t build off of, clone, or otherwise rip off another theme.
+	- [x] Never use any copyrighted material.
+	- [x] Avoid being gross or offensive.
+
+- [-] Documentation: make a demo tumblog
 - [ ] Submit to Tumblr Theme Garden or whatever
+- [ ] Make a fvsch.com blog post
+- [ ] Move to a separate repository
