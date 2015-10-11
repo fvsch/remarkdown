@@ -1,0 +1,9 @@
+Title: ReMarkdown v2
+----
+Lang: en
+----
+IndexFile: about.html
+----
+Date: 2014-08-14
+----
+Abstract: Is your HTML content looking all HTML-y and CSS-y? I bet it has great typography and carefully crafted negative space? Such ennui! Ditch all this @font-face and font-size nonsense, and go with a good old plain text look instead! That’s what ReMarkdown does: it takes your HTML and makes it look like Markdown. Pretty nerdy, uh? So the text you’re reading right now is not plain text, it’s good old HTML with H1s and Ps and BLOCKQUOTEs. Just “Inspect Element” and you’ll see.
