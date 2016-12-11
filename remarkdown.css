@@ -6,7 +6,7 @@
  */
 [data-rmd] {
   line-height: 1.5;
-  font-family: MyFaveMonospaceFont, monospace;
+  font-family: monospace, monospace;
 }
 
 [data-rmd] h1, [data-rmd] h2, [data-rmd] h3, [data-rmd] h4, [data-rmd] h5, [data-rmd] h6 {

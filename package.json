@@ -1,4 +1,6 @@
 {
+  "license": "WTFPL",
+  "repository": "fvsch/remarkdown",
   "scripts": {
     "build": "node-sass --output-style=expanded remarkdown.scss > remarkdown-custom.css",
     "build-demo": "node-sass --output-style=compressed assets/demo.scss > assets/demo.css"
