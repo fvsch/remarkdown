@@ -1,5 +1,7 @@
 
-# ReMarkdown.css — HTML that looks like Markdown text
+# ReMarkdown
+
+ReMarkdown is a stylesheet that styles HTML elements as their Markdown counterparts.
 
 See the [online demo and documentation](https://fvsch.github.io/remarkdown/).
 
