@@ -1,8 +1,0 @@
-Title: ReMarkdown — Display HTML as Markdown text
-----
-Lang: en
-----
-IndexFile: index.html
-----
-Date: 2011-01-26
-----

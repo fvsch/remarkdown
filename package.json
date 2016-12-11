@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "node-sass --output-style=expanded remarkdown.scss > remarkdown-custom.css",
+    "build-demo": "node-sass --output-style=compressed assets/demo.scss > assets/demo.css"
+  },
+  "devDependencies": {
+    "node-sass": "^4.0"
+  }
+}

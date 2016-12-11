@@ -1,591 +1,575 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>ReMarkdown — Available styles</title>
-	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="remarkdown.css">
-	<link rel="stylesheet" href="doc/rmd-raw.css">
-	<link rel="stylesheet" href="doc/pages.css">
+  <meta charset="utf-8">
+  <title>ReMarkdown — Available styles</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="assets/demo.css">
 </head>
 <body>
 
 <nav data-rmd>
-	<span>ReMarkdown</span>
-	<a href=".">about</a>
-	<em>styles</em>
-	<a href="config">config</a>
+  <span>ReMarkdown</span>
+  <a href=".">about</a>
+  <em>styles</em>
+  <a href="config.html">config</a>
 </nav>
 
 <div data-rmd="h1-underline h2-underline table-marker">
-	<h1>List of available styles</h1>
-	<p>All styles that are listed as “Default” here will be active when using the default <a href="remarkdown.css">remarkdown.css</a> build. No need to specify <code>data-rmd="style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="config">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
+  <h1>Demo of available styles</h1>
+  <p>All styles that are listed as “Default” here will be active when using the default <a href="remarkdown.css">remarkdown.css</a> build. No need to specify <code>data-rmd="style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="config.html#custom">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
 
-	<table id="style-list">
-		<tr>
-			<th scope="col">Style name</th>
-			<th scope="col">Default</th>
-			<th scope="col">Description</th>
-		</tr>
-		<tr>
-			<td><a href="#hn-hash">hn-hash</a></td>
-			<td>Yes</td>
-			<td>Add hashes at the start of titles</td>
-		</tr>
-		<tr>
-			<td><a href="#hn-close">hn-close</a></td>
-			<td>—</td>
-			<td>Add hashes at the end of titles</td>
-		</tr>
-		<tr>
-			<td><a href="#h-underline">h1-underline</a></td>
-			<td>—</td>
-			<td>Underline H1s with equals</td>
-		</tr>
-		<tr>
-			<td><a href="#h-underline">h2-underline</a></td>
-			<td>—</td>
-			<td>Underline H2s with hyphens</td>
-		</tr>
-		<tr>
-			<td><a href="#ul-hyphen">ul-hyphen</a></td>
-			<td>Yes</td>
-			<td>Use “-” for bullets</td>
-		</tr>
-		<tr>
-			<td><a href="#ul-star">ul-star</a></td>
-			<td>—</td>
-			<td>Use “*” for bullets</td>
-		</tr>
-		<tr>
-			<td><a href="#ul-plus">ul-plus</a></td>
-			<td>—</td>
-			<td>Use “+” for bullets</td>
-		</tr>
-		<tr>
-			<td><a href="#em-star">em-star</a></td>
-			<td>Yes</td>
-			<td>Use “*” signs for emphasis</td>
-		</tr>
-		<tr>
-			<td><a href="#em-underscore">em-underscore</a></td>
-			<td>—</td>
-			<td>Use “_” signs for emphasis</td>
-		</tr>
-		<tr>
-			<td><a href="#strong-star">strong-star</a></td>
-			<td>Yes</td>
-			<td>Use “*” signs for strong emphasis</td>
-		</tr>
-		<tr>
-			<td><a href="#strong-underscore">strong-underscore</a></td>
-			<td>—</td>
-			<td>Use “_” signs for strong emphasis</td>
-		</tr>
-		<tr>
-			<td><a href="#a-bracket">a-bracket</a></td>
-			<td>Yes</td>
-			<td>Add square brackets around links.</td>
-		</tr>
-		<tr>
-			<td><a href="#a-showurl">a-showurl</a></td>
-			<td>—</td>
-			<td>Show URLs after links</td>
-		</tr>
-		<tr>
-			<td><a href="#del-gfm">del-gfm</a></td>
-			<td>—</td>
-			<td>Wrap DEL in “~~” (<a href="https://help.github.com/articles/github-flavored-markdown#strikethrough">GFM style</a>)</td>
-		</tr>
-		<tr>
-			<td><a href="#hr-star">hr-star</a></td>
-			<td>Yes</td>
-			<td>Use “*” signs for HR</td>
-		</tr>
-		<tr>
-			<td><a href="#hr-hyphen">hr-hyphen</a></td>
-			<td>—</td>
-			<td>Use “-” signs for HR</td>
-		</tr>
-		<tr>
-			<td><a href="#hr-center">hr-center</a></td>
-			<td>—</td>
-			<td>Horizontally center the HR</td>
-		</tr>
-		<tr>
-			<td><a href="#code-tick">code-tick</a></td>
-			<td>Yes</td>
-			<td>Wrap CODE in “`” (backticks)</td>
-		</tr>
-		<tr>
-			<td><a href="#pre-indent">pre-indent</a></td>
-			<td>Yes</td>
-			<td>Left indent PRE by 4 spaces</td>
-		</tr>
-		<tr>
-			<td><a href="#code-fence">code-fence</a></td>
-			<td>—</td>
-			<td>Wraps code blocks in “```”</td>
-		</tr>
-		<tr>
-			<td><a href="#code-fence-tilde">code-fence-tilde</a></td>
-			<td>—</td>
-			<td>… wrap with “~~~”</td>
-		</tr>
-		<tr>
-			<td><a href="#code-fence-full">code-fence-full</a></td>
-			<td>—</td>
-			<td>… wrap with full line of “~”</td>
-		</tr>
-		<tr>
-			<td><a href="#table-marker">table-marker</a></td>
-			<td>—</td>
-			<td>Add markers to TABLE (<a href="https://michelf.ca/projects/php-markdown/extra/#table">syntax</a>)</td>
-		</tr>
-	</table>
+  <table id="style-list">
+    <tr>
+      <th scope="col">Style name</th>
+      <th scope="col">Default</th>
+      <th scope="col">Description</th>
+    </tr>
+    <tr>
+      <td><a href="#hn-hash">hn-hash</a></td>
+      <td>Yes</td>
+      <td>Add hashes at the start of titles</td>
+    </tr>
+    <tr>
+      <td><a href="#hn-close">hn-close</a></td>
+      <td>—</td>
+      <td>Add hashes at the end of titles</td>
+    </tr>
+    <tr>
+      <td><a href="#h-underline">h1-underline</a></td>
+      <td>—</td>
+      <td>Underline H1s with equals</td>
+    </tr>
+    <tr>
+      <td><a href="#h-underline">h2-underline</a></td>
+      <td>—</td>
+      <td>Underline H2s with hyphens</td>
+    </tr>
+    <tr>
+      <td><a href="#ul-hyphen">ul-hyphen</a></td>
+      <td>Yes</td>
+      <td>Use “-” for bullets</td>
+    </tr>
+    <tr>
+      <td><a href="#ul-star">ul-star</a></td>
+      <td>—</td>
+      <td>Use “*” for bullets</td>
+    </tr>
+    <tr>
+      <td><a href="#ul-plus">ul-plus</a></td>
+      <td>—</td>
+      <td>Use “+” for bullets</td>
+    </tr>
+    <tr>
+      <td><a href="#em-star">em-star</a></td>
+      <td>Yes</td>
+      <td>Use “*” signs for emphasis</td>
+    </tr>
+    <tr>
+      <td><a href="#em-underscore">em-underscore</a></td>
+      <td>—</td>
+      <td>Use “_” signs for emphasis</td>
+    </tr>
+    <tr>
+      <td><a href="#strong-star">strong-star</a></td>
+      <td>Yes</td>
+      <td>Use “*” signs for strong emphasis</td>
+    </tr>
+    <tr>
+      <td><a href="#strong-underscore">strong-underscore</a></td>
+      <td>—</td>
+      <td>Use “_” signs for strong emphasis</td>
+    </tr>
+    <tr>
+      <td><a href="#a-bracket">a-bracket</a></td>
+      <td>Yes</td>
+      <td>Add square brackets around links.</td>
+    </tr>
+    <tr>
+      <td><a href="#a-showurl">a-showurl</a></td>
+      <td>—</td>
+      <td>Show URLs after links</td>
+    </tr>
+    <tr>
+      <td><a href="#del-gfm">del-gfm</a></td>
+      <td>—</td>
+      <td>Wrap DEL in “~~” (<a href="https://help.github.com/articles/github-flavored-markdown#strikethrough">GFM style</a>)</td>
+    </tr>
+    <tr>
+      <td><a href="#hr-star">hr-star</a></td>
+      <td>Yes</td>
+      <td>Use “*” signs for HR</td>
+    </tr>
+    <tr>
+      <td><a href="#hr-hyphen">hr-hyphen</a></td>
+      <td>—</td>
+      <td>Use “-” signs for HR</td>
+    </tr>
+    <tr>
+      <td><a href="#hr-center">hr-center</a></td>
+      <td>—</td>
+      <td>Horizontally center the HR</td>
+    </tr>
+    <tr>
+      <td><a href="#code-tick">code-tick</a></td>
+      <td>Yes</td>
+      <td>Wrap CODE in “`” (backticks)</td>
+    </tr>
+    <tr>
+      <td><a href="#pre-indent">pre-indent</a></td>
+      <td>Yes</td>
+      <td>Left indent PRE by 4 spaces</td>
+    </tr>
+    <tr>
+      <td><a href="#code-fence">code-fence</a></td>
+      <td>—</td>
+      <td>Wraps code blocks in “```”</td>
+    </tr>
+    <tr>
+      <td><a href="#code-fence-tilde">code-fence-tilde</a></td>
+      <td>—</td>
+      <td>… wrap with “~~~”</td>
+    </tr>
+    <tr>
+      <td><a href="#code-fence-full">code-fence-full</a></td>
+      <td>—</td>
+      <td>… wrap with full line of “~”</td>
+    </tr>
+    <tr>
+      <td><a href="#table-marker">table-marker</a></td>
+      <td>—</td>
+      <td>Add markers to TABLE (<a href="https://michelf.ca/projects/php-markdown/extra/#table">syntax</a>)</td>
+    </tr>
+  </table>
 
-	<h2>Headings</h2>
-	<h3 id="hn-hash">Default: <code>hn-hash</code></h3>
+  <h2>Headings</h2>
+  <h3 id="hn-hash">Default: <code>hn-hash</code></h3>
 </div>
 
 <div class="example" data-rmd-test="hn-hash">
-	<h1>Heading level 1</h1>
-	<h2>Heading level 2</h2>
-	<h3>Heading level 3</h3>
-	<h4>Heading level 4</h4>
-	<h5>Heading level 5</h5>
-	<h6>Heading level 6</h6>
+  <h1>Heading level 1</h1>
+  <h2>Heading level 2</h2>
+  <h3>Heading level 3</h3>
+  <h4>Heading level 4</h4>
+  <h5>Heading level 5</h5>
+  <h6>Heading level 6</h6>
 </div>
 
 <div data-rmd>
-	<h3 id="hn-close">Option: <code>hn-close</code></h3>
+  <h3 id="hn-close">Option: <code>hn-close</code></h3>
 </div>
 
 <div class="example" data-rmd-test="hn-hash hn-close">
-	<h1>Heading level 1</h1>
-	<h2>Heading level 2</h2>
-	<h3>Heading level 3</h3>
-	<h4>Heading level 4</h4>
-	<h5>Heading level 5</h5>
-	<h6>Heading level 6</h6>
+  <h1>Heading level 1</h1>
+  <h2>Heading level 2</h2>
+  <h3>Heading level 3</h3>
+  <h4>Heading level 4</h4>
+  <h5>Heading level 5</h5>
+  <h6>Heading level 6</h6>
 </div>
 
 <div data-rmd>
-	<h3 id="h-underline">Options: <code>h1-underline</code> and <code>h2-underline</code></h3>
+  <h3 id="h-underline">Options: <code>h1-underline</code> and <code>h2-underline</code></h3>
 </div>
 
 <div class="example" data-rmd-test="h1-underline h2-underline">
-	<h1>Underlined H1</h1>
-	<h2>Underlined H2</h2>
-	<p>Underlined titles cannot be centered with <code>text-align:center</code>. You will need to use auto margins:</p>
-	<h1 style="margin-left: auto; margin-right: auto;">
-		Underlined H1
-	</h1>
-	<h2 style="margin-left: auto;">
-		Underlined H2
-	</h2>
-	<p>Note that titles that span two lines don’t look that great:</p>
-	<h2>
-		A long title: Possimus officia, ducimus nihil beatae dolore vitae, perspiciatis ex quaerat placeat, perferendis
-	</h2>
+  <h1>Underlined H1</h1>
+  <h2>Underlined H2</h2>
+  <p>Underlined titles cannot be centered with <code>text-align:center</code>. You will need to use auto margins:</p>
+  <h1 style="margin-left: auto; margin-right: auto;">
+    Underlined H1
+  </h1>
+  <h2 style="margin-left: auto;">
+    Underlined H2
+  </h2>
+  <p>Note that titles that span two lines don’t look that great:</p>
+  <h2>
+    A long title: Possimus officia, ducimus nihil beatae dolore vitae, perspiciatis ex quaerat placeat, perferendis
+  </h2>
 </div>
 
 <div data-rmd="h2-underline">
-	<h2>Lists</h2>
-	<h3>Default: ordered list (no option name)</h3>
+  <h2>Lists</h2>
+  <h3>Default: ordered list (no option name)</h3>
 </div>
 
 <div class="example" data-rmd-test>
-	<ol>
-		<li>This is a list.</li>
-		<li>With a second item.
-			<ol>
-				<li>Nested lists work too.</li>
-				<li>This is so cool.</li>
-			</ol>
-		</li>
-		<li>And a third one.</li>
-	</ol>
+  <ol>
+    <li>This is a list.</li>
+    <li>With a second item.
+      <ol>
+        <li>Nested lists work too.</li>
+        <li>This is so cool.</li>
+      </ol>
+    </li>
+    <li>And a third one.</li>
+  </ol>
 </div>
 
 <div data-rmd>
-	<h3 id="ul-hyphen">Default: <code>ul-hyphen</code></h3>
+  <h3 id="ul-hyphen">Default: <code>ul-hyphen</code></h3>
 </div>
 
 <div class="example" data-rmd-test="ul-hyphen">
-	<ul>
-		<li>This is a list.</li>
-		<li>With a second item.
-			<ul>
-				<li>Nested lists work too.</li>
-				<li>This is so cool.</li>
-			</ul>
-		</li>
-		<li>And a third one.</li>
-	</ul>
+  <ul>
+    <li>This is a list.</li>
+    <li>With a second item.
+      <ul>
+        <li>Nested lists work too.</li>
+        <li>This is so cool.</li>
+      </ul>
+    </li>
+    <li>And a third one.</li>
+  </ul>
 </div>
 
 <div data-rmd>
-	<h3 id="ul-star">Option: <code>ul-star</code></h3>
+  <h3 id="ul-star">Option: <code>ul-star</code></h3>
 </div>
 
 <div class="example" data-rmd-test="ul-star">
-	<ul>
-		<li>This is a list.</li>
-		<li>With a second item.</li>
-		<li>And a third one.</li>
-	</ul>
+  <ul>
+    <li>This is a list.</li>
+    <li>With a second item.</li>
+    <li>And a third one.</li>
+  </ul>
 </div>
 
 <div data-rmd>
-	<h3 id="ul-plus">Option: <code>ul-plus</code></h3>
+  <h3 id="ul-plus">Option: <code>ul-plus</code></h3>
 </div>
 
 <div class="example" data-rmd-test="ul-plus">
-	<ul>
-		<li>This is a list.</li>
-		<li>With a second item.</li>
-		<li>And a third one.</li>
-	</ul>
+  <ul>
+    <li>This is a list.</li>
+    <li>With a second item.</li>
+    <li>And a third one.</li>
+  </ul>
 </div>
 
 <div data-rmd="h2-underline">
-	<h3 id="ul-plus">Option: <code>ul-plus</code></h3>
-</div>
-
-<div class="example" data-rmd-test="ul-plus">
-	<ul>
-		<li>This is a list.</li>
-		<li>With a second item.</li>
-		<li>And a third one.</li>
-	</ul>
-</div>
-
-<div data-rmd="h2-underline">
-	<h2>Emphasis</h2>
-	<h3 id="em-star">Default: <code>em-star</code></h3>
+  <h2>Emphasis</h2>
+  <h3 id="em-star">Default: <code>em-star</code></h3>
 </div>
 
 <div class="example" data-rmd-test="em-star">
-	<p>This is <em>literally</em> figurative!</p>
+  <p>This is <em>literally</em> figurative!</p>
 </div>
 
 <div data-rmd>
-	<h3 id="em-underscore">Option: <code>em-underscore</code></h3>
+  <h3 id="em-underscore">Option: <code>em-underscore</code></h3>
 </div>
 
 <div class="example" data-rmd-test="em-underscore">
-	<p>This is <em>literally</em> figurative!</p>
+  <p>This is <em>literally</em> figurative!</p>
 </div>
 
 <div data-rmd>
-	<h3 id="strong-star">Default: <code>strong-star</code></h3>
+  <h3 id="strong-star">Default: <code>strong-star</code></h3>
 </div>
 
 <div class="example" data-rmd-test="strong-star">
-	<p>This is figurative. <strong>Literally.</strong></p>
+  <p>This is figurative. <strong>Literally.</strong></p>
 </div>
 
 <div data-rmd>
-	<h3 id="strong-underscore">Option: <code>strong-underscore</code></h3>
+  <h3 id="strong-underscore">Option: <code>strong-underscore</code></h3>
 </div>
 
 <div class="example" data-rmd-test="strong-underscore">
-	<p>This is figurative. <strong>Literally.</strong></p>
+  <p>This is figurative. <strong>Literally.</strong></p>
 </div>
 
 <div data-rmd="h2-underline">
-	<h2>Links</h2>
-	<h3 id="a-bracket">Default: <code>a-bracket</code></h3>
+  <h2>Links</h2>
+  <h3 id="a-bracket">Default: <code>a-bracket</code></h3>
 </div>
 
 <div class="example" data-rmd-test="a-bracket">
-	<p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
-	and let me play among the stars.
-	Let me see what spring is like
-	on a-Jupiter and Mars.</p>
+  <p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
+  and let me play among the stars.
+  Let me see what spring is like
+  on a-Jupiter and Mars.</p>
 </div>
 
 <div data-rmd>
-	<h3 id="a-showurl">Option: <code>a-showurl</code></h3>
+  <h3 id="a-showurl">Option: <code>a-showurl</code></h3>
 </div>
 
 <div class="example" data-rmd-test="a-showurl">
-	<p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
-	and let me play among the stars.
-	Let me see what spring is like
-	on a-Jupiter and Mars.</p>
+  <p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
+  and let me play among the stars.
+  Let me see what spring is like
+  on a-Jupiter and Mars.</p>
 </div>
 
 <div data-rmd="h2-underline">
-	<h2>Other</h2>
-	<h3 id="del-gfm">Option: <code>del-gfm</code></h3>
+  <h2>Other</h2>
+  <h3 id="del-gfm">Option: <code>del-gfm</code></h3>
 </div>
 
 <div class="example" data-rmd-test="del-gfm">
-	<p>This is <del>a mistake</del> awesome.</p>
+  <p>This is <del>a mistake</del> awesome.</p>
 </div>
 
 <div data-rmd="h2-underline">
-	<h2>Horizontal rules</h2>
-	<h3 id="hr-star">Default: <code>hr-star</code></h3>
+  <h2>Horizontal rules</h2>
+  <h3 id="hr-star">Default: <code>hr-star</code></h3>
 </div>
 
 <div class="example" data-rmd-test="hr-star">
-	<hr>
+  <hr>
 </div>
 
 <div data-rmd>
-	<h3 id="hr-hyphen">Option: <code>hr-hyphen</code></h3>
+  <h3 id="hr-hyphen">Option: <code>hr-hyphen</code></h3>
 </div>
 
 <div class="example" data-rmd-test="hr-hyphen">
-	<hr>
+  <hr>
 </div>
 
 <div data-rmd>
-	<h3 id="hr-center">Option: <code>hr-center</code></h3>
+  <h3 id="hr-center">Option: <code>hr-center</code></h3>
 </div>
 
 <div class="example">
-	<div data-rmd-test="hr-center hr-star"><hr></div>
-	<div data-rmd-test="hr-center hr-hyphen"><hr></div>
+  <div data-rmd-test="hr-center hr-star"><hr></div>
+  <div data-rmd-test="hr-center hr-hyphen"><hr></div>
 </div>
 
 <div data-rmd="h2-underline">
-	<h2>Code and code blocks</h2>
-	<h3 id="code-tick">Default: <code>code-tick</code></h3>
+  <h2>Code and code blocks</h2>
+  <h3 id="code-tick">Default: <code>code-tick</code></h3>
 </div>
 
 <div class="example" data-rmd-test="code-tick">
-	<p>Some inline code: <code>var someCode = 'lulz'</code>.</p>
+  <p>Some inline code: <code>var someCode = 'lulz'</code>.</p>
 </div>
 
 <div data-rmd>
-	<h3 id="pre-indent">Default: <code>pre-indent</code></h3>
+  <h3 id="pre-indent">Default: <code>pre-indent</code></h3>
 </div>
 
 <div class="example" data-rmd-test="pre-indent">
-	<p>A paragraph.</p>
-	<pre><code>pre {
-	margin-left: 4ch;
-	tab-size: 4;
+  <p>A paragraph.</p>
+  <pre><code>pre {
+  margin-left: 4ch;
+  tab-size: 4;
 }</code></pre>
-	<p>Another paragraph.</p>
+  <p>Another paragraph.</p>
 </div>
 
 <div data-rmd>
-	<h3 id="code-fence">Option: <code>code-fence</code></h3>
+  <h3 id="code-fence">Option: <code>code-fence</code></h3>
 </div>
 
 <div class="example" data-rmd-test="code-fence">
-	<pre><code>A code block</code></pre>
+  <pre><code>A code block</code></pre>
 </div>
 
 <div data-rmd>
-	<h3 id="code-fence-tilde">Option: <code>code-fence</code> + <code>code-fence-tilde</code></h3>
+  <h3 id="code-fence-tilde">Option: <code>code-fence</code> + <code>code-fence-tilde</code></h3>
 </div>
 
 <div class="example" data-rmd-test="code-fence code-fence-tilde">
-	<pre><code>A code block</code></pre>
+  <pre><code>A code block</code></pre>
 </div>
 
 <div data-rmd>
-	<h3 id="code-fence-full">Option: <code>code-fence</code> + <code>code-fence-full</code></h3>
+  <h3 id="code-fence-full">Option: <code>code-fence</code> + <code>code-fence-full</code></h3>
 </div>
 
 <div class="example" data-rmd-test="code-fence code-fence-full">
-	<pre><code>A code block</code></pre>
+  <pre><code>A code block</code></pre>
 </div>
 
 <div data-rmd="h2-underline">
-	<h2>Tables</h2>
-	<h3 id="table-marker">Option: <code>table-marker</code></h3>
+  <h2>Tables</h2>
+  <h3 id="table-marker">Option: <code>table-marker</code></h3>
 </div>
 
 <div class="example" data-rmd-test="table-marker">
-	<p>Not too bad for column headers:</p>
-	<table>
-		<tr>
-			<th scope="col">Col 1</th>
-			<th scope="col">Col 2</th>
-			<th scope="col">Col 3</th>
-		</tr>
-		<tr>
-			<td>Lorem ipsum</td>
-			<td>Dolor sit amet</td>
-			<td>Consectetur adipisicing elit</td>
-		</tr>
-		<tr>
-			<td>Quae enim corrupti</td>
-			<td>Excepturi laudantium molestiae nam</td>
-			<td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
-		</tr>
-	</table>
-	<p>Row headers don’t have a reference syntax yet, so I’ve tried that:</p>
-	<table>
-		<tr>
-			<th scope="row">Row 1</th>
-			<td>Lorem ipsum</td>
-			<td>Dolor sit amet</td>
-			<td>Consectetur adipisicing elit</td>
-		</tr>
-		<tr>
-			<th scope="row">Row 2</th>
-			<td>Quae enim corrupti</td>
-			<td>Excepturi laudantium molestiae nam</td>
-			<td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
-		</tr>
-	</table>
-	<p>Multiplication table! (The cell centered alignment is not part of ReMarkdown.)</p>
-	<table style="text-align:center;">
-		<tr>
-			<td></td>
-			<th scope="col">1</th>
-			<th scope="col">2</th>
-			<th scope="col">3</th>
-			<th scope="col">4</th>
-			<th scope="col">5</th>
-			<th scope="col">6</th>
-			<th scope="col">7</th>
-			<th scope="col">8</th>
-			<th scope="col">9</th>
-			<th scope="col">10</th>
-		</tr>
-		<tr>
-			<th scope="row">1</th>
-			<td>1</td>
-			<td>2</td>
-			<td>3</td>
-			<td>4</td>
-			<td>5</td>
-			<td>6</td>
-			<td>7</td>
-			<td>8</td>
-			<td>9</td>
-			<td>10</td>
-		</tr>
-		<tr>
-			<th scope="row">2</th>
-			<td>2</td>
-			<td>4</td>
-			<td>6</td>
-			<td>8</td>
-			<td>10</td>
-			<td>12</td>
-			<td>14</td>
-			<td>16</td>
-			<td>18</td>
-			<td>20</td>
-		</tr>
-		<tr>
-			<th scope="row">3</th>
-			<td>3</td>
-			<td>6</td>
-			<td>9</td>
-			<td>12</td>
-			<td>15</td>
-			<td>18</td>
-			<td>21</td>
-			<td>24</td>
-			<td>27</td>
-			<td>30</td>
-		</tr>
-		<tr>
-			<th scope="row">4</th>
-			<td>4</td>
-			<td>8</td>
-			<td>12</td>
-			<td>16</td>
-			<td>20</td>
-			<td>24</td>
-			<td>28</td>
-			<td>32</td>
-			<td>36</td>
-			<td>40</td>
-		</tr>
-		<tr>
-			<th scope="row">5</th>
-			<td>5</td>
-			<td>10</td>
-			<td>15</td>
-			<td>20</td>
-			<td>25</td>
-			<td>30</td>
-			<td>35</td>
-			<td>40</td>
-			<td>45</td>
-			<td>50</td>
-		</tr>
-		<tr>
-			<th scope="row">6</th>
-			<td>6</td>
-			<td>12</td>
-			<td>18</td>
-			<td>24</td>
-			<td>30</td>
-			<td>36</td>
-			<td>42</td>
-			<td>48</td>
-			<td>54</td>
-			<td>60</td>
-		</tr>
-		<tr>
-			<th scope="row">7</th>
-			<td>7</td>
-			<td>14</td>
-			<td>21</td>
-			<td>28</td>
-			<td>35</td>
-			<td>42</td>
-			<td>49</td>
-			<td>56</td>
-			<td>63</td>
-			<td>70</td>
-		</tr>
-		<tr>
-			<th scope="row">8</th>
-			<td>8</td>
-			<td>16</td>
-			<td>24</td>
-			<td>32</td>
-			<td>40</td>
-			<td>48</td>
-			<td>56</td>
-			<td>64</td>
-			<td>72</td>
-			<td>80</td>
-		</tr>
-		<tr>
-			<th scope="row">9</th>
-			<td>9</td>
-			<td>18</td>
-			<td>27</td>
-			<td>36</td>
-			<td>45</td>
-			<td>54</td>
-			<td>63</td>
-			<td>72</td>
-			<td>81</td>
-			<td>90</td>
-		</tr>
-		<tr>
-			<th scope="row">10</th>
-			<td>10</td>
-			<td>20</td>
-			<td>30</td>
-			<td>40</td>
-			<td>50</td>
-			<td>60</td>
-			<td>70</td>
-			<td>80</td>
-			<td>90</td>
-			<td>100</td>
-		</tr>
-	</table>
+  <p>Not too bad for column headers:</p>
+  <table>
+    <tr>
+      <th scope="col">Col 1</th>
+      <th scope="col">Col 2</th>
+      <th scope="col">Col 3</th>
+    </tr>
+    <tr>
+      <td>Lorem ipsum</td>
+      <td>Dolor sit amet</td>
+      <td>Consectetur adipisicing elit</td>
+    </tr>
+    <tr>
+      <td>Quae enim corrupti</td>
+      <td>Excepturi laudantium molestiae nam</td>
+      <td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
+    </tr>
+  </table>
+  <p>Row headers don’t have a reference syntax yet, so I’ve tried that:</p>
+  <table>
+    <tr>
+      <th scope="row">Row 1</th>
+      <td>Lorem ipsum</td>
+      <td>Dolor sit amet</td>
+      <td>Consectetur adipisicing elit</td>
+    </tr>
+    <tr>
+      <th scope="row">Row 2</th>
+      <td>Quae enim corrupti</td>
+      <td>Excepturi laudantium molestiae nam</td>
+      <td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
+    </tr>
+  </table>
+  <p>Multiplication table! (The cell centered alignment is not part of ReMarkdown.)</p>
+  <table style="text-align:center;">
+    <tr>
+      <td></td>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+      <th scope="col">3</th>
+      <th scope="col">4</th>
+      <th scope="col">5</th>
+      <th scope="col">6</th>
+      <th scope="col">7</th>
+      <th scope="col">8</th>
+      <th scope="col">9</th>
+      <th scope="col">10</th>
+    </tr>
+    <tr>
+      <th scope="row">1</th>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>2</td>
+      <td>4</td>
+      <td>6</td>
+      <td>8</td>
+      <td>10</td>
+      <td>12</td>
+      <td>14</td>
+      <td>16</td>
+      <td>18</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>3</td>
+      <td>6</td>
+      <td>9</td>
+      <td>12</td>
+      <td>15</td>
+      <td>18</td>
+      <td>21</td>
+      <td>24</td>
+      <td>27</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>4</td>
+      <td>8</td>
+      <td>12</td>
+      <td>16</td>
+      <td>20</td>
+      <td>24</td>
+      <td>28</td>
+      <td>32</td>
+      <td>36</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td>5</td>
+      <td>10</td>
+      <td>15</td>
+      <td>20</td>
+      <td>25</td>
+      <td>30</td>
+      <td>35</td>
+      <td>40</td>
+      <td>45</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td>6</td>
+      <td>12</td>
+      <td>18</td>
+      <td>24</td>
+      <td>30</td>
+      <td>36</td>
+      <td>42</td>
+      <td>48</td>
+      <td>54</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th scope="row">7</th>
+      <td>7</td>
+      <td>14</td>
+      <td>21</td>
+      <td>28</td>
+      <td>35</td>
+      <td>42</td>
+      <td>49</td>
+      <td>56</td>
+      <td>63</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th scope="row">8</th>
+      <td>8</td>
+      <td>16</td>
+      <td>24</td>
+      <td>32</td>
+      <td>40</td>
+      <td>48</td>
+      <td>56</td>
+      <td>64</td>
+      <td>72</td>
+      <td>80</td>
+    </tr>
+    <tr>
+      <th scope="row">9</th>
+      <td>9</td>
+      <td>18</td>
+      <td>27</td>
+      <td>36</td>
+      <td>45</td>
+      <td>54</td>
+      <td>63</td>
+      <td>72</td>
+      <td>81</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th scope="row">10</th>
+      <td>10</td>
+      <td>20</td>
+      <td>30</td>
+      <td>40</td>
+      <td>50</td>
+      <td>60</td>
+      <td>70</td>
+      <td>80</td>
+      <td>90</td>
+      <td>100</td>
+    </tr>
+  </table>
 </div>
-
-<?php include(realpath(dirname(__FILE__) . '/../analytics.html')); ?>
 
 </body>
 </html>

@@ -1,0 +1,112 @@
+/**
+ * Styles for ReMarkdown demo pages
+ * Depends on default remarkdown.css
+ */
+
+html {
+  background-color: white;
+  color: #202020;
+  font-size: 100%;
+}
+
+body {
+  max-width: 660px;
+  margin: 30px auto;
+  padding: 40px 80px;
+}
+
+@media (min-width: 901px) {
+  html {
+    background-color: #EEE;
+  }
+  body {
+    background-color: white;
+    border: 1px solid #DDD;
+    box-shadow: 3px 3px 3px -2px #DDD;
+  }
+}
+
+@media (max-width: 900px) {
+  body { margin: 0 auto; }
+}
+
+@media (max-width: 700px) {
+  body { padding: 30px; }
+}
+
+a {
+  color: #F02050;
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: 1px solid;
+}
+a:focus, a:active {
+  color: white;
+  background-color: #F02050;
+}
+
+nav {
+  margin: 0 0 4em;
+  text-align: right;
+}
+nav > span {
+  float: left;
+}
+@media (max-width: 450px) {
+  nav > * { display: block; padding-bottom: .4em; }
+}
+
+.example {
+  margin: 1.5em -30px;
+  padding: .5em 30px;
+  background: #EEF;
+}
+
+/* Main ReMarkdown build (defaults) */
+@import "../scss/all";
+
+/* Make the Markdown-like markers look cool */
+[data-rmd] ::before, [data-rmd] ::after {
+  opacity: .6;
+}
+[data-rmd] :not(a)::before, [data-rmd] :not(a)::after {
+  color: #205080;
+}
+
+/* Our own font-family. Also setting one for code elements */
+[data-rmd], [data-rmd-test] {
+  font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
+}
+[data-rmd] pre, [data-rmd-test] pre {
+  color: #802020;
+  font-family: Courier, "Courier New", monospace;
+}
+
+/* Avoid losing space to display code examples on small screens */
+[data-rmd] pre, [data-rmd-test] pre {
+  white-space: pre-wrap;
+}
+@media (max-width: 700px) {
+  [data-rmd] pre,
+  [data-rmd-test] pre {
+    margin-left: 0 !important;
+  }
+}
+
+[data-rmd] table {
+  margin: 2.5em 0;
+  font-size: 95%;
+}
+
+#style-list tr > * {
+  white-space: nowrap;
+}
+
+/* Custom ReMarkdown for the Styles page */
+$rmd-attr: "data-rmd-test";
+$rmd-margins: ();
+$rmd-defaults: none;
+$rmd-output-all-styles: true;
+$rmd-set-font-styles: true;
+@import "../scss/all";

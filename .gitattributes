@@ -1,0 +1,4 @@
+.gitattributes  export-ignore
+/assets         export-ignore
+/legacy         export-ignore
+/*.html         export-ignore
