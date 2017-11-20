@@ -1,11 +1,18 @@
 {
-  "license": "WTFPL",
-  "repository": "fvsch/remarkdown",
+  "name": "remarkdown.css",
+  "version": "3.0.0-beta1",
+  "license": "MIT",
+  "author": "Florens Verschelde",
+  "repository": "https://github.com/fvsch/remarkdown",
   "scripts": {
-    "build": "node-sass --output-style=expanded remarkdown.scss > remarkdown-custom.css",
-    "build-demo": "node-sass --output-style=compressed assets/demo.scss > assets/demo.css"
+    "build": "npm run b-main && npm run b-bem && npm run b-min && npm run b-demo",
+    "b-main": "node-sass --output-style=expanded src/remarkdown.scss > dist/remarkdown.css",
+    "b-bem": "node-sass --output-style=expanded src/remarkdown-attr.scss > dist/remarkdown-attr.css",
+    "b-min": "csso dist/remarkdown.css dist/remarkdown.min.css && csso dist/remarkdown-attr.css dist/remarkdown-attr.min.css",
+    "b-demo": "node-sass --output-style=expanded demo/demo.scss | csso > demo/demo.css"
   },
   "devDependencies": {
+    "csso-cli": "^1.1.0",
     "node-sass": "^4.0"
   }
 }

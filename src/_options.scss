@@ -1,26 +1,9 @@
-// ================================
-// Making a custom ReMarkdown build
-// ================================
-
-// --------
-// Read me!
-// --------
-
-// All options here are similar to the defaults used by remarkdown.scss.
-// If you want to build a custom build of ReMarkdown, you may:
-//
-// 1. Rename this file to remarkdown-custom.scss (or any other name as
-//    long as you use the .scss extension).
-// 2. Change any option you want. (Undefined options will use the same
-//    values as the default build.)
-// 3. Compile it with Sass (http://sass-lang.com/).
-
-// -----------------------
-// Available build options
-// -----------------------
+// ------------------------
+// ReMarkdown build options
+// ------------------------
 
 // Height of a line (as a unit-less ratio, e.g. 1.5)
-$rmd-lineratio: 1.5;
+$rmd-line-ratio: 1.5 !default;
 
 // Margins for titles and more (as number of lines)
 // By default we use one line for most things, but you can specify more here:
@@ -30,7 +13,7 @@ $rmd-margins: (
   hr: (top: 1, bottom: 1),
   blockquote: (top: 1, bottom: 1),
   table: (top: 1, bottom: 1),
-);
+) !default;
 
 // Default style variations.
 // Separate values with whitespace. Remove or comment out options you
@@ -43,63 +26,67 @@ $rmd-defaults:
   // h2-underline
   ul-hyphen
   // ul-star
-  // ul-plus 
+  // ul-plus
   em-star
   // em-underscore
   strong-star
   // strong-underscore
   a-bracket
   // a-showurl
-  // del-gfm
-  pre-indent
   code-tick
-  // code-fence
-  // code-fence-class
-  // code-fence-wide
+  pre-indent
+  // pre-tick
+  // pre-tilde
+  // pre-tilde-full
   hr-star
   // hr-center
   // hr-hyphen
+  quote-gt
+  // del-gfm
   // table-marker
-;
+!default;
 
 // Font stack to use.
 // AVOID using "monospace" only, or browsers might use a default small
 // text size (13px). Always define one or more font families before the
 // final ", monospace".
-$rmd-primary-font: monospace, monospace;
+$rmd-primary-font: monospace, monospace !default;
 
 // For elements that are traditionnaly monospace, use a different font?
-// $rmd-code-font: SomethingElse, monospace;
+$rmd-code-font: inherit !default;
 
 // Should ReMarkdown try to define a font-family, and reset font sizes, styles
 // and weights? It's generally useful but if you want to define your fonts
 // styles separately, set this to false.
 // If false, $rmd-primary-font and $rmd-code-font are ignored.
-$rmd-set-font-styles: true;
+$rmd-set-font-styles: true !default;
 
-// Attribute name
-$rmd-attr: "data-rmd";
+// Selectors for the ReMarkdown container and options
+// (%o will be replaced with the option name)
+$rmd-selector-base: ".remarkdown" !default;
+$rmd-selector-option: ".remarkdown.%o" !default;
 
 // Whether to output a comment with information about ReMarkdown
 // the main build options that were used.
-$rmd-header-comment: true;
+$rmd-header-comment: true !default;
 
 // HR patterns
-$rmd-hr-stars:   "* * * *";
-$rmd-hr-hyphens: "-------";
+$rmd-hr-stars:   "* * * *" !default;
+$rmd-hr-hyphens: "-------" !default;
+
+// Character used for simple headings
+$rmd-heading-sign: "#" !default;
+
+// Characters used for undelrlines headings
+$rmd-h1-underline: "==========" !default;
+$rmd-h2-underline: "----------" !default;
 
 // By default we use the `em` unit for vertical spacing.
 // This low-level option allows using `rem` instead.
-$rmd-prefer-rem: false;
+$rmd-prefer-rem: false !default;
 
 // Whether we should include styles for ALL alternative styles (true),
 // or only for styles listed in $rmd-defaults (false).
 // If false, the CSS build will be smaller, but setting options
 // in HTML with attribute vallues will be impossible.
-$rmd-output-all-styles: true;
-
-// ------------------------------------
-// Importing the main ReMarkdown styles
-// ------------------------------------
-
-@import "scss/all";
+$rmd-output-all-styles: true !default;

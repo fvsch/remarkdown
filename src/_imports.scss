@@ -1,0 +1,20 @@
+@import "_options.scss";
+@import "_toolkit.scss";
+@import "_styles.scss";
+
+@mixin rmd-output {
+  @include rmd-output-base;
+  @include rmd-output-hn;
+  @include rmd-output-para;
+  @include rmd-output-hr;
+  @include rmd-output-ul;
+  @include rmd-output-ol;
+  @include rmd-output-a;
+  @include rmd-output-em;
+  @include rmd-output-strong;
+  @include rmd-output-code;
+  @include rmd-output-pre;
+  @include rmd-output-quote;
+  @include rmd-output-del;
+  @include rmd-output-table;
+}

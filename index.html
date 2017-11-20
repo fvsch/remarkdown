@@ -4,18 +4,20 @@
   <meta charset="utf-8">
   <title>ReMarkdown — HTML that looks like Markdown text</title>
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="assets/demo.css">
+  <link rel="stylesheet" href="dist/remarkdown.css">
+  <link rel="stylesheet" href="demo/demo.css">
 </head>
 <body>
 
-<nav data-rmd>
+<nav class="remarkdown">
   <span>ReMarkdown</span>
+  <br>
   <em>about</em>
-  <a href="styles.html">styles</a>
-  <a href="config.html">config</a>
+  <a href="./styles.html">styles</a>
+  <a href="./config.html">config</a>
 </nav>
 
-<main data-rmd="h1-underline h2-underline">
+<main class="remarkdown h1-underline h2-underline">
 
 <h1>
   You should use ReMarkdown!
@@ -61,7 +63,7 @@
     <a href="https://github.com/fvsch/remarkdown">ReMarkdown is on Github</a>, do <del>complain</del> report bugs there.
   </li>
   <li>
-    Copyright: the <a href="LICENSE">WTF Public License</a> applies.
+    Copyright: the <a href="LICENSE">MIT License</a> applies (ReMarkdown 2.1 and older were licensed under the <a href="http://www.wtfpl.net/">WTFPL</a>).
   </li>
   <li>
     Browser support: I’m targetting the most current browsers (mid-2014). Theoretically it should work on IE9+, but that’s a very much untested assertion.
@@ -76,11 +78,7 @@
 </h2>
 
 <p>
-  I’m keeping the <a href="legacy/">legacy ReMarkdown 1.0</a> around; released in 2011, it had partial IE8 support and used a different syntax.
-</p>
-
-<p>
-  Also Peter Coles wrote <a href="http://mrcoles.com/demo/markdown-css/">Markdown.css</a>, a similar stylesheet, a little while back.
+  Peter Coles wrote <a href="http://mrcoles.com/demo/markdown-css/">Markdown.css</a>, a similar stylesheet, a little while back.
 </p>
 
 </main>

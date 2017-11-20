@@ -7,31 +7,24 @@ html {
   background-color: white;
   color: #202020;
   font-size: 100%;
+
+  @media (min-width: 900px) {
+    background-color: #EEE;
+  }
 }
 
 body {
   max-width: 660px;
-  margin: 30px auto;
-  padding: 40px 80px;
-}
+  padding: 30px;
+  margin: 0 auto;
 
-@media (min-width: 901px) {
-  html {
-    background-color: #EEE;
+  @media (min-width: 900px) {
+      margin: 30px auto;
+      padding: 40px 80px;
+      border: 1px solid #DDD;
+      background-color: white;
+      box-shadow: 3px 3px 3px -2px #DDD;
   }
-  body {
-    background-color: white;
-    border: 1px solid #DDD;
-    box-shadow: 3px 3px 3px -2px #DDD;
-  }
-}
-
-@media (max-width: 900px) {
-  body { margin: 0 auto; }
-}
-
-@media (max-width: 700px) {
-  body { padding: 30px; }
 }
 
 a {
@@ -50,6 +43,9 @@ nav {
   margin: 0 0 4em;
   text-align: right;
 }
+nav > br {
+  display: none;
+}
 nav > span {
   float: left;
 }
@@ -62,9 +58,6 @@ nav > span {
   padding: .5em 30px;
   background: #EEF;
 }
-
-/* Main ReMarkdown build (defaults) */
-@import "../scss/all";
 
 /* Make the Markdown-like markers look cool */
 [data-rmd] ::before, [data-rmd] ::after {
@@ -99,14 +92,16 @@ nav > span {
   font-size: 95%;
 }
 
+/* Styles page */
+
 #style-list tr > * {
   white-space: nowrap;
 }
 
-/* Custom ReMarkdown for the Styles page */
-$rmd-attr: "data-rmd-test";
+// Make a second ReMarkdown build for the styles demo blocks
+$rmd-selector-type: "class";
+$rmd-selector-base: "test";
 $rmd-margins: ();
 $rmd-defaults: none;
-$rmd-output-all-styles: true;
-$rmd-set-font-styles: true;
-@import "../scss/all";
+@import "../src/imports";
+@include rmd-output;

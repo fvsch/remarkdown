@@ -1,0 +1,86 @@
+// ------------------------
+// Utilities for ReMarkdown
+// ------------------------
+
+// Internal variables
+$__rmd-line: $rmd-line-ratio * 1em;
+@if ($rmd-prefer-rem) {
+  $__rmd-line: $rmd-line-ratio * 1rem;
+}
+
+@mixin rmd-header($title:"") {
+  $included: "defaults only";
+  @if $rmd-output-all-styles {
+    $included: "all";
+  }
+  @if $title {
+    /*! ReMarkdown #{label} */
+    /* Included styles: #{$included} */
+    /* Defaults: #{$rmd-defaults} */
+  }
+}
+
+// Wrap content in a selector including the option name, depending on
+// the content of $rmd-defaults and the value of $rmd-output-all-styles.
+// May output an unused placeholder selector (%rmd-void) if
+// $rmd-output-all-styles is false and the option is not in
+// $rmd-defaults, which drops the entire block from the output.
+@mixin __rmd_selector($option:null) {
+  $s: "";
+  @if index($rmd-defaults, $option) {
+    $s: __rmd_selector_syntax($option);
+  }
+  @if $rmd-output-all-styles {
+    @if $s != "" { $s: $s + ", "; }
+    $s: $s + __rmd_selector_syntax($option);
+  }
+  @if $s != "" {
+    #{$s} { @content; }
+  }
+}
+
+// Generate the general selector (if $name is null)
+// or an option-specific selector
+@function __rmd_selector_syntax($option:null) {
+  @if $option == null {
+    @return $rmd-selector-base;
+  } @else {
+    @return __rmd_replace($rmd-selector-option, '%o', $option)
+  }
+}
+
+// Get a margin value in em from $rmd-margins.
+// If not set, returns a value of 1 line.
+@function __rmd-margin($element, $direction) {
+  $elmargins: map-get($rmd-margins, $element);
+  @if $elmargins != null {
+    $num: map-get($elmargins, $direction);
+    @if $num != null {
+      @return $__rmd-line * $num;
+    }
+  }
+  @return $__rmd-line * 1;
+}
+
+// Small utility to repeat a string
+@function __rmd_repeat($string, $times) {
+  $result: "";
+  @for $i from 1 through $times {
+    $result: $result + $string;
+  }
+  @return $result;
+}
+
+/// Replace `$search` with `$replace` in `$string`
+/// @author Hugo Giraudel
+/// @param {String} $string - Initial string
+/// @param {String} $search - Substring to replace
+/// @param {String} $replace ('') - New value
+/// @return {String} - Updated string
+@function __rmd_replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + __rmd_replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
