@@ -60,34 +60,32 @@ nav > span {
 }
 
 /* Make the Markdown-like markers look cool */
-[data-rmd] ::before, [data-rmd] ::after {
+.remarkdown ::before,
+.remarkdown ::after {
   opacity: .6;
 }
-[data-rmd] :not(a)::before, [data-rmd] :not(a)::after {
+.remarkdown :not(a)::before,
+.remarkdown :not(a)::after {
   color: #205080;
 }
 
 /* Our own font-family. Also setting one for code elements */
-[data-rmd], [data-rmd-test] {
+.remarkdown {
   font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
 }
-[data-rmd] pre, [data-rmd-test] pre {
+.remarkdown pre {
+  white-space: pre-wrap;
   color: #802020;
   font-family: Courier, "Courier New", monospace;
 }
 
-/* Avoid losing space to display code examples on small screens */
-[data-rmd] pre, [data-rmd-test] pre {
-  white-space: pre-wrap;
-}
 @media (max-width: 700px) {
-  [data-rmd] pre,
-  [data-rmd-test] pre {
+  .remarkdown pre {
     margin-left: 0 !important;
   }
 }
 
-[data-rmd] table {
+.remarkdown table {
   margin: 2.5em 0;
   font-size: 95%;
 }
@@ -98,10 +96,11 @@ nav > span {
   white-space: nowrap;
 }
 
-// Make a second ReMarkdown build for the styles demo blocks
-$rmd-selector-type: "class";
-$rmd-selector-base: "test";
+// Make a custom ReMarkdown build for the styles demo blocks
+$rmd-selector-base: "[data-test]";
+$rmd-selector-option: "[data-test~='%o']";
 $rmd-margins: ();
-$rmd-defaults: none;
+$rmd-defaults: ();
+
 @import "../src/imports";
 @include rmd-output;

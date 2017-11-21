@@ -7,9 +7,10 @@
   "scripts": {
     "build": "npm run b-main && npm run b-bem && npm run b-min && npm run b-demo",
     "b-main": "node-sass --output-style=expanded src/remarkdown.scss > dist/remarkdown.css",
-    "b-bem": "node-sass --output-style=expanded src/remarkdown-attr.scss > dist/remarkdown-attr.css",
-    "b-min": "csso dist/remarkdown.css dist/remarkdown.min.css && csso dist/remarkdown-attr.css dist/remarkdown-attr.min.css",
-    "b-demo": "node-sass --output-style=expanded demo/demo.scss | csso > demo/demo.css"
+    "b-attr": "node-sass --output-style=expanded src/remarkdown-attr.scss > dist/remarkdown-attr.css",
+    "b-bem": "node-sass --output-style=expanded src/remarkdown-bem.scss > dist/remarkdown-bem.css",
+    "b-min": "csso dist/remarkdown.css dist/remarkdown.min.css && csso dist/remarkdown-attr.css dist/remarkdown-attr.min.css && csso dist/remarkdown-bem.css dist/remarkdown-bem.min.css",
+    "b-demo": "node-sass --output-style=expanded demo/demo.scss > demo/demo.css"
   },
   "devDependencies": {
     "csso-cli": "^1.1.0",

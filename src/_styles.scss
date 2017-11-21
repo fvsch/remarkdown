@@ -108,40 +108,55 @@
     ul {
       margin: __rmd-margin("ul", "top") 0 __rmd-margin("ul", "bottom") 3ch;
       padding: 0;
-      list-style: none;
     }
     li ul {
       margin-top: 0;
       margin-bottom: 0;
     }
-    ul > li::before {
+  }
+  @mixin rmd-ul-li-before($sign) {
+    & {
+      list-style: none;
+    }
+    & > li::before {
       float: left;
-      margin-left: -3ch;
       width: 1ch;
+      margin-left: -3ch;
+      content: $sign;
     }
-    @include __rmd_selector("ul-star") {
-      ul > li::before { content: "*"; }
+  }
+  @include __rmd_selector("ul-plus") {
+    ul {
+      @include rmd-ul-li-before("+");        
     }
-    @include __rmd_selector("ul-plus") {
-      ul > li::before { content: "+"; }
+  }
+  @include __rmd_selector("ul-star") {
+    ul {
+      @include rmd-ul-li-before("*");        
     }
-    @include __rmd_selector("ul-hyphen") {
-      ul > li::before { content: "-"; }
+  }
+  @include __rmd_selector("ul-hyphen") {
+    ul {
+      @include rmd-ul-li-before("-");        
     }
   }
 }
 
 @mixin rmd-output-ol {
-  @include __rmd_selector {
+  @include __rmd_selector() {
     ol {
       margin: __rmd-margin("ol", "top") 0 __rmd-margin("ol", "bottom") 3ch;
       padding: 0;
-      list-style: none;
-      counter-reset: rmd-ol;
     }
     li ol {
       margin-top: 0;
       margin-bottom: 0;
+    }
+  }
+  @include __rmd_selector("ol-decimal") {
+    ol {
+      list-style: none;
+      counter-reset: rmd-ol;
     }
     ol > li {
       counter-increment: rmd-ol;
@@ -241,7 +256,7 @@
   }
   @include __rmd_selector("pre-indent") {
     pre {
-      margin-left: 4ch;
+      margin-left: 3ch;
     }
   }
   %rmd-pre-fence-pseudo {

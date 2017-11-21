@@ -1,1 +1,505 @@
-html{background-color:#fff;color:#202020;font-size:100%}@media (min-width:900px){html{background-color:#eee}}body{max-width:660px;padding:30px;margin:0 auto}@media (min-width:900px){body{margin:30px auto;padding:40px 80px;border:1px solid #ddd;background-color:#fff;box-shadow:3px 3px 3px -2px #ddd}}a{color:#f02050;text-decoration:none}a:hover{border-bottom:1px solid}a:active,a:focus{color:#fff;background-color:#f02050}nav{margin:0 0 4em;text-align:right}.remarkdown.code-tick pre code::after,.remarkdown.code-tick pre code::before,nav>br{display:none}nav>span{float:left}@media (max-width:450px){nav>*{display:block;padding-bottom:.4em}}.example{margin:1.5em -30px;padding:.5em 30px;background:#eef}[data-rmd] ::after,[data-rmd] ::before{opacity:.6}[data-rmd] :not(a)::after,[data-rmd] :not(a)::before{color:#205080}[data-rmd-test],[data-rmd]{font-family:Menlo,Monaco,"DejaVu Sans Mono",Consolas,monospace}[data-rmd-test] pre,[data-rmd] pre{color:#802020;font-family:Courier,"Courier New",monospace;white-space:pre-wrap}@media (max-width:700px){[data-rmd-test] pre,[data-rmd] pre{margin-left:0!important}}[data-rmd] table{margin:2.5em 0;font-size:95%}#style-list tr>*{white-space:nowrap}test{line-height:1.5;font-family:monospace,monospace}test code,test kbd,test pre,test samp,test tt{font-family:inherit}test h1,test h2,test h3,test h4,test h5,test h6{font-size:inherit;font-weight:inherit}.remarkdown.table-marker table,test h1,test h2,test h3,test h4,test h5,test h6,test p,test pre{margin-top:1.5em;margin-bottom:1.5em}.remarkdown.hn-hash h1::before{content:"# "}.remarkdown.hn-close h1::after{content:" #"}.remarkdown.hn-hash h2::before{content:"## "}.remarkdown.hn-close h2::after{content:" ##"}.remarkdown.hn-hash h3::before{content:"### "}.remarkdown.hn-close h3::after{content:" ###"}.remarkdown.hn-hash h4::before{content:"#### "}.remarkdown.hn-close h4::after{content:" ####"}.remarkdown.hn-hash h5::before{content:"##### "}.remarkdown.hn-close h5::after{content:" #####"}.remarkdown.hn-hash h6::before{content:"###### "}.remarkdown.hn-close h6::after{content:" ######"}.remarkdown.h1-underline h1,.remarkdown.h2-underline h2{display:table;overflow:hidden;position:relative;padding-bottom:1.5em}.remarkdown.h1-underline h1::before,.remarkdown.h2-underline h2::before{content:none}.remarkdown.h1-underline h1::after,.remarkdown.h2-underline h2::after{position:absolute;bottom:0;left:0;height:1.5em;width:100%;overflow:hidden;word-break:break-all;cursor:default}.remarkdown.h1-underline h1::after{content:"========================================================================================================================"}.remarkdown.h2-underline h2::after{content:"------------------------------------------------------------------------------------------------------------------------"}hr,test figure{margin:1.5em 0}hr{height:1.5em;line-height:1.5em;border:0;color:inherit}.remarkdown.hr-center hr{text-align:center}.remarkdown.hr-star hr::before{content:"* * * *"}.remarkdown.hr-hyphen hr::before{content:"-------"}test ol,test ul{margin:1.5em 0 1.5em 3ch;padding:0;list-style:none}test li ol,test li ul{margin-top:0;margin-bottom:0}test ul>li::before{float:left;margin-left:-3ch;width:1ch}.remarkdown.em-star em::after,.remarkdown.em-star em::before,test .remarkdown.ul-star ul>li::before{content:"*"}test .remarkdown.ul-plus ul>li::before{content:"+"}test .remarkdown.ul-hyphen ul>li::before{content:"-"}test ol{counter-reset:rmd-ol}test ol>li{counter-increment:rmd-ol}test ol>li::before{float:left;margin-left:-4ch;width:3ch;overflow:hidden;text-align:right;content:counter(rmd-ol) "."}test ol>li[value]::before{content:attr(value) ".";word-spacing:-1ch}.remarkdown.a-bracket a::before,.remarkdown.a-showurl a[href]::before{content:"["}.remarkdown.a-bracket a::after{content:"]"}.remarkdown.a-showurl a[href]::after{content:"](" attr(href) ")";word-break:break-all}test em,test strong{font-style:normal;font-weight:400}.remarkdown.em-underscore em::after,.remarkdown.em-underscore em::before{content:"_"}.remarkdown.strong-star strong::after,.remarkdown.strong-star strong::before{content:"**"}.remarkdown.strong-underscore strong::after,.remarkdown.strong-underscore strong::before{content:"__"}.remarkdown.code-tick code::after,.remarkdown.code-tick code::before{content:"`"}test pre{tab-size:4}.remarkdown.pre-indent pre{margin-left:4ch}.remarkdown.pre-tick pre::after,.remarkdown.pre-tick pre::before,.remarkdown.pre-tilde pre::after,.remarkdown.pre-tilde pre::before,.remarkdown.pre-tilde-full pre::after,.remarkdown.pre-tilde-full pre::before{display:block;width:100%;height:1.5em;cursor:default}.remarkdown.pre-tick pre::after,.remarkdown.pre-tick pre::before{content:"```";position:relative;top:.3em}.remarkdown.pre-tilde pre::after,.remarkdown.pre-tilde pre::before{content:"~~~";overflow:hidden;word-break:break-all}.remarkdown.pre-tilde-full pre::after,.remarkdown.pre-tilde-full pre::before{content:"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";overflow:hidden;word-break:break-all}test blockquote{margin:1.5em 2ch;padding:0}.remarkdown.quote-gt blockquote{position:relative;margin:1.5em 0;padding-left:3ch}.remarkdown.quote-gt blockquote::before{position:absolute;top:0;left:0;bottom:0;overflow:hidden;white-space:pre;content:">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";cursor:default}.remarkdown.del-gfm del{text-decoration:none}.remarkdown.del-gfm del::after,.remarkdown.del-gfm del::before{content:"~~"}.remarkdown.table-marker table{border-collapse:collapse}.remarkdown.table-marker tr>*{min-width:3ch;position:relative;padding:0;text-align:inherit;vertical-align:top;font-weight:400;border:0}.remarkdown.table-marker tr>*+*{padding-left:3ch}.remarkdown.table-marker tr:first-child>th:not([scope=row]){padding-bottom:1.5em}.remarkdown.table-marker tr:first-child>th:not([scope=row])::after{content:"--------------------------------------------------------------------------------------------------------------";position:absolute;bottom:0;left:0;right:0;overflow:hidden;word-break:break-all;height:1.5em}.remarkdown.table-marker tr:first-child>*+th:not([scope=row])::after{left:3ch}.remarkdown.table-marker tr>*+::before{content:"|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";position:absolute;overflow:hidden;left:1ch;top:0;bottom:0;white-space:pre}.remarkdown.table-marker th[scope=row],.remarkdown.table-marker tr+tr>th:first-child{padding-right:1ch}.remarkdown.table-marker th[scope=row]::after,.remarkdown.table-marker tr+tr>th:first-child::after{position:absolute;right:-1ch;content:":"}
+/**
+ * Styles for ReMarkdown demo pages
+ * Depends on default remarkdown.css
+ */
+html {
+  background-color: white;
+  color: #202020;
+  font-size: 100%;
+}
+
+@media (min-width: 900px) {
+  html {
+    background-color: #EEE;
+  }
+}
+
+body {
+  max-width: 660px;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+@media (min-width: 900px) {
+  body {
+    margin: 30px auto;
+    padding: 40px 80px;
+    border: 1px solid #DDD;
+    background-color: white;
+    box-shadow: 3px 3px 3px -2px #DDD;
+  }
+}
+
+a {
+  color: #F02050;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom: 1px solid;
+}
+
+a:focus, a:active {
+  color: white;
+  background-color: #F02050;
+}
+
+nav {
+  margin: 0 0 4em;
+  text-align: right;
+}
+
+nav > br {
+  display: none;
+}
+
+nav > span {
+  float: left;
+}
+
+@media (max-width: 450px) {
+  nav > * {
+    display: block;
+    padding-bottom: .4em;
+  }
+}
+
+.example {
+  margin: 1.5em -30px;
+  padding: .5em 30px;
+  background: #EEF;
+}
+
+/* Make the Markdown-like markers look cool */
+.remarkdown ::before,
+.remarkdown ::after {
+  opacity: .6;
+}
+
+.remarkdown :not(a)::before,
+.remarkdown :not(a)::after {
+  color: #205080;
+}
+
+/* Our own font-family. Also setting one for code elements */
+.remarkdown {
+  font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
+}
+
+.remarkdown pre {
+  white-space: pre-wrap;
+  color: #802020;
+  font-family: Courier, "Courier New", monospace;
+}
+
+@media (max-width: 700px) {
+  .remarkdown pre {
+    margin-left: 0 !important;
+  }
+}
+
+.remarkdown table {
+  margin: 2.5em 0;
+  font-size: 95%;
+}
+
+/* Styles page */
+#style-list tr > * {
+  white-space: nowrap;
+}
+
+[data-test] {
+  line-height: 1.5;
+  font-family: monospace, monospace;
+}
+
+[data-test] pre, [data-test] code, [data-test] kbd, [data-test] samp, [data-test] tt {
+  font-family: inherit;
+}
+
+[data-test] h1, [data-test] h2, [data-test] h3, [data-test] h4, [data-test] h5, [data-test] h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+[data-test] h1 {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+[data-test] h2 {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+[data-test] h3, [data-test] h4, [data-test] h5, [data-test] h6 {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+[data-test~='hn-hash'] h1::before {
+  content: "# ";
+}
+
+[data-test~='hn-close'] h1::after {
+  content: " #";
+}
+
+[data-test~='hn-hash'] h2::before {
+  content: "## ";
+}
+
+[data-test~='hn-close'] h2::after {
+  content: " ##";
+}
+
+[data-test~='hn-hash'] h3::before {
+  content: "### ";
+}
+
+[data-test~='hn-close'] h3::after {
+  content: " ###";
+}
+
+[data-test~='hn-hash'] h4::before {
+  content: "#### ";
+}
+
+[data-test~='hn-close'] h4::after {
+  content: " ####";
+}
+
+[data-test~='hn-hash'] h5::before {
+  content: "##### ";
+}
+
+[data-test~='hn-close'] h5::after {
+  content: " #####";
+}
+
+[data-test~='hn-hash'] h6::before {
+  content: "###### ";
+}
+
+[data-test~='hn-close'] h6::after {
+  content: " ######";
+}
+
+[data-test~='h1-underline'] h1, [data-test~='h2-underline'] h2 {
+  display: table;
+  overflow: hidden;
+  position: relative;
+  padding-bottom: 1.5em;
+}
+
+[data-test~='h1-underline'] h1::before, [data-test~='h2-underline'] h2::before {
+  content: none;
+}
+
+[data-test~='h1-underline'] h1::after, [data-test~='h2-underline'] h2::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1.5em;
+  width: 100%;
+  overflow: hidden;
+  word-break: break-all;
+  cursor: default;
+}
+
+[data-test~='h1-underline'] h1::after {
+  content: "========================================================================================================================";
+}
+
+[data-test~='h2-underline'] h2::after {
+  content: "------------------------------------------------------------------------------------------------------------------------";
+}
+
+[data-test] p {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+[data-test] figure {
+  margin: 1.5em 0 1.5em;
+}
+
+hr {
+  height: 1.5em;
+  line-height: 1.5em;
+  margin: 1.5em 0 1.5em;
+  border: none;
+  color: inherit;
+}
+
+[data-test~='hr-center'] hr {
+  text-align: center;
+}
+
+[data-test~='hr-star'] hr::before {
+  content: "* * * *";
+}
+
+[data-test~='hr-hyphen'] hr::before {
+  content: "-------";
+}
+
+[data-test] ul {
+  margin: 1.5em 0 1.5em 3ch;
+  padding: 0;
+}
+
+[data-test] li ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+[data-test~='ul-plus'] ul {
+  list-style: none;
+}
+
+[data-test~='ul-plus'] ul > li::before {
+  float: left;
+  width: 1ch;
+  margin-left: -3ch;
+  content: "+";
+}
+
+[data-test~='ul-star'] ul {
+  list-style: none;
+}
+
+[data-test~='ul-star'] ul > li::before {
+  float: left;
+  width: 1ch;
+  margin-left: -3ch;
+  content: "*";
+}
+
+[data-test~='ul-hyphen'] ul {
+  list-style: none;
+}
+
+[data-test~='ul-hyphen'] ul > li::before {
+  float: left;
+  width: 1ch;
+  margin-left: -3ch;
+  content: "-";
+}
+
+[data-test] ol {
+  margin: 1.5em 0 1.5em 3ch;
+  padding: 0;
+}
+
+[data-test] li ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+[data-test~='ol-decimal'] ol {
+  list-style: none;
+  counter-reset: rmd-ol;
+}
+
+[data-test~='ol-decimal'] ol > li {
+  counter-increment: rmd-ol;
+}
+
+[data-test~='ol-decimal'] ol > li::before {
+  float: left;
+  margin-left: -4ch;
+  width: 3ch;
+  overflow: hidden;
+  text-align: right;
+  content: counter(rmd-ol) ".";
+}
+
+[data-test~='ol-decimal'] ol > li[value]::before {
+  content: attr(value) ".";
+  word-spacing: -1ch;
+}
+
+[data-test~='a-bracket'] a::before {
+  content: "[";
+}
+
+[data-test~='a-bracket'] a::after {
+  content: "]";
+}
+
+[data-test~='a-showurl'] a[href]::before {
+  content: "[";
+}
+
+[data-test~='a-showurl'] a[href]::after {
+  content: "](" attr(href) ")";
+  word-break: break-all;
+}
+
+[data-test] em, [data-test] strong {
+  font-style: normal;
+  font-weight: normal;
+}
+
+[data-test~='em-star'] em::before, [data-test~='em-star'] em::after {
+  content: "*";
+}
+
+[data-test~='em-underscore'] em::before, [data-test~='em-underscore'] em::after {
+  content: "_";
+}
+
+[data-test~='strong-star'] strong::before, [data-test~='strong-star'] strong::after {
+  content: "**";
+}
+
+[data-test~='strong-underscore'] strong::before, [data-test~='strong-underscore'] strong::after {
+  content: "__";
+}
+
+[data-test~='code-tick'] code::before,
+[data-test~='code-tick'] code::after {
+  content: "`";
+}
+
+[data-test~='code-tick'] pre code::before,
+[data-test~='code-tick'] pre code::after {
+  display: none;
+}
+
+[data-test] pre {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  tab-size: 4;
+}
+
+[data-test~='pre-indent'] pre {
+  margin-left: 3ch;
+}
+
+[data-test~='pre-tick'] pre::before,
+[data-test~='pre-tick'] pre::after, [data-test~='pre-tilde'] pre::before,
+[data-test~='pre-tilde'] pre::after, [data-test~='pre-tilde-full'] pre::before,
+[data-test~='pre-tilde-full'] pre::after {
+  display: block;
+  width: 100%;
+  height: 1.5em;
+  cursor: default;
+}
+
+[data-test~='pre-tick'] pre::before,
+[data-test~='pre-tick'] pre::after {
+  content: "```";
+  position: relative;
+  top: .3em;
+}
+
+[data-test~='pre-tilde'] pre::before,
+[data-test~='pre-tilde'] pre::after {
+  content: "~~~";
+  overflow: hidden;
+  word-break: break-all;
+}
+
+[data-test~='pre-tilde-full'] pre::before,
+[data-test~='pre-tilde-full'] pre::after {
+  content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+  overflow: hidden;
+  word-break: break-all;
+}
+
+[data-test] blockquote {
+  margin: 1.5em 2ch 1.5em;
+  padding: 0;
+}
+
+[data-test~='quote-gt'] blockquote {
+  position: relative;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 3ch;
+}
+
+[data-test~='quote-gt'] blockquote::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  white-space: pre;
+  content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+  cursor: default;
+}
+
+[data-test~='del-gfm'] del {
+  text-decoration: none;
+}
+
+[data-test~='del-gfm'] del::before,
+[data-test~='del-gfm'] del::after {
+  content: "~~";
+}
+
+[data-test~='table-marker'] table {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  border-collapse: collapse;
+}
+
+[data-test~='table-marker'] tr > * {
+  min-width: 3ch;
+  position: relative;
+  padding: 0;
+  text-align: inherit;
+  vertical-align: top;
+  font-weight: normal;
+  border: none;
+}
+
+[data-test~='table-marker'] tr > * + * {
+  padding-left: 3ch;
+}
+
+[data-test~='table-marker'] tr:first-child > th:not([scope="row"]) {
+  padding-bottom: 1.5em;
+}
+
+[data-test~='table-marker'] tr:first-child > th:not([scope="row"])::after {
+  content: "--------------------------------------------------------------------------------------------------------------";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  word-break: break-all;
+  height: 1.5em;
+}
+
+[data-test~='table-marker'] tr:first-child > * + th:not([scope="row"])::after {
+  left: 3ch;
+}
+
+[data-test~='table-marker'] tr > * + *::before {
+  content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+  position: absolute;
+  overflow: hidden;
+  left: 1ch;
+  top: 0;
+  bottom: 0;
+  white-space: pre;
+}
+
+[data-test~='table-marker'] th[scope="row"],
+[data-test~='table-marker'] tr + tr > th:first-child {
+  padding-right: 1ch;
+}
+
+[data-test~='table-marker'] th[scope="row"]::after,
+[data-test~='table-marker'] tr + tr > th:first-child::after {
+  position: absolute;
+  right: -1ch;
+  content: ":";
+}

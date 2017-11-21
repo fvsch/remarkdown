@@ -2,18 +2,16 @@
 // ReMarkdown build options
 // ------------------------
 
-// Height of a line (as a unit-less ratio, e.g. 1.5)
-$rmd-line-ratio: 1.5 !default;
+// Selectors for the ReMarkdown container and options
+// (%o will be replaced with the option name)
+$rmd-selector-base: ".remarkdown" !default;
+$rmd-selector-option: ".remarkdown.%o" !default;
 
-// Margins for titles and more (as number of lines)
-// By default we use one line for most things, but you can specify more here:
-$rmd-margins: (
-  h1: (top: 2, bottom: 1),
-  h2: (top: 2, bottom: 1),
-  hr: (top: 1, bottom: 1),
-  blockquote: (top: 1, bottom: 1),
-  table: (top: 1, bottom: 1),
-) !default;
+// Whether we should include styles for ALL alternative styles (true),
+// or only for styles listed in $rmd-defaults (false).
+// If false, the CSS build will be smaller, but setting options
+// in HTML with classes or attribute values will be impossible.
+$rmd-output-all-styles: true !default;
 
 // Default style variations.
 // Separate values with whitespace. Remove or comment out options you
@@ -27,6 +25,7 @@ $rmd-defaults:
   ul-hyphen
   // ul-star
   // ul-plus
+  ol-decimal
   em-star
   // em-underscore
   strong-star
@@ -46,6 +45,12 @@ $rmd-defaults:
   // table-marker
 !default;
 
+// Should ReMarkdown try to define a font-family, and reset font sizes, styles
+// and weights? It's generally useful but if you want to define your fonts
+// styles separately, set this to false.
+// If false, $rmd-primary-font and $rmd-code-font are ignored.
+$rmd-set-font-styles: true !default;
+
 // Font stack to use.
 // AVOID using "monospace" only, or browsers might use a default small
 // text size (13px). Always define one or more font families before the
@@ -55,20 +60,22 @@ $rmd-primary-font: monospace, monospace !default;
 // For elements that are traditionnaly monospace, use a different font?
 $rmd-code-font: inherit !default;
 
-// Should ReMarkdown try to define a font-family, and reset font sizes, styles
-// and weights? It's generally useful but if you want to define your fonts
-// styles separately, set this to false.
-// If false, $rmd-primary-font and $rmd-code-font are ignored.
-$rmd-set-font-styles: true !default;
+// Height of a line (as a unit-less ratio, e.g. 1.5)
+$rmd-line-ratio: 1.5 !default;
 
-// Selectors for the ReMarkdown container and options
-// (%o will be replaced with the option name)
-$rmd-selector-base: ".remarkdown" !default;
-$rmd-selector-option: ".remarkdown.%o" !default;
+// Margins for titles and more (as number of lines)
+// By default we use one line for most things, but you can specify more here:
+$rmd-margins: (
+  h1: (top: 2, bottom: 1),
+  h2: (top: 2, bottom: 1),
+  hr: (top: 1, bottom: 1),
+  blockquote: (top: 1, bottom: 1),
+  table: (top: 1, bottom: 1),
+) !default;
 
-// Whether to output a comment with information about ReMarkdown
-// the main build options that were used.
-$rmd-header-comment: true !default;
+// By default we use the `em` unit for vertical spacing.
+// This low-level option allows using `rem` instead.
+$rmd-prefer-rem: false !default;
 
 // HR patterns
 $rmd-hr-stars:   "* * * *" !default;
@@ -80,13 +87,3 @@ $rmd-heading-sign: "#" !default;
 // Characters used for undelrlines headings
 $rmd-h1-underline: "==========" !default;
 $rmd-h2-underline: "----------" !default;
-
-// By default we use the `em` unit for vertical spacing.
-// This low-level option allows using `rem` instead.
-$rmd-prefer-rem: false !default;
-
-// Whether we should include styles for ALL alternative styles (true),
-// or only for styles listed in $rmd-defaults (false).
-// If false, the CSS build will be smaller, but setting options
-// in HTML with attribute vallues will be impossible.
-$rmd-output-all-styles: true !default;

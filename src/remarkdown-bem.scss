@@ -1,0 +1,11 @@
+$rmd-selector-base: ".remarkdown";
+$rmd-selector-option: ".remarkdown--%o";
+
+// Only apply basic styles and require use of 'remarkdown--option-name'
+// to activate decorations
+$rmd-output-all-styles: true;
+$rmd-defaults: ();
+
+@import "imports";
+@include rmd-header("ReMarkdown 3.0.0-beta1 (BEM build) https://fvsch.github.io/remarkdown/");
+@include rmd-output();

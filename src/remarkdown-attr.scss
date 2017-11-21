@@ -1,6 +1,6 @@
-$rmd-selector-base: "[data-rmd] %o";
-$rmd-selector-option: "[data-rmd~='%o']";
+$rmd-selector-base: "[data-remarkdown]";
+$rmd-selector-option: "[data-remarkdown~='%o']";
 
 @import "imports";
-@include rmd-header("ReMarkdown 3.0.0-beta1 [attr] (MIT) https://fvsch.github.io/remarkdown/");
+@include rmd-header("ReMarkdown 3.0.0-beta1 (attr build) https://fvsch.github.io/remarkdown/");
 @include rmd-output();

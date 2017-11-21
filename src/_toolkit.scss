@@ -28,7 +28,7 @@ $__rmd-line: $rmd-line-ratio * 1em;
 @mixin __rmd_selector($option:null) {
   $s: "";
   @if index($rmd-defaults, $option) {
-    $s: __rmd_selector_syntax($option);
+    $s: __rmd_selector_syntax();
   }
   @if $rmd-output-all-styles {
     @if $s != "" { $s: $s + ", "; }

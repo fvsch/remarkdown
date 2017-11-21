@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<nav data-rmd>
+<nav class="remarkdown">
   <span>ReMarkdown</span>
   <br>
   <a href="./">about</a>
@@ -17,7 +17,7 @@
   <a href="./config.html">config</a>
 </nav>
 
-<div data-rmd="h1-underline h2-underline table-marker">
+<div class="remarkdown h1-underline h2-underline table-marker">
   <h1>Demo of available styles</h1>
   <p>All styles that are listed as “Default” here will be active when using the default <a href="remarkdown.css">remarkdown.css</a> build. No need to specify <code>data-rmd="style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="config.html#custom">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
 
@@ -148,7 +148,7 @@
   <h3 id="hn-hash">Default: <code>hn-hash</code></h3>
 </div>
 
-<div class="example" data-rmd-test="hn-hash">
+<div class="example" data-test="hn-hash">
   <h1>Heading level 1</h1>
   <h2>Heading level 2</h2>
   <h3>Heading level 3</h3>
@@ -157,11 +157,11 @@
   <h6>Heading level 6</h6>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="hn-close">Option: <code>hn-close</code></h3>
 </div>
 
-<div class="example" data-rmd-test="hn-hash hn-close">
+<div class="example" data-test="hn-hash hn-close">
   <h1>Heading level 1</h1>
   <h2>Heading level 2</h2>
   <h3>Heading level 3</h3>
@@ -170,11 +170,11 @@
   <h6>Heading level 6</h6>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="h-underline">Options: <code>h1-underline</code> and <code>h2-underline</code></h3>
 </div>
 
-<div class="example" data-rmd-test="h1-underline h2-underline">
+<div class="example" data-test="h1-underline h2-underline">
   <h1>Underlined H1</h1>
   <h2>Underlined H2</h2>
   <p>Underlined titles cannot be centered with <code>text-align:center</code>. You will need to use auto margins:</p>
@@ -195,7 +195,7 @@
   <h3>Default: ordered list (no option name)</h3>
 </div>
 
-<div class="example" data-rmd-test>
+<div class="example" data-test>
   <ol>
     <li>This is a list.</li>
     <li>With a second item.
@@ -208,11 +208,11 @@
   </ol>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="ul-hyphen">Default: <code>ul-hyphen</code></h3>
 </div>
 
-<div class="example" data-rmd-test="ul-hyphen">
+<div class="example" data-test="ul-hyphen">
   <ul>
     <li>This is a list.</li>
     <li>With a second item.
@@ -225,11 +225,11 @@
   </ul>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="ul-star">Option: <code>ul-star</code></h3>
 </div>
 
-<div class="example" data-rmd-test="ul-star">
+<div class="example" data-test="ul-star">
   <ul>
     <li>This is a list.</li>
     <li>With a second item.</li>
@@ -237,11 +237,11 @@
   </ul>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="ul-plus">Option: <code>ul-plus</code></h3>
 </div>
 
-<div class="example" data-rmd-test="ul-plus">
+<div class="example" data-test="ul-plus">
   <ul>
     <li>This is a list.</li>
     <li>With a second item.</li>
@@ -254,31 +254,31 @@
   <h3 id="em-star">Default: <code>em-star</code></h3>
 </div>
 
-<div class="example" data-rmd-test="em-star">
+<div class="example" data-test="em-star">
   <p>This is <em>literally</em> figurative!</p>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="em-underscore">Option: <code>em-underscore</code></h3>
 </div>
 
-<div class="example" data-rmd-test="em-underscore">
+<div class="example" data-test="em-underscore">
   <p>This is <em>literally</em> figurative!</p>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="strong-star">Default: <code>strong-star</code></h3>
 </div>
 
-<div class="example" data-rmd-test="strong-star">
+<div class="example" data-test="strong-star">
   <p>This is figurative. <strong>Literally.</strong></p>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="strong-underscore">Option: <code>strong-underscore</code></h3>
 </div>
 
-<div class="example" data-rmd-test="strong-underscore">
+<div class="example" data-test="strong-underscore">
   <p>This is figurative. <strong>Literally.</strong></p>
 </div>
 
@@ -287,18 +287,18 @@
   <h3 id="a-bracket">Default: <code>a-bracket</code></h3>
 </div>
 
-<div class="example" data-rmd-test="a-bracket">
+<div class="example" data-test="a-bracket">
   <p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
   and let me play among the stars.
   Let me see what spring is like
   on a-Jupiter and Mars.</p>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="a-showurl">Option: <code>a-showurl</code></h3>
 </div>
 
-<div class="example" data-rmd-test="a-showurl">
+<div class="example" data-test="a-showurl">
   <p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
   and let me play among the stars.
   Let me see what spring is like
@@ -310,7 +310,7 @@
   <h3 id="del-gfm">Option: <code>del-gfm</code></h3>
 </div>
 
-<div class="example" data-rmd-test="del-gfm">
+<div class="example" data-test="del-gfm">
   <p>This is <del>a mistake</del> awesome.</p>
 </div>
 
@@ -319,25 +319,25 @@
   <h3 id="hr-star">Default: <code>hr-star</code></h3>
 </div>
 
-<div class="example" data-rmd-test="hr-star">
+<div class="example" data-test="hr-star">
   <hr>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="hr-hyphen">Option: <code>hr-hyphen</code></h3>
 </div>
 
-<div class="example" data-rmd-test="hr-hyphen">
+<div class="example" data-test="hr-hyphen">
   <hr>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="hr-center">Option: <code>hr-center</code></h3>
 </div>
 
 <div class="example">
-  <div data-rmd-test="hr-center hr-star"><hr></div>
-  <div data-rmd-test="hr-center hr-hyphen"><hr></div>
+  <div data-test="hr-center hr-star"><hr></div>
+  <div data-test="hr-center hr-hyphen"><hr></div>
 </div>
 
 <div data-rmd="h2-underline">
@@ -345,15 +345,15 @@
   <h3 id="code-tick">Default: <code>code-tick</code></h3>
 </div>
 
-<div class="example" data-rmd-test="code-tick">
+<div class="example" data-test="code-tick">
   <p>Some inline code: <code>var someCode = 'lulz'</code>.</p>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="pre-indent">Default: <code>pre-indent</code></h3>
 </div>
 
-<div class="example" data-rmd-test="pre-indent">
+<div class="example" data-test="pre-indent">
   <p>A paragraph.</p>
   <pre><code>pre {
   margin-left: 4ch;
@@ -362,27 +362,27 @@
   <p>Another paragraph.</p>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="code-fence">Option: <code>code-fence</code></h3>
 </div>
 
-<div class="example" data-rmd-test="code-fence">
+<div class="example" data-test="code-fence">
   <pre><code>A code block</code></pre>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="code-fence-tilde">Option: <code>code-fence</code> + <code>code-fence-tilde</code></h3>
 </div>
 
-<div class="example" data-rmd-test="code-fence code-fence-tilde">
+<div class="example" data-test="code-fence code-fence-tilde">
   <pre><code>A code block</code></pre>
 </div>
 
-<div data-rmd>
+<div class="remarkdown">
   <h3 id="code-fence-full">Option: <code>code-fence</code> + <code>code-fence-full</code></h3>
 </div>
 
-<div class="example" data-rmd-test="code-fence code-fence-full">
+<div class="example" data-test="code-fence code-fence-full">
   <pre><code>A code block</code></pre>
 </div>
 
@@ -391,7 +391,7 @@
   <h3 id="table-marker">Option: <code>table-marker</code></h3>
 </div>
 
-<div class="example" data-rmd-test="table-marker">
+<div class="example" data-test="table-marker">
   <p>Not too bad for column headers:</p>
   <table>
     <tr>
