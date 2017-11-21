@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<nav data-rmd>
+<nav class="remarkdown">
   <span>ReMarkdown</span>
   <br>
   <a href=".">about</a>
@@ -17,21 +17,21 @@
   <em>config</em>
 </nav>
 
-<main data-rmd="h1-underline h2-underline">
+<main class="remarkdown h1-underline h2-underline">
 
 <h1>
   ReMarkdown configuration
 </h1>
 
 <h2>
-  HTML options for alternate styles
+  CSS classes for alternate styles
 </h2>
 
 <p>
-  You can define a number of options by using keywords in the <code>data-rmd</code> attribute. Keywords must be separated by whitespace. (Think of the <code>data-rmd</code> attribute as a <code>class</code> attribute that is specific to ReMarkdown.)
+  ReMarkdown has a few default styles, but more styles can be enabled by using optional classes in addition to the `remarkdown` class.
 </p>
 
-<pre><code>&lt;div data-rmd="h1-underline em-underscore hr-center">
+<pre><code>&lt;div class="remarkdown h1-underline em-underscore hr-center">
   &lt;!--
     Any basic HTML content:
     headings, paragraphs, lists, etc.
@@ -39,7 +39,7 @@
 &lt;/div></code></pre>
 
 <p>
-  The <a href="styles.html">Styles page</a> has a list and a preview of all available styles. Note that if you use the <a href="remarkdown.css">default ReMarkdown build</a> (aka <code>remarkdown.css</code>), all styles specified as “Default” are already active, so you don’t need to add them to the value of the <code>data-rmd</code> attribute.
+  The <a href="styles.html">Styles page</a> has a list and a preview of all available styles. Note that if you use the <a href="dist/remarkdown.css">default ReMarkdown build</a> (aka <code>remarkdown.css</code>), all styles specified as “Default” are already active, so you don’t need to add classes for them.
 </p>
 
 <h2>

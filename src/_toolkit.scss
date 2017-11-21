@@ -9,14 +9,20 @@ $__rmd-line: $rmd-line-ratio * 1em;
 }
 
 @mixin rmd-header($title:"") {
-  $included: "defaults only";
-  @if $rmd-output-all-styles {
-    $included: "all";
+  $included: "all";
+  $list: $rmd-defaults;
+  @if not $rmd-output-all-styles {
+    $included: "defaults only";
+  }
+  @if not $list or $list == "" or length($list) == 0 {
+    $list: "none";
   }
   @if $title {
-    /*! ReMarkdown #{label} */
-    /* Included styles: #{$included} */
-    /* Defaults: #{$rmd-defaults} */
+/*! #{$title} */
+/*
+  Included: #{$included}
+  Defaults: #{$list}
+*/
   }
 }
 

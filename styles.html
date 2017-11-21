@@ -19,7 +19,7 @@
 
 <div class="remarkdown h1-underline h2-underline table-marker">
   <h1>Demo of available styles</h1>
-  <p>All styles that are listed as “Default” here will be active when using the default <a href="remarkdown.css">remarkdown.css</a> build. No need to specify <code>data-rmd="style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="config.html#custom">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
+  <p>All styles that are listed as “Default” here will be active when using the default <a href="remarkdown.css">remarkdown.css</a> build. No need to specify <code>class="remarkdown style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="config.html#custom">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
 
   <table id="style-list">
     <tr>
@@ -28,14 +28,14 @@
       <th scope="col">Description</th>
     </tr>
     <tr>
-      <td><a href="#hn-hash">hn-hash</a></td>
+      <td><a href="#hn-base">hn-reset</a></td>
       <td>Yes</td>
-      <td>Add hashes at the start of titles</td>
+      <td>Reset titles’ font size and weight</td>
     </tr>
     <tr>
-      <td><a href="#hn-close">hn-close</a></td>
-      <td>—</td>
-      <td>Add hashes at the end of titles</td>
+      <td><a href="#hn-base">hn-hash</a></td>
+      <td>Yes</td>
+      <td>Add hashes at the start of titles</td>
     </tr>
     <tr>
       <td><a href="#h-underline">h1-underline</a></td>
@@ -46,6 +46,11 @@
       <td><a href="#h-underline">h2-underline</a></td>
       <td>—</td>
       <td>Underline H2s with hyphens</td>
+    </tr>
+    <tr>
+      <td><a href="#ol-decimal">ol-decimal</a></td>
+      <td>Yes</td>
+      <td>Override default counter for OL</td>
     </tr>
     <tr>
       <td><a href="#ul-hyphen">ul-hyphen</a></td>
@@ -120,22 +125,22 @@
     <tr>
       <td><a href="#pre-indent">pre-indent</a></td>
       <td>Yes</td>
-      <td>Left indent PRE by 4 spaces</td>
+      <td>Left indent PRE elements</td>
     </tr>
     <tr>
-      <td><a href="#code-fence">code-fence</a></td>
+      <td><a href="#pre-tick">pre-tick</a></td>
       <td>—</td>
-      <td>Wraps code blocks in “```”</td>
+      <td>Wraps PRE in “```”</td>
     </tr>
     <tr>
-      <td><a href="#code-fence-tilde">code-fence-tilde</a></td>
+      <td><a href="#pre-tilde">pre-tilde</a></td>
       <td>—</td>
-      <td>… wrap with “~~~”</td>
+      <td>Wraps PRE in “~~~”</td>
     </tr>
     <tr>
-      <td><a href="#code-fence-full">code-fence-full</a></td>
+      <td><a href="#pre-tilde-full">pre-tilde-full</a></td>
       <td>—</td>
-      <td>… wrap with full line of “~”</td>
+      <td>Wraps PRE in a full line of “~”</td>
     </tr>
     <tr>
       <td><a href="#table-marker">table-marker</a></td>
@@ -145,23 +150,11 @@
   </table>
 
   <h2>Headings</h2>
-  <h3 id="hn-hash">Default: <code>hn-hash</code></h3>
+  <h3 id="hn-base">Defaults: <code>hn-reset</code> and <code>hn-hash</code></h3>
+  <p>Note: next examples will all use <code>hn-reset</code>.</p>
 </div>
 
-<div class="example" data-test="hn-hash">
-  <h1>Heading level 1</h1>
-  <h2>Heading level 2</h2>
-  <h3>Heading level 3</h3>
-  <h4>Heading level 4</h4>
-  <h5>Heading level 5</h5>
-  <h6>Heading level 6</h6>
-</div>
-
-<div class="remarkdown">
-  <h3 id="hn-close">Option: <code>hn-close</code></h3>
-</div>
-
-<div class="example" data-test="hn-hash hn-close">
+<div class="example" data-test="hn-reset hn-hash">
   <h1>Heading level 1</h1>
   <h2>Heading level 2</h2>
   <h3>Heading level 3</h3>
@@ -174,7 +167,7 @@
   <h3 id="h-underline">Options: <code>h1-underline</code> and <code>h2-underline</code></h3>
 </div>
 
-<div class="example" data-test="h1-underline h2-underline">
+<div class="example" data-test="hn-reset h1-underline h2-underline">
   <h1>Underlined H1</h1>
   <h2>Underlined H2</h2>
   <p>Underlined titles cannot be centered with <code>text-align:center</code>. You will need to use auto margins:</p>
@@ -184,18 +177,18 @@
   <h2 style="margin-left: auto;">
     Underlined H2
   </h2>
-  <p>Note that titles that span two lines don’t look that great:</p>
+  <p>Note that titles on two lines may not look that great:</p>
   <h2>
     A long title: Possimus officia, ducimus nihil beatae dolore vitae, perspiciatis ex quaerat placeat, perferendis
   </h2>
 </div>
 
-<div data-rmd="h2-underline">
-  <h2>Lists</h2>
-  <h3>Default: ordered list (no option name)</h3>
+<div class="remarkdown h2-underline">
+  <h2>Ordered lists</h2>
+  <h3>Default: <code>ol-decimal</code></h3>
 </div>
 
-<div class="example" data-test>
+<div class="example" data-test="ol-decimal">
   <ol>
     <li>This is a list.</li>
     <li>With a second item.
@@ -249,7 +242,7 @@
   </ul>
 </div>
 
-<div data-rmd="h2-underline">
+<div class="remarkdown h2-underline">
   <h2>Emphasis</h2>
   <h3 id="em-star">Default: <code>em-star</code></h3>
 </div>
@@ -282,7 +275,7 @@
   <p>This is figurative. <strong>Literally.</strong></p>
 </div>
 
-<div data-rmd="h2-underline">
+<div class="remarkdown h2-underline">
   <h2>Links</h2>
   <h3 id="a-bracket">Default: <code>a-bracket</code></h3>
 </div>
@@ -305,7 +298,7 @@
   on a-Jupiter and Mars.</p>
 </div>
 
-<div data-rmd="h2-underline">
+<div class="remarkdown h2-underline">
   <h2>Other</h2>
   <h3 id="del-gfm">Option: <code>del-gfm</code></h3>
 </div>
@@ -314,7 +307,7 @@
   <p>This is <del>a mistake</del> awesome.</p>
 </div>
 
-<div data-rmd="h2-underline">
+<div class="remarkdown h2-underline">
   <h2>Horizontal rules</h2>
   <h3 id="hr-star">Default: <code>hr-star</code></h3>
 </div>
@@ -340,7 +333,7 @@
   <div data-test="hr-center hr-hyphen"><hr></div>
 </div>
 
-<div data-rmd="h2-underline">
+<div class="remarkdown h2-underline">
   <h2>Code and code blocks</h2>
   <h3 id="code-tick">Default: <code>code-tick</code></h3>
 </div>
@@ -356,37 +349,37 @@
 <div class="example" data-test="pre-indent">
   <p>A paragraph.</p>
   <pre><code>pre {
-  margin-left: 4ch;
+  margin-left: 3ch;
   tab-size: 4;
 }</code></pre>
   <p>Another paragraph.</p>
 </div>
 
 <div class="remarkdown">
-  <h3 id="code-fence">Option: <code>code-fence</code></h3>
+  <h3 id="pre-tick">Option: <code>pre-tick</code></h3>
 </div>
 
-<div class="example" data-test="code-fence">
+<div class="example" data-test="pre-tick">
   <pre><code>A code block</code></pre>
 </div>
 
 <div class="remarkdown">
-  <h3 id="code-fence-tilde">Option: <code>code-fence</code> + <code>code-fence-tilde</code></h3>
+  <h3 id="pre-tilde">Option: <code>pre-tilde</code></h3>
 </div>
 
-<div class="example" data-test="code-fence code-fence-tilde">
+<div class="example" data-test="pre-tilde">
   <pre><code>A code block</code></pre>
 </div>
 
 <div class="remarkdown">
-  <h3 id="code-fence-full">Option: <code>code-fence</code> + <code>code-fence-full</code></h3>
+  <h3 id="pre-tilde-full">Option: <code>pre-tilde-full</code></h3>
 </div>
 
-<div class="example" data-test="code-fence code-fence-full">
+<div class="example" data-test="pre-tilde-full">
   <pre><code>A code block</code></pre>
 </div>
 
-<div data-rmd="h2-underline">
+<div class="remarkdown h2-underline">
   <h2>Tables</h2>
   <h3 id="table-marker">Option: <code>table-marker</code></h3>
 </div>
@@ -410,7 +403,7 @@
       <td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
     </tr>
   </table>
-  <p>Row headers don’t have a reference syntax yet, so I’ve tried that:</p>
+  <p>Row headers don’t have a markers:</p>
   <table>
     <tr>
       <th scope="row">Row 1</th>
@@ -425,7 +418,7 @@
       <td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
     </tr>
   </table>
-  <p>Multiplication table! (The cell centered alignment is not part of ReMarkdown.)</p>
+  <p>Multiplication table! (Note: the cell centered alignment is not part of ReMarkdown.)</p>
   <table style="text-align:center;">
     <tr>
       <td></td>

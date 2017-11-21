@@ -100,7 +100,7 @@ nav > span {
 $rmd-selector-base: "[data-test]";
 $rmd-selector-option: "[data-test~='%o']";
 $rmd-margins: ();
-$rmd-defaults: ();
+$rmd-defaults: lol;
 
 @import "../src/imports";
 @include rmd-output;

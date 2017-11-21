@@ -18,8 +18,8 @@ $rmd-output-all-styles: true !default;
 // don't want. Note that all option names are singular:
 // e.g. "hr-hyphen" even if we use several hyphens to display a <hr>.
 $rmd-defaults:
+  hn-reset
   hn-hash
-  // hn-close
   // h1-underline
   // h2-underline
   ul-hyphen

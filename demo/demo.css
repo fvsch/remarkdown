@@ -113,26 +113,26 @@ nav > span {
   font-family: monospace, monospace;
 }
 
-[data-test] pre, [data-test] code, [data-test] kbd, [data-test] samp, [data-test] tt {
+[data-test] pre, [data-test] code, [data-test] kbd, [data-test] samp {
   font-family: inherit;
 }
 
-[data-test] h1, [data-test] h2, [data-test] h3, [data-test] h4, [data-test] h5, [data-test] h6 {
+[data-test~='hn-reset'] h1, [data-test~='hn-reset'] h2, [data-test~='hn-reset'] h3, [data-test~='hn-reset'] h4, [data-test~='hn-reset'] h5, [data-test~='hn-reset'] h6 {
   font-size: inherit;
   font-weight: inherit;
 }
 
-[data-test] h1 {
+[data-test~='hn-reset'] h1 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
-[data-test] h2 {
+[data-test~='hn-reset'] h2 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
-[data-test] h3, [data-test] h4, [data-test] h5, [data-test] h6 {
+[data-test~='hn-reset'] h3, [data-test~='hn-reset'] h4, [data-test~='hn-reset'] h5, [data-test~='hn-reset'] h6 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
@@ -141,48 +141,24 @@ nav > span {
   content: "# ";
 }
 
-[data-test~='hn-close'] h1::after {
-  content: " #";
-}
-
 [data-test~='hn-hash'] h2::before {
   content: "## ";
-}
-
-[data-test~='hn-close'] h2::after {
-  content: " ##";
 }
 
 [data-test~='hn-hash'] h3::before {
   content: "### ";
 }
 
-[data-test~='hn-close'] h3::after {
-  content: " ###";
-}
-
 [data-test~='hn-hash'] h4::before {
   content: "#### ";
-}
-
-[data-test~='hn-close'] h4::after {
-  content: " ####";
 }
 
 [data-test~='hn-hash'] h5::before {
   content: "##### ";
 }
 
-[data-test~='hn-close'] h5::after {
-  content: " #####";
-}
-
 [data-test~='hn-hash'] h6::before {
   content: "###### ";
-}
-
-[data-test~='hn-close'] h6::after {
-  content: " ######";
 }
 
 [data-test~='h1-underline'] h1, [data-test~='h2-underline'] h2 {
@@ -490,16 +466,4 @@ hr {
   top: 0;
   bottom: 0;
   white-space: pre;
-}
-
-[data-test~='table-marker'] th[scope="row"],
-[data-test~='table-marker'] tr + tr > th:first-child {
-  padding-right: 1ch;
-}
-
-[data-test~='table-marker'] th[scope="row"]::after,
-[data-test~='table-marker'] tr + tr > th:first-child::after {
-  position: absolute;
-  right: -1ch;
-  content: ":";
 }

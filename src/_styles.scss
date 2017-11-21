@@ -9,7 +9,7 @@
     line-height: $rmd-line-ratio;
     @if $rmd-set-font-styles {
       font-family: $rmd-primary-font;
-      pre, code, kbd, samp, tt {
+      pre, code, kbd, samp {
         font-family: $rmd-code-font;
       }
     }
@@ -17,15 +17,13 @@
 }
 
 // Headings
-// Options: hn-hash, hn-close, h1-underline, h2-undelrine
+// Options: hn-hash, h1-underline, h2-undelrine
 
 @mixin rmd-output-hn {
-  @include __rmd_selector {
-    @if $rmd-set-font-styles {
-      h1, h2, h3, h4, h5, h6 {
-        font-size: inherit;
-        font-weight: inherit;
-      }
+  @include __rmd_selector("hn-reset") {
+    h1, h2, h3, h4, h5, h6 {
+      font-size: inherit;
+      font-weight: inherit;
     }
     h1 {
       margin-top: __rmd-margin("h1", "top");
@@ -40,13 +38,11 @@
       margin-bottom: __rmd-margin("hn", "bottom");
     }
   }
-  @for $i from 1 through 6 {
-    $marker: __rmd_repeat($rmd-heading-sign, $i);
-    @include __rmd_selector("hn-hash") {
-      h#{$i}::before { content: $marker + " "; }
-    }
-    @include __rmd_selector("hn-close") {
-      h#{$i}::after { content: " " + $marker; }
+  @include __rmd_selector("hn-hash") {
+    @for $i from 1 through 6 {
+      h#{$i}::before {
+        content: __rmd_repeat($rmd-heading-sign, $i) + " ";
+      }
     }
   }
   %hn-underline-common {
@@ -409,16 +405,6 @@
       top: 0;
       bottom: 0;
       white-space: pre;
-    }
-    th[scope="row"],
-    tr + tr > th:first-child {
-      padding-right: 1ch;
-    }
-    th[scope="row"]::after,
-    tr + tr > th:first-child::after {
-      position: absolute;
-      right: -1ch;
-      content: ":";
     }
   }
 }

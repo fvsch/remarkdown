@@ -5,7 +5,7 @@
   "author": "Florens Verschelde",
   "repository": "https://github.com/fvsch/remarkdown",
   "scripts": {
-    "build": "npm run b-main && npm run b-bem && npm run b-min && npm run b-demo",
+    "build": "npm run b-main && npm run b-attr && npm run b-bem && npm run b-min && npm run b-demo",
     "b-main": "node-sass --output-style=expanded src/remarkdown.scss > dist/remarkdown.css",
     "b-attr": "node-sass --output-style=expanded src/remarkdown-attr.scss > dist/remarkdown-attr.css",
     "b-bem": "node-sass --output-style=expanded src/remarkdown-bem.scss > dist/remarkdown-bem.css",
