@@ -1,7 +1,7 @@
-/*! ReMarkdown 3.0.0-beta1 (MIT) https://fvsch.github.io/remarkdown/ */
+/*! ReMarkdown-zero 3.0.0-beta1 (MIT) https://fvsch.github.io/remarkdown/ */
 /*
   Included: all styles
-  Defaults: hn-reset hn-hash ul-hyphen ol-decimal em-star strong-star a-bracket code-tick pre-indent hr-star quote-gt
+  Defaults: none
 */
 .remarkdown {
   line-height: 1.5;
@@ -12,47 +12,47 @@
   font-family: inherit;
 }
 
-.remarkdown h1, .remarkdown h2, .remarkdown h3, .remarkdown h4, .remarkdown h5, .remarkdown h6 {
+.remarkdown.hn-reset h1, .remarkdown.hn-reset h2, .remarkdown.hn-reset h3, .remarkdown.hn-reset h4, .remarkdown.hn-reset h5, .remarkdown.hn-reset h6 {
   font-size: inherit;
   font-weight: inherit;
 }
 
-.remarkdown h1 {
-  margin-top: 3em;
-  margin-bottom: 1.5em;
-}
-
-.remarkdown h2 {
-  margin-top: 3em;
-  margin-bottom: 1.5em;
-}
-
-.remarkdown h3, .remarkdown h4, .remarkdown h5, .remarkdown h6 {
+.remarkdown.hn-reset h1 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
-.remarkdown h1::before {
+.remarkdown.hn-reset h2 {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.remarkdown.hn-reset h3, .remarkdown.hn-reset h4, .remarkdown.hn-reset h5, .remarkdown.hn-reset h6 {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.remarkdown.hn-hash h1::before {
   content: "# ";
 }
 
-.remarkdown h2::before {
+.remarkdown.hn-hash h2::before {
   content: "## ";
 }
 
-.remarkdown h3::before {
+.remarkdown.hn-hash h3::before {
   content: "### ";
 }
 
-.remarkdown h4::before {
+.remarkdown.hn-hash h4::before {
   content: "#### ";
 }
 
-.remarkdown h5::before {
+.remarkdown.hn-hash h5::before {
   content: "##### ";
 }
 
-.remarkdown h6::before {
+.remarkdown.hn-hash h6::before {
   content: "###### ";
 }
 
@@ -107,7 +107,7 @@ hr {
   text-align: center;
 }
 
-.remarkdown hr::before {
+.remarkdown.hr-star hr::before {
   content: "* * * *";
 }
 
@@ -147,11 +147,11 @@ hr {
   content: "*";
 }
 
-.remarkdown ul {
+.remarkdown.ul-hyphen ul {
   list-style: none;
 }
 
-.remarkdown ul > li::before {
+.remarkdown.ul-hyphen ul > li::before {
   float: left;
   width: 1ch;
   margin-left: -3ch;
@@ -168,16 +168,16 @@ hr {
   margin-bottom: 0;
 }
 
-.remarkdown ol {
+.remarkdown.ol-decimal ol {
   list-style: none;
   counter-reset: rmd-ol;
 }
 
-.remarkdown ol > li {
+.remarkdown.ol-decimal ol > li {
   counter-increment: rmd-ol;
 }
 
-.remarkdown ol > li::before {
+.remarkdown.ol-decimal ol > li::before {
   float: left;
   margin-left: -4ch;
   width: 3ch;
@@ -186,16 +186,16 @@ hr {
   content: counter(rmd-ol) ".";
 }
 
-.remarkdown ol > li[value]::before {
+.remarkdown.ol-decimal ol > li[value]::before {
   content: attr(value) ".";
   word-spacing: -1ch;
 }
 
-.remarkdown a::before {
+.remarkdown.a-bracket a::before {
   content: "[";
 }
 
-.remarkdown a::after {
+.remarkdown.a-bracket a::after {
   content: "]";
 }
 
@@ -213,7 +213,7 @@ hr {
   font-weight: normal;
 }
 
-.remarkdown em::before, .remarkdown em::after {
+.remarkdown.em-star em::before, .remarkdown.em-star em::after {
   content: "*";
 }
 
@@ -221,7 +221,7 @@ hr {
   content: "_";
 }
 
-.remarkdown strong::before, .remarkdown strong::after {
+.remarkdown.strong-star strong::before, .remarkdown.strong-star strong::after {
   content: "**";
 }
 
@@ -229,13 +229,13 @@ hr {
   content: "__";
 }
 
-.remarkdown code::before,
-.remarkdown code::after {
+.remarkdown.code-tick code::before,
+.remarkdown.code-tick code::after {
   content: "`";
 }
 
-.remarkdown pre code::before,
-.remarkdown pre code::after {
+.remarkdown.code-tick pre code::before,
+.remarkdown.code-tick pre code::after {
   display: none;
 }
 
@@ -245,7 +245,7 @@ hr {
   tab-size: 4;
 }
 
-.remarkdown pre {
+.remarkdown.pre-indent pre {
   margin-left: 3ch;
 }
 
@@ -285,7 +285,7 @@ hr {
   padding: 0;
 }
 
-.remarkdown blockquote {
+.remarkdown.quote-gt blockquote {
   position: relative;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -294,7 +294,7 @@ hr {
   padding-left: 3ch;
 }
 
-.remarkdown blockquote::before {
+.remarkdown.quote-gt blockquote::before {
   position: absolute;
   top: 0;
   left: 0;

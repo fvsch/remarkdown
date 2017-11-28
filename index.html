@@ -13,29 +13,34 @@
   <span>ReMarkdown</span>
   <br>
   <em>about</em>
-  <a href="./styles.html">styles</a>
+  <a href="./options.html">options</a>
   <a href="./config.html">config</a>
 </nav>
 
 <main class="remarkdown h1-underline h2-underline">
 
 <h1>
-  You should use ReMarkdown!
+  Make your HTML look like Markdown
 </h1>
 
 <p>
-  Is your HTML content looking all HTML-y and CSS-y? I bet it has great typography and carefully crafted negative space?
-</p>
-<p>
-  <em>Such ennui!</em> Ditch all this <code>@font-face</code> and <code>font-size</code> nonsense, and go with a good old plain text look instead!
+  The text you’re reading right now is not plain text, but simple HTML styled like <a href="http://daringfireball.net/projects/markdown/">Markdown</a> text. Right-click and inspect this page to get a feel of how it works.
 </p>
 
-<p>
-  That’s what ReMarkdown does: it takes your HTML and makes it look like <a href="http://daringfireball.net/projects/markdown/">Markdown</a>. Pretty nerdy, uh? So the text you’re reading right now is not plain text, it’s good old HTML with H1s and Ps and BLOCKQUOTEs. Just “Inspect Element” and you’ll see.
-</p>
+<h2>
+  But, why?!?
+</h2>
 
 <p>
-  Using ReMarkdown is as simple as downloading <a href="dist/remarkdown.css">remarkdown&shy;.css</a>, and declaring it like this:
+  Because it was fun to do.
+</p>
+
+<h2>
+  Usage
+</h2>
+
+<p>
+  Using ReMarkdown is as simple as downloading <a href="dist/remarkdown.css">remarkdown&shy;.css</a>, and using a single attribute:
 </p>
 
 <pre><code>&lt;!doctype html>
@@ -44,14 +49,30 @@
   &lt;title>Using ReMarkdown&lt;/title>
   <b>&lt;link rel="stylesheet" href="remarkdown.css"></b>
 &lt;/head>
-&lt;body <b>class="remarkdown"</b>>
+&lt;body <b>data-remarkdown</b>>
   &lt;h1>Hello World&lt;/h1>
   &lt;p>A paragraph.&lt;/p>
 &lt;/body>
 &lt;/html></code></pre>
 
+<h2>
+  Modularity
+</h2>
+
 <p>
-  And there’s a bunch of <a href="styles.html">alternative styles</a> to pick from! Define your prefered styles using the <code>data-rmd</code> attribute, or when compiling from the Sass source (see the <a href="config.html">configuration guide</a> for details).
+  ReMarkdown is broken down into <a href="./options.html">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
+</p>
+
+<p>
+  You can choose additional variants by adding option names in the <code>data-remarkdown</code> attribute. For example:
+</p>
+
+<pre><code>&ltbody class="remarkdown h1-underline pre-ticks">
+  ...
+&lt;/body></code></pre>
+
+<p>
+  And there’s a bunch of <a href="options.html">alternative styles</a> to pick from! Define your prefered styles using the <code>data-rmd</code> attribute, or when compiling from the Sass source (see the <a href="config.html">configuration guide</a> for details).
 </p>
 
 <h2>
@@ -78,7 +99,7 @@
 </h2>
 
 <p>
-  Peter Coles wrote <a href="http://mrcoles.com/demo/markdown-css/">Markdown.css</a>, a similar stylesheet, a little while back.
+  Peter Coles wrote <a href="http://mrcoles.com/demo/markdown-css/">Markdown.css</a>, a similar stylesheet.
 </p>
 
 </main>

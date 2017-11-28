@@ -1,7 +1,7 @@
-/*! ReMarkdown 3.0.0-beta1 (attr build) https://fvsch.github.io/remarkdown/ */
+/*! ReMarkdown-zero 3.0.0-beta1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
 /*
-  Included: all
-  Defaults: hn-reset hn-hash ul-hyphen ol-decimal em-star strong-star a-bracket code-tick pre-indent hr-star quote-gt
+  Included: all styles
+  Defaults: none
 */
 [data-remarkdown] {
   line-height: 1.5;
@@ -12,47 +12,47 @@
   font-family: inherit;
 }
 
-[data-remarkdown] h1, [data-remarkdown] h2, [data-remarkdown] h3, [data-remarkdown] h4, [data-remarkdown] h5, [data-remarkdown] h6, [data-remarkdown~='hn-reset'] h1, [data-remarkdown~='hn-reset'] h2, [data-remarkdown~='hn-reset'] h3, [data-remarkdown~='hn-reset'] h4, [data-remarkdown~='hn-reset'] h5, [data-remarkdown~='hn-reset'] h6 {
+[data-remarkdown~='hn-reset'] h1, [data-remarkdown~='hn-reset'] h2, [data-remarkdown~='hn-reset'] h3, [data-remarkdown~='hn-reset'] h4, [data-remarkdown~='hn-reset'] h5, [data-remarkdown~='hn-reset'] h6 {
   font-size: inherit;
   font-weight: inherit;
 }
 
-[data-remarkdown] h1, [data-remarkdown~='hn-reset'] h1 {
-  margin-top: 3em;
-  margin-bottom: 1.5em;
-}
-
-[data-remarkdown] h2, [data-remarkdown~='hn-reset'] h2 {
-  margin-top: 3em;
-  margin-bottom: 1.5em;
-}
-
-[data-remarkdown] h3, [data-remarkdown] h4, [data-remarkdown] h5, [data-remarkdown] h6, [data-remarkdown~='hn-reset'] h3, [data-remarkdown~='hn-reset'] h4, [data-remarkdown~='hn-reset'] h5, [data-remarkdown~='hn-reset'] h6 {
+[data-remarkdown~='hn-reset'] h1 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
-[data-remarkdown] h1::before, [data-remarkdown~='hn-hash'] h1::before {
+[data-remarkdown~='hn-reset'] h2 {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+[data-remarkdown~='hn-reset'] h3, [data-remarkdown~='hn-reset'] h4, [data-remarkdown~='hn-reset'] h5, [data-remarkdown~='hn-reset'] h6 {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+[data-remarkdown~='hn-hash'] h1::before {
   content: "# ";
 }
 
-[data-remarkdown] h2::before, [data-remarkdown~='hn-hash'] h2::before {
+[data-remarkdown~='hn-hash'] h2::before {
   content: "## ";
 }
 
-[data-remarkdown] h3::before, [data-remarkdown~='hn-hash'] h3::before {
+[data-remarkdown~='hn-hash'] h3::before {
   content: "### ";
 }
 
-[data-remarkdown] h4::before, [data-remarkdown~='hn-hash'] h4::before {
+[data-remarkdown~='hn-hash'] h4::before {
   content: "#### ";
 }
 
-[data-remarkdown] h5::before, [data-remarkdown~='hn-hash'] h5::before {
+[data-remarkdown~='hn-hash'] h5::before {
   content: "##### ";
 }
 
-[data-remarkdown] h6::before, [data-remarkdown~='hn-hash'] h6::before {
+[data-remarkdown~='hn-hash'] h6::before {
   content: "###### ";
 }
 
@@ -107,7 +107,7 @@ hr {
   text-align: center;
 }
 
-[data-remarkdown] hr::before, [data-remarkdown~='hr-star'] hr::before {
+[data-remarkdown~='hr-star'] hr::before {
   content: "* * * *";
 }
 
@@ -147,11 +147,11 @@ hr {
   content: "*";
 }
 
-[data-remarkdown] ul, [data-remarkdown~='ul-hyphen'] ul {
+[data-remarkdown~='ul-hyphen'] ul {
   list-style: none;
 }
 
-[data-remarkdown] ul > li::before, [data-remarkdown~='ul-hyphen'] ul > li::before {
+[data-remarkdown~='ul-hyphen'] ul > li::before {
   float: left;
   width: 1ch;
   margin-left: -3ch;
@@ -168,16 +168,16 @@ hr {
   margin-bottom: 0;
 }
 
-[data-remarkdown] ol, [data-remarkdown~='ol-decimal'] ol {
+[data-remarkdown~='ol-decimal'] ol {
   list-style: none;
   counter-reset: rmd-ol;
 }
 
-[data-remarkdown] ol > li, [data-remarkdown~='ol-decimal'] ol > li {
+[data-remarkdown~='ol-decimal'] ol > li {
   counter-increment: rmd-ol;
 }
 
-[data-remarkdown] ol > li::before, [data-remarkdown~='ol-decimal'] ol > li::before {
+[data-remarkdown~='ol-decimal'] ol > li::before {
   float: left;
   margin-left: -4ch;
   width: 3ch;
@@ -186,16 +186,16 @@ hr {
   content: counter(rmd-ol) ".";
 }
 
-[data-remarkdown] ol > li[value]::before, [data-remarkdown~='ol-decimal'] ol > li[value]::before {
+[data-remarkdown~='ol-decimal'] ol > li[value]::before {
   content: attr(value) ".";
   word-spacing: -1ch;
 }
 
-[data-remarkdown] a::before, [data-remarkdown~='a-bracket'] a::before {
+[data-remarkdown~='a-bracket'] a::before {
   content: "[";
 }
 
-[data-remarkdown] a::after, [data-remarkdown~='a-bracket'] a::after {
+[data-remarkdown~='a-bracket'] a::after {
   content: "]";
 }
 
@@ -213,7 +213,7 @@ hr {
   font-weight: normal;
 }
 
-[data-remarkdown] em::before, [data-remarkdown] em::after, [data-remarkdown~='em-star'] em::before, [data-remarkdown~='em-star'] em::after {
+[data-remarkdown~='em-star'] em::before, [data-remarkdown~='em-star'] em::after {
   content: "*";
 }
 
@@ -221,7 +221,7 @@ hr {
   content: "_";
 }
 
-[data-remarkdown] strong::before, [data-remarkdown] strong::after, [data-remarkdown~='strong-star'] strong::before, [data-remarkdown~='strong-star'] strong::after {
+[data-remarkdown~='strong-star'] strong::before, [data-remarkdown~='strong-star'] strong::after {
   content: "**";
 }
 
@@ -229,14 +229,12 @@ hr {
   content: "__";
 }
 
-[data-remarkdown] code::before,
-[data-remarkdown] code::after, [data-remarkdown~='code-tick'] code::before,
+[data-remarkdown~='code-tick'] code::before,
 [data-remarkdown~='code-tick'] code::after {
   content: "`";
 }
 
-[data-remarkdown] pre code::before,
-[data-remarkdown] pre code::after, [data-remarkdown~='code-tick'] pre code::before,
+[data-remarkdown~='code-tick'] pre code::before,
 [data-remarkdown~='code-tick'] pre code::after {
   display: none;
 }
@@ -247,7 +245,7 @@ hr {
   tab-size: 4;
 }
 
-[data-remarkdown] pre, [data-remarkdown~='pre-indent'] pre {
+[data-remarkdown~='pre-indent'] pre {
   margin-left: 3ch;
 }
 
@@ -287,7 +285,7 @@ hr {
   padding: 0;
 }
 
-[data-remarkdown] blockquote, [data-remarkdown~='quote-gt'] blockquote {
+[data-remarkdown~='quote-gt'] blockquote {
   position: relative;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -296,7 +294,7 @@ hr {
   padding-left: 3ch;
 }
 
-[data-remarkdown] blockquote::before, [data-remarkdown~='quote-gt'] blockquote::before {
+[data-remarkdown~='quote-gt'] blockquote::before {
   position: absolute;
   top: 0;
   left: 0;

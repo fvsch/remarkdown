@@ -2,13 +2,8 @@
  * Styles for ReMarkdown demo pages
  * Depends on default remarkdown.css
  */
-html {
-  background-color: white;
-  color: #202020;
-  font-size: 100%;
-}
 
-@media (min-width: 900px) {
+ @media (min-width: 900px) {
   html {
     background-color: #EEE;
   }
@@ -18,8 +13,10 @@ body {
   max-width: 660px;
   padding: 30px;
   margin: 0 auto;
+  color: #202020;
+  background-color: white;
 }
-
+  
 @media (min-width: 900px) {
   body {
     margin: 30px auto;
@@ -34,11 +31,9 @@ a {
   color: #F02050;
   text-decoration: none;
 }
-
 a:hover {
   border-bottom: 1px solid;
 }
-
 a:focus, a:active {
   color: white;
   background-color: #F02050;
@@ -48,20 +43,14 @@ nav {
   margin: 0 0 4em;
   text-align: right;
 }
-
 nav > br {
   display: none;
 }
-
 nav > span {
   float: left;
 }
-
 @media (max-width: 450px) {
-  nav > * {
-    display: block;
-    padding-bottom: .4em;
-  }
+  nav > * { display: block; padding-bottom: .4em; }
 }
 
 .example {
@@ -75,7 +64,6 @@ nav > span {
 .remarkdown ::after {
   opacity: .6;
 }
-
 .remarkdown :not(a)::before,
 .remarkdown :not(a)::after {
   color: #205080;
@@ -85,7 +73,6 @@ nav > span {
 .remarkdown {
   font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
 }
-
 .remarkdown pre {
   white-space: pre-wrap;
   color: #802020;
@@ -104,366 +91,7 @@ nav > span {
 }
 
 /* Styles page */
+
 #style-list tr > * {
   white-space: nowrap;
-}
-
-[data-test] {
-  line-height: 1.5;
-  font-family: monospace, monospace;
-}
-
-[data-test] pre, [data-test] code, [data-test] kbd, [data-test] samp {
-  font-family: inherit;
-}
-
-[data-test~='hn-reset'] h1, [data-test~='hn-reset'] h2, [data-test~='hn-reset'] h3, [data-test~='hn-reset'] h4, [data-test~='hn-reset'] h5, [data-test~='hn-reset'] h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-[data-test~='hn-reset'] h1 {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-}
-
-[data-test~='hn-reset'] h2 {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-}
-
-[data-test~='hn-reset'] h3, [data-test~='hn-reset'] h4, [data-test~='hn-reset'] h5, [data-test~='hn-reset'] h6 {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-}
-
-[data-test~='hn-hash'] h1::before {
-  content: "# ";
-}
-
-[data-test~='hn-hash'] h2::before {
-  content: "## ";
-}
-
-[data-test~='hn-hash'] h3::before {
-  content: "### ";
-}
-
-[data-test~='hn-hash'] h4::before {
-  content: "#### ";
-}
-
-[data-test~='hn-hash'] h5::before {
-  content: "##### ";
-}
-
-[data-test~='hn-hash'] h6::before {
-  content: "###### ";
-}
-
-[data-test~='h1-underline'] h1, [data-test~='h2-underline'] h2 {
-  display: table;
-  overflow: hidden;
-  position: relative;
-  padding-bottom: 1.5em;
-}
-
-[data-test~='h1-underline'] h1::before, [data-test~='h2-underline'] h2::before {
-  content: none;
-}
-
-[data-test~='h1-underline'] h1::after, [data-test~='h2-underline'] h2::after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 1.5em;
-  width: 100%;
-  overflow: hidden;
-  word-break: break-all;
-  cursor: default;
-}
-
-[data-test~='h1-underline'] h1::after {
-  content: "========================================================================================================================";
-}
-
-[data-test~='h2-underline'] h2::after {
-  content: "------------------------------------------------------------------------------------------------------------------------";
-}
-
-[data-test] p {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-}
-
-[data-test] figure {
-  margin: 1.5em 0 1.5em;
-}
-
-hr {
-  height: 1.5em;
-  line-height: 1.5em;
-  margin: 1.5em 0 1.5em;
-  border: none;
-  color: inherit;
-}
-
-[data-test~='hr-center'] hr {
-  text-align: center;
-}
-
-[data-test~='hr-star'] hr::before {
-  content: "* * * *";
-}
-
-[data-test~='hr-hyphen'] hr::before {
-  content: "-------";
-}
-
-[data-test] ul {
-  margin: 1.5em 0 1.5em 3ch;
-  padding: 0;
-}
-
-[data-test] li ul {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-[data-test~='ul-plus'] ul {
-  list-style: none;
-}
-
-[data-test~='ul-plus'] ul > li::before {
-  float: left;
-  width: 1ch;
-  margin-left: -3ch;
-  content: "+";
-}
-
-[data-test~='ul-star'] ul {
-  list-style: none;
-}
-
-[data-test~='ul-star'] ul > li::before {
-  float: left;
-  width: 1ch;
-  margin-left: -3ch;
-  content: "*";
-}
-
-[data-test~='ul-hyphen'] ul {
-  list-style: none;
-}
-
-[data-test~='ul-hyphen'] ul > li::before {
-  float: left;
-  width: 1ch;
-  margin-left: -3ch;
-  content: "-";
-}
-
-[data-test] ol {
-  margin: 1.5em 0 1.5em 3ch;
-  padding: 0;
-}
-
-[data-test] li ol {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-[data-test~='ol-decimal'] ol {
-  list-style: none;
-  counter-reset: rmd-ol;
-}
-
-[data-test~='ol-decimal'] ol > li {
-  counter-increment: rmd-ol;
-}
-
-[data-test~='ol-decimal'] ol > li::before {
-  float: left;
-  margin-left: -4ch;
-  width: 3ch;
-  overflow: hidden;
-  text-align: right;
-  content: counter(rmd-ol) ".";
-}
-
-[data-test~='ol-decimal'] ol > li[value]::before {
-  content: attr(value) ".";
-  word-spacing: -1ch;
-}
-
-[data-test~='a-bracket'] a::before {
-  content: "[";
-}
-
-[data-test~='a-bracket'] a::after {
-  content: "]";
-}
-
-[data-test~='a-showurl'] a[href]::before {
-  content: "[";
-}
-
-[data-test~='a-showurl'] a[href]::after {
-  content: "](" attr(href) ")";
-  word-break: break-all;
-}
-
-[data-test] em, [data-test] strong {
-  font-style: normal;
-  font-weight: normal;
-}
-
-[data-test~='em-star'] em::before, [data-test~='em-star'] em::after {
-  content: "*";
-}
-
-[data-test~='em-underscore'] em::before, [data-test~='em-underscore'] em::after {
-  content: "_";
-}
-
-[data-test~='strong-star'] strong::before, [data-test~='strong-star'] strong::after {
-  content: "**";
-}
-
-[data-test~='strong-underscore'] strong::before, [data-test~='strong-underscore'] strong::after {
-  content: "__";
-}
-
-[data-test~='code-tick'] code::before,
-[data-test~='code-tick'] code::after {
-  content: "`";
-}
-
-[data-test~='code-tick'] pre code::before,
-[data-test~='code-tick'] pre code::after {
-  display: none;
-}
-
-[data-test] pre {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  tab-size: 4;
-}
-
-[data-test~='pre-indent'] pre {
-  margin-left: 3ch;
-}
-
-[data-test~='pre-tick'] pre::before,
-[data-test~='pre-tick'] pre::after, [data-test~='pre-tilde'] pre::before,
-[data-test~='pre-tilde'] pre::after, [data-test~='pre-tilde-full'] pre::before,
-[data-test~='pre-tilde-full'] pre::after {
-  display: block;
-  width: 100%;
-  height: 1.5em;
-  cursor: default;
-}
-
-[data-test~='pre-tick'] pre::before,
-[data-test~='pre-tick'] pre::after {
-  content: "```";
-  position: relative;
-  top: .3em;
-}
-
-[data-test~='pre-tilde'] pre::before,
-[data-test~='pre-tilde'] pre::after {
-  content: "~~~";
-  overflow: hidden;
-  word-break: break-all;
-}
-
-[data-test~='pre-tilde-full'] pre::before,
-[data-test~='pre-tilde-full'] pre::after {
-  content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-  overflow: hidden;
-  word-break: break-all;
-}
-
-[data-test] blockquote {
-  margin: 1.5em 2ch 1.5em;
-  padding: 0;
-}
-
-[data-test~='quote-gt'] blockquote {
-  position: relative;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 3ch;
-}
-
-[data-test~='quote-gt'] blockquote::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  overflow: hidden;
-  white-space: pre;
-  content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
-  cursor: default;
-}
-
-[data-test~='del-gfm'] del {
-  text-decoration: none;
-}
-
-[data-test~='del-gfm'] del::before,
-[data-test~='del-gfm'] del::after {
-  content: "~~";
-}
-
-[data-test~='table-marker'] table {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  border-collapse: collapse;
-}
-
-[data-test~='table-marker'] tr > * {
-  min-width: 3ch;
-  position: relative;
-  padding: 0;
-  text-align: inherit;
-  vertical-align: top;
-  font-weight: normal;
-  border: none;
-}
-
-[data-test~='table-marker'] tr > * + * {
-  padding-left: 3ch;
-}
-
-[data-test~='table-marker'] tr:first-child > th:not([scope="row"]) {
-  padding-bottom: 1.5em;
-}
-
-[data-test~='table-marker'] tr:first-child > th:not([scope="row"])::after {
-  content: "--------------------------------------------------------------------------------------------------------------";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  word-break: break-all;
-  height: 1.5em;
-}
-
-[data-test~='table-marker'] tr:first-child > * + th:not([scope="row"])::after {
-  left: 3ch;
-}
-
-[data-test~='table-marker'] tr > * + *::before {
-  content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
-  position: absolute;
-  overflow: hidden;
-  left: 1ch;
-  top: 0;
-  bottom: 0;
-  white-space: pre;
 }

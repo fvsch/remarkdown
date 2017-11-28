@@ -9,7 +9,7 @@ $__rmd-line: $rmd-line-ratio * 1em;
 }
 
 @mixin rmd-header($title:"") {
-  $included: "all";
+  $included: "all styles";
   $list: $rmd-defaults;
   @if not $rmd-output-all-styles {
     $included: "defaults only";
@@ -32,16 +32,15 @@ $__rmd-line: $rmd-line-ratio * 1em;
 // $rmd-output-all-styles is false and the option is not in
 // $rmd-defaults, which drops the entire block from the output.
 @mixin __rmd_selector($option:null) {
-  $s: "";
-  @if index($rmd-defaults, $option) {
-    $s: __rmd_selector_syntax();
+  @if $option == null or index($rmd-defaults, $option) {
+    #{__rmd_selector_syntax()} {
+      @content;
+    }
   }
-  @if $rmd-output-all-styles {
-    @if $s != "" { $s: $s + ", "; }
-    $s: $s + __rmd_selector_syntax($option);
-  }
-  @if $s != "" {
-    #{$s} { @content; }
+  @else if $rmd-output-all-styles {
+    #{__rmd_selector_syntax($option)} {
+      @content;
+    }
   }
 }
 

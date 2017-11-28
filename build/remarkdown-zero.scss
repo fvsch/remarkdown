@@ -1,0 +1,10 @@
+// Class-based build of ReMarkdown with no default styles
+
+$rmd-selector-base: ".remarkdown";
+$rmd-selector-option: ".remarkdown.%o";
+$rmd-defaults: ();
+$rmd-margins: ();
+
+@import "../src/imports";
+@include rmd-header("ReMarkdown-zero 3.0.0-beta1 (MIT) https://fvsch.github.io/remarkdown/");
+@include rmd-output();

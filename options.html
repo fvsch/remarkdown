@@ -5,6 +5,7 @@
   <title>ReMarkdown — Available styles</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="dist/remarkdown.css">
+  <link rel="stylesheet" href="dist/remarkdown-zero.attr.css">
   <link rel="stylesheet" href="demo/demo.css">
 </head>
 <body>
@@ -13,7 +14,7 @@
   <span>ReMarkdown</span>
   <br>
   <a href="./">about</a>
-  <em>styles</em>
+  <em>options</em>
   <a href="./config.html">config</a>
 </nav>
 
@@ -23,7 +24,7 @@
 
   <table id="style-list">
     <tr>
-      <th scope="col">Style name</th>
+      <th scope="col">Option name</th>
       <th scope="col">Default</th>
       <th scope="col">Description</th>
     </tr>
@@ -154,7 +155,7 @@
   <p>Note: next examples will all use <code>hn-reset</code>.</p>
 </div>
 
-<div class="example" data-test="hn-reset hn-hash">
+<div class="example" data-remarkdown="hn-reset hn-hash">
   <h1>Heading level 1</h1>
   <h2>Heading level 2</h2>
   <h3>Heading level 3</h3>
@@ -167,7 +168,7 @@
   <h3 id="h-underline">Options: <code>h1-underline</code> and <code>h2-underline</code></h3>
 </div>
 
-<div class="example" data-test="hn-reset h1-underline h2-underline">
+<div class="example" data-remarkdown="hn-reset h1-underline h2-underline">
   <h1>Underlined H1</h1>
   <h2>Underlined H2</h2>
   <p>Underlined titles cannot be centered with <code>text-align:center</code>. You will need to use auto margins:</p>
@@ -188,7 +189,7 @@
   <h3>Default: <code>ol-decimal</code></h3>
 </div>
 
-<div class="example" data-test="ol-decimal">
+<div class="example" data-remarkdown="ol-decimal">
   <ol>
     <li>This is a list.</li>
     <li>With a second item.
@@ -205,7 +206,7 @@
   <h3 id="ul-hyphen">Default: <code>ul-hyphen</code></h3>
 </div>
 
-<div class="example" data-test="ul-hyphen">
+<div class="example" data-remarkdown="ul-hyphen">
   <ul>
     <li>This is a list.</li>
     <li>With a second item.
@@ -222,7 +223,7 @@
   <h3 id="ul-star">Option: <code>ul-star</code></h3>
 </div>
 
-<div class="example" data-test="ul-star">
+<div class="example" data-remarkdown="ul-star">
   <ul>
     <li>This is a list.</li>
     <li>With a second item.</li>
@@ -234,7 +235,7 @@
   <h3 id="ul-plus">Option: <code>ul-plus</code></h3>
 </div>
 
-<div class="example" data-test="ul-plus">
+<div class="example" data-remarkdown="ul-plus">
   <ul>
     <li>This is a list.</li>
     <li>With a second item.</li>
@@ -247,7 +248,7 @@
   <h3 id="em-star">Default: <code>em-star</code></h3>
 </div>
 
-<div class="example" data-test="em-star">
+<div class="example" data-remarkdown="em-star">
   <p>This is <em>literally</em> figurative!</p>
 </div>
 
@@ -255,7 +256,7 @@
   <h3 id="em-underscore">Option: <code>em-underscore</code></h3>
 </div>
 
-<div class="example" data-test="em-underscore">
+<div class="example" data-remarkdown="em-underscore">
   <p>This is <em>literally</em> figurative!</p>
 </div>
 
@@ -263,7 +264,7 @@
   <h3 id="strong-star">Default: <code>strong-star</code></h3>
 </div>
 
-<div class="example" data-test="strong-star">
+<div class="example" data-remarkdown="strong-star">
   <p>This is figurative. <strong>Literally.</strong></p>
 </div>
 
@@ -271,7 +272,7 @@
   <h3 id="strong-underscore">Option: <code>strong-underscore</code></h3>
 </div>
 
-<div class="example" data-test="strong-underscore">
+<div class="example" data-remarkdown="strong-underscore">
   <p>This is figurative. <strong>Literally.</strong></p>
 </div>
 
@@ -280,7 +281,7 @@
   <h3 id="a-bracket">Default: <code>a-bracket</code></h3>
 </div>
 
-<div class="example" data-test="a-bracket">
+<div class="example" data-remarkdown="a-bracket">
   <p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
   and let me play among the stars.
   Let me see what spring is like
@@ -291,7 +292,7 @@
   <h3 id="a-showurl">Option: <code>a-showurl</code></h3>
 </div>
 
-<div class="example" data-test="a-showurl">
+<div class="example" data-remarkdown="a-showurl">
   <p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
   and let me play among the stars.
   Let me see what spring is like
@@ -303,7 +304,7 @@
   <h3 id="del-gfm">Option: <code>del-gfm</code></h3>
 </div>
 
-<div class="example" data-test="del-gfm">
+<div class="example" data-remarkdown="del-gfm">
   <p>This is <del>a mistake</del> awesome.</p>
 </div>
 
@@ -312,7 +313,7 @@
   <h3 id="hr-star">Default: <code>hr-star</code></h3>
 </div>
 
-<div class="example" data-test="hr-star">
+<div class="example" data-remarkdown="hr-star">
   <hr>
 </div>
 
@@ -320,7 +321,7 @@
   <h3 id="hr-hyphen">Option: <code>hr-hyphen</code></h3>
 </div>
 
-<div class="example" data-test="hr-hyphen">
+<div class="example" data-remarkdown="hr-hyphen">
   <hr>
 </div>
 
@@ -329,8 +330,8 @@
 </div>
 
 <div class="example">
-  <div data-test="hr-center hr-star"><hr></div>
-  <div data-test="hr-center hr-hyphen"><hr></div>
+  <div data-remarkdown="hr-center hr-star"><hr></div>
+  <div data-remarkdown="hr-center hr-hyphen"><hr></div>
 </div>
 
 <div class="remarkdown h2-underline">
@@ -338,7 +339,7 @@
   <h3 id="code-tick">Default: <code>code-tick</code></h3>
 </div>
 
-<div class="example" data-test="code-tick">
+<div class="example" data-remarkdown="code-tick">
   <p>Some inline code: <code>var someCode = 'lulz'</code>.</p>
 </div>
 
@@ -346,7 +347,7 @@
   <h3 id="pre-indent">Default: <code>pre-indent</code></h3>
 </div>
 
-<div class="example" data-test="pre-indent">
+<div class="example" data-remarkdown="pre-indent">
   <p>A paragraph.</p>
   <pre><code>pre {
   margin-left: 3ch;
@@ -359,7 +360,7 @@
   <h3 id="pre-tick">Option: <code>pre-tick</code></h3>
 </div>
 
-<div class="example" data-test="pre-tick">
+<div class="example" data-remarkdown="pre-tick">
   <pre><code>A code block</code></pre>
 </div>
 
@@ -367,7 +368,7 @@
   <h3 id="pre-tilde">Option: <code>pre-tilde</code></h3>
 </div>
 
-<div class="example" data-test="pre-tilde">
+<div class="example" data-remarkdown="pre-tilde">
   <pre><code>A code block</code></pre>
 </div>
 
@@ -375,7 +376,7 @@
   <h3 id="pre-tilde-full">Option: <code>pre-tilde-full</code></h3>
 </div>
 
-<div class="example" data-test="pre-tilde-full">
+<div class="example" data-remarkdown="pre-tilde-full">
   <pre><code>A code block</code></pre>
 </div>
 
@@ -384,7 +385,7 @@
   <h3 id="table-marker">Option: <code>table-marker</code></h3>
 </div>
 
-<div class="example" data-test="table-marker">
+<div class="example" data-remarkdown="table-marker">
   <p>Not too bad for column headers:</p>
   <table>
     <tr>
