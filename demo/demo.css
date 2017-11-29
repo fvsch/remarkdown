@@ -39,6 +39,12 @@ a:focus, a:active {
   background-color: #F02050;
 }
 
+:not(pre) > code,
+:not(pre) > code::before,
+:not(pre) > code::after {
+  color: #009040;
+}
+
 nav {
   margin: 0 0 4em;
   text-align: right;
@@ -49,7 +55,7 @@ nav > br {
 nav > span {
   float: left;
 }
-@media (max-width: 450px) {
+@media (max-width: 900px) {
   nav > * { display: block; padding-bottom: .4em; }
 }
 
@@ -63,9 +69,6 @@ nav > span {
 .remarkdown ::before,
 .remarkdown ::after {
   opacity: .6;
-}
-.remarkdown :not(a)::before,
-.remarkdown :not(a)::after {
   color: #205080;
 }
 
@@ -73,11 +76,16 @@ nav > span {
 .remarkdown {
   font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
 }
+
 .remarkdown pre {
   white-space: pre-wrap;
   color: #802020;
   font-family: Courier, "Courier New", monospace;
 }
+
+.remarkdown code {
+  color: #802020;  
+} 
 
 @media (max-width: 700px) {
   .remarkdown pre {

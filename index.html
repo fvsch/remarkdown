@@ -13,7 +13,7 @@
   <span>ReMarkdown</span>
   <br>
   <em>about</em>
-  <a href="./options.html">options</a>
+  <a href="./styles.html">styles</a>
   <a href="./customize.html">customize</a>
 </nav>
 
@@ -24,22 +24,22 @@
 </h1>
 
 <p>
-  The text you’re reading right now is not plain text, but simple HTML styled like <a href="http://daringfireball.net/projects/markdown/">Markdown</a> text. Right-click and inspect this page to get a feel of how it works.
+  The text you’re reading right now is not plain text, but simple HTML styled like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> text. Right-click and inspect this page to get a feel of how it works.
 </p>
 
 <h2>
-  Getting started
+  Using ReMarkdown
 </h2>
 
 <p>
-  Using ReMarkdown is as simple as downloading <a href="dist/remarkdown.css">remarkdown&shy;.css</a>, and using a single class:
+  It’s as simple as downloading <a href="https://unpkg.com/remarkdown.css/dist/remarkdown.css">remarkdown.css</a>, and adding the <code>remarkdown</code> class to a container:
 </p>
 
 <pre><code>&lt;!doctype html>
 &lt;html lang="en">
 &lt;head>
   &lt;title>Using ReMarkdown&lt;/title>
-  <b>&lt;link rel="stylesheet" href="https://fvsch.github.io/remarkdown/dist/remarkdown.css"></b>
+  <b>&lt;link rel="stylesheet" href="https://unpkg.com/remarkdown.css/dist/remarkdown.css"></b>
 &lt;/head>
 &lt;body <b>class="remarkdown"</b>>
   &lt;h1>Hello World&lt;/h1>
@@ -48,11 +48,11 @@
 &lt;/html></code></pre>
 
 <h2>
-  Modularity
+  Make it your own
 </h2>
 
 <p>
-  ReMarkdown is broken down into <a href="./options.html">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
+  ReMarkdown is broken down into <a href="./styles.html">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
 </p>
 
 <p>
@@ -64,46 +64,30 @@
 &lt;/body></code></pre>
 
 <p>
-  If for some reason you don’t like the default options, you can use the ReMarkdown-zero builds which have no default styles, and list all the styles you want to use:
-</p>
-
-<pre><code>&lt;head>
-  &lt;link rel="stylesheet" href="https://fvsch.github.io/remarkdown/dist/remarkdown-zero.css">
-&lt;/head>
-&lt;body class="remarkdown hn-reset hn-hash a-bracket ul-plus ol-alpha …">
-  ...
-&lt;/body></code></pre>
-
-<p>
-  For even greater control, you can <a href="./customize.html">build a custom ReMarkdown stylesheet using Sass</a>.
+  Take a look at the <a href="./customize.html">customize</a> page for different ways to disable, enable or override styles, change the defaults, change how selectors look, etc.
 </p>
 
 <h2>
-  Technicalities
+  Misc info
 </h2>
 
 <ul>
   <li>
-    <a href="https://github.com/fvsch/remarkdown">ReMarkdown is on Github</a>, do <del>complain</del> report bugs there.
+    GitHub: <a href="https://github.com/fvsch/remarkdown">fvsch/remarkdown</a>
   </li>
   <li>
-    Copyright: the <a href="LICENSE">MIT License</a> applies (ReMarkdown 2.1 and older were licensed under the <a href="http://www.wtfpl.net/">WTFPL</a>).
+    npm: <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>
   </li>
   <li>
-    Browser support: I’m targetting the most current browsers (mid-2014). Theoretically it should work on IE9+, but that’s a very much untested assertion.
+    Copyright: <a href="LICENSE">MIT License</a> (1.0 and 2.0 used the <a href="http://www.wtfpl.net/">WTFPL</a>)
   </li>
   <li>
-    This is no HTML-to-Markdown converter. Try <a href="https://pandoc.org/">Pandoc</a>.
+    Browser support: IE11+, and all recent-ish browsers
+  </li>
+  <li>
+    Similar projects: <a href="https://mrcoles.com/demo/markdown-css/">Peter Coles’ Markdown.css</a>
   </li>
 </ul>
-
-<h2>
-  Similar stuff
-</h2>
-
-<p>
-  Peter Coles wrote <a href="http://mrcoles.com/demo/markdown-css/">Markdown.css</a>, a similar stylesheet.
-</p>
 
 </main>
 

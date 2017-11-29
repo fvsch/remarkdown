@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <title>ReMarkdown — Configuration</title>
   <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="dist/remarkdown.css">
-  <link rel="stylesheet" href="demo/demo.css">
+  <link rel="stylesheet" href="./dist/remarkdown.css">
+  <link rel="stylesheet" href="./demo/demo.css">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
   <span>ReMarkdown</span>
   <br>
   <a href="./">about</a>
-  <a href="./options.html">options</a>
+  <a href="./styles.html">styles</a>
   <em>customize</em>
 </nav>
 
@@ -32,20 +32,39 @@
 </h2>
 
 <p>
-  You can activate styles from the <a href="./options.html">options list</a> by declaring them in your HTML, as classes or attribute values:
+  You can activate the <a href="./styles.html">available styles</a> by declaring them in your HTML, as classes or attribute values:
 </p>
 
 <pre><code>&lt;div class="remarkdown h1-underline ul-star">
-  Using remarkdown.css
-&lt;/div>
-
-&lt;div data-remarkdown="h1-underline ul-star">
-  Using remarkdown.attr.css
+  &lt;p>Using remarkdown.css&lt;/p>
 &lt;/div></code></pre>
 
+<h3>
+  ReMarkdown Zero
+</h3>
+
 <p>
-  If you don’t want to use ReMarkdown’s default styles, you can use the <a href="./dist/remarkdown-zero.css">remarkdown-zero.css</a> or <a href="./dist/remarkdown-zero.attr.css">remarkdown-zero.attr.css</a> stylesheets instead, and declare all the styles you want explicitly.
+  If you don’t want to use ReMarkdown’s default styles, you can use the <a href="https://unpkg.com/remarkdown.css/dist/remarkdown-zero.css">remarkdown-zero.css</a> stylesheet instead, and declare all the styles you want explicitly.
 </p>
+
+<pre><code>&lt;div class="remarkdown hn-reset hn-hash h1-underline ul-star a-bracket pre-tick quote-gt ...">
+  &lt;p>Using remarkdown.css&lt;/p>
+&lt;/div></code></pre>
+
+<h3>
+  Using attributes instead of classes
+</h3>
+
+<p>
+  ReMarkdown comes with an alternative stylesheet which uses the <code>data-remarkdown</code> HTML attribute for styling, instead of classes:
+</p>
+
+<pre><code>&lt;head>
+  &lt;link rel="stylesheet" href="https://unpkg.com/remarkdown.css/dist/remarkdown.attr.css">
+  &lt;!-- or https://unpkg.com/remarkdown.css/dist/remarkdown-zero.attr.css -->
+&lt;body data-remarkdown="h1-underline a-bracket ul-plus ol-alpha">
+  ...
+&lt;/body></code></pre>
 
 <h2>
   Add your own CSS
@@ -139,7 +158,7 @@
 </ol>
 
 <p>
-  Once you’ve downloaded and extracted the ReMarkdown source, look at the contents of the <code>remarkdown.scss</code> file, which has documentation for all the available options. You can change some of the options as you want.
+  Once you’ve downloaded and extracted the ReMarkdown source, copy one of the Sass stylesheets in the <code>build</code> directory as <code>build/remarkdown-custom.scss</code>. Change or add <code>$rmd-*</code> variables to change your build’s configuration. See <code>src/_options.scss</code> for a detailed list of options.
 </p>
 
 <p>
@@ -148,15 +167,15 @@
 
 <pre><code># install dependencies
 npm install
-# build the remarkdown-custom.css file
-npm run build</code></pre>
+# build the dist/remarkdown-custom.css file
+npm start</code></pre>
 
 <p>
-  Some highlights from the compiling options:
+  Note: if you already have your own Node-and-Sass build chain in place, you can install ReMarkdown with <code>npm install remarkdown.css</code> and import <code>node_modules/remarkdown.css/src/imports</code>.
 </p>
 
 <h3>
-  Change the default styles
+  Example: changing the default styles
 </h3>
 
 <p>
@@ -174,7 +193,7 @@ npm run build</code></pre>
 </p>
 
 <h3>
-  Do not include alternate styles
+  Example: only output default styles
 </h3>
 
 <p>

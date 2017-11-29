@@ -4,6 +4,13 @@
   "license": "MIT",
   "author": "Florens Verschelde",
   "repository": "https://github.com/fvsch/remarkdown",
+  "keywords": ["css", "markdown"],
+  "files": [
+    "/README.md",
+    "/LICENSE",
+    "/src/*.scss",
+    "/dist/*.css"
+  ],
   "scripts": { "start": "node build" },
   "devDependencies": {
     "glob": "^7.1.2",
