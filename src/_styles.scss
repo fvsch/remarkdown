@@ -21,19 +21,21 @@
 
 @mixin rmd-output-hn {
   @include __rmd_selector("hn-reset") {
-    h1, h2, h3, h4, h5, h6 {
+    h1 {
       font-size: inherit;
       font-weight: inherit;
-    }
-    h1 {
       margin-top: __rmd-margin("h1", "top");
       margin-bottom: __rmd-margin("h1", "bottom");
     }
     h2 {
+      font-size: inherit;
+      font-weight: inherit;
       margin-top: __rmd-margin("h2", "top");
       margin-bottom: __rmd-margin("h2", "bottom");
     }
     h3, h4, h5, h6 {
+      font-size: inherit;
+      font-weight: inherit;
       margin-top: __rmd-margin("hn", "top");
       margin-bottom: __rmd-margin("hn", "bottom");
     }
@@ -91,7 +93,9 @@
       margin-bottom: __rmd-margin("p", "bottom");
     }
     figure {
-      margin: __rmd-margin("figure", "top") 0 __rmd-margin("figure", "bottom");
+      margin:
+        __rmd-margin("figure", "top") 0
+        __rmd-margin("figure", "bottom");
     }
   }
 }
@@ -102,7 +106,11 @@
 @mixin rmd-output-ul {
   @include __rmd_selector {
     ul {
-      margin: __rmd-margin("ul", "top") 0 __rmd-margin("ul", "bottom") 3ch;
+      margin:
+        __rmd-margin("ul", "top")
+        __rmd-indent("ul", "right")
+        __rmd-margin("ul", "bottom")
+        __rmd-indent("ul", "left");
       padding: 0;
     }
     li ul {
@@ -117,7 +125,8 @@
     & > li::before {
       float: left;
       width: 1ch;
-      margin-left: -3ch;
+      margin-left: __rmd-indent("ul", "left") * -1;
+      margin-right: 1ch;
       content: $sign;
     }
   }
@@ -141,7 +150,11 @@
 @mixin rmd-output-ol {
   @include __rmd_selector() {
     ol {
-      margin: __rmd-margin("ol", "top") 0 __rmd-margin("ol", "bottom") 3ch;
+      margin:
+      __rmd-margin("ol", "top")
+      __rmd-indent("ol", "right")
+      __rmd-margin("ol", "bottom")
+      __rmd-indent("ol", "left");
       padding: 0;
     }
     li ol {
@@ -149,27 +162,40 @@
       margin-bottom: 0;
     }
   }
-  @include __rmd_selector("ol-decimal") {
+  @mixin rmd-ol-li-before($type) {
     ol {
       list-style: none;
-      counter-reset: rmd-ol;
+      @if $type != "zero" {
+        counter-reset: rmd-ol;
+      }
     }
-    ol > li {
-      counter-increment: rmd-ol;
+    @if $type != "zero" {
+      ol > li {
+        counter-increment: rmd-ol;
+      }
     }
     ol > li::before {
       float: left;
-      margin-left: -4ch;
-      width: 3ch;
-      overflow: hidden;
-      text-align: right;
-      content: counter(rmd-ol) ".";
+      margin-left: __rmd-indent("ol", "left") * -1;
+      margin-right: 1ch;
+      min-width: 2ch;
+      @if $type == "zero" {
+        content: "0.";
+      } @else if $type == "alpha" {
+        content: counter(rmd-ol, lower-alpha) ".";
+      } @else {
+        content: counter(rmd-ol) ".";
+      }
     }
-    ol > li[value]::before {
-      content: attr(value) ".";
-      // For values like <li value=" 12 ">, resulting in " 12 ."
-      word-spacing: -1ch;
-    }
+  }
+  @include __rmd_selector("ol-decimal") {
+    @include rmd-ol-li-before("decimal");
+  }
+  @include __rmd_selector("ol-zero") {
+    @include rmd-ol-li-before("zero");
+  }
+  @include __rmd_selector("ol-alpha") {
+    @include rmd-ol-li-before("alpha");
   }
 }
 
@@ -252,7 +278,8 @@
   }
   @include __rmd_selector("pre-indent") {
     pre {
-      margin-left: 3ch;
+      margin-left: __rmd-indent("pre", "left");
+      margin-right: __rmd-indent("pre", "right");
     }
   }
   %rmd-pre-fence-pseudo {
@@ -267,7 +294,7 @@
       @extend %rmd-pre-fence-pseudo;
       content: "```";
       position: relative;
-      top: .3em;
+      top: .25em;
     }
   }
   @include __rmd_selector("pre-tilde") {
@@ -318,24 +345,24 @@
 @mixin rmd-output-quote {
   @include __rmd_selector {
     blockquote {
-      margin: __rmd-margin("blockquote", "top") 2ch __rmd-margin("blockquote", "bottom");
+      margin:
+        __rmd-margin("blockquote", "top")
+        __rmd-indent("blockquote", "right")
+        __rmd-margin("blockquote", "bottom")
+        __rmd-indent("blockquote", "left");
       padding: 0;
     }
   }
   @include __rmd_selector("quote-gt") {
     blockquote {
       position: relative;
-      margin-top: __rmd-margin("blockquote", "top");
-      margin-bottom: __rmd-margin("blockquote", "bottom");
-      margin-left: 0;
-      margin-right: 0;
-      padding-left: 3ch;
     }
     blockquote::before {
       position: absolute;
       top: 0;
-      left: 0;
+      left: -2ch;
       bottom: 0;
+      width: 1ch;
       overflow: hidden;
       white-space: pre;
       content: __rmd_repeat(">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A", 20);

@@ -50,21 +50,34 @@ $__rmd-line: $rmd-line-ratio * 1em;
   @if $option == null {
     @return $rmd-selector-base;
   } @else {
-    @return __rmd_replace($rmd-selector-option, '%o', $option)
+    @return __rmd_replace($rmd-selector-option, '%o', $option);
   }
 }
 
 // Get a margin value in em from $rmd-margins.
 // If not set, returns a value of 1 line.
-@function __rmd-margin($element, $direction) {
-  $elmargins: map-get($rmd-margins, $element);
-  @if $elmargins != null {
-    $num: map-get($elmargins, $direction);
+@function __rmd-margin($element, $direction:"top") {
+  $config: map-get($rmd-margins, $element);
+  @if $config != null {
+    $num: map-get($config, $direction);
     @if $num != null {
       @return $__rmd-line * $num;
     }
   }
   @return $__rmd-line * 1;
+}
+
+// Get a horizontal margin (indent) value for an element.
+// If not set, returns a value of 0.
+@function __rmd-indent($element, $direction:"left") {
+  $config: map-get($rmd-indents, $element);
+  @if $config != null {
+    $num: map-get($config, $direction);
+    @if $num != null {
+      @return 1ch * $num;
+    }
+  }
+  @return 0;
 }
 
 // Small utility to repeat a string

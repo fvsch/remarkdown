@@ -12,62 +12,63 @@
   font-family: inherit;
 }
 
-[data-remarkdown~='hn-reset'] h1, [data-remarkdown~='hn-reset'] h2, [data-remarkdown~='hn-reset'] h3, [data-remarkdown~='hn-reset'] h4, [data-remarkdown~='hn-reset'] h5, [data-remarkdown~='hn-reset'] h6 {
+[data-remarkdown~="hn-reset"] h1 {
   font-size: inherit;
   font-weight: inherit;
-}
-
-[data-remarkdown~='hn-reset'] h1 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
-[data-remarkdown~='hn-reset'] h2 {
+[data-remarkdown~="hn-reset"] h2 {
+  font-size: inherit;
+  font-weight: inherit;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
-[data-remarkdown~='hn-reset'] h3, [data-remarkdown~='hn-reset'] h4, [data-remarkdown~='hn-reset'] h5, [data-remarkdown~='hn-reset'] h6 {
+[data-remarkdown~="hn-reset"] h3, [data-remarkdown~="hn-reset"] h4, [data-remarkdown~="hn-reset"] h5, [data-remarkdown~="hn-reset"] h6 {
+  font-size: inherit;
+  font-weight: inherit;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
-[data-remarkdown~='hn-hash'] h1::before {
+[data-remarkdown~="hn-hash"] h1::before {
   content: "# ";
 }
 
-[data-remarkdown~='hn-hash'] h2::before {
+[data-remarkdown~="hn-hash"] h2::before {
   content: "## ";
 }
 
-[data-remarkdown~='hn-hash'] h3::before {
+[data-remarkdown~="hn-hash"] h3::before {
   content: "### ";
 }
 
-[data-remarkdown~='hn-hash'] h4::before {
+[data-remarkdown~="hn-hash"] h4::before {
   content: "#### ";
 }
 
-[data-remarkdown~='hn-hash'] h5::before {
+[data-remarkdown~="hn-hash"] h5::before {
   content: "##### ";
 }
 
-[data-remarkdown~='hn-hash'] h6::before {
+[data-remarkdown~="hn-hash"] h6::before {
   content: "###### ";
 }
 
-[data-remarkdown~='h1-underline'] h1, [data-remarkdown~='h2-underline'] h2 {
+[data-remarkdown~="h1-underline"] h1, [data-remarkdown~="h2-underline"] h2 {
   display: table;
   overflow: hidden;
   position: relative;
   padding-bottom: 1.5em;
 }
 
-[data-remarkdown~='h1-underline'] h1::before, [data-remarkdown~='h2-underline'] h2::before {
+[data-remarkdown~="h1-underline"] h1::before, [data-remarkdown~="h2-underline"] h2::before {
   content: none;
 }
 
-[data-remarkdown~='h1-underline'] h1::after, [data-remarkdown~='h2-underline'] h2::after {
+[data-remarkdown~="h1-underline"] h1::after, [data-remarkdown~="h2-underline"] h2::after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -78,11 +79,11 @@
   cursor: default;
 }
 
-[data-remarkdown~='h1-underline'] h1::after {
+[data-remarkdown~="h1-underline"] h1::after {
   content: "========================================================================================================================";
 }
 
-[data-remarkdown~='h2-underline'] h2::after {
+[data-remarkdown~="h2-underline"] h2::after {
   content: "------------------------------------------------------------------------------------------------------------------------";
 }
 
@@ -103,20 +104,20 @@ hr {
   color: inherit;
 }
 
-[data-remarkdown~='hr-center'] hr {
+[data-remarkdown~="hr-center"] hr {
   text-align: center;
 }
 
-[data-remarkdown~='hr-star'] hr::before {
+[data-remarkdown~="hr-star"] hr::before {
   content: "* * * *";
 }
 
-[data-remarkdown~='hr-hyphen'] hr::before {
+[data-remarkdown~="hr-hyphen"] hr::before {
   content: "-------";
 }
 
 [data-remarkdown] ul {
-  margin: 1.5em 0 1.5em 3ch;
+  margin: 1.5em 0ch 1.5em 4ch;
   padding: 0;
 }
 
@@ -125,41 +126,44 @@ hr {
   margin-bottom: 0;
 }
 
-[data-remarkdown~='ul-plus'] ul {
+[data-remarkdown~="ul-plus"] ul {
   list-style: none;
 }
 
-[data-remarkdown~='ul-plus'] ul > li::before {
+[data-remarkdown~="ul-plus"] ul > li::before {
   float: left;
   width: 1ch;
-  margin-left: -3ch;
+  margin-left: -4ch;
+  margin-right: 1ch;
   content: "+";
 }
 
-[data-remarkdown~='ul-star'] ul {
+[data-remarkdown~="ul-star"] ul {
   list-style: none;
 }
 
-[data-remarkdown~='ul-star'] ul > li::before {
+[data-remarkdown~="ul-star"] ul > li::before {
   float: left;
   width: 1ch;
-  margin-left: -3ch;
+  margin-left: -4ch;
+  margin-right: 1ch;
   content: "*";
 }
 
-[data-remarkdown~='ul-hyphen'] ul {
+[data-remarkdown~="ul-hyphen"] ul {
   list-style: none;
 }
 
-[data-remarkdown~='ul-hyphen'] ul > li::before {
+[data-remarkdown~="ul-hyphen"] ul > li::before {
   float: left;
   width: 1ch;
-  margin-left: -3ch;
+  margin-left: -4ch;
+  margin-right: 1ch;
   content: "-";
 }
 
 [data-remarkdown] ol {
-  margin: 1.5em 0 1.5em 3ch;
+  margin: 1.5em 0ch 1.5em 4ch;
   padding: 0;
 }
 
@@ -168,42 +172,65 @@ hr {
   margin-bottom: 0;
 }
 
-[data-remarkdown~='ol-decimal'] ol {
+[data-remarkdown~="ol-decimal"] ol {
   list-style: none;
   counter-reset: rmd-ol;
 }
 
-[data-remarkdown~='ol-decimal'] ol > li {
+[data-remarkdown~="ol-decimal"] ol > li {
   counter-increment: rmd-ol;
 }
 
-[data-remarkdown~='ol-decimal'] ol > li::before {
+[data-remarkdown~="ol-decimal"] ol > li::before {
   float: left;
   margin-left: -4ch;
-  width: 3ch;
-  overflow: hidden;
-  text-align: right;
+  margin-right: 1ch;
+  min-width: 2ch;
   content: counter(rmd-ol) ".";
 }
 
-[data-remarkdown~='ol-decimal'] ol > li[value]::before {
-  content: attr(value) ".";
-  word-spacing: -1ch;
+[data-remarkdown~="ol-zero"] ol {
+  list-style: none;
 }
 
-[data-remarkdown~='a-bracket'] a::before {
+[data-remarkdown~="ol-zero"] ol > li::before {
+  float: left;
+  margin-left: -4ch;
+  margin-right: 1ch;
+  min-width: 2ch;
+  content: "0.";
+}
+
+[data-remarkdown~="ol-alpha"] ol {
+  list-style: none;
+  counter-reset: rmd-ol;
+}
+
+[data-remarkdown~="ol-alpha"] ol > li {
+  counter-increment: rmd-ol;
+}
+
+[data-remarkdown~="ol-alpha"] ol > li::before {
+  float: left;
+  margin-left: -4ch;
+  margin-right: 1ch;
+  min-width: 2ch;
+  content: counter(rmd-ol, lower-alpha) ".";
+}
+
+[data-remarkdown~="a-bracket"] a::before {
   content: "[";
 }
 
-[data-remarkdown~='a-bracket'] a::after {
+[data-remarkdown~="a-bracket"] a::after {
   content: "]";
 }
 
-[data-remarkdown~='a-showurl'] a[href]::before {
+[data-remarkdown~="a-showurl"] a[href]::before {
   content: "[";
 }
 
-[data-remarkdown~='a-showurl'] a[href]::after {
+[data-remarkdown~="a-showurl"] a[href]::after {
   content: "](" attr(href) ")";
   word-break: break-all;
 }
@@ -213,29 +240,29 @@ hr {
   font-weight: normal;
 }
 
-[data-remarkdown~='em-star'] em::before, [data-remarkdown~='em-star'] em::after {
+[data-remarkdown~="em-star"] em::before, [data-remarkdown~="em-star"] em::after {
   content: "*";
 }
 
-[data-remarkdown~='em-underscore'] em::before, [data-remarkdown~='em-underscore'] em::after {
+[data-remarkdown~="em-underscore"] em::before, [data-remarkdown~="em-underscore"] em::after {
   content: "_";
 }
 
-[data-remarkdown~='strong-star'] strong::before, [data-remarkdown~='strong-star'] strong::after {
+[data-remarkdown~="strong-star"] strong::before, [data-remarkdown~="strong-star"] strong::after {
   content: "**";
 }
 
-[data-remarkdown~='strong-underscore'] strong::before, [data-remarkdown~='strong-underscore'] strong::after {
+[data-remarkdown~="strong-underscore"] strong::before, [data-remarkdown~="strong-underscore"] strong::after {
   content: "__";
 }
 
-[data-remarkdown~='code-tick'] code::before,
-[data-remarkdown~='code-tick'] code::after {
+[data-remarkdown~="code-tick"] code::before,
+[data-remarkdown~="code-tick"] code::after {
   content: "`";
 }
 
-[data-remarkdown~='code-tick'] pre code::before,
-[data-remarkdown~='code-tick'] pre code::after {
+[data-remarkdown~="code-tick"] pre code::before,
+[data-remarkdown~="code-tick"] pre code::after {
   display: none;
 }
 
@@ -245,82 +272,79 @@ hr {
   tab-size: 4;
 }
 
-[data-remarkdown~='pre-indent'] pre {
-  margin-left: 3ch;
+[data-remarkdown~="pre-indent"] pre {
+  margin-left: 4ch;
+  margin-right: 0ch;
 }
 
-[data-remarkdown~='pre-tick'] pre::before,
-[data-remarkdown~='pre-tick'] pre::after, [data-remarkdown~='pre-tilde'] pre::before,
-[data-remarkdown~='pre-tilde'] pre::after, [data-remarkdown~='pre-tilde-full'] pre::before,
-[data-remarkdown~='pre-tilde-full'] pre::after {
+[data-remarkdown~="pre-tick"] pre::before,
+[data-remarkdown~="pre-tick"] pre::after, [data-remarkdown~="pre-tilde"] pre::before,
+[data-remarkdown~="pre-tilde"] pre::after, [data-remarkdown~="pre-tilde-full"] pre::before,
+[data-remarkdown~="pre-tilde-full"] pre::after {
   display: block;
   width: 100%;
   height: 1.5em;
   cursor: default;
 }
 
-[data-remarkdown~='pre-tick'] pre::before,
-[data-remarkdown~='pre-tick'] pre::after {
+[data-remarkdown~="pre-tick"] pre::before,
+[data-remarkdown~="pre-tick"] pre::after {
   content: "```";
   position: relative;
-  top: .3em;
+  top: .25em;
 }
 
-[data-remarkdown~='pre-tilde'] pre::before,
-[data-remarkdown~='pre-tilde'] pre::after {
+[data-remarkdown~="pre-tilde"] pre::before,
+[data-remarkdown~="pre-tilde"] pre::after {
   content: "~~~";
   overflow: hidden;
   word-break: break-all;
 }
 
-[data-remarkdown~='pre-tilde-full'] pre::before,
-[data-remarkdown~='pre-tilde-full'] pre::after {
+[data-remarkdown~="pre-tilde-full"] pre::before,
+[data-remarkdown~="pre-tilde-full"] pre::after {
   content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
   overflow: hidden;
   word-break: break-all;
 }
 
 [data-remarkdown] blockquote {
-  margin: 1.5em 2ch 1.5em;
+  margin: 1.5em 2ch 1.5em 2ch;
   padding: 0;
 }
 
-[data-remarkdown~='quote-gt'] blockquote {
+[data-remarkdown~="quote-gt"] blockquote {
   position: relative;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 3ch;
 }
 
-[data-remarkdown~='quote-gt'] blockquote::before {
+[data-remarkdown~="quote-gt"] blockquote::before {
   position: absolute;
   top: 0;
-  left: 0;
+  left: -2ch;
   bottom: 0;
+  width: 1ch;
   overflow: hidden;
   white-space: pre;
   content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
   cursor: default;
 }
 
-[data-remarkdown~='del-gfm'] del {
+[data-remarkdown~="del-gfm"] del {
   text-decoration: none;
 }
 
-[data-remarkdown~='del-gfm'] del::before,
-[data-remarkdown~='del-gfm'] del::after {
+[data-remarkdown~="del-gfm"] del::before,
+[data-remarkdown~="del-gfm"] del::after {
   content: "~~";
 }
 
-[data-remarkdown~='table-marker'] table {
+[data-remarkdown~="table-marker"] table {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
   border-collapse: collapse;
 }
 
-[data-remarkdown~='table-marker'] tr > * {
+[data-remarkdown~="table-marker"] tr > * {
   min-width: 3ch;
   position: relative;
   padding: 0;
@@ -330,15 +354,15 @@ hr {
   border: none;
 }
 
-[data-remarkdown~='table-marker'] tr > * + * {
+[data-remarkdown~="table-marker"] tr > * + * {
   padding-left: 3ch;
 }
 
-[data-remarkdown~='table-marker'] tr:first-child > th:not([scope="row"]) {
+[data-remarkdown~="table-marker"] tr:first-child > th:not([scope="row"]) {
   padding-bottom: 1.5em;
 }
 
-[data-remarkdown~='table-marker'] tr:first-child > th:not([scope="row"])::after {
+[data-remarkdown~="table-marker"] tr:first-child > th:not([scope="row"])::after {
   content: "--------------------------------------------------------------------------------------------------------------";
   position: absolute;
   bottom: 0;
@@ -349,11 +373,11 @@ hr {
   height: 1.5em;
 }
 
-[data-remarkdown~='table-marker'] tr:first-child > * + th:not([scope="row"])::after {
+[data-remarkdown~="table-marker"] tr:first-child > * + th:not([scope="row"])::after {
   left: 3ch;
 }
 
-[data-remarkdown~='table-marker'] tr > * + *::before {
+[data-remarkdown~="table-marker"] tr > * + *::before {
   content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
   position: absolute;
   overflow: hidden;

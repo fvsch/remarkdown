@@ -15,12 +15,12 @@
   <br>
   <a href="./">about</a>
   <em>options</em>
-  <a href="./config.html">config</a>
+  <a href="./customize.html">customize</a>
 </nav>
 
 <div class="remarkdown h1-underline h2-underline table-marker">
   <h1>Demo of available styles</h1>
-  <p>All styles that are listed as “Default” here will be active when using the default <a href="remarkdown.css">remarkdown.css</a> build. No need to specify <code>class="remarkdown style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="config.html#custom">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
+  <p>All styles that are listed as “Default” here will be active when using the default <a href="./dist/remarkdown.css">remarkdown.css</a> build. No need to specify <code>class="remarkdown style-name"</code> for those. On the other hand, if you want to either disable them or include them in a <a href="./build.html">custom build</a>, it’s helpful to know the style’s name and what it does.</p>
 
   <table id="style-list">
     <tr>
@@ -51,7 +51,17 @@
     <tr>
       <td><a href="#ol-decimal">ol-decimal</a></td>
       <td>Yes</td>
-      <td>Override default counter for OL</td>
+      <td>Use decimal numbers for OL items</td>
+    </tr>
+    <tr>
+      <td><a href="#ol-zero">ol-zero</a></td>
+      <td>—</td>
+      <td>Use zeros for all OL items</td>
+    </tr>
+    <tr>
+      <td><a href="#ol-alpha">ol-alpha</a></td>
+      <td>—</td>
+      <td>Use lowercase letters for OL items</td>
     </tr>
     <tr>
       <td><a href="#ul-hyphen">ul-hyphen</a></td>
@@ -67,6 +77,11 @@
       <td><a href="#ul-plus">ul-plus</a></td>
       <td>—</td>
       <td>Use “+” for bullets</td>
+    </tr>
+    <tr>
+      <td><a href="#quote-gt">quote-gt</a></td>
+      <td>—</td>
+      <td>Use “&gt;” signs for blockquotes</td>
     </tr>
     <tr>
       <td><a href="#em-star">em-star</a></td>
@@ -97,11 +112,6 @@
       <td><a href="#a-showurl">a-showurl</a></td>
       <td>—</td>
       <td>Show URLs after links</td>
-    </tr>
-    <tr>
-      <td><a href="#del-gfm">del-gfm</a></td>
-      <td>—</td>
-      <td>Wrap DEL in “~~” (<a href="https://help.github.com/articles/github-flavored-markdown#strikethrough">GFM style</a>)</td>
     </tr>
     <tr>
       <td><a href="#hr-star">hr-star</a></td>
@@ -142,6 +152,11 @@
       <td><a href="#pre-tilde-full">pre-tilde-full</a></td>
       <td>—</td>
       <td>Wraps PRE in a full line of “~”</td>
+    </tr>
+    <tr>
+      <td><a href="#del-gfm">del-gfm</a></td>
+      <td>—</td>
+      <td>Wrap DEL in “~~” (<a href="https://help.github.com/articles/github-flavored-markdown#strikethrough">GFM style</a>)</td>
     </tr>
     <tr>
       <td><a href="#table-marker">table-marker</a></td>
@@ -185,8 +200,8 @@
 </div>
 
 <div class="remarkdown h2-underline">
-  <h2>Ordered lists</h2>
-  <h3>Default: <code>ol-decimal</code></h3>
+  <h2>Lists</h2>
+  <h3 id="ol-decimal">Default: <code>ol-decimal</code></h3>
 </div>
 
 <div class="example" data-remarkdown="ol-decimal">
@@ -198,6 +213,30 @@
         <li>This is so cool.</li>
       </ol>
     </li>
+    <li>And a third one.</li>
+  </ol>
+</div>
+
+<div class="remarkdown">
+  <h3 id="ol-zero">Option: <code>ol-zero</code></h3>
+</div>
+
+<div class="example" data-remarkdown="ol-zero">
+  <ol>
+    <li>This is a list.</li>
+    <li>With a second item.</li>
+    <li>And a third one.</li>
+  </ol>
+</div>
+
+<div class="remarkdown">
+  <h3 id="ol-alpha">Option: <code>ol-alpha</code></h3>
+</div>
+
+<div class="example" data-remarkdown="ol-alpha">
+  <ol>
+    <li>This is a list.</li>
+    <li>With a second item.</li>
     <li>And a third one.</li>
   </ol>
 </div>
@@ -241,6 +280,18 @@
     <li>With a second item.</li>
     <li>And a third one.</li>
   </ul>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Blockquotes</h2>
+  <h3 id="quote-gt">Default: <code>quote-gt</code></h3>
+</div>
+
+<div class="example" data-remarkdown="quote-gt">
+  <blockquote>
+    <p>Saepe blanditiis ratione ipsum tempore quam aspernatur at doloremque deleniti minima commodi. Impedit, assumenda.</p>
+    <p>Here comes a second paragraph.</p>
+  </blockquote>
 </div>
 
 <div class="remarkdown h2-underline">
@@ -297,15 +348,6 @@
   and let me play among the stars.
   Let me see what spring is like
   on a-Jupiter and Mars.</p>
-</div>
-
-<div class="remarkdown h2-underline">
-  <h2>Other</h2>
-  <h3 id="del-gfm">Option: <code>del-gfm</code></h3>
-</div>
-
-<div class="example" data-remarkdown="del-gfm">
-  <p>This is <del>a mistake</del> awesome.</p>
 </div>
 
 <div class="remarkdown h2-underline">
@@ -378,6 +420,15 @@
 
 <div class="example" data-remarkdown="pre-tilde-full">
   <pre><code>A code block</code></pre>
+</div>
+
+<div class="remarkdown h2-underline">
+  <h2>Other</h2>
+  <h3 id="del-gfm">Option: <code>del-gfm</code></h3>
+</div>
+
+<div class="example" data-remarkdown="del-gfm">
+  <p>This is <del>a mistake</del> awesome.</p>
 </div>
 
 <div class="remarkdown h2-underline">

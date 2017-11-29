@@ -14,7 +14,7 @@
   <br>
   <em>about</em>
   <a href="./options.html">options</a>
-  <a href="./config.html">config</a>
+  <a href="./customize.html">customize</a>
 </nav>
 
 <main class="remarkdown h1-underline h2-underline">
@@ -28,28 +28,20 @@
 </p>
 
 <h2>
-  But, why?!?
+  Getting started
 </h2>
 
 <p>
-  Because it was fun to do.
-</p>
-
-<h2>
-  Usage
-</h2>
-
-<p>
-  Using ReMarkdown is as simple as downloading <a href="dist/remarkdown.css">remarkdown&shy;.css</a>, and using a single attribute:
+  Using ReMarkdown is as simple as downloading <a href="dist/remarkdown.css">remarkdown&shy;.css</a>, and using a single class:
 </p>
 
 <pre><code>&lt;!doctype html>
 &lt;html lang="en">
 &lt;head>
   &lt;title>Using ReMarkdown&lt;/title>
-  <b>&lt;link rel="stylesheet" href="remarkdown.css"></b>
+  <b>&lt;link rel="stylesheet" href="https://fvsch.github.io/remarkdown/dist/remarkdown.css"></b>
 &lt;/head>
-&lt;body <b>data-remarkdown</b>>
+&lt;body <b>class="remarkdown"</b>>
   &lt;h1>Hello World&lt;/h1>
   &lt;p>A paragraph.&lt;/p>
 &lt;/body>
@@ -64,15 +56,26 @@
 </p>
 
 <p>
-  You can choose additional variants by adding option names in the <code>data-remarkdown</code> attribute. For example:
+  You can choose additional variants by adding option names as classes along the <code>remarkdown</code> class. For example:
 </p>
 
-<pre><code>&ltbody class="remarkdown h1-underline pre-ticks">
+<pre><code>&lt;body class="remarkdown h1-underline pre-ticks">
   ...
 &lt;/body></code></pre>
 
 <p>
-  And there’s a bunch of <a href="options.html">alternative styles</a> to pick from! Define your prefered styles using the <code>data-rmd</code> attribute, or when compiling from the Sass source (see the <a href="config.html">configuration guide</a> for details).
+  If for some reason you don’t like the default options, you can use the ReMarkdown-zero builds which have no default styles, and list all the styles you want to use:
+</p>
+
+<pre><code>&lt;head>
+  &lt;link rel="stylesheet" href="https://fvsch.github.io/remarkdown/dist/remarkdown-zero.css">
+&lt;/head>
+&lt;body class="remarkdown hn-reset hn-hash a-bracket ul-plus ol-alpha …">
+  ...
+&lt;/body></code></pre>
+
+<p>
+  For even greater control, you can <a href="./customize.html">build a custom ReMarkdown stylesheet using Sass</a>.
 </p>
 
 <h2>

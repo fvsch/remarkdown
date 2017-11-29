@@ -12,34 +12,39 @@
 <nav class="remarkdown">
   <span>ReMarkdown</span>
   <br>
-  <a href=".">about</a>
-  <a href="options.html">options</a>
-  <em>config</em>
+  <a href="./">about</a>
+  <a href="./options.html">options</a>
+  <em>customize</em>
 </nav>
 
 <main class="remarkdown h1-underline h2-underline">
 
 <h1>
-  ReMarkdown configuration
+  Customizing ReMarkdown
 </h1>
 
+<p>
+  There are three ways to customize ReMarkdown: picking available styles in HTML, adding your own CSS styles, and building ReMarkdown with Sass and custom settings.
+</p>
+
 <h2>
-  CSS classes for alternate styles
+  Picking styles in HTML
 </h2>
 
 <p>
-  ReMarkdown has a few default styles, but more styles can be enabled by using optional classes in addition to the `remarkdown` class.
+  You can activate styles from the <a href="./options.html">options list</a> by declaring them in your HTML, as classes or attribute values:
 </p>
 
-<pre><code>&lt;div class="remarkdown h1-underline em-underscore hr-center">
-  &lt;!--
-    Any basic HTML content:
-    headings, paragraphs, lists, etc.
-  -->
+<pre><code>&lt;div class="remarkdown h1-underline ul-star">
+  Using remarkdown.css
+&lt;/div>
+
+&lt;div data-remarkdown="h1-underline ul-star">
+  Using remarkdown.attr.css
 &lt;/div></code></pre>
 
 <p>
-  The <a href="styles.html">Styles page</a> has a list and a preview of all available styles. Note that if you use the <a href="dist/remarkdown.css">default ReMarkdown build</a> (aka <code>remarkdown.css</code>), all styles specified as “Default” are already active, so you don’t need to add classes for them.
+  If you don’t want to use ReMarkdown’s default styles, you can use the <a href="./dist/remarkdown-zero.css">remarkdown-zero.css</a> or <a href="./dist/remarkdown-zero.attr.css">remarkdown-zero.attr.css</a> stylesheets instead, and declare all the styles you want explicitly.
 </p>
 
 <h2>
@@ -54,8 +59,8 @@
   Make markers pop out
 </h3>
 
-<pre><code>[data-rmd] ::before,
-[data-rmd] ::after {
+<pre><code>.remarkdown ::before,
+.remarkdown ::after {
   color: rgba(255, 0, 0, .5);
 }</code></pre>
 
@@ -69,11 +74,11 @@
 
 <pre><code>/* remarkdown.css must be declared BEFORE this */
 
-[data-rmd] {
+.remarkdown {
   font-family: Menlo, Monaco, "DejaVu Sans Mono",
     Consolas, monospace;
 }
-[data-rmd] pre {
+.remarkdown pre {
   font-family: Courier, "Courier New", monospace;
 }</code></pre>
 
@@ -93,8 +98,8 @@
   ReMarkdown sets the <code>font-size</code> of headings to <code>1em</code> to better achieve that plain text look (since plain text editors and file formats use the same font size for all text). But if you want big titles anyway, it’s easy:
 </p>
 
-<pre><code>[data-rmd] h1 { font-size: 1.5em; }
-[data-rmd] h2 { font-size: 1.2em; }</code></pre>
+<pre><code>.remarkdown h1 { font-size: 1.5em; }
+.remarkdown h2 { font-size: 1.2em; }</code></pre>
 
 <p>
   Alternatively, if you’re compiling your own build, there is an option to disallow ReMarkdown from setting any font style.
@@ -108,7 +113,7 @@
   Most ReMarkdown selectors have a specificity of <code>0011</code> or in some cases <code>0012</code>. If your own selectors have similar weight, make sure you declare your own styles <em>after</em> <code>remarkdown.css</code>. Alternatively you can make use of id selectors or of the double-class trick:
 </p>
 
-<pre><code>[data-rmd] h1 {
+<pre><code>.remarkdown h1 {
   /* Selector has a specificity of 0011 */
 }
 .myTitle.myTitle {
@@ -155,12 +160,13 @@ npm run build</code></pre>
 </h3>
 
 <p>
-  You can use the <code>$rmd-defaults</code> variable to change the styles that should be applied by default (i.e. when you use the <code>data-rmd</code> attribute without any explicit style).
+  You can use the <code>$rmd-defaults</code> variable to change the styles that should be applied by default (i.e. when you use the <code>remarkdown</code> class without any explicit style).
 </p>
 
 <pre><code>$rmd-defaults:
-  hn-hash h1-underline h2-underline
-  ul-star em-underscore strong-underscore
+  hn-reset hn-hash h1-underline h2-underline
+  ul-star ol-decimal
+  em-underscore strong-underscore
   hr-hyphen hr-center;</code></pre>
 
 <p>
@@ -176,7 +182,7 @@ npm run build</code></pre>
 </p>
 
 <p>
-  Currently the default build with all styles included is close to 7.5 KB, while the same defaults with no alternative styles included is down to 4.0 KB.
+  Currently the default build with all styles included is close to 8&nbsp;KB, while the same defaults with no alternative styles included is down to 4&nbsp;KB.
 </p>
 
 </main>

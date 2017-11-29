@@ -12,22 +12,23 @@
   font-family: inherit;
 }
 
-.remarkdown.hn-reset h1, .remarkdown.hn-reset h2, .remarkdown.hn-reset h3, .remarkdown.hn-reset h4, .remarkdown.hn-reset h5, .remarkdown.hn-reset h6 {
+.remarkdown.hn-reset h1 {
   font-size: inherit;
   font-weight: inherit;
-}
-
-.remarkdown.hn-reset h1 {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
 .remarkdown.hn-reset h2 {
+  font-size: inherit;
+  font-weight: inherit;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
 
 .remarkdown.hn-reset h3, .remarkdown.hn-reset h4, .remarkdown.hn-reset h5, .remarkdown.hn-reset h6 {
+  font-size: inherit;
+  font-weight: inherit;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
@@ -116,7 +117,7 @@ hr {
 }
 
 .remarkdown ul {
-  margin: 1.5em 0 1.5em 3ch;
+  margin: 1.5em 0ch 1.5em 4ch;
   padding: 0;
 }
 
@@ -132,7 +133,8 @@ hr {
 .remarkdown.ul-plus ul > li::before {
   float: left;
   width: 1ch;
-  margin-left: -3ch;
+  margin-left: -4ch;
+  margin-right: 1ch;
   content: "+";
 }
 
@@ -143,7 +145,8 @@ hr {
 .remarkdown.ul-star ul > li::before {
   float: left;
   width: 1ch;
-  margin-left: -3ch;
+  margin-left: -4ch;
+  margin-right: 1ch;
   content: "*";
 }
 
@@ -154,12 +157,13 @@ hr {
 .remarkdown.ul-hyphen ul > li::before {
   float: left;
   width: 1ch;
-  margin-left: -3ch;
+  margin-left: -4ch;
+  margin-right: 1ch;
   content: "-";
 }
 
 .remarkdown ol {
-  margin: 1.5em 0 1.5em 3ch;
+  margin: 1.5em 0ch 1.5em 4ch;
   padding: 0;
 }
 
@@ -180,15 +184,38 @@ hr {
 .remarkdown.ol-decimal ol > li::before {
   float: left;
   margin-left: -4ch;
-  width: 3ch;
-  overflow: hidden;
-  text-align: right;
+  margin-right: 1ch;
+  min-width: 2ch;
   content: counter(rmd-ol) ".";
 }
 
-.remarkdown.ol-decimal ol > li[value]::before {
-  content: attr(value) ".";
-  word-spacing: -1ch;
+.remarkdown.ol-zero ol {
+  list-style: none;
+}
+
+.remarkdown.ol-zero ol > li::before {
+  float: left;
+  margin-left: -4ch;
+  margin-right: 1ch;
+  min-width: 2ch;
+  content: "0.";
+}
+
+.remarkdown.ol-alpha ol {
+  list-style: none;
+  counter-reset: rmd-ol;
+}
+
+.remarkdown.ol-alpha ol > li {
+  counter-increment: rmd-ol;
+}
+
+.remarkdown.ol-alpha ol > li::before {
+  float: left;
+  margin-left: -4ch;
+  margin-right: 1ch;
+  min-width: 2ch;
+  content: counter(rmd-ol, lower-alpha) ".";
 }
 
 .remarkdown.a-bracket a::before {
@@ -246,7 +273,8 @@ hr {
 }
 
 .remarkdown.pre-indent pre {
-  margin-left: 3ch;
+  margin-left: 4ch;
+  margin-right: 0ch;
 }
 
 .remarkdown.pre-tick pre::before,
@@ -263,7 +291,7 @@ hr {
 .remarkdown.pre-tick pre::after {
   content: "```";
   position: relative;
-  top: .3em;
+  top: .25em;
 }
 
 .remarkdown.pre-tilde pre::before,
@@ -281,24 +309,20 @@ hr {
 }
 
 .remarkdown blockquote {
-  margin: 1.5em 2ch 1.5em;
+  margin: 1.5em 2ch 1.5em 2ch;
   padding: 0;
 }
 
 .remarkdown.quote-gt blockquote {
   position: relative;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-  margin-left: 0;
-  margin-right: 0;
-  padding-left: 3ch;
 }
 
 .remarkdown.quote-gt blockquote::before {
   position: absolute;
   top: 0;
-  left: 0;
+  left: -2ch;
   bottom: 0;
+  width: 1ch;
   overflow: hidden;
   white-space: pre;
   content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";

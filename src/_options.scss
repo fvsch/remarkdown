@@ -26,6 +26,9 @@ $rmd-defaults:
   // ul-star
   // ul-plus
   ol-decimal
+  // ol-zero
+  // ol-alpha
+  quote-gt
   em-star
   // em-underscore
   strong-star
@@ -40,7 +43,6 @@ $rmd-defaults:
   hr-star
   // hr-center
   // hr-hyphen
-  quote-gt
   // del-gfm
   // table-marker
 !default;
@@ -63,14 +65,28 @@ $rmd-code-font: inherit !default;
 // Height of a line (as a unit-less ratio, e.g. 1.5)
 $rmd-line-ratio: 1.5 !default;
 
-// Margins for titles and more (as number of lines)
-// By default we use one line for most things, but you can specify more here:
+// Vertical margins for titles and more (as number of lines)
+// By default we use one line for everything, but you can specify more here:
 $rmd-margins: (
-  h1: (top: 2, bottom: 1),
-  h2: (top: 2, bottom: 1),
+  h1: (top: 1.5, bottom: 1),
+  h2: (top: 1.5, bottom: 1),
+  hn: (top: 1, bottom: 1),
   hr: (top: 1, bottom: 1),
+  p: (top: 1, bottom: 1),
+  pre: (top: 1, bottom: 1),
+  ol: (top: 1, bottom: 1),
+  ul: (top: 1, bottom: 1),
+  figure: (top: 1, bottom: 1),
   blockquote: (top: 1, bottom: 1),
   table: (top: 1, bottom: 1),
+) !default;
+
+// Horizontal indents (as number of characters) for a few elements
+$rmd-indents: (
+  ul: (left: 4, right: 0),
+  ol: (left: 4, right: 0),
+  pre: (left: 4, right: 0),
+  blockquote: (left: 2, right: 2)
 ) !default;
 
 // By default we use the `em` unit for vertical spacing.
