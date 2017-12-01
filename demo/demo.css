@@ -3,7 +3,7 @@
  * Depends on default remarkdown.css
  */
 
- @media (min-width: 900px) {
+@media (min-width: 900px) {
   html {
     background-color: #EEE;
   }
@@ -37,12 +37,6 @@ a:hover {
 a:focus, a:active {
   color: white;
   background-color: #F02050;
-}
-
-:not(pre) > code,
-:not(pre) > code::before,
-:not(pre) > code::after {
-  color: #009040;
 }
 
 nav {
