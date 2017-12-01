@@ -4,16 +4,35 @@
   "license": "MIT",
   "author": "Florens Verschelde",
   "repository": "https://github.com/fvsch/remarkdown",
-  "keywords": ["css", "markdown"],
+  "keywords": [
+    "css",
+    "markdown"
+  ],
   "files": [
     "/README.md",
     "/LICENSE",
     "/src/*.scss",
     "/dist/*.css"
   ],
-  "scripts": { "start": "node build" },
+  "scripts": {
+    "start": "node build"
+  },
   "devDependencies": {
     "glob": "^7.1.2",
-    "node-sass": "^4.0"
+    "node-sass": "^4.0",
+    "prettier": "^1.8.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.scss",
+        "options": {
+          "semi": true,
+          "singleQuote": false
+        }
+      }
+    ]
   }
 }

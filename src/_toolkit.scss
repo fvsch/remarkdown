@@ -18,8 +18,8 @@ $__rmd-line: $rmd-line-ratio * 1em;
     $list: "none";
   }
   @if $title {
-/*! #{$title} */
-/*
+    /*! #{$title} */
+    /*
   Included: #{$included}
   Defaults: #{$list}
 */
@@ -36,8 +36,7 @@ $__rmd-line: $rmd-line-ratio * 1em;
     #{__rmd_selector_syntax()} {
       @content;
     }
-  }
-  @else if $rmd-output-all-styles {
+  } @else if $rmd-output-all-styles {
     #{__rmd_selector_syntax($option)} {
       @content;
     }
@@ -50,7 +49,7 @@ $__rmd-line: $rmd-line-ratio * 1em;
   @if $option == null {
     @return $rmd-selector-base;
   } @else {
-    @return __rmd_replace($rmd-selector-option, '%o', $option);
+    @return __rmd_replace($rmd-selector-option, "%o", $option);
   }
 }
 
@@ -95,7 +94,7 @@ $__rmd-line: $rmd-line-ratio * 1em;
 /// @param {String} $search - Substring to replace
 /// @param {String} $replace ('') - New value
 /// @return {String} - Updated string
-@function __rmd_replace($string, $search, $replace: '') {
+@function __rmd_replace($string, $search, $replace: "") {
   $index: str-index($string, $search);
   @if $index {
     @return str-slice($string, 1, $index - 1) + $replace + __rmd_replace(str-slice($string, $index + str-length($search)), $search, $replace);

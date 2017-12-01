@@ -9,7 +9,10 @@
     line-height: $rmd-line-ratio;
     @if $rmd-set-font-styles {
       font-family: $rmd-primary-font;
-      pre, code, kbd, samp {
+      pre,
+      code,
+      kbd,
+      samp {
         font-family: $rmd-code-font;
       }
     }
@@ -33,7 +36,10 @@
       margin-top: __rmd-margin("h2", "top");
       margin-bottom: __rmd-margin("h2", "bottom");
     }
-    h3, h4, h5, h6 {
+    h3,
+    h4,
+    h5,
+    h6 {
       font-size: inherit;
       font-weight: inherit;
       margin-top: __rmd-margin("hn", "top");
@@ -93,9 +99,7 @@
       margin-bottom: __rmd-margin("p", "bottom");
     }
     figure {
-      margin:
-        __rmd-margin("figure", "top") 0
-        __rmd-margin("figure", "bottom");
+      margin: __rmd-margin("figure", "top") 0 __rmd-margin("figure", "bottom");
     }
   }
 }
@@ -106,11 +110,8 @@
 @mixin rmd-output-ul {
   @include __rmd_selector {
     ul {
-      margin:
-        __rmd-margin("ul", "top")
-        __rmd-indent("ul", "right")
-        __rmd-margin("ul", "bottom")
-        __rmd-indent("ul", "left");
+      margin: __rmd-margin("ul", "top") __rmd-indent("ul", "right")
+        __rmd-margin("ul", "bottom") __rmd-indent("ul", "left");
       padding: 0;
     }
     li ul {
@@ -132,17 +133,17 @@
   }
   @include __rmd_selector("ul-plus") {
     ul {
-      @include rmd-ul-li-before("+");        
+      @include rmd-ul-li-before("+");
     }
   }
   @include __rmd_selector("ul-star") {
     ul {
-      @include rmd-ul-li-before("*");        
+      @include rmd-ul-li-before("*");
     }
   }
   @include __rmd_selector("ul-hyphen") {
     ul {
-      @include rmd-ul-li-before("-");        
+      @include rmd-ul-li-before("-");
     }
   }
 }
@@ -150,11 +151,8 @@
 @mixin rmd-output-ol {
   @include __rmd_selector() {
     ol {
-      margin:
-      __rmd-margin("ol", "top")
-      __rmd-indent("ol", "right")
-      __rmd-margin("ol", "bottom")
-      __rmd-indent("ol", "left");
+      margin: __rmd-margin("ol", "top") __rmd-indent("ol", "right")
+        __rmd-margin("ol", "bottom") __rmd-indent("ol", "left");
       padding: 0;
     }
     li ol {
@@ -205,13 +203,19 @@
 @mixin rmd-output-a {
   @include __rmd_selector("a-bracket") {
     a {
-      &::before { content: "["; }
-      &::after { content: "]"; }
+      &::before {
+        content: "[";
+      }
+      &::after {
+        content: "]";
+      }
     }
   }
   @include __rmd_selector("a-showurl") {
     a[href] {
-      &::before { content: "["; }
+      &::before {
+        content: "[";
+      }
       &::after {
         content: "](" attr(href) ")";
         word-break: break-all;
@@ -226,26 +230,39 @@
 @mixin rmd-output-em {
   @if $rmd-set-font-styles {
     @include __rmd_selector {
-      em, strong {
+      em,
+      strong {
         font-style: normal;
         font-weight: normal;
       }
     }
   }
   @include __rmd_selector("em-star") {
-    em::before, em::after { content: "*"; }
+    em::before,
+    em::after {
+      content: "*";
+    }
   }
   @include __rmd_selector("em-underscore") {
-    em::before, em::after { content: "_"; }
+    em::before,
+    em::after {
+      content: "_";
+    }
   }
 }
 
 @mixin rmd-output-strong {
   @include __rmd_selector("strong-star") {
-    strong::before, strong::after { content: "**"; }
+    strong::before,
+    strong::after {
+      content: "**";
+    }
   }
   @include __rmd_selector("strong-underscore") {
-    strong::before, strong::after { content: "__"; }
+    strong::before,
+    strong::after {
+      content: "__";
+    }
   }
 }
 
@@ -294,7 +311,7 @@
       @extend %rmd-pre-fence-pseudo;
       content: "```";
       position: relative;
-      top: .25em;
+      top: 0.25em;
     }
   }
   @include __rmd_selector("pre-tilde") {
@@ -329,13 +346,19 @@
     color: inherit;
   }
   @include __rmd_selector("hr-center") {
-    hr { text-align: center; }
+    hr {
+      text-align: center;
+    }
   }
   @include __rmd_selector("hr-star") {
-    hr::before { content: $rmd-hr-stars; }
+    hr::before {
+      content: $rmd-hr-stars;
+    }
   }
   @include __rmd_selector("hr-hyphen") {
-    hr::before { content: $rmd-hr-hyphens; }
+    hr::before {
+      content: $rmd-hr-hyphens;
+    }
   }
 }
 
@@ -345,10 +368,8 @@
 @mixin rmd-output-quote {
   @include __rmd_selector {
     blockquote {
-      margin:
-        __rmd-margin("blockquote", "top")
-        __rmd-indent("blockquote", "right")
-        __rmd-margin("blockquote", "bottom")
+      margin: __rmd-margin("blockquote", "top")
+        __rmd-indent("blockquote", "right") __rmd-margin("blockquote", "bottom")
         __rmd-indent("blockquote", "left");
       padding: 0;
     }

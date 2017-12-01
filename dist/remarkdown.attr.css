@@ -8,7 +8,10 @@
   font-family: monospace, monospace;
 }
 
-[data-remarkdown] pre, [data-remarkdown] code, [data-remarkdown] kbd, [data-remarkdown] samp {
+[data-remarkdown] pre,
+[data-remarkdown] code,
+[data-remarkdown] kbd,
+[data-remarkdown] samp {
   font-family: inherit;
 }
 
@@ -26,7 +29,10 @@
   margin-bottom: 1.5em;
 }
 
-[data-remarkdown] h3, [data-remarkdown] h4, [data-remarkdown] h5, [data-remarkdown] h6 {
+[data-remarkdown] h3,
+[data-remarkdown] h4,
+[data-remarkdown] h5,
+[data-remarkdown] h6 {
   font-size: inherit;
   font-weight: inherit;
   margin-top: 1.5em;
@@ -57,18 +63,21 @@
   content: "###### ";
 }
 
-[data-remarkdown~="h1-underline"] h1, [data-remarkdown~="h2-underline"] h2 {
+[data-remarkdown~="h1-underline"] h1,
+[data-remarkdown~="h2-underline"] h2 {
   display: table;
   overflow: hidden;
   position: relative;
   padding-bottom: 1.5em;
 }
 
-[data-remarkdown~="h1-underline"] h1::before, [data-remarkdown~="h2-underline"] h2::before {
+[data-remarkdown~="h1-underline"] h1::before,
+[data-remarkdown~="h2-underline"] h2::before {
   content: none;
 }
 
-[data-remarkdown~="h1-underline"] h1::after, [data-remarkdown~="h2-underline"] h2::after {
+[data-remarkdown~="h1-underline"] h1::after,
+[data-remarkdown~="h2-underline"] h2::after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -235,24 +244,29 @@ hr {
   word-break: break-all;
 }
 
-[data-remarkdown] em, [data-remarkdown] strong {
+[data-remarkdown] em,
+[data-remarkdown] strong {
   font-style: normal;
   font-weight: normal;
 }
 
-[data-remarkdown] em::before, [data-remarkdown] em::after {
+[data-remarkdown] em::before,
+[data-remarkdown] em::after {
   content: "*";
 }
 
-[data-remarkdown~="em-underscore"] em::before, [data-remarkdown~="em-underscore"] em::after {
+[data-remarkdown~="em-underscore"] em::before,
+[data-remarkdown~="em-underscore"] em::after {
   content: "_";
 }
 
-[data-remarkdown] strong::before, [data-remarkdown] strong::after {
+[data-remarkdown] strong::before,
+[data-remarkdown] strong::after {
   content: "**";
 }
 
-[data-remarkdown~="strong-underscore"] strong::before, [data-remarkdown~="strong-underscore"] strong::after {
+[data-remarkdown~="strong-underscore"] strong::before,
+[data-remarkdown~="strong-underscore"] strong::after {
   content: "__";
 }
 
@@ -278,8 +292,10 @@ hr {
 }
 
 [data-remarkdown~="pre-tick"] pre::before,
-[data-remarkdown~="pre-tick"] pre::after, [data-remarkdown~="pre-tilde"] pre::before,
-[data-remarkdown~="pre-tilde"] pre::after, [data-remarkdown~="pre-tilde-full"] pre::before,
+[data-remarkdown~="pre-tick"] pre::after,
+[data-remarkdown~="pre-tilde"] pre::before,
+[data-remarkdown~="pre-tilde"] pre::after,
+[data-remarkdown~="pre-tilde-full"] pre::before,
 [data-remarkdown~="pre-tilde-full"] pre::after {
   display: block;
   width: 100%;
@@ -291,7 +307,7 @@ hr {
 [data-remarkdown~="pre-tick"] pre::after {
   content: "```";
   position: relative;
-  top: .25em;
+  top: 0.25em;
 }
 
 [data-remarkdown~="pre-tilde"] pre::before,
@@ -362,7 +378,9 @@ hr {
   padding-bottom: 1.5em;
 }
 
-[data-remarkdown~="table-marker"] tr:first-child > th:not([scope="row"])::after {
+[data-remarkdown~="table-marker"]
+  tr:first-child
+  > th:not([scope="row"])::after {
   content: "--------------------------------------------------------------------------------------------------------------";
   position: absolute;
   bottom: 0;
@@ -373,7 +391,10 @@ hr {
   height: 1.5em;
 }
 
-[data-remarkdown~="table-marker"] tr:first-child > * + th:not([scope="row"])::after {
+[data-remarkdown~="table-marker"]
+  tr:first-child
+  > *
+  + th:not([scope="row"])::after {
   left: 3ch;
 }
 

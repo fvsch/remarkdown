@@ -1,7 +1,7 @@
 // Attribute-based build of ReMarkdown using default styles
 
 $rmd-selector-base: "[data-remarkdown]";
-$rmd-selector-option: "[data-remarkdown~=\"%o\"]";
+$rmd-selector-option: '[data-remarkdown~="%o"]';
 
 @import "../src/imports";
 @include rmd-header("ReMarkdown 3.0.0-beta1 [attr] (MIT) https://fvsch.github.io/remarkdown/");
