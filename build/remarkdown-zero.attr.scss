@@ -6,5 +6,5 @@ $rmd-defaults: ();
 $rmd-margins: ();
 
 @import "../src/imports";
-@include rmd-header("ReMarkdown-zero 3.0.0-beta1 [attr] (MIT) https://fvsch.github.io/remarkdown/");
+@include rmd-header("ReMarkdown-zero 3.0.0 [attr] (MIT) https://fvsch.github.io/remarkdown/");
 @include rmd-output();
