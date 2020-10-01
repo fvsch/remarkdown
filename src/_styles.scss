@@ -107,6 +107,46 @@
 // Lists
 // Options: ul-star, ul-plus, ul-hyphen
 
+@mixin __rmd-ul-li-before($sign) {
+  & {
+    list-style: none;
+  }
+  & > li::before {
+    float: left;
+    width: 1ch;
+    margin-left: __rmd-indent("ul", "left") * -1;
+    margin-right: 1ch;
+    content: $sign;
+  }
+}
+
+@mixin __rmd-ol-li-before($type) {
+  ol {
+    list-style: none;
+    @if $type != "zero" {
+      counter-reset: rmd-ol;
+    }
+  }
+  @if $type != "zero" {
+    ol > li {
+      counter-increment: rmd-ol;
+    }
+  }
+  ol > li::before {
+    float: left;
+    margin-left: __rmd-indent("ol", "left") * -1;
+    margin-right: 1ch;
+    min-width: 2ch;
+    @if $type == "zero" {
+      content: "0.";
+    } @else if $type == "alpha" {
+      content: counter(rmd-ol, lower-alpha) ".";
+    } @else {
+      content: counter(rmd-ol) ".";
+    }
+  }
+}
+
 @mixin rmd-output-ul {
   @include __rmd_selector {
     ul {
@@ -119,31 +159,19 @@
       margin-bottom: 0;
     }
   }
-  @mixin rmd-ul-li-before($sign) {
-    & {
-      list-style: none;
-    }
-    & > li::before {
-      float: left;
-      width: 1ch;
-      margin-left: __rmd-indent("ul", "left") * -1;
-      margin-right: 1ch;
-      content: $sign;
-    }
-  }
   @include __rmd_selector("ul-plus") {
     ul {
-      @include rmd-ul-li-before("+");
+      @include __rmd-ul-li-before("+");
     }
   }
   @include __rmd_selector("ul-star") {
     ul {
-      @include rmd-ul-li-before("*");
+      @include __rmd-ul-li-before("*");
     }
   }
   @include __rmd_selector("ul-hyphen") {
     ul {
-      @include rmd-ul-li-before("-");
+      @include __rmd-ul-li-before("-");
     }
   }
 }
@@ -160,40 +188,14 @@
       margin-bottom: 0;
     }
   }
-  @mixin rmd-ol-li-before($type) {
-    ol {
-      list-style: none;
-      @if $type != "zero" {
-        counter-reset: rmd-ol;
-      }
-    }
-    @if $type != "zero" {
-      ol > li {
-        counter-increment: rmd-ol;
-      }
-    }
-    ol > li::before {
-      float: left;
-      margin-left: __rmd-indent("ol", "left") * -1;
-      margin-right: 1ch;
-      min-width: 2ch;
-      @if $type == "zero" {
-        content: "0.";
-      } @else if $type == "alpha" {
-        content: counter(rmd-ol, lower-alpha) ".";
-      } @else {
-        content: counter(rmd-ol) ".";
-      }
-    }
-  }
   @include __rmd_selector("ol-decimal") {
-    @include rmd-ol-li-before("decimal");
+    @include __rmd-ol-li-before("decimal");
   }
   @include __rmd_selector("ol-zero") {
-    @include rmd-ol-li-before("zero");
+    @include __rmd-ol-li-before("zero");
   }
   @include __rmd_selector("ol-alpha") {
-    @include rmd-ol-li-before("alpha");
+    @include __rmd-ol-li-before("alpha");
   }
 }
 
