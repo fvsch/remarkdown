@@ -1,5 +1,5 @@
 
-# ReMarkdown
+# ReMarkdown - stylesheet
 
 ReMarkdown is a stylesheet that makes HTML look like raw Markdown text.
 Take a look at the [online demo and documentation](https://fvsch.github.io/remarkdown/).
