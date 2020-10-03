@@ -16,6 +16,7 @@ $rmd-h1-underline: "★☆★☆★☆★☆★☆";
 $rmd-h2-underline: "~~~~~~~~~~";
 
 // Enable or disable features
+// prettier-ignore
 $rmd-defaults:
   hn-reset
   hn-hash
@@ -48,12 +49,26 @@ $rmd-defaults:
 
 // Horizontal indents (as number of characters)
 $rmd-indents: (
-  ul: (left: 6, right: 4),
-  ol: (left: 6, right: 4),
-  pre: (left: 2, right: 2),
-  blockquote: (left: 2, right: 2)
+  ul: (
+    left: 6,
+    right: 4,
+  ),
+  ol: (
+    left: 6,
+    right: 4,
+  ),
+  pre: (
+    left: 2,
+    right: 2,
+  ),
+  blockquote: (
+    left: 2,
+    right: 2,
+  ),
 );
 
 @import "src/_imports.scss";
-@include rmd-header("ReMarkdown 3.0.0 (MIT) Custom Build https://fvsch.github.io/remarkdown/");
+@include rmd-header(
+  "ReMarkdown %v (MIT) Custom Build https://fvsch.github.io/remarkdown/"
+);
 @include rmd-output();

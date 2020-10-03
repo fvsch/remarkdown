@@ -4,5 +4,5 @@ $rmd-selector-base: ".remarkdown";
 $rmd-selector-option: ".remarkdown.%o";
 
 @import "_imports.scss";
-@include rmd-header("ReMarkdown 3.0.0 (MIT) https://fvsch.github.io/remarkdown/");
+@include rmd-header("ReMarkdown %v (MIT) https://fvsch.github.io/remarkdown/");
 @include rmd-output();

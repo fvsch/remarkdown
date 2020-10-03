@@ -1,8 +1,5 @@
-/*! ReMarkdown-zero 3.0.0 (MIT) https://fvsch.github.io/remarkdown/ */
-/*
-  Included: all styles
-  Defaults: none
-*/
+/*! ReMarkdown-zero 3.1.0 (MIT) https://fvsch.github.io/remarkdown/ */
+/* includes: all styles; defaults: none; */
 .remarkdown {
   line-height: 1.5;
   font-family: monospace, monospace;

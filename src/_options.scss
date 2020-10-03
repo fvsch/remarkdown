@@ -69,28 +69,71 @@ $rmd-line-ratio: 1.5 !default;
 // Vertical margins for titles and more (as number of lines)
 // By default we use one line for everything, but you can specify more here:
 $rmd-margins: (
-    h1: (top: 1.5, bottom: 1),
-    h2: (top: 1.5, bottom: 1),
-    hn: (top: 1, bottom: 1),
-    hr: (top: 1, bottom: 1),
-    p: (top: 1, bottom: 1),
-    pre: (top: 1, bottom: 1),
-    ol: (top: 1, bottom: 1),
-    ul: (top: 1, bottom: 1),
-    figure: (top: 1, bottom: 1),
-    blockquote: (top: 1, bottom: 1),
-    table: (top: 1, bottom: 1)
-  )
-  !default;
+  h1: (
+    top: 1.5,
+    bottom: 1,
+  ),
+  h2: (
+    top: 1.5,
+    bottom: 1,
+  ),
+  hn: (
+    top: 1,
+    bottom: 1,
+  ),
+  hr: (
+    top: 1,
+    bottom: 1,
+  ),
+  p: (
+    top: 1,
+    bottom: 1,
+  ),
+  pre: (
+    top: 1,
+    bottom: 1,
+  ),
+  ol: (
+    top: 1,
+    bottom: 1,
+  ),
+  ul: (
+    top: 1,
+    bottom: 1,
+  ),
+  figure: (
+    top: 1,
+    bottom: 1,
+  ),
+  blockquote: (
+    top: 1,
+    bottom: 1,
+  ),
+  table: (
+    top: 1,
+    bottom: 1,
+  ),
+) !default;
 
 // Horizontal indents (as number of characters) for a few elements
 $rmd-indents: (
-    ul: (left: 4, right: 0),
-    ol: (left: 4, right: 0),
-    pre: (left: 4, right: 0),
-    blockquote: (left: 2, right: 2)
-  )
-  !default;
+  ul: (
+    left: 4,
+    right: 0,
+  ),
+  ol: (
+    left: 4,
+    right: 0,
+  ),
+  pre: (
+    left: 4,
+    right: 0,
+  ),
+  blockquote: (
+    left: 2,
+    right: 2,
+  ),
+) !default;
 
 // By default we use the `em` unit for vertical spacing.
 // This low-level option allows using `rem` instead.

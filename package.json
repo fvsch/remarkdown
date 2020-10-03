@@ -1,6 +1,6 @@
 {
   "name": "remarkdown.css",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "license": "MIT",
   "author": "Florens Verschelde",
   "repository": "https://github.com/fvsch/remarkdown",
@@ -8,12 +8,7 @@
     "css",
     "markdown"
   ],
-  "files": [
-    "/README.md",
-    "/LICENSE",
-    "/src/*.scss",
-    "/dist/*.css"
-  ],
+
   "scripts": {
     "build": "node src/build.js",
     "start": "serve docs"
@@ -22,5 +17,25 @@
     "prettier": "^2.1.2",
     "sass": "^1.26.11",
     "serve": "^11.3.2"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false,
+    "overrides": [
+      {
+        "files": "*.scss",
+        "options": {
+          "singleQuote": false
+        }
+      },
+      {
+        "files": "*.css",
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
   }
 }

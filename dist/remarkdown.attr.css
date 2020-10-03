@@ -1,8 +1,5 @@
-/*! ReMarkdown 3.0.0 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
-/*
-  Included: all styles
-  Defaults: hn-reset hn-hash ul-hyphen ol-decimal quote-gt em-star strong-star a-bracket code-tick pre-indent hr-star
-*/
+/*! ReMarkdown 3.1.0 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
+/* includes: all styles; defaults: hn-reset hn-hash ul-hyphen ol-decimal quote-gt em-star strong-star a-bracket code-tick pre-indent hr-star; */
 [data-remarkdown] {
   line-height: 1.5;
   font-family: monospace, monospace;

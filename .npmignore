@@ -1,0 +1,6 @@
+.gitattributes
+.gitignore
+.npmignore
+/dist/remarkdown-custom.css
+/docs
+*.tgz
