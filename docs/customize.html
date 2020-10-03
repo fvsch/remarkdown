@@ -106,7 +106,7 @@
 </p>
 
 <p>
-  You could also use a font that is not monospace. A variable-width font whose design is not too tight (think: NOT HELVETICA) should give interesting results.
+  You could also use a font that is not monospace. A variable-width font whose design is not too tight could give interesting results.
 </p>
 
 <h3>
@@ -129,16 +129,20 @@
 </h3>
 
 <p>
-  Most ReMarkdown selectors have a specificity of <code>0011</code> or in some cases <code>0012</code>. If your own selectors have similar weight, make sure you declare your own styles <em>after</em> <code>remarkdown.css</code>. Alternatively you can make use of id selectors or of the double-class trick:
+  Most ReMarkdown selectors have a specificity of <code>0,0,1,1</code> or in some cases <code>0,0,1,2</code>. If your own selectors have similar weight, make sure you declare your own styles <em>after</em> <code>remarkdown.css</code>. Alternatively you can make use of id selectors or of the double-class trick:
 </p>
 
 <pre><code>.remarkdown h1 {
-  /* Selector has a specificity of 0011 */
+  /* Selector has a specificity of 0,0,1,1 */
 }
 .myTitle.myTitle {
-  /* Selector matches and has a specificity of 0020 */
+  /* Selector matches and has a specificity of 0,0,2,0 */
 }
 </code></pre>
+
+<p>
+  Learn more <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">about selector specificity</a>.
+</p>
 
 <h2 id="custom">
   Build a custom stylesheet with Sass
@@ -158,20 +162,18 @@
 </ol>
 
 <p>
-  Once you’ve downloaded and extracted the ReMarkdown source, copy one of the Sass stylesheets in the <code>build</code> directory as <code>build/remarkdown-custom.scss</code>. Change or add <code>$rmd-*</code> variables to change your build’s configuration. See <a href="https://github.com/fvsch/remarkdown/blob/main/src/_options.scss"><code>src/_options.scss</code></a> for a detailed list of options.
+  Once you’ve downloaded and extracted the ReMarkdown source, modify the <code>src/remardown-custom.scss</code> stylesheets, changing or adding <code>$rmd-*</code> variables to change your build’s configuration. See <a href="https://github.com/fvsch/remarkdown/blob/main/src/_options.scss"><code>src/_options.scss</code></a> for a detailed list of options.
 </p>
 
 <p>
-  To compile, use a terminal (Terminal on macOS, cmd.exe or Git Bash on Windows, etc.) and navigate to where the <code>remarkdown.scss</code> file is, and run these commands:
+  To compile, use a terminal (Terminal on macOS, cmd.exe or Git Bash on Windows, etc.), navigate to the root of the extracted folder (probably called <code>remarkdown-main</code>), and run these commands:
 </p>
 
-<pre><code># install dependencies
-npm install
-# build the dist/remarkdown-custom.css file
-npm start</code></pre>
+<pre><code>npm install
+npm run build</code></pre>
 
 <p>
-  Note: if you already have your own Node-and-Sass build chain in place, you can install ReMarkdown with <code>npm install remarkdown.css</code> and import <code>node_modules/remarkdown.css/src/imports</code>.
+  Note: if you already have your own Node-and-Sass build chain in place, you can install ReMarkdown with <code>npm install remarkdown.css</code> and import the main mixins with <code>@import "node_modules/remarkdown.css/src/_imports.scss";</code>.
 </p>
 
 <h3>

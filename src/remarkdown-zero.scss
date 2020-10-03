@@ -5,6 +5,6 @@ $rmd-selector-option: ".remarkdown.%o";
 $rmd-defaults: ();
 $rmd-margins: ();
 
-@import "../src/imports";
+@import "_imports.scss";
 @include rmd-header("ReMarkdown-zero 3.0.0 (MIT) https://fvsch.github.io/remarkdown/");
 @include rmd-output();

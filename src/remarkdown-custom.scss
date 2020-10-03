@@ -1,0 +1,59 @@
+// --------------------------
+// Custom build of ReMarkdown
+// --------------------------
+// See _options.scss for the list of available Sass variables that can be used
+// to customize your ReMarkdown stylesheet. Some examples follow.
+
+// BEM-style selectors
+$rmd-selector-base: ".remarkdown";
+$rmd-selector-option: ".remarkdown--%o";
+
+// Don't output styles for disabled features
+$rmd-output-all-styles: false;
+
+// Fancy underlines
+$rmd-h1-underline: "★☆★☆★☆★☆★☆";
+$rmd-h2-underline: "~~~~~~~~~~";
+
+// Enable or disable features
+$rmd-defaults:
+  hn-reset
+  hn-hash
+  h1-underline
+  h2-underline
+  // ul-hyphen
+  // ul-star
+  ul-plus
+  // ol-decimal
+  // ol-zero
+  ol-alpha
+  // quote-gt
+  // em-star
+  em-underscore
+  // strong-star
+  strong-underscore
+  // a-bracket
+  // a-showurl
+  // code-tick
+  // pre-indent
+  // pre-tick
+  pre-tilde
+  pre-tilde-full
+  // hr-star
+  hr-center
+  hr-hyphen
+  // del-gfm
+  table-marker
+;
+
+// Horizontal indents (as number of characters)
+$rmd-indents: (
+  ul: (left: 6, right: 4),
+  ol: (left: 6, right: 4),
+  pre: (left: 2, right: 2),
+  blockquote: (left: 2, right: 2)
+);
+
+@import "src/_imports.scss";
+@include rmd-header("ReMarkdown 3.0.0 (MIT) Custom Build https://fvsch.github.io/remarkdown/");
+@include rmd-output();

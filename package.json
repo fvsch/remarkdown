@@ -15,24 +15,12 @@
     "/dist/*.css"
   ],
   "scripts": {
-    "start": "node build"
+    "build": "node src/build.js",
+    "start": "serve docs"
   },
   "devDependencies": {
-    "glob": "^7.1.2",
-    "node-sass": "^4.0",
-    "prettier": "^1.8.2"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "overrides": [
-      {
-        "files": "*.scss",
-        "options": {
-          "semi": true,
-          "singleQuote": false
-        }
-      }
-    ]
+    "prettier": "^2.1.2",
+    "sass": "^1.26.11",
+    "serve": "^11.3.2"
   }
 }
