@@ -340,12 +340,14 @@
 // Options: hr-center, hr-star, hr-hyphen
 
 @mixin rmd-output-hr {
-  hr {
-    height: $__rmd-line;
-    line-height: $__rmd-line;
-    margin: __rmd-margin("hr", "top") 0 __rmd-margin("hr", "bottom");
-    border: none;
-    color: inherit;
+  @include __rmd_selector {
+    hr {
+      height: $__rmd-line;
+      line-height: $__rmd-line;
+      margin: __rmd-margin("hr", "top") 0 __rmd-margin("hr", "bottom");
+      border: none;
+      color: inherit;
+    }
   }
   @include __rmd_selector("hr-center") {
     hr {

@@ -91,7 +91,7 @@
   margin: 1.5em 0 1.5em;
 }
 
-hr {
+[data-remarkdown] hr {
   height: 1.5em;
   line-height: 1.5em;
   margin: 1.5em 0 1.5em;
