@@ -8,7 +8,6 @@
     "css",
     "markdown"
   ],
-
   "scripts": {
     "build": "node src/build.js",
     "start": "serve docs"
