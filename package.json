@@ -11,11 +11,11 @@
 	"scripts": {
 		"build": "node src/build.js",
 		"format": "prettier --write src",
-		"start": "serve docs"
+		"start": "servitsy docs"
 	},
 	"devDependencies": {
 		"prettier": "^3.8.1",
 		"sass": "^1.26.11",
-		"serve": "^11.3.2"
+		"servitsy": "^0.5.0"
 	}
 }
