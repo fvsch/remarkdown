@@ -1,3 +1,7 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:string";
+
 // ------------------------
 // Utilities for ReMarkdown
 // ------------------------
@@ -15,7 +19,7 @@ $__rmd-line: $rmd-line-ratio * 1em;
 	@if not $rmd-output-all-styles {
 		$included: "defaults only";
 	}
-	@if not $list or $list == "" or length($list) == 0 {
+	@if not $list or $list == "" or list.length($list) == 0 {
 		$list: "none";
 	}
 	@if $title {
@@ -30,7 +34,7 @@ $__rmd-line: $rmd-line-ratio * 1em;
 // $rmd-output-all-styles is false and the option is not in
 // $rmd-defaults, which drops the entire block from the output.
 @mixin __rmd_selector($option: null) {
-	@if $option == null or index($rmd-defaults, $option) {
+	@if $option == null or list.index($rmd-defaults, $option) {
 		#{__rmd_selector_syntax()} {
 			@content;
 		}
@@ -54,9 +58,9 @@ $__rmd-line: $rmd-line-ratio * 1em;
 // Get a margin value in em from $rmd-margins.
 // If not set, returns a value of 1 line.
 @function __rmd-margin($element, $direction: "top") {
-	$config: map-get($rmd-margins, $element);
+	$config: map.get($rmd-margins, $element);
 	@if $config != null {
-		$num: map-get($config, $direction);
+		$num: map.get($config, $direction);
 		@if $num != null {
 			@return $__rmd-line * $num;
 		}
@@ -67,9 +71,9 @@ $__rmd-line: $rmd-line-ratio * 1em;
 // Get a horizontal margin (indent) value for an element.
 // If not set, returns a value of 0.
 @function __rmd-indent($element, $direction: "left") {
-	$config: map-get($rmd-indents, $element);
+	$config: map.get($rmd-indents, $element);
 	@if $config != null {
-		$num: map-get($config, $direction);
+		$num: map.get($config, $direction);
 		@if $num != null {
 			@return 1ch * $num;
 		}
@@ -93,10 +97,10 @@ $__rmd-line: $rmd-line-ratio * 1em;
 /// @param {String} $replace ('') - New value
 /// @return {String} - Updated string
 @function __rmd_replace($string, $search, $replace: "") {
-	$index: str-index($string, $search);
+	$index: string.index($string, $search);
 	@if $index {
-		@return str-slice($string, 1, $index - 1) + $replace +
-			__rmd_replace(str-slice($string, $index + str-length($search)), $search, $replace);
+		@return string.slice($string, 1, $index - 1) + $replace +
+			__rmd_replace(string.slice($string, $index + string.length($search)), $search, $replace);
 	}
 	@return $string;
 }
