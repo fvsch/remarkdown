@@ -5,458 +5,457 @@
 // Base
 
 @mixin rmd-output-base {
-  @include __rmd_selector {
-    line-height: $rmd-line-ratio;
-    @if $rmd-set-font-styles {
-      font-family: $rmd-primary-font;
-      pre,
-      code,
-      kbd,
-      samp {
-        font-family: $rmd-code-font;
-      }
-    }
-  }
+	@include __rmd_selector {
+		line-height: $rmd-line-ratio;
+		@if $rmd-set-font-styles {
+			font-family: $rmd-primary-font;
+			pre,
+			code,
+			kbd,
+			samp {
+				font-family: $rmd-code-font;
+			}
+		}
+	}
 }
 
 // Headings
 // Options: hn-hash, h1-underline, h2-undelrine
 
 @mixin rmd-output-hn {
-  @include __rmd_selector("hn-reset") {
-    h1 {
-      font-size: inherit;
-      font-weight: inherit;
-      margin-top: __rmd-margin("h1", "top");
-      margin-bottom: __rmd-margin("h1", "bottom");
-    }
-    h2 {
-      font-size: inherit;
-      font-weight: inherit;
-      margin-top: __rmd-margin("h2", "top");
-      margin-bottom: __rmd-margin("h2", "bottom");
-    }
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-size: inherit;
-      font-weight: inherit;
-      margin-top: __rmd-margin("hn", "top");
-      margin-bottom: __rmd-margin("hn", "bottom");
-    }
-  }
-  @include __rmd_selector("hn-hash") {
-    @for $i from 1 through 6 {
-      h#{$i}::before {
-        content: __rmd_repeat($rmd-heading-sign, $i) + " ";
-      }
-    }
-  }
-  %hn-underline-common {
-    display: table;
-    overflow: hidden;
-    position: relative;
-    padding-bottom: $__rmd-line;
-    &::before {
-      content: none;
-    }
-    &::after {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: $__rmd-line;
-      width: 100%;
-      overflow: hidden;
-      word-break: break-all;
-      cursor: default;
-    }
-  }
-  @include __rmd_selector("h1-underline") {
-    h1 {
-      @extend %hn-underline-common;
-      &::after {
-        content: __rmd_repeat($rmd-h1-underline, 12);
-      }
-    }
-  }
-  @include __rmd_selector("h2-underline") {
-    h2 {
-      @extend %hn-underline-common;
-      &::after {
-        content: __rmd_repeat($rmd-h2-underline, 12);
-      }
-    }
-  }
+	@include __rmd_selector("hn-reset") {
+		h1 {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-top: __rmd-margin("h1", "top");
+			margin-bottom: __rmd-margin("h1", "bottom");
+		}
+		h2 {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-top: __rmd-margin("h2", "top");
+			margin-bottom: __rmd-margin("h2", "bottom");
+		}
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-top: __rmd-margin("hn", "top");
+			margin-bottom: __rmd-margin("hn", "bottom");
+		}
+	}
+	@include __rmd_selector("hn-hash") {
+		@for $i from 1 through 6 {
+			h#{$i}::before {
+				content: __rmd_repeat($rmd-heading-sign, $i) + " ";
+			}
+		}
+	}
+	%hn-underline-common {
+		display: table;
+		overflow: hidden;
+		position: relative;
+		padding-bottom: $__rmd-line;
+		&::before {
+			content: none;
+		}
+		&::after {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: $__rmd-line;
+			width: 100%;
+			overflow: hidden;
+			word-break: break-all;
+			cursor: default;
+		}
+	}
+	@include __rmd_selector("h1-underline") {
+		h1 {
+			@extend %hn-underline-common;
+			&::after {
+				content: __rmd_repeat($rmd-h1-underline, 12);
+			}
+		}
+	}
+	@include __rmd_selector("h2-underline") {
+		h2 {
+			@extend %hn-underline-common;
+			&::after {
+				content: __rmd_repeat($rmd-h2-underline, 12);
+			}
+		}
+	}
 }
 
 // Paragraphs
 
 @mixin rmd-output-para {
-  @include __rmd_selector {
-    p {
-      margin-top: __rmd-margin("p", "top");
-      margin-bottom: __rmd-margin("p", "bottom");
-    }
-    figure {
-      margin: __rmd-margin("figure", "top") 0 __rmd-margin("figure", "bottom");
-    }
-  }
+	@include __rmd_selector {
+		p {
+			margin-top: __rmd-margin("p", "top");
+			margin-bottom: __rmd-margin("p", "bottom");
+		}
+		figure {
+			margin: __rmd-margin("figure", "top") 0 __rmd-margin("figure", "bottom");
+		}
+	}
 }
 
 // Lists
 // Options: ul-star, ul-plus, ul-hyphen
 
 @mixin __rmd-ul-li-before($sign) {
-  & {
-    list-style: none;
-  }
-  & > li::before {
-    float: left;
-    width: 1ch;
-    margin-left: __rmd-indent("ul", "left") * -1;
-    margin-right: 1ch;
-    content: $sign;
-  }
+	& {
+		list-style: none;
+	}
+	& > li::before {
+		float: left;
+		width: 1ch;
+		margin-left: __rmd-indent("ul", "left") * -1;
+		margin-right: 1ch;
+		content: $sign;
+	}
 }
 
 @mixin __rmd-ol-li-before($type) {
-  ol {
-    list-style: none;
-    @if $type != "zero" {
-      counter-reset: rmd-ol;
-    }
-  }
-  @if $type != "zero" {
-    ol > li {
-      counter-increment: rmd-ol;
-    }
-  }
-  ol > li::before {
-    float: left;
-    margin-left: __rmd-indent("ol", "left") * -1;
-    margin-right: 1ch;
-    min-width: 2ch;
-    @if $type == "zero" {
-      content: "0.";
-    } @else if $type == "alpha" {
-      content: counter(rmd-ol, lower-alpha) ".";
-    } @else {
-      content: counter(rmd-ol) ".";
-    }
-  }
+	ol {
+		list-style: none;
+		@if $type != "zero" {
+			counter-reset: rmd-ol;
+		}
+	}
+	@if $type != "zero" {
+		ol > li {
+			counter-increment: rmd-ol;
+		}
+	}
+	ol > li::before {
+		float: left;
+		margin-left: __rmd-indent("ol", "left") * -1;
+		margin-right: 1ch;
+		min-width: 2ch;
+		@if $type == "zero" {
+			content: "0.";
+		} @else if $type == "alpha" {
+			content: counter(rmd-ol, lower-alpha) ".";
+		} @else {
+			content: counter(rmd-ol) ".";
+		}
+	}
 }
 
 @mixin rmd-output-ul {
-  @include __rmd_selector {
-    ul {
-      margin: __rmd-margin("ul", "top") __rmd-indent("ul", "right")
-        __rmd-margin("ul", "bottom") __rmd-indent("ul", "left");
-      padding: 0;
-    }
-    li ul {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-  @include __rmd_selector("ul-plus") {
-    ul {
-      @include __rmd-ul-li-before("+");
-    }
-  }
-  @include __rmd_selector("ul-star") {
-    ul {
-      @include __rmd-ul-li-before("*");
-    }
-  }
-  @include __rmd_selector("ul-hyphen") {
-    ul {
-      @include __rmd-ul-li-before("-");
-    }
-  }
+	@include __rmd_selector {
+		ul {
+			margin: __rmd-margin("ul", "top") __rmd-indent("ul", "right") __rmd-margin("ul", "bottom")
+				__rmd-indent("ul", "left");
+			padding: 0;
+		}
+		li ul {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+	@include __rmd_selector("ul-plus") {
+		ul {
+			@include __rmd-ul-li-before("+");
+		}
+	}
+	@include __rmd_selector("ul-star") {
+		ul {
+			@include __rmd-ul-li-before("*");
+		}
+	}
+	@include __rmd_selector("ul-hyphen") {
+		ul {
+			@include __rmd-ul-li-before("-");
+		}
+	}
 }
 
 @mixin rmd-output-ol {
-  @include __rmd_selector() {
-    ol {
-      margin: __rmd-margin("ol", "top") __rmd-indent("ol", "right")
-        __rmd-margin("ol", "bottom") __rmd-indent("ol", "left");
-      padding: 0;
-    }
-    li ol {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-  }
-  @include __rmd_selector("ol-decimal") {
-    @include __rmd-ol-li-before("decimal");
-  }
-  @include __rmd_selector("ol-zero") {
-    @include __rmd-ol-li-before("zero");
-  }
-  @include __rmd_selector("ol-alpha") {
-    @include __rmd-ol-li-before("alpha");
-  }
+	@include __rmd_selector() {
+		ol {
+			margin: __rmd-margin("ol", "top") __rmd-indent("ol", "right") __rmd-margin("ol", "bottom")
+				__rmd-indent("ol", "left");
+			padding: 0;
+		}
+		li ol {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+	@include __rmd_selector("ol-decimal") {
+		@include __rmd-ol-li-before("decimal");
+	}
+	@include __rmd_selector("ol-zero") {
+		@include __rmd-ol-li-before("zero");
+	}
+	@include __rmd_selector("ol-alpha") {
+		@include __rmd-ol-li-before("alpha");
+	}
 }
 
 // Links
 // Options: a-bracket, a-showurl
 
 @mixin rmd-output-a {
-  @include __rmd_selector("a-bracket") {
-    a {
-      &::before {
-        content: "[";
-      }
-      &::after {
-        content: "]";
-      }
-    }
-  }
-  @include __rmd_selector("a-showurl") {
-    a[href] {
-      &::before {
-        content: "[";
-      }
-      &::after {
-        content: "](" attr(href) ")";
-        word-break: break-all;
-      }
-    }
-  }
+	@include __rmd_selector("a-bracket") {
+		a {
+			&::before {
+				content: "[";
+			}
+			&::after {
+				content: "]";
+			}
+		}
+	}
+	@include __rmd_selector("a-showurl") {
+		a[href] {
+			&::before {
+				content: "[";
+			}
+			&::after {
+				content: "](" attr(href) ")";
+				word-break: break-all;
+			}
+		}
+	}
 }
 
 // Emphasis
 // Options: em-star, em-underscore, strong-star, strong-underscore
 
 @mixin rmd-output-em {
-  @if $rmd-set-font-styles {
-    @include __rmd_selector {
-      em,
-      strong {
-        font-style: normal;
-        font-weight: normal;
-      }
-    }
-  }
-  @include __rmd_selector("em-star") {
-    em::before,
-    em::after {
-      content: "*";
-    }
-  }
-  @include __rmd_selector("em-underscore") {
-    em::before,
-    em::after {
-      content: "_";
-    }
-  }
+	@if $rmd-set-font-styles {
+		@include __rmd_selector {
+			em,
+			strong {
+				font-style: normal;
+				font-weight: normal;
+			}
+		}
+	}
+	@include __rmd_selector("em-star") {
+		em::before,
+		em::after {
+			content: "*";
+		}
+	}
+	@include __rmd_selector("em-underscore") {
+		em::before,
+		em::after {
+			content: "_";
+		}
+	}
 }
 
 @mixin rmd-output-strong {
-  @include __rmd_selector("strong-star") {
-    strong::before,
-    strong::after {
-      content: "**";
-    }
-  }
-  @include __rmd_selector("strong-underscore") {
-    strong::before,
-    strong::after {
-      content: "__";
-    }
-  }
+	@include __rmd_selector("strong-star") {
+		strong::before,
+		strong::after {
+			content: "**";
+		}
+	}
+	@include __rmd_selector("strong-underscore") {
+		strong::before,
+		strong::after {
+			content: "__";
+		}
+	}
 }
 
 // Code
 // Options: code-tick
 
 @mixin rmd-output-code {
-  @include __rmd_selector("code-tick") {
-    code::before,
-    code::after {
-      content: "`";
-    }
-    pre code::before,
-    pre code::after {
-      display: none;
-    }
-  }
+	@include __rmd_selector("code-tick") {
+		code::before,
+		code::after {
+			content: "`";
+		}
+		pre code::before,
+		pre code::after {
+			display: none;
+		}
+	}
 }
 
 // PRE
 // Options: pre-indent, pre-tick, pre-tilde, pre-tilde-full
 
 @mixin rmd-output-pre {
-  @include __rmd_selector {
-    pre {
-      margin-top: __rmd-margin("pre", "top");
-      margin-bottom: __rmd-margin("pre", "bottom");
-      tab-size: 4;
-    }
-  }
-  @include __rmd_selector("pre-indent") {
-    pre {
-      margin-left: __rmd-indent("pre", "left");
-      margin-right: __rmd-indent("pre", "right");
-    }
-  }
-  %rmd-pre-fence-pseudo {
-    display: block;
-    width: 100%;
-    height: $__rmd-line;
-    cursor: default;
-  }
-  @include __rmd_selector("pre-tick") {
-    pre::before,
-    pre::after {
-      @extend %rmd-pre-fence-pseudo;
-      content: "```";
-      position: relative;
-      top: 0.25em;
-    }
-  }
-  @include __rmd_selector("pre-tilde") {
-    pre::before,
-    pre::after {
-      @extend %rmd-pre-fence-pseudo;
-      content: "~~~";
-      overflow: hidden;
-      word-break: break-all;
-    }
-  }
-  @include __rmd_selector("pre-tilde-full") {
-    pre::before,
-    pre::after {
-      @extend %rmd-pre-fence-pseudo;
-      content: __rmd_repeat("~~~~~~~~~~", 12);
-      overflow: hidden;
-      word-break: break-all;
-    }
-  }
+	@include __rmd_selector {
+		pre {
+			margin-top: __rmd-margin("pre", "top");
+			margin-bottom: __rmd-margin("pre", "bottom");
+			tab-size: 4;
+		}
+	}
+	@include __rmd_selector("pre-indent") {
+		pre {
+			margin-left: __rmd-indent("pre", "left");
+			margin-right: __rmd-indent("pre", "right");
+		}
+	}
+	%rmd-pre-fence-pseudo {
+		display: block;
+		width: 100%;
+		height: $__rmd-line;
+		cursor: default;
+	}
+	@include __rmd_selector("pre-tick") {
+		pre::before,
+		pre::after {
+			@extend %rmd-pre-fence-pseudo;
+			content: "```";
+			position: relative;
+			top: 0.25em;
+		}
+	}
+	@include __rmd_selector("pre-tilde") {
+		pre::before,
+		pre::after {
+			@extend %rmd-pre-fence-pseudo;
+			content: "~~~";
+			overflow: hidden;
+			word-break: break-all;
+		}
+	}
+	@include __rmd_selector("pre-tilde-full") {
+		pre::before,
+		pre::after {
+			@extend %rmd-pre-fence-pseudo;
+			content: __rmd_repeat("~~~~~~~~~~", 12);
+			overflow: hidden;
+			word-break: break-all;
+		}
+	}
 }
 
 // Horizontal rules
 // Options: hr-center, hr-star, hr-hyphen
 
 @mixin rmd-output-hr {
-  @include __rmd_selector {
-    hr {
-      height: $__rmd-line;
-      line-height: $__rmd-line;
-      margin: __rmd-margin("hr", "top") 0 __rmd-margin("hr", "bottom");
-      border: none;
-      color: inherit;
-    }
-  }
-  @include __rmd_selector("hr-center") {
-    hr {
-      text-align: center;
-    }
-  }
-  @include __rmd_selector("hr-star") {
-    hr::before {
-      content: $rmd-hr-stars;
-    }
-  }
-  @include __rmd_selector("hr-hyphen") {
-    hr::before {
-      content: $rmd-hr-hyphens;
-    }
-  }
+	@include __rmd_selector {
+		hr {
+			height: $__rmd-line;
+			line-height: $__rmd-line;
+			margin: __rmd-margin("hr", "top") 0 __rmd-margin("hr", "bottom");
+			border: none;
+			color: inherit;
+		}
+	}
+	@include __rmd_selector("hr-center") {
+		hr {
+			text-align: center;
+		}
+	}
+	@include __rmd_selector("hr-star") {
+		hr::before {
+			content: $rmd-hr-stars;
+		}
+	}
+	@include __rmd_selector("hr-hyphen") {
+		hr::before {
+			content: $rmd-hr-hyphens;
+		}
+	}
 }
 
 // Quotes (<q> not managed since not in Markdown)
 // Option: quote-gt
 
 @mixin rmd-output-quote {
-  @include __rmd_selector {
-    blockquote {
-      margin: __rmd-margin("blockquote", "top")
-        __rmd-indent("blockquote", "right") __rmd-margin("blockquote", "bottom")
-        __rmd-indent("blockquote", "left");
-      padding: 0;
-    }
-  }
-  @include __rmd_selector("quote-gt") {
-    blockquote {
-      position: relative;
-    }
-    blockquote::before {
-      position: absolute;
-      top: 0;
-      left: -2ch;
-      bottom: 0;
-      width: 1ch;
-      overflow: hidden;
-      white-space: pre;
-      content: __rmd_repeat(">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A", 20);
-      cursor: default;
-    }
-  }
+	@include __rmd_selector {
+		blockquote {
+			margin: __rmd-margin("blockquote", "top") __rmd-indent("blockquote", "right")
+				__rmd-margin("blockquote", "bottom") __rmd-indent("blockquote", "left");
+			padding: 0;
+		}
+	}
+	@include __rmd_selector("quote-gt") {
+		blockquote {
+			position: relative;
+		}
+		blockquote::before {
+			position: absolute;
+			top: 0;
+			left: -2ch;
+			bottom: 0;
+			width: 1ch;
+			overflow: hidden;
+			white-space: pre;
+			content: __rmd_repeat(">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A", 20);
+			cursor: default;
+		}
+	}
 }
 
 // DEL
 // Option: del-gfm
 
 @mixin rmd-output-del {
-  @include __rmd_selector("del-gfm") {
-    del {
-      text-decoration: none;
-    }
-    del::before,
-    del::after {
-      content: "~~";
-    }
-  }
+	@include __rmd_selector("del-gfm") {
+		del {
+			text-decoration: none;
+		}
+		del::before,
+		del::after {
+			content: "~~";
+		}
+	}
 }
 
 // Tables
 // Option: table-marker
 
 @mixin rmd-output-table {
-  @include __rmd_selector("table-marker") {
-    table {
-      margin-top: __rmd-margin("table", "top");
-      margin-bottom: __rmd-margin("table", "bottom");
-      border-collapse: collapse;
-    }
-    tr > * {
-      min-width: 3ch;
-      position: relative;
-      padding: 0;
-      text-align: inherit;
-      vertical-align: top;
-      font-weight: normal;
-      border: none;
-    }
-    tr > * + * {
-      padding-left: 3ch;
-    }
-    tr:first-child > th:not([scope="row"]) {
-      padding-bottom: $__rmd-line;
-    }
-    tr:first-child > th:not([scope="row"])::after {
-      content: __rmd_repeat("-----------", 10);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      overflow: hidden;
-      word-break: break-all;
-      height: $__rmd-line;
-    }
-    tr:first-child > * + th:not([scope="row"])::after {
-      left: 3ch;
-    }
-    tr > * + *::before {
-      content: __rmd_repeat("|\A", 10);
-      position: absolute;
-      overflow: hidden;
-      left: 1ch;
-      top: 0;
-      bottom: 0;
-      white-space: pre;
-    }
-  }
+	@include __rmd_selector("table-marker") {
+		table {
+			margin-top: __rmd-margin("table", "top");
+			margin-bottom: __rmd-margin("table", "bottom");
+			border-collapse: collapse;
+		}
+		tr > * {
+			min-width: 3ch;
+			position: relative;
+			padding: 0;
+			text-align: inherit;
+			vertical-align: top;
+			font-weight: normal;
+			border: none;
+		}
+		tr > * + * {
+			padding-left: 3ch;
+		}
+		tr:first-child > th:not([scope="row"]) {
+			padding-bottom: $__rmd-line;
+		}
+		tr:first-child > th:not([scope="row"])::after {
+			content: __rmd_repeat("-----------", 10);
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			overflow: hidden;
+			word-break: break-all;
+			height: $__rmd-line;
+		}
+		tr:first-child > * + th:not([scope="row"])::after {
+			left: 3ch;
+		}
+		tr > * + *::before {
+			content: __rmd_repeat("|\A", 10);
+			position: absolute;
+			overflow: hidden;
+			left: 1ch;
+			top: 0;
+			bottom: 0;
+			white-space: pre;
+		}
+	}
 }
