@@ -1,0 +1,16 @@
+// Paragraphs
+
+@use "../utils/selector";
+@use "../utils/spacing";
+
+@mixin output-para {
+	@include selector.base {
+		p {
+			margin-block: spacing.margins("p");
+		}
+		figure {
+			margin-block: spacing.margins("figure");
+			margin-inline: 0;
+		}
+	}
+}

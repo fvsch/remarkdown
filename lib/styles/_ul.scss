@@ -1,0 +1,40 @@
+// <ul>
+// Options: ul-star, ul-plus, ul-hyphen
+
+@use "../utils/selector";
+@use "../utils/spacing";
+
+@mixin output-ul {
+	@include selector.base {
+		ul {
+			margin-block: spacing.margins("ul");
+			margin-inline: spacing.indents("ul");
+			padding: 0;
+		}
+		li ul {
+			margin-block: 0;
+		}
+	}
+	@include selector.option("ul-plus") {
+		@include -ul-li-before("+");
+	}
+	@include selector.option("ul-star") {
+		@include -ul-li-before("*");
+	}
+	@include selector.option("ul-hyphen") {
+		@include -ul-li-before("-");
+	}
+}
+
+@mixin -ul-li-before($sign) {
+	ul {
+		list-style: none;
+	}
+	ul > li::before {
+		float: inline-start;
+		width: 1ch;
+		margin-inline-start: spacing.indent("ul", "start") * -1;
+		margin-inline-end: 1ch;
+		content: $sign;
+	}
+}

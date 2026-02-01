@@ -1,0 +1,72 @@
+// Headings
+// Options: hn-hash, h1-underline, h2-undelrine
+
+@use "../config";
+@use "../utils/selector";
+@use "../utils/spacing";
+@use "../utils/str";
+
+@mixin output-hn {
+	@include selector.option("hn-reset") {
+		h1 {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-block: spacing.margins("h1");
+		}
+		h2 {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-block: spacing.margins("h2");
+		}
+		:is(h3, h4, h5, h6) {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-block: spacing.margins("hn");
+		}
+	}
+	@include selector.option("hn-hash") {
+		$sign: config.get("heading-sign", string);
+		@for $i from 1 through 6 {
+			h#{$i}::before {
+				content: str.repeat($sign, $i) + " ";
+			}
+		}
+	}
+	%-hn-underline-common {
+		display: table;
+		overflow: hidden;
+		position: relative;
+		padding-bottom: spacing.line();
+		&::before {
+			content: none;
+		}
+		&::after {
+			position: absolute;
+			bottom: 0;
+			inset-inline: 0;
+			height: spacing.line();
+			width: 100%;
+			overflow: hidden;
+			word-break: break-all;
+			cursor: default;
+		}
+	}
+	@include selector.option("h1-underline") {
+		$chars: config.get("h1-underline");
+		h1 {
+			@extend %-hn-underline-common;
+			&::after {
+				content: str.repeat($chars, 12);
+			}
+		}
+	}
+	@include selector.option("h2-underline") {
+		$chars: config.get("h2-underline");
+		h2 {
+			@extend %-hn-underline-common;
+			&::after {
+				content: str.repeat($chars, 12);
+			}
+		}
+	}
+}
