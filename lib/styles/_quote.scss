@@ -1,0 +1,34 @@
+// Quotes (<q> not managed since not in Markdown)
+// Option: quote-gt
+
+@use "../utils/selector";
+@use "../utils/spacing";
+@use "../utils/str";
+
+@mixin output-quote {
+	@include selector.base {
+		blockquote {
+			margin-block: spacing.margins("blockquote");
+			margin-inline: spacing.indents("blockquote");
+			padding: 0;
+		}
+	}
+	@include selector.option("quote-gt") {
+		blockquote {
+			position: relative;
+		}
+		blockquote::before {
+			position: absolute;
+			inset-block: 0;
+			inset-inline-start: -2ch;
+			width: 1ch;
+			overflow: hidden;
+			white-space: pre;
+			content: str.repeat(">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A", 20);
+			cursor: default;
+		}
+		blockquote:dir(rtl)::before {
+			content: str.repeat("<\A<\A<\A<\A<\A<\A<\A<\A<\A<\A", 20);
+		}
+	}
+}

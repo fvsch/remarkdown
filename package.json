@@ -1,15 +1,30 @@
 {
 	"name": "remarkdown.css",
-	"version": "3.1.0",
+	"version": "4.0.0-alpha.1",
 	"license": "MIT",
+	"description": "ReMarkdown styles HTML to look like plain Markdown text.",
+	"homepage": "https://fvsch.github.io/remarkdown/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fvsch/remarkdown.git"
+	},
 	"author": "Florens Verschelde",
-	"repository": "https://github.com/fvsch/remarkdown",
 	"keywords": [
 		"css",
 		"markdown"
 	],
+	"files": [
+		"README.md",
+		"dist",
+		"lib"
+	],
+	"type": "module",
+	"exports": {
+		"sass": "./lib/remarkdown.scss",
+		"style": "./dist/remarkdown.css"
+	},
 	"scripts": {
-		"build": "node src/build.js",
+		"build": "node build.js",
 		"format": "prettier --write src",
 		"start": "servitsy docs"
 	},

@@ -1,0 +1,16 @@
+// <del>
+// Option: del-gfm
+
+@use "../utils/selector";
+
+@mixin output-del {
+	@include selector.option("del-gfm") {
+		del {
+			text-decoration: none;
+		}
+		del::before,
+		del::after {
+			content: "~~";
+		}
+	}
+}

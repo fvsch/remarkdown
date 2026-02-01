@@ -1,0 +1,47 @@
+$-version: "4.0.0-alpha.1";
+
+@use "sass:list";
+@use "sass:meta";
+
+@forward "./config" show configure;
+@forward "./styles/all" show output-base, output-code, output-del, output-em, output-hn, output-hr,
+	output-link, output-ol, output-para, output-pre, output-quote, output-strong, output-table,
+	output-ul;
+
+@use "./config";
+@use "./styles/all" as *;
+@use "./utils/str";
+
+@mixin header($title: "ReMarkdown %v") {
+	$included: "all styles";
+	@if config.get("output-all-styles") != true {
+		$included: "default-styles only";
+	}
+
+	$list: config.get("default-styles", list);
+	@if list.length($list) == 0 {
+		$list: "none";
+	}
+	@if $title {
+		$title: str.replace($title, "%v", $-version);
+		/*! #{$title} */
+		/* includes: #{$included}; defaults: #{$list}; */
+	}
+}
+
+@mixin output {
+	@include output-base;
+	@include output-hn;
+	@include output-para;
+	@include output-hr;
+	@include output-ul;
+	@include output-ol;
+	@include output-a;
+	@include output-em;
+	@include output-strong;
+	@include output-code;
+	@include output-pre;
+	@include output-quote;
+	@include output-del;
+	@include output-table;
+}

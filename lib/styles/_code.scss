@@ -1,0 +1,17 @@
+// <code>
+// Options: code-tick
+
+@use "../utils/selector";
+
+@mixin output-code {
+	@include selector.option("code-tick") {
+		code::before,
+		code::after {
+			content: "`";
+		}
+		pre code::before,
+		pre code::after {
+			content: none;
+		}
+	}
+}

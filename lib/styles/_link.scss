@@ -1,0 +1,24 @@
+// Links
+// Options: a-bracket, a-showurl
+
+@use "../utils/selector";
+
+@mixin output-a {
+	@include selector.option("a-bracket") {
+		a::before {
+			content: "[";
+		}
+		a::after {
+			content: "]";
+		}
+	}
+	@include selector.option("a-showurl") {
+		a[href]::before {
+			content: "[";
+		}
+		a[href]::after {
+			content: "](" attr(href) ")";
+			word-break: break-all;
+		}
+	}
+}

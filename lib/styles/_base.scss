@@ -1,0 +1,17 @@
+// Base
+
+@use "../config";
+@use "../utils/selector";
+
+@mixin output-base {
+	@if config.get("set-font-styles", bool) {
+		@include selector.base {
+			font-family: config.get("primary-font");
+			line-height: config.get("line-height", number);
+
+			:is(pre, code, kbd, samp) {
+				font-family: config.get("code-font", string);
+			}
+		}
+	}
+}

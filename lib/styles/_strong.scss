@@ -1,0 +1,28 @@
+// <strong>
+// Options: strong-star, strong-underscore
+
+@use "../config";
+@use "../utils/selector";
+
+@mixin output-strong {
+	@if config.get("set-font-styles", bool) {
+		@include selector.base {
+			strong {
+				font-style: normal;
+				font-weight: normal;
+			}
+		}
+	}
+	@include selector.option("strong-star") {
+		strong::before,
+		strong::after {
+			content: "**";
+		}
+	}
+	@include selector.option("strong-underscore") {
+		strong::before,
+		strong::after {
+			content: "__";
+		}
+	}
+}

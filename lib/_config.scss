@@ -1,0 +1,39 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+
+@use "./defaults";
+@use "./utils/str";
+
+$-defaults: meta.module-variables("defaults");
+$-state: $-defaults;
+
+@mixin configure($args...) {
+	$options: meta.keywords($args);
+	@each $name, $value in $options {
+		@if map.has-key($-defaults, $name) == false {
+			$list: map.keys($-defaults);
+			@error "Unknown option #{$name}, expected one of: #{$list}.";
+		}
+	}
+	$-state: map.merge($-defaults, $options) !global;
+}
+
+@function get($keys, $type: null) {
+	$value: null;
+	@if meta.type-of($keys) == string {
+		$value: map.get($-state, $keys);
+	} @else {
+		$value: map.get($-state, $keys...);
+	}
+	@if $type != null and $type != meta.type-of($value) {
+		$path: str.join($keys, ".");
+		@error "Config value for #{$path} has type #{meta.type-of($value)}, expected #{$type}";
+	}
+	@return $value;
+}
+
+@function is-default($name) {
+	$list: get("default-styles", list);
+	@return list.index($list, $name) != null;
+}

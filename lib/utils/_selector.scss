@@ -1,0 +1,35 @@
+@use "../config";
+@use "./str";
+
+/// Wrap content in the base selector
+@mixin base {
+	#{-selector-base()} {
+		@content;
+	}
+}
+
+/// Wrap content in a selector including the option name, depending on
+/// the content of $defaults and the value of $output-all-styles.
+/// Outputs nothing if $output-all-styles is false and the option is not
+/// in $defaults.
+@mixin option($name) {
+	$selector: %rmd-void;
+	@if config.is-default($name) {
+		#{-selector-base()} {
+			@content;
+		}
+	} @else if config.get("output-all-styles") == true {
+		#{-selector-option($name)} {
+			@content;
+		}
+	}
+}
+
+@function -selector-base() {
+	@return config.get("selector-base", string);
+}
+
+@function -selector-option($name) {
+	$pattern: config.get("selector-option", string);
+	@return str.replace($pattern, "%o", $name);
+}

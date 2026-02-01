@@ -1,0 +1,50 @@
+// Tables
+// Option: table-marker
+
+@use "../utils/selector";
+@use "../utils/spacing";
+@use "../utils/str";
+
+@mixin output-table {
+	@include selector.option("table-marker") {
+		table {
+			margin-block: spacing.margins("table");
+			border-collapse: collapse;
+		}
+		tr > * {
+			min-width: 3ch;
+			position: relative;
+			padding: 0;
+			text-align: inherit;
+			vertical-align: top;
+			font-weight: normal;
+			border: none;
+		}
+		tr > * + * {
+			padding-inline-start: 3ch;
+		}
+		tr:first-child > th:not([scope="row"]) {
+			padding-bottom: spacing.line();
+		}
+		tr:first-child > th:not([scope="row"])::after {
+			content: str.repeat("-----------", 10);
+			position: absolute;
+			bottom: 0;
+			inset-inline: 0;
+			overflow: hidden;
+			word-break: break-all;
+			height: spacing.line();
+		}
+		tr:first-child > * + th:not([scope="row"])::after {
+			inset-inline-start: 3ch;
+		}
+		tr > * + *::before {
+			content: str.repeat("|\A", 10);
+			position: absolute;
+			inset-block: 0;
+			inset-inline-start: 1ch;
+			overflow: hidden;
+			white-space: pre;
+		}
+	}
+}

@@ -1,0 +1,7 @@
+// Class-based build of ReMarkdown using default styles
+
+@use "../lib/remarkdown" as rmd;
+
+@include rmd.configure($selector-base: ".remarkdown", $selector-option: ".remarkdown.%o");
+@include rmd.header("ReMarkdown %v (MIT) https://fvsch.github.io/remarkdown/");
+@include rmd.output();

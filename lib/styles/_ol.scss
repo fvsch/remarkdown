@@ -1,0 +1,54 @@
+// <ol>
+// Options: ol-decimal, ol-zero, ol-alpha
+
+@use "../utils/selector";
+@use "../utils/spacing";
+
+@mixin output-ol {
+	@include selector.base() {
+		ol {
+			margin-block: spacing.margins("ol");
+			margin-inline: spacing.indents("ol");
+			padding: 0;
+		}
+		li ol {
+			margin-block: 0;
+		}
+	}
+	@include selector.option("ol-decimal") {
+		@include -ol-li-before("decimal");
+	}
+	@include selector.option("ol-zero") {
+		@include -ol-li-before("zero");
+	}
+	@include selector.option("ol-alpha") {
+		@include -ol-li-before("alpha");
+	}
+}
+
+@mixin -ol-li-before($type) {
+	ol {
+		list-style: none;
+		@if $type != "zero" {
+			counter-reset: rmd-ol;
+		}
+	}
+	@if $type != "zero" {
+		ol > li {
+			counter-increment: rmd-ol;
+		}
+	}
+	ol > li::before {
+		float: inline-start;
+		margin-inline-start: spacing.indent("ol", "start") * -1;
+		margin-inline-end: 1ch;
+		min-width: 2ch;
+		@if $type == "zero" {
+			content: "0.";
+		} @else if $type == "alpha" {
+			content: counter(rmd-ol, lower-alpha) ".";
+		} @else {
+			content: counter(rmd-ol) ".";
+		}
+	}
+}
