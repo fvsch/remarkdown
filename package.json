@@ -25,12 +25,12 @@
 	},
 	"scripts": {
 		"build": "node build.js",
-		"format": "prettier --write src",
+		"format": "prettier --write '**/*.scss' '**/*.js'",
 		"start": "servitsy docs"
 	},
 	"devDependencies": {
-		"prettier": "^3.8.1",
-		"sass": "^1.97.3",
-		"servitsy": "^0.5.0"
+		"prettier": "^3.9.6",
+		"sass": "^1.102.0",
+		"servitsy": "^0.6.0"
 	}
 }
