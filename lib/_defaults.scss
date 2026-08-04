@@ -7,36 +7,36 @@ $selector-option: ".remarkdown.%o";
 // Separate values with whitespace. Remove or comment out options you
 // don't want. Note that all option names are singular:
 // e.g. "hr-hyphen" even if we use several hyphens to display a <hr>.
-// prettier-ignore
-$default-styles:
-    hn-reset
-    hn-hash
-    // h1-underline
-    // h2-underline
-    ul-hyphen
-    // ul-star
-    // ul-plus
-    ol-decimal
-    // ol-zero
-    // ol-alpha
-    quote-gt
-    em-star
-    // em-underscore
-    strong-star
-    // strong-underscore
-    a-bracket
-    // a-showurl
-    code-tick
-    pre-indent
-    // pre-tick
-    // pre-tilde
-    // pre-tilde-full
-    hr-star
-    // hr-center
-    // hr-hyphen
-    // del-gfm
-    // table-marker
-;
+// oxfmt-ignore
+$default-styles: (
+	hn-reset
+	hn-hash
+	// h1-underline
+	// h2-underline
+	ul-hyphen
+	// ul-star
+	// ul-plus
+	ol-decimal
+	// ol-zero
+	// ol-alpha
+	quote-gt
+	em-star
+	// em-underscore
+	strong-star
+	// strong-underscore
+	a-bracket
+	// a-showurl
+	code-tick
+	pre-indent
+	// pre-tick
+	// pre-tilde
+	// pre-tilde-full
+	hr-star
+	// hr-center
+	// hr-hyphen
+	// del-gfm
+	// table-marker
+);
 
 // Whether we should include styles for ALL alternative styles (true),
 // or only for styles listed in $default-styles (false).

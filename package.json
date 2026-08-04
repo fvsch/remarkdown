@@ -25,11 +25,11 @@
 	},
 	"scripts": {
 		"build": "node build.js",
-		"format": "prettier --write '**/*.scss' '**/*.js'",
+		"format": "oxfmt --write '**/*.scss' '**/*.js'",
 		"start": "servitsy docs"
 	},
 	"devDependencies": {
-		"prettier": "^3.9.6",
+		"oxfmt": "^0.62.0",
 		"sass": "^1.102.0",
 		"servitsy": "^0.6.0"
 	}
