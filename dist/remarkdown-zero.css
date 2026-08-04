@@ -1,261 +1,261 @@
 /*! ReMarkdown-zero 4.0.0-alpha.1 (MIT) https://fvsch.github.io/remarkdown/ */
 /* includes: all styles; defaults: none; */
 .remarkdown {
-  font-family: monospace, monospace;
-  line-height: 1.5;
+	font-family: monospace, monospace;
+	line-height: 1.5;
 }
 .remarkdown :is(pre, code, kbd, samp) {
-  font-family: inherit;
+	font-family: inherit;
 }
 
 .remarkdown.hn-reset h1 {
-  font-size: inherit;
-  font-weight: inherit;
-  margin-block: 1lh;
+	font-size: inherit;
+	font-weight: inherit;
+	margin-block: 1lh;
 }
 .remarkdown.hn-reset h2 {
-  font-size: inherit;
-  font-weight: inherit;
-  margin-block: 1lh;
+	font-size: inherit;
+	font-weight: inherit;
+	margin-block: 1lh;
 }
 .remarkdown.hn-reset :is(h3, h4, h5, h6) {
-  font-size: inherit;
-  font-weight: inherit;
-  margin-block: 1lh;
+	font-size: inherit;
+	font-weight: inherit;
+	margin-block: 1lh;
 }
 
 .remarkdown.hn-hash h1::before {
-  content: "# ";
+	content: "# ";
 }
 .remarkdown.hn-hash h2::before {
-  content: "## ";
+	content: "## ";
 }
 .remarkdown.hn-hash h3::before {
-  content: "### ";
+	content: "### ";
 }
 .remarkdown.hn-hash h4::before {
-  content: "#### ";
+	content: "#### ";
 }
 .remarkdown.hn-hash h5::before {
-  content: "##### ";
+	content: "##### ";
 }
 .remarkdown.hn-hash h6::before {
-  content: "###### ";
+	content: "###### ";
 }
 
 .remarkdown.h2-underline h2,
 .remarkdown.h1-underline h1 {
-  display: table;
-  overflow: hidden;
-  position: relative;
-  padding-bottom: 1lh;
+	display: table;
+	overflow: hidden;
+	position: relative;
+	padding-bottom: 1lh;
 }
 .remarkdown.h2-underline h2::before,
 .remarkdown.h1-underline h1::before {
-  content: none;
+	content: none;
 }
 .remarkdown.h2-underline h2::after,
 .remarkdown.h1-underline h1::after {
-  position: absolute;
-  bottom: 0;
-  inset-inline: 0;
-  height: 1lh;
-  width: 100%;
-  overflow: hidden;
-  word-break: break-all;
-  cursor: default;
+	position: absolute;
+	bottom: 0;
+	inset-inline: 0;
+	height: 1lh;
+	width: 100%;
+	overflow: hidden;
+	word-break: break-all;
+	cursor: default;
 }
 
 .remarkdown.h1-underline h1::after {
-  content: "========================================================================================================================";
+	content: "========================================================================================================================";
 }
 
 .remarkdown.h2-underline h2::after {
-  content: "------------------------------------------------------------------------------------------------------------------------";
+	content: "------------------------------------------------------------------------------------------------------------------------";
 }
 
 .remarkdown p {
-  margin-block: 1lh;
+	margin-block: 1lh;
 }
 .remarkdown figure {
-  margin-block: 1lh;
-  margin-inline: 0;
+	margin-block: 1lh;
+	margin-inline: 0;
 }
 
 .remarkdown hr {
-  height: 1lh;
-  line-height: 1lh;
-  margin-block: 1lh;
-  margin-inline: 0;
-  border: none;
-  color: inherit;
+	height: 1lh;
+	line-height: 1lh;
+	margin-block: 1lh;
+	margin-inline: 0;
+	border: none;
+	color: inherit;
 }
 
 .remarkdown.hr-center hr {
-  text-align: center;
+	text-align: center;
 }
 
 .remarkdown.hr-star hr::before {
-  content: "* * * *";
+	content: "* * * *";
 }
 
 .remarkdown.hr-hyphen hr::before {
-  content: "-------";
+	content: "-------";
 }
 
 .remarkdown ul {
-  margin-block: 1lh;
-  margin-inline: 0ch;
-  padding: 0;
+	margin-block: 1lh;
+	margin-inline: 0ch;
+	padding: 0;
 }
 .remarkdown li ul {
-  margin-block: 0;
+	margin-block: 0;
 }
 
 .remarkdown.ul-plus ul {
-  list-style: none;
+	list-style: none;
 }
 .remarkdown.ul-plus ul > li::before {
-  float: inline-start;
-  width: 1ch;
-  margin-inline-start: 0ch;
-  margin-inline-end: 1ch;
-  content: "+";
+	float: inline-start;
+	width: 1ch;
+	margin-inline-start: 0ch;
+	margin-inline-end: 1ch;
+	content: "+";
 }
 
 .remarkdown.ul-star ul {
-  list-style: none;
+	list-style: none;
 }
 .remarkdown.ul-star ul > li::before {
-  float: inline-start;
-  width: 1ch;
-  margin-inline-start: 0ch;
-  margin-inline-end: 1ch;
-  content: "*";
+	float: inline-start;
+	width: 1ch;
+	margin-inline-start: 0ch;
+	margin-inline-end: 1ch;
+	content: "*";
 }
 
 .remarkdown.ul-hyphen ul {
-  list-style: none;
+	list-style: none;
 }
 .remarkdown.ul-hyphen ul > li::before {
-  float: inline-start;
-  width: 1ch;
-  margin-inline-start: 0ch;
-  margin-inline-end: 1ch;
-  content: "-";
+	float: inline-start;
+	width: 1ch;
+	margin-inline-start: 0ch;
+	margin-inline-end: 1ch;
+	content: "-";
 }
 
 .remarkdown ol {
-  margin-block: 1lh;
-  margin-inline: 0ch;
-  padding: 0;
+	margin-block: 1lh;
+	margin-inline: 0ch;
+	padding: 0;
 }
 .remarkdown li ol {
-  margin-block: 0;
+	margin-block: 0;
 }
 
 .remarkdown.ol-decimal ol {
-  list-style: none;
-  counter-reset: rmd-ol;
+	list-style: none;
+	counter-reset: rmd-ol;
 }
 .remarkdown.ol-decimal ol > li {
-  counter-increment: rmd-ol;
+	counter-increment: rmd-ol;
 }
 .remarkdown.ol-decimal ol > li::before {
-  float: inline-start;
-  margin-inline-start: 0ch;
-  margin-inline-end: 1ch;
-  min-width: 2ch;
-  content: counter(rmd-ol) ".";
+	float: inline-start;
+	margin-inline-start: 0ch;
+	margin-inline-end: 1ch;
+	min-width: 2ch;
+	content: counter(rmd-ol) ".";
 }
 
 .remarkdown.ol-zero ol {
-  list-style: none;
+	list-style: none;
 }
 .remarkdown.ol-zero ol > li::before {
-  float: inline-start;
-  margin-inline-start: 0ch;
-  margin-inline-end: 1ch;
-  min-width: 2ch;
-  content: "0.";
+	float: inline-start;
+	margin-inline-start: 0ch;
+	margin-inline-end: 1ch;
+	min-width: 2ch;
+	content: "0.";
 }
 
 .remarkdown.ol-alpha ol {
-  list-style: none;
-  counter-reset: rmd-ol;
+	list-style: none;
+	counter-reset: rmd-ol;
 }
 .remarkdown.ol-alpha ol > li {
-  counter-increment: rmd-ol;
+	counter-increment: rmd-ol;
 }
 .remarkdown.ol-alpha ol > li::before {
-  float: inline-start;
-  margin-inline-start: 0ch;
-  margin-inline-end: 1ch;
-  min-width: 2ch;
-  content: counter(rmd-ol, lower-alpha) ".";
+	float: inline-start;
+	margin-inline-start: 0ch;
+	margin-inline-end: 1ch;
+	min-width: 2ch;
+	content: counter(rmd-ol, lower-alpha) ".";
 }
 
 .remarkdown.a-bracket a::before {
-  content: "[";
+	content: "[";
 }
 .remarkdown.a-bracket a::after {
-  content: "]";
+	content: "]";
 }
 
 .remarkdown.a-showurl a[href]::before {
-  content: "[";
+	content: "[";
 }
 .remarkdown.a-showurl a[href]::after {
-  content: "](" attr(href) ")";
-  word-break: break-all;
+	content: "](" attr(href) ")";
+	word-break: break-all;
 }
 
 .remarkdown em {
-  font-style: normal;
-  font-weight: normal;
+	font-style: normal;
+	font-weight: normal;
 }
 
 .remarkdown.em-star em::before,
 .remarkdown.em-star em::after {
-  content: "*";
+	content: "*";
 }
 
 .remarkdown.em-underscore em::before,
 .remarkdown.em-underscore em::after {
-  content: "_";
+	content: "_";
 }
 
 .remarkdown strong {
-  font-style: normal;
-  font-weight: normal;
+	font-style: normal;
+	font-weight: normal;
 }
 
 .remarkdown.strong-star strong::before,
 .remarkdown.strong-star strong::after {
-  content: "**";
+	content: "**";
 }
 
 .remarkdown.strong-underscore strong::before,
 .remarkdown.strong-underscore strong::after {
-  content: "__";
+	content: "__";
 }
 
 .remarkdown.code-tick code::before,
 .remarkdown.code-tick code::after {
-  content: "`";
+	content: "`";
 }
 .remarkdown.code-tick pre code::before,
 .remarkdown.code-tick pre code::after {
-  content: none;
+	content: none;
 }
 
 .remarkdown pre {
-  margin-block: 1lh;
-  tab-size: 4;
+	margin-block: 1lh;
+	tab-size: 4;
 }
 
 .remarkdown.pre-indent pre {
-  margin-inline: 0ch;
+	margin-inline: 0ch;
 }
 
 .remarkdown.pre-tilde-full pre::before,
@@ -264,100 +264,100 @@
 .remarkdown.pre-tilde pre::after,
 .remarkdown.pre-tick pre::before,
 .remarkdown.pre-tick pre::after {
-  display: block;
-  width: 100%;
-  height: 1lh;
-  cursor: default;
+	display: block;
+	width: 100%;
+	height: 1lh;
+	cursor: default;
 }
 
 .remarkdown.pre-tick pre::before,
 .remarkdown.pre-tick pre::after {
-  content: "```";
-  position: relative;
-  top: 0.25em;
+	content: "```";
+	position: relative;
+	top: 0.25em;
 }
 
 .remarkdown.pre-tilde pre::before,
 .remarkdown.pre-tilde pre::after {
-  content: "~~~";
-  overflow: hidden;
-  word-break: break-all;
+	content: "~~~";
+	overflow: hidden;
+	word-break: break-all;
 }
 
 .remarkdown.pre-tilde-full pre::before,
 .remarkdown.pre-tilde-full pre::after {
-  content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-  overflow: hidden;
-  word-break: break-all;
+	content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+	overflow: hidden;
+	word-break: break-all;
 }
 
 .remarkdown blockquote {
-  margin-block: 1lh;
-  margin-inline: 0ch;
-  padding: 0;
+	margin-block: 1lh;
+	margin-inline: 0ch;
+	padding: 0;
 }
 
 .remarkdown.quote-gt blockquote {
-  position: relative;
+	position: relative;
 }
 .remarkdown.quote-gt blockquote::before {
-  position: absolute;
-  inset-block: 0;
-  inset-inline-start: -2ch;
-  width: 1ch;
-  overflow: hidden;
-  white-space: pre;
-  content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
-  cursor: default;
+	position: absolute;
+	inset-block: 0;
+	inset-inline-start: -2ch;
+	width: 1ch;
+	overflow: hidden;
+	white-space: pre;
+	content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+	cursor: default;
 }
 .remarkdown.quote-gt blockquote:dir(rtl)::before {
-  content: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+	content: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 }
 
 .remarkdown.del-gfm del {
-  text-decoration: none;
+	text-decoration: none;
 }
 .remarkdown.del-gfm del::before,
 .remarkdown.del-gfm del::after {
-  content: "~~";
+	content: "~~";
 }
 
 .remarkdown.table-marker table {
-  margin-block: 1lh;
-  border-collapse: collapse;
+	margin-block: 1lh;
+	border-collapse: collapse;
 }
 .remarkdown.table-marker tr > * {
-  min-width: 3ch;
-  position: relative;
-  padding: 0;
-  text-align: inherit;
-  vertical-align: top;
-  font-weight: normal;
-  border: none;
+	min-width: 3ch;
+	position: relative;
+	padding: 0;
+	text-align: inherit;
+	vertical-align: top;
+	font-weight: normal;
+	border: none;
 }
 .remarkdown.table-marker tr > * + * {
-  padding-inline-start: 3ch;
+	padding-inline-start: 3ch;
 }
 .remarkdown.table-marker tr:first-child > th:not([scope="row"]) {
-  padding-bottom: 1lh;
+	padding-bottom: 1lh;
 }
 .remarkdown.table-marker tr:first-child > th:not([scope="row"])::after {
-  content: "--------------------------------------------------------------------------------------------------------------";
-  position: absolute;
-  bottom: 0;
-  inset-inline: 0;
-  overflow: hidden;
-  word-break: break-all;
-  height: 1lh;
+	content: "--------------------------------------------------------------------------------------------------------------";
+	position: absolute;
+	bottom: 0;
+	inset-inline: 0;
+	overflow: hidden;
+	word-break: break-all;
+	height: 1lh;
 }
 .remarkdown.table-marker tr:first-child > * + th:not([scope="row"])::after {
-  inset-inline-start: 3ch;
+	inset-inline-start: 3ch;
 }
 .remarkdown.table-marker tr > * + *::before {
-  content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
-  position: absolute;
-  inset-block: 0;
-  inset-inline-start: 1ch;
-  overflow: hidden;
-  white-space: pre;
+	content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+	position: absolute;
+	inset-block: 0;
+	inset-inline-start: 1ch;
+	overflow: hidden;
+	white-space: pre;
 }
