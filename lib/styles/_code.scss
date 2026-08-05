@@ -1,13 +1,13 @@
 // <code>
 // Options: code-tick
 
-@use "../utils/selector";
+@use "../shared/all" as *;
 
 @mixin output-code {
-	@include selector.option("code-tick") {
+	@include selector-option("code-tick") {
 		code::before,
 		code::after {
-			content: "`";
+			@include content("`");
 		}
 		pre code::before,
 		pre code::after {

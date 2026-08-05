@@ -1,51 +1,49 @@
 // <pre>
 // Options: pre-indent, pre-tick, pre-tilde, pre-tilde-full
 
-@use "../utils/selector";
-@use "../utils/spacing";
-@use "../utils/str";
+@use "../shared/all" as *;
 
 @mixin output-pre {
-	@include selector.base {
+	@include selector-base {
 		pre {
-			margin-block: spacing.margins("pre");
+			margin-block: margins("pre");
 			tab-size: 4;
 		}
 	}
-	@include selector.option("pre-indent") {
+	@include selector-option("pre-indent") {
 		pre {
-			margin-inline: spacing.indents("pre");
+			margin-inline: indents("pre");
 		}
 	}
 	%-pre-fence-pseudo {
 		display: block;
 		width: 100%;
-		height: spacing.line();
+		height: line();
 		cursor: default;
 	}
-	@include selector.option("pre-tick") {
+	@include selector-option("pre-tick") {
 		pre::before,
 		pre::after {
 			@extend %-pre-fence-pseudo;
-			content: "```";
+			@include content("```");
 			position: relative;
 			top: 0.25em;
 		}
 	}
-	@include selector.option("pre-tilde") {
+	@include selector-option("pre-tilde") {
 		pre::before,
 		pre::after {
 			@extend %-pre-fence-pseudo;
-			content: "~~~";
+			@include content("~~~");
 			overflow: hidden;
 			word-break: break-all;
 		}
 	}
-	@include selector.option("pre-tilde-full") {
+	@include selector-option("pre-tilde-full") {
 		pre::before,
 		pre::after {
 			@extend %-pre-fence-pseudo;
-			content: str.repeat("~~~~~~~~~~", 12);
+			@include content(str-repeat("~~~~~~~~~~", 12));
 			overflow: hidden;
 			word-break: break-all;
 		}

@@ -1,16 +1,16 @@
 // <del>
 // Option: del-gfm
 
-@use "../utils/selector";
+@use "../shared/all" as *;
 
 @mixin output-del {
-	@include selector.option("del-gfm") {
+	@include selector-option("del-gfm") {
 		del {
 			text-decoration: none;
 		}
 		del::before,
 		del::after {
-			content: "~~";
+			@include content("~~");
 		}
 	}
 }
