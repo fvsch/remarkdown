@@ -1,15 +1,14 @@
 // Paragraphs
 
-@use "../utils/selector";
-@use "../utils/spacing";
+@use "../shared/all" as *;
 
 @mixin output-para {
-	@include selector.base {
+	@include selector-base {
 		p {
-			margin-block: spacing.margins("p");
+			margin-block: margins("p");
 		}
 		figure {
-			margin-block: spacing.margins("figure");
+			margin-block: margins("figure");
 			margin-inline: 0;
 		}
 	}

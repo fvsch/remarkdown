@@ -1,14 +1,12 @@
 // Tables
 // Option: table-marker
 
-@use "../utils/selector";
-@use "../utils/spacing";
-@use "../utils/str";
+@use "../shared/all" as *;
 
 @mixin output-table {
-	@include selector.option("table-marker") {
+	@include selector-option("table-marker") {
 		table {
-			margin-block: spacing.margins("table");
+			margin-block: margins("table");
 			border-collapse: collapse;
 		}
 		tr > * {
@@ -24,22 +22,22 @@
 			padding-inline-start: 3ch;
 		}
 		tr:first-child > th:not([scope="row"]) {
-			padding-bottom: spacing.line();
+			padding-bottom: line();
 		}
 		tr:first-child > th:not([scope="row"])::after {
-			content: str.repeat("-----------", 10);
+			@include content(str-repeat("-----------", 10));
 			position: absolute;
 			bottom: 0;
 			inset-inline: 0;
 			overflow: hidden;
 			word-break: break-all;
-			height: spacing.line();
+			height: line();
 		}
 		tr:first-child > * + th:not([scope="row"])::after {
 			inset-inline-start: 3ch;
 		}
 		tr > * + *::before {
-			content: str.repeat("|\A", 10);
+			@include content(str-repeat("|\A", 10));
 			position: absolute;
 			inset-block: 0;
 			inset-inline-start: 1ch;

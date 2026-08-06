@@ -1,9 +1,13 @@
+/// Configure and retrieve ReMarkdown options
+/// This module copies values from defaults, and optionally overrides
+/// them when calling the configure() mixin.
+
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
 
-@use "./defaults";
-@use "./utils/str";
+@use "../defaults";
+@use "./str";
 
 $-defaults: meta.module-variables("defaults");
 $-state: $-defaults;

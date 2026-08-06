@@ -1,34 +1,32 @@
 // Horizontal rules
 // Options: hr-center, hr-star, hr-hyphen
 
-@use "../config";
-@use "../utils/selector";
-@use "../utils/spacing";
+@use "../shared/all" as *;
 
 @mixin output-hr {
-	@include selector.base {
+	@include selector-base {
 		hr {
-			height: spacing.line();
-			line-height: spacing.line();
-			margin-block: spacing.margins("hr");
+			height: line();
+			line-height: line();
+			margin-block: margins("hr");
 			margin-inline: 0;
 			border: none;
 			color: inherit;
 		}
 	}
-	@include selector.option("hr-center") {
+	@include selector-option("hr-center") {
 		hr {
 			text-align: center;
 		}
 	}
-	@include selector.option("hr-star") {
+	@include selector-option("hr-star") {
 		hr::before {
-			content: config.get("hr-stars", string);
+			@include content(config-get("hr-stars", string));
 		}
 	}
-	@include selector.option("hr-hyphen") {
+	@include selector-option("hr-hyphen") {
 		hr::before {
-			content: config.get("hr-hyphens", string);
+			@include content(config-get("hr-hyphens", string));
 		}
 	}
 }

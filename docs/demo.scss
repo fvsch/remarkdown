@@ -1,4 +1,5 @@
 @use "../lib/remarkdown" as rmd;
+@use "../preset/zero-config" as zero;
 
 /**
  * Styles for ReMarkdown demo pages
@@ -27,9 +28,9 @@
 @layer remarkdown-zero-attr {
 	@include rmd.configure(
 		$selector-base: "[data-remarkdown]",
-		$selector-option: '[data-remarkdown~="%o"]',
-		$default-styles: (),
-		$margins: ()
+		$selector-option: "[data-remarkdown~=%o]",
+		$default-styles: zero.$default-styles,
+		$margins: zero.$margins
 	);
 	@include rmd.header("ReMarkdown-zero %v [attr] (MIT) https://fvsch.github.io/remarkdown/");
 	@include rmd.output();

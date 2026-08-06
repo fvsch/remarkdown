@@ -1,11 +1,16 @@
-@use "../config";
+@use "sass:meta";
+
+@use "./config";
 
 /// Get a margin value in em from $margins.
 /// If not set, returns a value of 1 line.
 @function margin($element, $direction) {
 	@if $direction == "top" or $direction == "bottom" {
-		$num: config.get("margins" $element $direction) or 1;
-		@return line($num);
+		$num: config.get("margins" $element $direction);
+		@if meta.type-of($num) == number {
+			@return line($num);
+		}
+		@return line(1);
 	} @else {
 		@error "Unknown direction #{$direction}";
 	}
