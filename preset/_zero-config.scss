@@ -1,0 +1,24 @@
+$default-styles: ();
+
+$margins: (
+	"h1": (),
+	"h2": (),
+	"hn": (),
+	"hr": (),
+	"p": (),
+	"pre": (),
+	"ol": (
+		"inline-start": 3,
+		"inline-end": 0,
+	),
+	"ul": (
+		"inline-start": 3,
+		"inline-end": 0,
+	),
+	"figure": (),
+	"blockquote": (
+		"inline-start": 2,
+		"inline-end": 0,
+	),
+	"table": (),
+);

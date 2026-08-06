@@ -1,3 +1,14 @@
+/// Default options for ReMarkdown
+/// To change those options, use the `configure` mixin:
+///
+/// 	@use "remarkdown.css/lib/remarkdown";
+/// 	@include remarkdown.configure(
+/// 		$selector-base: "article",
+/// 		$selector-option: "article.%0"
+/// 	);
+/// 	@include remarkdown.header();
+/// 	@include remarkdown.output();
+
 // Selectors for the ReMarkdown container and options
 // (%o will be replaced with the option name)
 $selector-base: ".remarkdown";

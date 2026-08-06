@@ -28,22 +28,22 @@
 		margin-block: 1lh;
 	}
 	.remarkdown h1::before {
-		content: "# ";
+		content: "# "/"";
 	}
 	.remarkdown h2::before {
-		content: "## ";
+		content: "## "/"";
 	}
 	.remarkdown h3::before {
-		content: "### ";
+		content: "### "/"";
 	}
 	.remarkdown h4::before {
-		content: "#### ";
+		content: "#### "/"";
 	}
 	.remarkdown h5::before {
-		content: "##### ";
+		content: "##### "/"";
 	}
 	.remarkdown h6::before {
-		content: "###### ";
+		content: "###### "/"";
 	}
 	[data-remarkdown~="h2-underline"] h2,
 	[data-remarkdown~="h1-underline"] h1,
@@ -74,10 +74,10 @@
 		cursor: default;
 	}
 	.remarkdown.h1-underline h1::after {
-		content: "========================================================================================================================";
+		content: "========================================================================================================================"/"";
 	}
 	.remarkdown.h2-underline h2::after {
-		content: "------------------------------------------------------------------------------------------------------------------------";
+		content: "------------------------------------------------------------------------------------------------------------------------"/"";
 	}
 	.remarkdown p {
 		margin-block: 1lh;
@@ -98,10 +98,10 @@
 		text-align: center;
 	}
 	.remarkdown hr::before {
-		content: "* * * *";
+		content: "* * * *"/"";
 	}
 	.remarkdown.hr-hyphen hr::before {
-		content: "-------";
+		content: "-------"/"";
 	}
 	.remarkdown ul {
 		margin-block: 1lh;
@@ -115,31 +115,31 @@
 		list-style: none;
 	}
 	.remarkdown.ul-plus ul > li::before {
+		content: "+"/"";
 		float: inline-start;
 		width: 1ch;
 		margin-inline-start: -4ch;
 		margin-inline-end: 1ch;
-		content: "+";
 	}
 	.remarkdown.ul-star ul {
 		list-style: none;
 	}
 	.remarkdown.ul-star ul > li::before {
+		content: "*"/"";
 		float: inline-start;
 		width: 1ch;
 		margin-inline-start: -4ch;
 		margin-inline-end: 1ch;
-		content: "*";
 	}
 	.remarkdown ul {
 		list-style: none;
 	}
 	.remarkdown ul > li::before {
+		content: "-"/"";
 		float: inline-start;
 		width: 1ch;
 		margin-inline-start: -4ch;
 		margin-inline-end: 1ch;
-		content: "-";
 	}
 	.remarkdown ol {
 		margin-block: 1lh;
@@ -161,7 +161,7 @@
 		margin-inline-start: -4ch;
 		margin-inline-end: 1ch;
 		min-width: 2ch;
-		content: counter(rmd-ol) ".";
+		content: counter(rmd-ol) "."/"";
 	}
 	.remarkdown.ol-zero ol {
 		list-style: none;
@@ -171,7 +171,7 @@
 		margin-inline-start: -4ch;
 		margin-inline-end: 1ch;
 		min-width: 2ch;
-		content: "0.";
+		content: "0."/"";
 	}
 	.remarkdown.ol-alpha ol {
 		list-style: none;
@@ -185,19 +185,19 @@
 		margin-inline-start: -4ch;
 		margin-inline-end: 1ch;
 		min-width: 2ch;
-		content: counter(rmd-ol, lower-alpha) ".";
+		content: counter(rmd-ol, lower-alpha) "."/"";
 	}
 	.remarkdown a::before {
-		content: "[";
+		content: "["/"";
 	}
 	.remarkdown a::after {
-		content: "]";
+		content: "]"/"";
 	}
 	.remarkdown.a-showurl a[href]::before {
-		content: "[";
+		content: "["/"";
 	}
 	.remarkdown.a-showurl a[href]::after {
-		content: "](" attr(href) ")";
+		content: "](" attr(href) ")"/"";
 		word-break: break-all;
 	}
 	.remarkdown em {
@@ -206,11 +206,11 @@
 	}
 	.remarkdown em::before,
 	.remarkdown em::after {
-		content: "*";
+		content: "*"/"";
 	}
 	.remarkdown.em-underscore em::before,
 	.remarkdown.em-underscore em::after {
-		content: "_";
+		content: "_"/"";
 	}
 	.remarkdown strong {
 		font-style: normal;
@@ -218,15 +218,15 @@
 	}
 	.remarkdown strong::before,
 	.remarkdown strong::after {
-		content: "**";
+		content: "**"/"";
 	}
 	.remarkdown.strong-underscore strong::before,
 	.remarkdown.strong-underscore strong::after {
-		content: "__";
+		content: "__"/"";
 	}
 	.remarkdown code::before,
 	.remarkdown code::after {
-		content: "`";
+		content: "`"/"";
 	}
 	.remarkdown pre code::before,
 	.remarkdown pre code::after {
@@ -258,19 +258,19 @@
 	}
 	.remarkdown.pre-tick pre::before,
 	.remarkdown.pre-tick pre::after {
-		content: "```";
+		content: "```"/"";
 		position: relative;
 		top: 0.25em;
 	}
 	.remarkdown.pre-tilde pre::before,
 	.remarkdown.pre-tilde pre::after {
-		content: "~~~";
+		content: "~~~"/"";
 		overflow: hidden;
 		word-break: break-all;
 	}
 	.remarkdown.pre-tilde-full pre::before,
 	.remarkdown.pre-tilde-full pre::after {
-		content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+		content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"/"";
 		overflow: hidden;
 		word-break: break-all;
 	}
@@ -283,24 +283,24 @@
 		position: relative;
 	}
 	.remarkdown blockquote::before {
+		content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a"/"";
 		position: absolute;
 		inset-block: 0;
 		inset-inline-start: -2ch;
 		width: 1ch;
 		overflow: hidden;
 		white-space: pre;
-		content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 		cursor: default;
 	}
 	.remarkdown blockquote:dir(rtl)::before {
-		content: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+		content: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a"/"";
 	}
 	.remarkdown.del-gfm del {
 		text-decoration: none;
 	}
 	.remarkdown.del-gfm del::before,
 	.remarkdown.del-gfm del::after {
-		content: "~~";
+		content: "~~"/"";
 	}
 	.remarkdown.table-marker table {
 		margin-block: 1lh;
@@ -322,7 +322,7 @@
 		padding-bottom: 1lh;
 	}
 	.remarkdown.table-marker tr:first-child > th:not([scope="row"])::after {
-		content: "--------------------------------------------------------------------------------------------------------------";
+		content: "--------------------------------------------------------------------------------------------------------------"/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
@@ -334,7 +334,7 @@
 		inset-inline-start: 3ch;
 	}
 	.remarkdown.table-marker tr > * + *::before {
-		content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+		content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a"/"";
 		position: absolute;
 		inset-block: 0;
 		inset-inline-start: 1ch;
@@ -368,22 +368,22 @@
 		margin-block: 1lh;
 	}
 	[data-remarkdown~="hn-hash"] h1::before {
-		content: "# ";
+		content: "# "/"";
 	}
 	[data-remarkdown~="hn-hash"] h2::before {
-		content: "## ";
+		content: "## "/"";
 	}
 	[data-remarkdown~="hn-hash"] h3::before {
-		content: "### ";
+		content: "### "/"";
 	}
 	[data-remarkdown~="hn-hash"] h4::before {
-		content: "#### ";
+		content: "#### "/"";
 	}
 	[data-remarkdown~="hn-hash"] h5::before {
-		content: "##### ";
+		content: "##### "/"";
 	}
 	[data-remarkdown~="hn-hash"] h6::before {
-		content: "###### ";
+		content: "###### "/"";
 	}
 	[data-remarkdown~="h2-underline"] h2,
 	[data-remarkdown~="h1-underline"] h1,
@@ -414,10 +414,10 @@
 		cursor: default;
 	}
 	[data-remarkdown~="h1-underline"] h1::after {
-		content: "========================================================================================================================";
+		content: "========================================================================================================================"/"";
 	}
 	[data-remarkdown~="h2-underline"] h2::after {
-		content: "------------------------------------------------------------------------------------------------------------------------";
+		content: "------------------------------------------------------------------------------------------------------------------------"/"";
 	}
 	[data-remarkdown] p {
 		margin-block: 1lh;
@@ -438,14 +438,14 @@
 		text-align: center;
 	}
 	[data-remarkdown~="hr-star"] hr::before {
-		content: "* * * *";
+		content: "* * * *"/"";
 	}
 	[data-remarkdown~="hr-hyphen"] hr::before {
-		content: "-------";
+		content: "-------"/"";
 	}
 	[data-remarkdown] ul {
 		margin-block: 1lh;
-		margin-inline: 0ch;
+		margin-inline: 3ch 0ch;
 		padding: 0;
 	}
 	[data-remarkdown] li ul {
@@ -455,35 +455,35 @@
 		list-style: none;
 	}
 	[data-remarkdown~="ul-plus"] ul > li::before {
+		content: "+"/"";
 		float: inline-start;
 		width: 1ch;
-		margin-inline-start: 0ch;
+		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
-		content: "+";
 	}
 	[data-remarkdown~="ul-star"] ul {
 		list-style: none;
 	}
 	[data-remarkdown~="ul-star"] ul > li::before {
+		content: "*"/"";
 		float: inline-start;
 		width: 1ch;
-		margin-inline-start: 0ch;
+		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
-		content: "*";
 	}
 	[data-remarkdown~="ul-hyphen"] ul {
 		list-style: none;
 	}
 	[data-remarkdown~="ul-hyphen"] ul > li::before {
+		content: "-"/"";
 		float: inline-start;
 		width: 1ch;
-		margin-inline-start: 0ch;
+		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
-		content: "-";
 	}
 	[data-remarkdown] ol {
 		margin-block: 1lh;
-		margin-inline: 0ch;
+		margin-inline: 3ch 0ch;
 		padding: 0;
 	}
 	[data-remarkdown] li ol {
@@ -498,20 +498,20 @@
 	}
 	[data-remarkdown~="ol-decimal"] ol > li::before {
 		float: inline-start;
-		margin-inline-start: 0ch;
+		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
 		min-width: 2ch;
-		content: counter(rmd-ol) ".";
+		content: counter(rmd-ol) "."/"";
 	}
 	[data-remarkdown~="ol-zero"] ol {
 		list-style: none;
 	}
 	[data-remarkdown~="ol-zero"] ol > li::before {
 		float: inline-start;
-		margin-inline-start: 0ch;
+		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
 		min-width: 2ch;
-		content: "0.";
+		content: "0."/"";
 	}
 	[data-remarkdown~="ol-alpha"] ol {
 		list-style: none;
@@ -522,22 +522,22 @@
 	}
 	[data-remarkdown~="ol-alpha"] ol > li::before {
 		float: inline-start;
-		margin-inline-start: 0ch;
+		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
 		min-width: 2ch;
-		content: counter(rmd-ol, lower-alpha) ".";
+		content: counter(rmd-ol, lower-alpha) "."/"";
 	}
 	[data-remarkdown~="a-bracket"] a::before {
-		content: "[";
+		content: "["/"";
 	}
 	[data-remarkdown~="a-bracket"] a::after {
-		content: "]";
+		content: "]"/"";
 	}
 	[data-remarkdown~="a-showurl"] a[href]::before {
-		content: "[";
+		content: "["/"";
 	}
 	[data-remarkdown~="a-showurl"] a[href]::after {
-		content: "](" attr(href) ")";
+		content: "](" attr(href) ")"/"";
 		word-break: break-all;
 	}
 	[data-remarkdown] em {
@@ -546,11 +546,11 @@
 	}
 	[data-remarkdown~="em-star"] em::before,
 	[data-remarkdown~="em-star"] em::after {
-		content: "*";
+		content: "*"/"";
 	}
 	[data-remarkdown~="em-underscore"] em::before,
 	[data-remarkdown~="em-underscore"] em::after {
-		content: "_";
+		content: "_"/"";
 	}
 	[data-remarkdown] strong {
 		font-style: normal;
@@ -558,15 +558,15 @@
 	}
 	[data-remarkdown~="strong-star"] strong::before,
 	[data-remarkdown~="strong-star"] strong::after {
-		content: "**";
+		content: "**"/"";
 	}
 	[data-remarkdown~="strong-underscore"] strong::before,
 	[data-remarkdown~="strong-underscore"] strong::after {
-		content: "__";
+		content: "__"/"";
 	}
 	[data-remarkdown~="code-tick"] code::before,
 	[data-remarkdown~="code-tick"] code::after {
-		content: "`";
+		content: "`"/"";
 	}
 	[data-remarkdown~="code-tick"] pre code::before,
 	[data-remarkdown~="code-tick"] pre code::after {
@@ -598,49 +598,49 @@
 	}
 	[data-remarkdown~="pre-tick"] pre::before,
 	[data-remarkdown~="pre-tick"] pre::after {
-		content: "```";
+		content: "```"/"";
 		position: relative;
 		top: 0.25em;
 	}
 	[data-remarkdown~="pre-tilde"] pre::before,
 	[data-remarkdown~="pre-tilde"] pre::after {
-		content: "~~~";
+		content: "~~~"/"";
 		overflow: hidden;
 		word-break: break-all;
 	}
 	[data-remarkdown~="pre-tilde-full"] pre::before,
 	[data-remarkdown~="pre-tilde-full"] pre::after {
-		content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+		content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"/"";
 		overflow: hidden;
 		word-break: break-all;
 	}
 	[data-remarkdown] blockquote {
 		margin-block: 1lh;
-		margin-inline: 0ch;
+		margin-inline: 2ch 0ch;
 		padding: 0;
 	}
 	[data-remarkdown~="quote-gt"] blockquote {
 		position: relative;
 	}
 	[data-remarkdown~="quote-gt"] blockquote::before {
+		content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a"/"";
 		position: absolute;
 		inset-block: 0;
 		inset-inline-start: -2ch;
 		width: 1ch;
 		overflow: hidden;
 		white-space: pre;
-		content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 		cursor: default;
 	}
 	[data-remarkdown~="quote-gt"] blockquote:dir(rtl)::before {
-		content: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+		content: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a"/"";
 	}
 	[data-remarkdown~="del-gfm"] del {
 		text-decoration: none;
 	}
 	[data-remarkdown~="del-gfm"] del::before,
 	[data-remarkdown~="del-gfm"] del::after {
-		content: "~~";
+		content: "~~"/"";
 	}
 	[data-remarkdown~="table-marker"] table {
 		margin-block: 1lh;
@@ -662,7 +662,7 @@
 		padding-bottom: 1lh;
 	}
 	[data-remarkdown~="table-marker"] tr:first-child > th:not([scope="row"])::after {
-		content: "--------------------------------------------------------------------------------------------------------------";
+		content: "--------------------------------------------------------------------------------------------------------------"/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
@@ -674,7 +674,7 @@
 		inset-inline-start: 3ch;
 	}
 	[data-remarkdown~="table-marker"] tr > * + *::before {
-		content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+		content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a"/"";
 		position: absolute;
 		inset-block: 0;
 		inset-inline-start: 1ch;

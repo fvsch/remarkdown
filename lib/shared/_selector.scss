@@ -1,10 +1,12 @@
-@use "../config";
+@use "./config";
 @use "./str";
 
 /// Wrap content in the base selector
-@mixin base {
-	#{-selector-base()} {
-		@content;
+@mixin base($cond: true) {
+	@if $cond {
+		#{-selector-base()} {
+			@content;
+		}
 	}
 }
 
@@ -12,15 +14,16 @@
 /// the content of $defaults and the value of $output-all-styles.
 /// Outputs nothing if $output-all-styles is false and the option is not
 /// in $defaults.
-@mixin option($name) {
-	$selector: %rmd-void;
-	@if config.is-default($name) {
-		#{-selector-base()} {
-			@content;
-		}
-	} @else if config.get("output-all-styles") == true {
-		#{-selector-option($name)} {
-			@content;
+@mixin option($name, $cond: true) {
+	@if $cond {
+		@if config.is-default($name) {
+			#{-selector-base()} {
+				@content;
+			}
+		} @else if config.get("output-all-styles") == true {
+			#{-selector-option($name)} {
+				@content;
+			}
 		}
 	}
 }

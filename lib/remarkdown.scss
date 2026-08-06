@@ -1,29 +1,31 @@
-$-version: "4.0.0-alpha.1";
+/// The ReMarkdown.css Sass library
+/// Exposes three mixins:
+/// - `configure`: can be used to override defaults;
+/// - `header`: outputs a CSS comment describing the library;
+/// - `output`: generates the actual styles.
+
+@forward "./shared/config" show configure;
+@forward "./styles/all";
 
 @use "sass:list";
 @use "sass:meta";
-
-@forward "./config" show configure;
-@forward "./styles/all" show output-base, output-code, output-del, output-em, output-hn, output-hr,
-	output-link, output-ol, output-para, output-pre, output-quote, output-strong, output-table,
-	output-ul;
-
-@use "./config";
+@use "./shared/all" as *;
 @use "./styles/all" as *;
-@use "./utils/str";
+
+$version: "4.0.0-alpha.1";
 
 @mixin header($title: "ReMarkdown %v") {
 	$included: "all styles";
-	@if config.get("output-all-styles") != true {
+	@if config-get("output-all-styles") != true {
 		$included: "default-styles only";
 	}
 
-	$list: config.get("default-styles", list);
+	$list: config-get("default-styles", list);
 	@if list.length($list) == 0 {
 		$list: "none";
 	}
 	@if $title {
-		$title: str.replace($title, "%v", $-version);
+		$title: str-replace($title, "%v", $version);
 		/*! #{$title} */
 		/* includes: #{$included}; defaults: #{$list}; */
 	}

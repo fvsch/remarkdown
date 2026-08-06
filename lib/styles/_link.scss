@@ -1,23 +1,23 @@
 // Links
 // Options: a-bracket, a-showurl
 
-@use "../utils/selector";
+@use "../shared/all" as *;
 
 @mixin output-a {
-	@include selector.option("a-bracket") {
+	@include selector-option("a-bracket") {
 		a::before {
-			content: "[";
+			@include content("[");
 		}
 		a::after {
-			content: "]";
+			@include content("]");
 		}
 	}
-	@include selector.option("a-showurl") {
+	@include selector-option("a-showurl") {
 		a[href]::before {
-			content: "[";
+			@include content("[");
 		}
 		a[href]::after {
-			content: "](" attr(href) ")";
+			@include content("](" attr(href) ")");
 			word-break: break-all;
 		}
 	}
