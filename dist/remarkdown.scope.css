@@ -1,0 +1,329 @@
+/*! ReMarkdown 4.0.0-alpha.1 [scope] (MIT) https://fvsch.github.io/remarkdown/ */
+/* includes: all styles; defaults: hn-reset hn-hash ul-hyphen ol-decimal quote-gt em-star strong-star a-bracket code-tick pre-indent hr-star; */
+@scope (.remarkdown) to (.remarkdown-off) {
+	& {
+		font-family: monospace, monospace;
+		line-height: 1.5;
+	}
+	:is(pre, code, kbd, samp) {
+		font-family: inherit;
+	}
+	h1 {
+		font-size: inherit;
+		font-weight: inherit;
+		margin-block: 1.5lh 1lh;
+	}
+	h2 {
+		font-size: inherit;
+		font-weight: inherit;
+		margin-block: 1.5lh 1lh;
+	}
+	:is(h3, h4, h5, h6) {
+		font-size: inherit;
+		font-weight: inherit;
+		margin-block: 1lh;
+	}
+	h1::before {
+		content: "# "/"";
+	}
+	h2::before {
+		content: "## "/"";
+	}
+	h3::before {
+		content: "### "/"";
+	}
+	h4::before {
+		content: "#### "/"";
+	}
+	h5::before {
+		content: "##### "/"";
+	}
+	h6::before {
+		content: "###### "/"";
+	}
+	&.h2-underline h2,
+	&.h1-underline h1 {
+		display: table;
+		overflow: hidden;
+		position: relative;
+		padding-bottom: 1lh;
+	}
+	&.h2-underline h2::before,
+	&.h1-underline h1::before {
+		content: none;
+	}
+	&.h2-underline h2::after,
+	&.h1-underline h1::after {
+		position: absolute;
+		bottom: 0;
+		inset-inline: 0;
+		height: 1lh;
+		width: 100%;
+		overflow: hidden;
+		word-break: break-all;
+		cursor: default;
+	}
+	&.h1-underline h1::after {
+		content: "========================================================================================================================"/"";
+	}
+	&.h2-underline h2::after {
+		content: "------------------------------------------------------------------------------------------------------------------------"/"";
+	}
+	p {
+		margin-block: 1lh;
+	}
+	figure {
+		margin-block: 1lh;
+		margin-inline: 0;
+	}
+	hr {
+		height: 1lh;
+		line-height: 1lh;
+		margin-block: 1lh;
+		margin-inline: 0;
+		border: none;
+		color: inherit;
+	}
+	&.hr-center hr {
+		text-align: center;
+	}
+	hr::before {
+		content: "* * * *"/"";
+	}
+	&.hr-hyphen hr::before {
+		content: "-------"/"";
+	}
+	ul {
+		margin-block: 1lh;
+		margin-inline: 4ch 0ch;
+		padding: 0;
+	}
+	li ul {
+		margin-block: 0;
+	}
+	&.ul-plus ul {
+		list-style: none;
+	}
+	&.ul-plus ul > li::before {
+		content: "+"/"";
+		float: inline-start;
+		width: 1ch;
+		margin-inline-start: -4ch;
+		margin-inline-end: 1ch;
+	}
+	&.ul-star ul {
+		list-style: none;
+	}
+	&.ul-star ul > li::before {
+		content: "*"/"";
+		float: inline-start;
+		width: 1ch;
+		margin-inline-start: -4ch;
+		margin-inline-end: 1ch;
+	}
+	ul {
+		list-style: none;
+	}
+	ul > li::before {
+		content: "-"/"";
+		float: inline-start;
+		width: 1ch;
+		margin-inline-start: -4ch;
+		margin-inline-end: 1ch;
+	}
+	ol {
+		margin-block: 1lh;
+		margin-inline: 4ch 0ch;
+		padding: 0;
+	}
+	li ol {
+		margin-block: 0;
+	}
+	ol {
+		list-style: none;
+		counter-reset: rmd-ol;
+	}
+	ol > li {
+		counter-increment: rmd-ol;
+	}
+	ol > li::before {
+		float: inline-start;
+		margin-inline-start: -4ch;
+		margin-inline-end: 1ch;
+		min-width: 2ch;
+		content: counter(rmd-ol) "."/"";
+	}
+	&.ol-zero ol {
+		list-style: none;
+	}
+	&.ol-zero ol > li::before {
+		float: inline-start;
+		margin-inline-start: -4ch;
+		margin-inline-end: 1ch;
+		min-width: 2ch;
+		content: "0."/"";
+	}
+	&.ol-alpha ol {
+		list-style: none;
+		counter-reset: rmd-ol;
+	}
+	&.ol-alpha ol > li {
+		counter-increment: rmd-ol;
+	}
+	&.ol-alpha ol > li::before {
+		float: inline-start;
+		margin-inline-start: -4ch;
+		margin-inline-end: 1ch;
+		min-width: 2ch;
+		content: counter(rmd-ol, lower-alpha) "."/"";
+	}
+	a::before {
+		content: "["/"";
+	}
+	a::after {
+		content: "]"/"";
+	}
+	&.a-showurl a[href]::before {
+		content: "["/"";
+	}
+	&.a-showurl a[href]::after {
+		content: "](" attr(href) ")"/"";
+		word-break: break-all;
+	}
+	em {
+		font-style: normal;
+		font-weight: normal;
+	}
+	em::before,
+	em::after {
+		content: "*"/"";
+	}
+	&.em-underscore em::before,
+	&.em-underscore em::after {
+		content: "_"/"";
+	}
+	strong {
+		font-style: normal;
+		font-weight: normal;
+	}
+	strong::before,
+	strong::after {
+		content: "**"/"";
+	}
+	&.strong-underscore strong::before,
+	&.strong-underscore strong::after {
+		content: "__"/"";
+	}
+	code::before,
+	code::after {
+		content: "`"/"";
+	}
+	pre code::before,
+	pre code::after {
+		content: none;
+	}
+	pre {
+		margin-block: 1lh;
+		tab-size: 4;
+	}
+	pre {
+		margin-inline: 4ch 0ch;
+	}
+	&.pre-tick pre::before,
+	&.pre-tick pre::after {
+		content: "```"/"";
+		display: block;
+		width: 100%;
+		height: 1lh;
+		cursor: default;
+		position: relative;
+		top: 0.25em;
+	}
+	&.pre-tilde pre::before,
+	&.pre-tilde pre::after {
+		content: "~~~"/"";
+		display: block;
+		width: 100%;
+		height: 1lh;
+		cursor: default;
+		overflow: hidden;
+		word-break: break-all;
+	}
+	&.pre-tilde-full pre::before,
+	&.pre-tilde-full pre::after {
+		content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"/"";
+		display: block;
+		width: 100%;
+		height: 1lh;
+		cursor: default;
+		overflow: hidden;
+		word-break: break-all;
+	}
+	blockquote {
+		margin-block: 1lh;
+		margin-inline: 2ch;
+		padding: 0;
+	}
+	blockquote {
+		position: relative;
+	}
+	blockquote::before {
+		content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a"/"";
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: -2ch;
+		width: 1ch;
+		overflow: hidden;
+		white-space: pre;
+		cursor: default;
+	}
+	blockquote:dir(rtl)::before {
+		content: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a"/"";
+	}
+	&.del-gfm del {
+		text-decoration: none;
+	}
+	&.del-gfm del::before,
+	&.del-gfm del::after {
+		content: "~~"/"";
+	}
+	&.table-marker table {
+		margin-block: 1lh;
+		border-collapse: collapse;
+	}
+	&.table-marker tr > * {
+		min-width: 3ch;
+		position: relative;
+		padding: 0;
+		text-align: inherit;
+		vertical-align: top;
+		font-weight: normal;
+		border: none;
+	}
+	&.table-marker tr > * + * {
+		padding-inline-start: 3ch;
+	}
+	&.table-marker tr:first-child > th:not([scope="row"]) {
+		padding-bottom: 1lh;
+	}
+	&.table-marker tr:first-child > th:not([scope="row"])::after {
+		content: "--------------------------------------------------------------------------------------------------------------"/"";
+		position: absolute;
+		bottom: 0;
+		inset-inline: 0;
+		overflow: hidden;
+		word-break: break-all;
+		height: 1lh;
+	}
+	&.table-marker tr:first-child > * + th:not([scope="row"])::after {
+		inset-inline-start: 3ch;
+	}
+	&.table-marker tr > * + *::before {
+		content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a"/"";
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 1ch;
+		overflow: hidden;
+		white-space: pre;
+	}
+}

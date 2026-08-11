@@ -5,6 +5,7 @@
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
+@use "sass:string";
 
 @use "../defaults";
 @use "./str";
@@ -30,14 +31,30 @@ $-state: $-defaults;
 	} @else {
 		$value: map.get($-state, $keys...);
 	}
-	@if $type != null and $type != meta.type-of($value) {
+	@if ($type != null) and
+		($type != meta.type-of($value)) and
+		($type != meta.type-of(list.nth($value, 1)))
+	{
 		$path: str.join($keys, ".");
 		@error "Config value for #{$path} has type #{meta.type-of($value)}, expected #{$type}";
 	}
 	@return $value;
 }
 
-@function is-default($name) {
+@function get-font-family($name) {
+	$value: get($name, string);
+	@if meta.type-of($value) == string {
+		@return string.unquote($value);
+	}
+	@return $value;
+}
+
+@function is-default($names) {
 	$list: get("default-styles", list);
-	@return list.index($list, $name) != null;
+	@each $name in $names {
+		@if list.index($list, $name) != null {
+			@return true;
+		}
+	}
+	@return false;
 }

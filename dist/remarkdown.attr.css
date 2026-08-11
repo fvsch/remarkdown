@@ -258,21 +258,13 @@
 	margin-inline: 4ch 0ch;
 }
 
-[data-remarkdown~="pre-tilde-full"] pre::before,
-[data-remarkdown~="pre-tilde-full"] pre::after,
-[data-remarkdown~="pre-tilde"] pre::before,
-[data-remarkdown~="pre-tilde"] pre::after,
 [data-remarkdown~="pre-tick"] pre::before,
 [data-remarkdown~="pre-tick"] pre::after {
+	content: "```"/"";
 	display: block;
 	width: 100%;
 	height: 1lh;
 	cursor: default;
-}
-
-[data-remarkdown~="pre-tick"] pre::before,
-[data-remarkdown~="pre-tick"] pre::after {
-	content: "```"/"";
 	position: relative;
 	top: 0.25em;
 }
@@ -280,6 +272,10 @@
 [data-remarkdown~="pre-tilde"] pre::before,
 [data-remarkdown~="pre-tilde"] pre::after {
 	content: "~~~"/"";
+	display: block;
+	width: 100%;
+	height: 1lh;
+	cursor: default;
 	overflow: hidden;
 	word-break: break-all;
 }
@@ -287,6 +283,10 @@
 [data-remarkdown~="pre-tilde-full"] pre::before,
 [data-remarkdown~="pre-tilde-full"] pre::after {
 	content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"/"";
+	display: block;
+	width: 100%;
+	height: 1lh;
+	cursor: default;
 	overflow: hidden;
 	word-break: break-all;
 }

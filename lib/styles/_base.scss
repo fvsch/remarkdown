@@ -3,12 +3,13 @@
 @use "../shared/all" as *;
 
 @mixin output-base {
-	@include selector-base(config-get("set-font-styles", bool)) {
-		font-family: config-get("primary-font");
-		line-height: config-get("line-height", number);
-
+	@include selector-base($cond: config-get("set-font-styles", bool)) {
+		& {
+			font-family: config-get-font-family("primary-font");
+			line-height: config-get("line-height", number);
+		}
 		:is(pre, code, kbd, samp) {
-			font-family: config-get("code-font", string);
+			font-family: config-get-font-family("code-font");
 		}
 	}
 }
