@@ -1,0 +1,17 @@
+// Attribute-based build of ReMarkdown with no default styles
+
+@use "../lib/rmd";
+@use "./zero-config" as *;
+
+@include rmd.configure(
+	$selector-base: "",
+	$selector-option: '&.%o',
+	$default-styles: $default-styles,
+	$margins: $margins
+);
+
+@include rmd.header("ReMarkdown-zero %v [scope] (MIT) https://fvsch.github.io/remarkdown/");
+
+@scope (.remarkdown) to (.remarkdown-off) {
+	@include rmd.output();
+}

@@ -4,8 +4,13 @@
 /// Wrap content in the base selector
 @mixin base($cond: true) {
 	@if $cond {
-		#{-selector-base()} {
+		$selector: -selector-base();
+		@if $selector == "" {
 			@content;
+		} @else {
+			#{$selector} {
+				@content;
+			}
 		}
 	}
 }
@@ -15,15 +20,13 @@
 /// Outputs nothing if $output-all-styles is false and the option is not
 /// in $defaults.
 @mixin option($name, $cond: true) {
-	@if $cond {
-		@if config.is-default($name) {
-			#{-selector-base()} {
-				@content;
-			}
-		} @else if config.get("output-all-styles") == true {
-			#{-selector-option($name)} {
-				@content;
-			}
+	@if config.is-default($name) {
+		@include base($cond: $cond) {
+			@content;
+		}
+	} @else if $cond and config.get("output-all-styles") == true {
+		#{-selector-option($name)} {
+			@content;
 		}
 	}
 }

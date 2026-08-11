@@ -1,13 +1,15 @@
 // Class-based build of ReMarkdown with no default styles
 
-@use "../lib/remarkdown" as rmd;
-@use "./zero-config" as zero;
+@use "../lib/rmd";
+@use "./zero-config" as *;
 
 @include rmd.configure(
 	$selector-base: ".remarkdown",
 	$selector-option: ".remarkdown.%o",
-	$default-styles: zero.$default-styles,
-	$margins: zero.$margins
+	$default-styles: $default-styles,
+	$margins: $margins
 );
+
 @include rmd.header("ReMarkdown-zero %v (MIT) https://fvsch.github.io/remarkdown/");
+
 @include rmd.output();

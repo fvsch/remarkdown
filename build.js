@@ -7,8 +7,10 @@ import oxfmtConfig from './.oxfmtrc.json' with { type: 'json' };
 buildAll([
 	['preset/remarkdown.scss', 'dist/remarkdown.css'],
 	['preset/remarkdown.attr.scss', 'dist/remarkdown.attr.css'],
+	['preset/remarkdown.scope.scss', 'dist/remarkdown.scope.css'],
 	['preset/remarkdown-zero.scss', 'dist/remarkdown-zero.css'],
 	['preset/remarkdown-zero.attr.scss', 'dist/remarkdown-zero.attr.css'],
+	['preset/remarkdown-zero.scope.scss', 'dist/remarkdown-zero.scope.css'],
 	['docs/demo.scss', 'docs/demo.css'],
 ]);
 

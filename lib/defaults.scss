@@ -10,7 +10,13 @@
 /// 	@include remarkdown.output();
 
 // Selectors for the ReMarkdown container and options
-// (%o will be replaced with the option name)
+// -	option selector: "%o" will be replaced by the option name;
+// -	base selector: an empty string base selector ("") can be used if you want
+// 	to use CSS nesting or CSS @scope, for example:
+// 	.remarkdown {
+// 		@include remarkdown.configure($selector-base: "", $selector-option: "&.%o");
+// 		@include remarkdown.output();
+// 	}
 $selector-base: ".remarkdown";
 $selector-option: ".remarkdown.%o";
 
