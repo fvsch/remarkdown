@@ -1,11 +1,9 @@
-// Attribute-based build of ReMarkdown with no default styles
-
 @use "../lib/rmd";
-@use "./zero-config" as *;
+@use "../preset/zero-config" as *;
 
 @include rmd.configure(
 	$selector-base: "[data-remarkdown]",
-	$selector-option: '[data-remarkdown~=%o]',
+	$selector-option: "[data-remarkdown~=%o]",
 	$default-styles: $default-styles,
 	$margins: $margins
 );

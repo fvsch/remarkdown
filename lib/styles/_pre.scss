@@ -15,17 +15,11 @@
 			margin-inline: indents("pre");
 		}
 	}
-	%-pre-fence-pseudo {
-		display: block;
-		width: 100%;
-		height: line();
-		cursor: default;
-	}
 	@include selector-option("pre-tick") {
 		pre::before,
 		pre::after {
-			@extend %-pre-fence-pseudo;
 			@include content("```");
+			@include -pre-fence-pseudo;
 			position: relative;
 			top: 0.25em;
 		}
@@ -33,8 +27,8 @@
 	@include selector-option("pre-tilde") {
 		pre::before,
 		pre::after {
-			@extend %-pre-fence-pseudo;
 			@include content("~~~");
+			@include -pre-fence-pseudo;
 			overflow: hidden;
 			word-break: break-all;
 		}
@@ -42,10 +36,17 @@
 	@include selector-option("pre-tilde-full") {
 		pre::before,
 		pre::after {
-			@extend %-pre-fence-pseudo;
 			@include content(str-repeat("~~~~~~~~~~", 12));
+			@include -pre-fence-pseudo;
 			overflow: hidden;
 			word-break: break-all;
 		}
 	}
+}
+
+@mixin -pre-fence-pseudo {
+	display: block;
+	width: 100%;
+	height: line();
+	cursor: default;
 }

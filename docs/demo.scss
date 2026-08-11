@@ -1,39 +1,18 @@
-@use "../lib/remarkdown" as rmd;
-@use "../preset/zero-config" as zero;
-
 /**
  * Styles for ReMarkdown demo pages
  */
+@use "sass:meta";
 
 @layer remarkdown, remarkdown-zero-attr;
 
 /// Class-based build of ReMarkdown using default styles
 @layer remarkdown {
-	@include rmd.configure(
-		$selector-base: ".remarkdown",
-		$selector-option: ".remarkdown.%o",
-		$primary-font: (
-			Menlo,
-			Monaco,
-			"DejaVu Sans Mono",
-			Consolas,
-			monospace,
-		)
-	);
-	@include rmd.header("ReMarkdown %v (MIT) https://fvsch.github.io/remarkdown/");
-	@include rmd.output();
+	@include meta.load-css("./rmd-defaults");
 }
 
 /// Attribute-based build of ReMarkdown with no default styles
 @layer remarkdown-zero-attr {
-	@include rmd.configure(
-		$selector-base: "[data-remarkdown]",
-		$selector-option: "[data-remarkdown~=%o]",
-		$default-styles: zero.$default-styles,
-		$margins: zero.$margins
-	);
-	@include rmd.header("ReMarkdown-zero %v [attr] (MIT) https://fvsch.github.io/remarkdown/");
-	@include rmd.output();
+	@include meta.load-css("./rmd-zero");
 }
 
 /* Demo layout and page styles */
@@ -103,33 +82,25 @@ nav {
 	white-space: nowrap;
 }
 
-/* Our own font-family. Also setting one for code elements */
-.remarkdown {
-	font-family: Menlo, Monaco, "DejaVu Sans Mono", Consolas, monospace;
-}
-
-/* Make the Markdown-like markers look cool */
-.remarkdown ::before,
-.remarkdown ::after {
-	opacity: 0.6;
-	color: #205080;
-}
-
-.remarkdown code {
-	color: #802020;
-}
-
-.remarkdown pre {
-	white-space: pre-wrap;
-	color: #802020;
-	font-family: Courier, "Courier New", monospace;
-
-	@media (max-width: 700px) {
-		margin-inline-start: 0 !important;
+@scope (.remarkdown) to (.remarkdown-off) {
+	/* Make the Markdown-like markers look cool */
+	::before,
+	::after {
+		opacity: 0.6;
+		color: #205080;
 	}
-}
-
-.remarkdown table {
-	margin-block: 2.5em;
-	font-size: 95%;
+	code {
+		color: #802020;
+	}
+	pre {
+		white-space: pre-wrap;
+		color: #802020;
+		@media (max-width: 700px) {
+			margin-inline-start: 0;
+		}
+	}
+	table {
+		margin-block: 2.5em;
+		font-size: 95%;
+	}
 }

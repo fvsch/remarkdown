@@ -1,0 +1,25 @@
+@use "../lib/rmd";
+
+@include rmd.configure(
+	$selector-base: "",
+	$selector-option: "&.%o",
+	$primary-font: (
+		Menlo,
+		Monaco,
+		DejaVu Sans Mono,
+		Consolas,
+		monospace,
+	),
+	$code-font: (
+		Courier,
+		Courier New,
+		Liberation Mono,
+		monospace,
+	)
+);
+
+@include rmd.header("ReMarkdown %v (MIT) https://fvsch.github.io/remarkdown/");
+
+@scope (.remarkdown) to (.remarkdown-off) {
+	@include rmd.output();
+}

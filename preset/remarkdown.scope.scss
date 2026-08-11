@@ -1,0 +1,14 @@
+// Scope-based build of ReMarkdown using default styles
+
+@use "../lib/rmd";
+
+@include rmd.configure(
+	$selector-base: "",
+	$selector-option: '&.%o'
+);
+
+@include rmd.header("ReMarkdown %v [scope] (MIT) https://fvsch.github.io/remarkdown/");
+
+@scope (.remarkdown) to (.remarkdown-off) {
+	@include rmd.output();
+}
