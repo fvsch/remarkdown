@@ -1,10 +1,10 @@
 // <em>
-// Options: em-star, em-underscore
+// Options: em-reset, em-star, em-underscore
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-em {
-	@include selector-base($cond: config-get("set-font-styles", bool)) {
+	@include selector-option("em-reset") {
 		em {
 			font-style: normal;
 			font-weight: normal;

@@ -1,7 +1,7 @@
 // Tables
 // Option: table-marker
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-table {
 	@include selector-option("table-marker") {

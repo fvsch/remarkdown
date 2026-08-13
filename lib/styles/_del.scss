@@ -1,7 +1,7 @@
 // <del>
-// Option: del-gfm
+// Options: del-gfm
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-del {
 	@include selector-option("del-gfm") {

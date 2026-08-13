@@ -1,6 +1,6 @@
 // Paragraphs
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-para {
 	@include selector-base {
@@ -9,7 +9,7 @@
 		}
 		figure {
 			margin-block: margins("figure");
-			margin-inline: 0;
+			margin-inline: indents("figure");
 		}
 	}
 }
