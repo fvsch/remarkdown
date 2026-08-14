@@ -1,5 +1,5 @@
 /*! ReMarkdown-zero 4.0.0-alpha.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
-/* includes: all styles; defaults: none; */
+/* includes: all styles; defaults: base-text, hn-reset, em-reset, strong-reset; */
 [data-remarkdown] {
 	font-family: monospace, monospace;
 	line-height: 1.5;
@@ -8,17 +8,17 @@
 	font-family: inherit;
 }
 
-[data-remarkdown~="hn-reset"] h1 {
+[data-remarkdown] h1 {
 	font-size: inherit;
 	font-weight: inherit;
 	margin-block: 1lh;
 }
-[data-remarkdown~="hn-reset"] h2 {
+[data-remarkdown] h2 {
 	font-size: inherit;
 	font-weight: inherit;
 	margin-block: 1lh;
 }
-[data-remarkdown~="hn-reset"] :is(h3, h4, h5, h6) {
+[data-remarkdown] :is(h3, h4, h5, h6) {
 	font-size: inherit;
 	font-weight: inherit;
 	margin-block: 1lh;
@@ -43,19 +43,17 @@
 	content: "###### "/"";
 }
 
-[data-remarkdown~="h2-underline"] h2,
 [data-remarkdown~="h1-underline"] h1 {
 	display: table;
 	overflow: hidden;
 	position: relative;
 	padding-bottom: 1lh;
 }
-[data-remarkdown~="h2-underline"] h2::before,
 [data-remarkdown~="h1-underline"] h1::before {
 	content: none;
 }
-[data-remarkdown~="h2-underline"] h2::after,
 [data-remarkdown~="h1-underline"] h1::after {
+	content: "========================================================================================================================"/"";
 	position: absolute;
 	bottom: 0;
 	inset-inline: 0;
@@ -66,12 +64,25 @@
 	cursor: default;
 }
 
-[data-remarkdown~="h1-underline"] h1::after {
-	content: "========================================================================================================================"/"";
+[data-remarkdown~="h2-underline"] h2 {
+	display: table;
+	overflow: hidden;
+	position: relative;
+	padding-bottom: 1lh;
 }
-
+[data-remarkdown~="h2-underline"] h2::before {
+	content: none;
+}
 [data-remarkdown~="h2-underline"] h2::after {
 	content: "------------------------------------------------------------------------------------------------------------------------"/"";
+	position: absolute;
+	bottom: 0;
+	inset-inline: 0;
+	height: 1lh;
+	width: 100%;
+	overflow: hidden;
+	word-break: break-all;
+	cursor: default;
 }
 
 [data-remarkdown] p {
@@ -79,7 +90,7 @@
 }
 [data-remarkdown] figure {
 	margin-block: 1lh;
-	margin-inline: 0;
+	margin-inline: 0ch;
 }
 
 [data-remarkdown] hr {
@@ -195,6 +206,9 @@
 	content: counter(rmd-ol, lower-alpha) "."/"";
 }
 
+[data-remarkdown~="a-bracket"] a {
+	text-decoration-inset: 1ch;
+}
 [data-remarkdown~="a-bracket"] a::before {
 	content: "["/"";
 }
@@ -255,7 +269,7 @@
 }
 
 [data-remarkdown~="pre-indent"] pre {
-	margin-inline: 0ch;
+	margin-inline: 4ch 0ch;
 }
 
 [data-remarkdown~="pre-tick"] pre::before,

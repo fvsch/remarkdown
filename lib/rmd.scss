@@ -1,31 +1,35 @@
 /// The ReMarkdown.css Sass library
 /// Exposes three mixins:
-/// - `configure`: can be used to override defaults;
+/// - `config`: can be used to override defaults;
 /// - `header`: outputs a CSS comment describing the library;
 /// - `output`: generates the actual styles.
 
-@forward "./shared/config" show configure;
-@forward "./styles/all";
-
 @use "sass:list";
-@use "sass:meta";
-@use "./shared/all" as *;
-@use "./styles/all" as *;
+@use "./styles" as *;
+@use "./toolkit" as *;
+
+@forward "./styles";
 
 $version: "4.0.0-alpha.1";
+$-homepage: "https://fvsch.github.io/remarkdown/";
 
-@mixin header($title: "ReMarkdown %v") {
+@mixin config($args...) {
+	$options: merge-arglist($args);
+	@include config-set($options);
+}
+
+@mixin header($title: "ReMarkdown %v - %h") {
 	$included: "all styles";
 	@if config-get("output-all-styles") != true {
 		$included: "default-styles only";
 	}
-
 	$list: config-get("default-styles", list);
 	@if list.length($list) == 0 {
 		$list: "none";
 	}
 	@if $title {
 		$title: str-replace($title, "%v", $version);
+		$title: str-replace($title, "%h", $-homepage);
 		/*! #{$title} */
 		/* includes: #{$included}; defaults: #{$list}; */
 	}

@@ -2,12 +2,12 @@
 
 @use "../lib/rmd";
 
-@include rmd.configure(
+@include rmd.config(
 	$selector-base: "",
 	$selector-option: '&.%o'
 );
 
-@include rmd.header("ReMarkdown %v [scope] (MIT) https://fvsch.github.io/remarkdown/");
+@include rmd.header("ReMarkdown %v [scope] (MIT) %h");
 
 @scope (.remarkdown) to (.remarkdown-off) {
 	@include rmd.output();

@@ -1,7 +1,7 @@
 // <ol>
 // Options: ol-decimal, ol-zero, ol-alpha
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-ol {
 	@include selector-base() {

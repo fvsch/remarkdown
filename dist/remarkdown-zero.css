@@ -1,5 +1,5 @@
 /*! ReMarkdown-zero 4.0.0-alpha.1 (MIT) https://fvsch.github.io/remarkdown/ */
-/* includes: all styles; defaults: none; */
+/* includes: all styles; defaults: base-text, hn-reset, em-reset, strong-reset; */
 .remarkdown {
 	font-family: monospace, monospace;
 	line-height: 1.5;
@@ -8,17 +8,17 @@
 	font-family: inherit;
 }
 
-.remarkdown.hn-reset h1 {
+.remarkdown h1 {
 	font-size: inherit;
 	font-weight: inherit;
 	margin-block: 1lh;
 }
-.remarkdown.hn-reset h2 {
+.remarkdown h2 {
 	font-size: inherit;
 	font-weight: inherit;
 	margin-block: 1lh;
 }
-.remarkdown.hn-reset :is(h3, h4, h5, h6) {
+.remarkdown :is(h3, h4, h5, h6) {
 	font-size: inherit;
 	font-weight: inherit;
 	margin-block: 1lh;
@@ -43,19 +43,17 @@
 	content: "###### "/"";
 }
 
-.remarkdown.h2-underline h2,
 .remarkdown.h1-underline h1 {
 	display: table;
 	overflow: hidden;
 	position: relative;
 	padding-bottom: 1lh;
 }
-.remarkdown.h2-underline h2::before,
 .remarkdown.h1-underline h1::before {
 	content: none;
 }
-.remarkdown.h2-underline h2::after,
 .remarkdown.h1-underline h1::after {
+	content: "========================================================================================================================"/"";
 	position: absolute;
 	bottom: 0;
 	inset-inline: 0;
@@ -66,12 +64,25 @@
 	cursor: default;
 }
 
-.remarkdown.h1-underline h1::after {
-	content: "========================================================================================================================"/"";
+.remarkdown.h2-underline h2 {
+	display: table;
+	overflow: hidden;
+	position: relative;
+	padding-bottom: 1lh;
 }
-
+.remarkdown.h2-underline h2::before {
+	content: none;
+}
 .remarkdown.h2-underline h2::after {
 	content: "------------------------------------------------------------------------------------------------------------------------"/"";
+	position: absolute;
+	bottom: 0;
+	inset-inline: 0;
+	height: 1lh;
+	width: 100%;
+	overflow: hidden;
+	word-break: break-all;
+	cursor: default;
 }
 
 .remarkdown p {
@@ -79,7 +90,7 @@
 }
 .remarkdown figure {
 	margin-block: 1lh;
-	margin-inline: 0;
+	margin-inline: 0ch;
 }
 
 .remarkdown hr {
@@ -195,6 +206,9 @@
 	content: counter(rmd-ol, lower-alpha) "."/"";
 }
 
+.remarkdown.a-bracket a {
+	text-decoration-inset: 1ch;
+}
 .remarkdown.a-bracket a::before {
 	content: "["/"";
 }
@@ -255,7 +269,7 @@
 }
 
 .remarkdown.pre-indent pre {
-	margin-inline: 0ch;
+	margin-inline: 4ch 0ch;
 }
 
 .remarkdown.pre-tick pre::before,

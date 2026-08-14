@@ -2,25 +2,56 @@
  * Styles for ReMarkdown demo pages
  */
 @use "sass:meta";
+@use "../lib/rmd";
+@use "../lib/zero";
 
-@layer remarkdown, remarkdown-zero-attr;
-
-/// Class-based build of ReMarkdown using default styles
 @layer remarkdown {
-	@include meta.load-css("./rmd-defaults");
-}
+	/// Class-based build of ReMarkdown using default styles
+	@include rmd.config(
+		$selector-base: "",
+		$selector-option: "&.%o",
+		$base-font: (
+			Menlo,
+			Consolas,
+			DejaVu Sans Mono,
+			ui-monospace,
+			monospace,
+		)
+	);
+	@include rmd.header("ReMarkdown %v [scope-custom] (MIT) %h");
+	@scope (.remarkdown) to ([data-remarkdown]) {
+		@include rmd.output();
+	}
 
-/// Attribute-based build of ReMarkdown with no default styles
-@layer remarkdown-zero-attr {
-	@include meta.load-css("./rmd-zero");
+	/// Attribute-based build of ReMarkdown with no default styles
+	@include rmd.config(
+		meta.module-variables("zero"),
+		$selector-base: "[data-remarkdown]",
+		$selector-option: "[data-remarkdown~=%o]"
+	);
+	@include rmd.header("ReMarkdown-zero %v [attr] (MIT) %h");
+	@include rmd.output();
 }
 
 /* Demo layout and page styles */
 
-html {
-	background-color: white;
-	@media (min-width: 900px) {
-		background-color: #eee;
+:root {
+	--text-color: hsl(0 0% 12%);
+	--link-color: hsl(346 86% 54%);
+	--code-color: hsl(0 60% 31%);
+	--pseudo-color: hsl(210 60% 31% / 0.6);
+	--bg-color: hsl(0 0% 100%);
+	--bg-alt-color: hsl(0 0% 93%);
+	--bg-border-color: hsl(0 0% 86%);
+	--demo-text-color: hsl(220 50% 32%);
+	--demo-bg-color: hsl(235 80% 95%);
+
+	scroll-padding-top: 1lh;
+	color: var(--text-color);
+	background-color: var(--bg-color);
+
+	@media (width >= 900px) {
+		background-color: var(--bg-alt-color);
 	}
 }
 
@@ -28,79 +59,104 @@ body {
 	max-width: 660px;
 	padding: 30px;
 	margin: 0 auto;
-	color: #202020;
 
-	@media (min-width: 900px) {
+	@media (width >= 900px) {
 		margin: 30px auto;
 		padding: 40px 80px;
-		border: 1px solid #ddd;
-		background-color: white;
-		box-shadow: 3px 3px 3px -2px #ddd;
+		border: 1px solid var(--bg-border-color);
+		background-color: var(--bg-color);
+		box-shadow: 3px 3px 3px -2px var(--bg-border-color);
 	}
 }
 
-a {
-	color: #f02050;
-	text-decoration: none;
+@scope (.remarkdown) to ([data-remarkdown]) {
+	/* Make the Markdown-like markers look nice */
+	::before,
+	::after {
+		color: var(--pseudo-color);
+	}
+
+	a {
+		color: var(--link-color);
+		text-decoration-line: none;
+		text-decoration-thickness: 1.5px;
+		text-underline-offset: 0.25em;
+	}
+	a:hover {
+		text-decoration-line: underline;
+	}
+	a:focus-visible {
+		color: white;
+		background-color: var(--link-color);
+		outline: solid 2px var(--link-color);
+		&::before,
+		&::after {
+			color: inherit;
+		}
+	}
+
+	code {
+		color: var(--code-color);
+	}
+	pre {
+		white-space: pre-wrap;
+		color: var(--code-color);
+		@media (width < 700px) {
+			margin-inline-start: 0;
+		}
+	}
+
+	table {
+		margin-block: 2.5em;
+		font-size: 95%;
+	}
 }
-a:hover {
-	border-bottom: 1px solid;
-}
-a:focus,
-a:active {
-	color: white;
-	background-color: #f02050;
-}
+
+/* Nav bar */
 
 nav {
-	margin: 0 0 4em;
-	text-align: right;
+	display: flex;
+	flex-direction: column;
+	gap: 1ch;
+	margin-block: 0 2lh;
+	text-align: center;
 
+	& > :first-child {
+		font-style: italic;
+	}
 	& > br {
 		display: none;
 	}
-	& > span {
-		float: left;
-	}
-	@media (max-width: 900px) {
-		& > * {
-			display: block;
-			padding-bottom: 0.4em;
+
+	@media (width >= 700px) {
+		flex-direction: row;
+		gap: 2ch;
+		text-align: right;
+		& > :first-child {
+			margin-inline-end: auto;
 		}
 	}
-}
-
-.example {
-	margin: 1.5em -30px;
-	padding: 0.5em 30px;
-	background: #eef;
 }
 
 /* Styles page */
 
-#style-list tr > * {
-	white-space: nowrap;
+#styles {
+	figure {
+		overflow-x: auto;
+		margin: 1.5em -30px;
+		padding: 0.5em 30px;
+		color: var(--demo-text-color);
+		background-color: var(--demo-bg-color);
+	}
 }
 
-@scope (.remarkdown) to (.remarkdown-off) {
-	/* Make the Markdown-like markers look cool */
-	::before,
-	::after {
-		opacity: 0.6;
-		color: #205080;
+#styles-list {
+	tr > :first-child {
+		white-space: nowrap;
 	}
-	code {
-		color: #802020;
-	}
-	pre {
-		white-space: pre-wrap;
-		color: #802020;
-		@media (max-width: 700px) {
-			margin-inline-start: 0;
+	@media (width < 700px) {
+		tr > :last-child {
+			display: none;
 		}
-	}
-	table {
-		margin-block: 2.5em;
-		font-size: 95%;
 	}
 }

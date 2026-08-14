@@ -1,7 +1,7 @@
 // <ul>
 // Options: ul-star, ul-plus, ul-hyphen
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-ul {
 	@include selector-base {

@@ -8,13 +8,12 @@
 @use "sass:string";
 
 @use "../defaults";
-@use "./str";
+@use "./utils";
 
 $-defaults: meta.module-variables("defaults");
 $-state: $-defaults;
 
-@mixin configure($args...) {
-	$options: meta.keywords($args);
+@mixin set($options) {
 	@each $name, $value in $options {
 		@if map.has-key($-defaults, $name) == false {
 			$list: map.keys($-defaults);
@@ -35,16 +34,8 @@ $-state: $-defaults;
 		($type != meta.type-of($value)) and
 		($type != meta.type-of(list.nth($value, 1)))
 	{
-		$path: str.join($keys, ".");
+		$path: utils.str-join($keys, ".");
 		@error "Config value for #{$path} has type #{meta.type-of($value)}, expected #{$type}";
-	}
-	@return $value;
-}
-
-@function get-font-family($name) {
-	$value: get($name, string);
-	@if meta.type-of($value) == string {
-		@return string.unquote($value);
 	}
 	@return $value;
 }

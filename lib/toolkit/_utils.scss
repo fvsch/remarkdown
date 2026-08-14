@@ -1,0 +1,45 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+
+/// Merge positional arguments and named arguments passed to a function or mixin,
+/// provided the positional arguments are maps themselves.
+@function merge-arglist($args) {
+	$map: ();
+	@each $arg in $args {
+		@if meta.type-of($arg) == map {
+			$map: map.merge($map, $arg);
+		}
+	}
+	$map: map.merge($map, meta.keywords($args));
+	@return $map;
+}
+
+@function str-join($list, $joiner: "") {
+	$acc: "";
+	@each $item in $list {
+		$sep: if(sass($acc): $joiner; else: "");
+		$acc: $acc + $sep + $item;
+	}
+	@return string.quote($acc);
+}
+
+@function str-repeat($str, $times) {
+	$result: "";
+	@for $i from 1 through $times {
+		$result: $result + $str;
+	}
+	@return $result;
+}
+
+@function str-replace($subject, $search, $replacement: "") {
+	$index: string.index($subject, $search);
+	@if $index {
+		$start: string.slice($subject, 1, $index - 1);
+		$end: string.slice($subject, $index + string.length($search));
+		@return $start + $replacement + str-replace($end, $search, $replacement);
+	} @else {
+		@return $subject;
+	}
+}

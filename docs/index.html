@@ -1,91 +1,91 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>ReMarkdown — HTML that looks like Markdown text</title>
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="./demo.css">
+	<meta charset="utf-8">
+	<title>ReMarkdown — HTML that looks like Markdown text</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" href="./demo.css">
 </head>
-<body>
+<body class="remarkdown h1-underline h2-underline em-underscore">
 
-<nav class="remarkdown">
-  <span>ReMarkdown</span>
-  <br>
-  <em>about</em>
-  <a href="./styles.html">styles</a>
-  <a href="./customize.html">customize</a>
+<nav>
+	<span>ReMarkdown</span>
+	<br>
+	<em>about</em>
+	<a href="./styles.html">styles</a>
+	<a href="./customize.html">customize</a>
 </nav>
 
-<main class="remarkdown h1-underline h2-underline">
+<main>
 
 <h1>
-  Make your HTML look like Markdown
+	Make your HTML look like Markdown
 </h1>
 
 <p>
-  The text you’re reading right now is not plain text, but simple HTML styled like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> text. Right-click and inspect this page to get a feel of how it works.
+	The text you’re reading right now is not plain text, but simple HTML styled like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> text. Right-click and inspect this page to get a feel of how it works.
 </p>
 
 <h2>
-  Using ReMarkdown
+	Using ReMarkdown
 </h2>
 
 <p>
-  It’s as simple as downloading <a href="https://unpkg.com/remarkdown.css/dist/remarkdown.css">remarkdown.css</a>, and adding the <code>remarkdown</code> class to a container:
+	It’s as simple as downloading <a href="https://unpkg.com/remarkdown.css/dist/remarkdown.css">remarkdown.css</a>, and adding the <code>remarkdown</code> class to a container:
 </p>
 
 <pre><code>&lt;!doctype html>
 &lt;html lang="en">
 &lt;head>
-  &lt;title>Using ReMarkdown&lt;/title>
-  <b>&lt;link rel="stylesheet" href="https://unpkg.com/remarkdown.css/dist/remarkdown.css"></b>
+	&lt;title>Using ReMarkdown&lt;/title>
+	<b>&lt;link rel="stylesheet" href="https://unpkg.com/remarkdown.css/dist/remarkdown.css"></b>
 &lt;/head>
 &lt;body <b>class="remarkdown"</b>>
-  &lt;h1>Hello World&lt;/h1>
-  &lt;p>A paragraph.&lt;/p>
+	&lt;h1>Hello World&lt;/h1>
+	&lt;p>A paragraph.&lt;/p>
 &lt;/body>
 &lt;/html></code></pre>
 
 <h2>
-  Make it your own
+	Make it your own
 </h2>
 
 <p>
-  ReMarkdown is broken down into <a href="./styles.html">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
+	ReMarkdown is broken down into <a href="./styles.html">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
 </p>
 
 <p>
-  You can choose additional variants by adding option names as classes along the <code>remarkdown</code> class. For example:
+	You can choose additional variants by adding option names as classes along the <code>remarkdown</code> class. For example:
 </p>
 
 <pre><code>&lt;body class="remarkdown h1-underline pre-ticks">
-  ...
+	...
 &lt;/body></code></pre>
 
 <p>
-  Take a look at the <a href="./customize.html">customize</a> page for different ways to disable, enable or override styles, change the defaults, change how selectors look, etc.
+	Take a look at the <a href="./customize.html">customize</a> page for different ways to disable, enable or override styles, change the defaults, change how selectors look, etc.
 </p>
 
 <h2>
-  More info
+	More info
 </h2>
 
 <ul>
-  <li>
-    GitHub: <a href="https://github.com/fvsch/remarkdown">fvsch/remarkdown</a>
-  </li>
-  <li>
-    npm: <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>
-  </li>
-  <li>
-    Copyright: <a href="https://github.com/fvsch/remarkdown/blob/main/LICENSE">MIT License</a> (1.0 and 2.0 used the <a href="http://www.wtfpl.net/">WTFPL</a>)
-  </li>
-  <li>
-    Browser support: IE11+, and all recent-ish browsers
-  </li>
-  <li>
-    Similar projects: <a href="https://mrcoles.com/demo/markdown-css/">Peter Coles’ Markdown.css</a>
-  </li>
+	<li>
+		GitHub: <a href="https://github.com/fvsch/remarkdown">fvsch/remarkdown</a>
+	</li>
+	<li>
+		npm: <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>
+	</li>
+	<li>
+		Copyright: <a href="https://github.com/fvsch/remarkdown/blob/main/LICENSE">MIT License</a> (1.0 and 2.0 used the <a href="http://www.wtfpl.net/">WTFPL</a>)
+	</li>
+	<li>
+		Browser support: IE11+, and all recent-ish browsers
+	</li>
+	<li>
+		Similar projects: <a href="https://mrcoles.com/demo/markdown-css/">Peter Coles’ Markdown.css</a>
+	</li>
 </ul>
 
 </main>
