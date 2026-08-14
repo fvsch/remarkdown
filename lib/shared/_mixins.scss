@@ -1,8 +1,0 @@
-@mixin content($value, $alt: "") {
-	content: $value / $alt;
-	// Ideally we can double the empty alt string with `speak: never`,
-	// but browser support seems nonexistent, so maybe best not to include it?
-	// @if $alt == "" {
-	// 	speak: never;
-	// }
-}

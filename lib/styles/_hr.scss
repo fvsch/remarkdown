@@ -1,7 +1,7 @@
 // Horizontal rules
 // Options: hr-center, hr-star, hr-hyphen
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-hr {
 	@include selector-base {

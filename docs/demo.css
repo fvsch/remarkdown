@@ -1,26 +1,21 @@
 /**
  * Styles for ReMarkdown demo pages
  */
-@layer remarkdown, remarkdown-zero-attr;
 @layer remarkdown {
-	/*! ReMarkdown 4.0.0-alpha.1 (MIT) https://fvsch.github.io/remarkdown/ */
-	/* includes: all styles; defaults: hn-reset hn-hash ul-hyphen ol-decimal quote-gt em-star strong-star a-bracket code-tick pre-indent hr-star; */
-	@scope (.remarkdown) to (.remarkdown-off) {
+	/*! ReMarkdown 4.0.0-alpha.1 [scope-custom] (MIT) https://fvsch.github.io/remarkdown/ */
+	/* includes: all styles; defaults: base-text, hn-reset, hn-hash, ul-hyphen, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
+	@scope (.remarkdown) to ([data-remarkdown]) {
 		& {
 			font-family:
 				Menlo,
-				Monaco,
-				DejaVu Sans Mono,
 				Consolas,
+				DejaVu Sans Mono,
+				ui-monospace,
 				monospace;
 			line-height: 1.5;
 		}
 		:is(pre, code, kbd, samp) {
-			font-family:
-				Courier,
-				Courier New,
-				Liberation Mono,
-				monospace;
+			font-family: inherit;
 		}
 		h1 {
 			font-size: inherit;
@@ -55,19 +50,17 @@
 		h6::before {
 			content: "###### "/"";
 		}
-		&.h2-underline h2,
 		&.h1-underline h1 {
 			display: table;
 			overflow: hidden;
 			position: relative;
 			padding-bottom: 1lh;
 		}
-		&.h2-underline h2::before,
 		&.h1-underline h1::before {
 			content: none;
 		}
-		&.h2-underline h2::after,
 		&.h1-underline h1::after {
+			content: "========================================================================================================================"/"";
 			position: absolute;
 			bottom: 0;
 			inset-inline: 0;
@@ -77,18 +70,32 @@
 			word-break: break-all;
 			cursor: default;
 		}
-		&.h1-underline h1::after {
-			content: "========================================================================================================================"/"";
+		&.h2-underline h2 {
+			display: table;
+			overflow: hidden;
+			position: relative;
+			padding-bottom: 1lh;
+		}
+		&.h2-underline h2::before {
+			content: none;
 		}
 		&.h2-underline h2::after {
 			content: "------------------------------------------------------------------------------------------------------------------------"/"";
+			position: absolute;
+			bottom: 0;
+			inset-inline: 0;
+			height: 1lh;
+			width: 100%;
+			overflow: hidden;
+			word-break: break-all;
+			cursor: default;
 		}
 		p {
 			margin-block: 1lh;
 		}
 		figure {
 			margin-block: 1lh;
-			margin-inline: 0;
+			margin-inline: 0ch;
 		}
 		hr {
 			height: 1lh;
@@ -190,6 +197,9 @@
 			margin-inline-end: 1ch;
 			min-width: 2ch;
 			content: counter(rmd-ol, lower-alpha) "."/"";
+		}
+		a {
+			text-decoration-inset: 1ch;
 		}
 		a::before {
 			content: "["/"";
@@ -341,10 +351,8 @@
 			white-space: pre;
 		}
 	}
-}
-@layer remarkdown-zero-attr {
 	/*! ReMarkdown-zero 4.0.0-alpha.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
-	/* includes: all styles; defaults: none; */
+	/* includes: all styles; defaults: base-text, hn-reset, em-reset, strong-reset; */
 	[data-remarkdown] {
 		font-family: monospace, monospace;
 		line-height: 1.5;
@@ -352,17 +360,17 @@
 	[data-remarkdown] :is(pre, code, kbd, samp) {
 		font-family: inherit;
 	}
-	[data-remarkdown~="hn-reset"] h1 {
+	[data-remarkdown] h1 {
 		font-size: inherit;
 		font-weight: inherit;
 		margin-block: 1lh;
 	}
-	[data-remarkdown~="hn-reset"] h2 {
+	[data-remarkdown] h2 {
 		font-size: inherit;
 		font-weight: inherit;
 		margin-block: 1lh;
 	}
-	[data-remarkdown~="hn-reset"] :is(h3, h4, h5, h6) {
+	[data-remarkdown] :is(h3, h4, h5, h6) {
 		font-size: inherit;
 		font-weight: inherit;
 		margin-block: 1lh;
@@ -385,19 +393,17 @@
 	[data-remarkdown~="hn-hash"] h6::before {
 		content: "###### "/"";
 	}
-	[data-remarkdown~="h2-underline"] h2,
 	[data-remarkdown~="h1-underline"] h1 {
 		display: table;
 		overflow: hidden;
 		position: relative;
 		padding-bottom: 1lh;
 	}
-	[data-remarkdown~="h2-underline"] h2::before,
 	[data-remarkdown~="h1-underline"] h1::before {
 		content: none;
 	}
-	[data-remarkdown~="h2-underline"] h2::after,
 	[data-remarkdown~="h1-underline"] h1::after {
+		content: "========================================================================================================================"/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
@@ -407,18 +413,32 @@
 		word-break: break-all;
 		cursor: default;
 	}
-	[data-remarkdown~="h1-underline"] h1::after {
-		content: "========================================================================================================================"/"";
+	[data-remarkdown~="h2-underline"] h2 {
+		display: table;
+		overflow: hidden;
+		position: relative;
+		padding-bottom: 1lh;
+	}
+	[data-remarkdown~="h2-underline"] h2::before {
+		content: none;
 	}
 	[data-remarkdown~="h2-underline"] h2::after {
 		content: "------------------------------------------------------------------------------------------------------------------------"/"";
+		position: absolute;
+		bottom: 0;
+		inset-inline: 0;
+		height: 1lh;
+		width: 100%;
+		overflow: hidden;
+		word-break: break-all;
+		cursor: default;
 	}
 	[data-remarkdown] p {
 		margin-block: 1lh;
 	}
 	[data-remarkdown] figure {
 		margin-block: 1lh;
-		margin-inline: 0;
+		margin-inline: 0ch;
 	}
 	[data-remarkdown] hr {
 		height: 1lh;
@@ -521,6 +541,9 @@
 		min-width: 2ch;
 		content: counter(rmd-ol, lower-alpha) "."/"";
 	}
+	[data-remarkdown~="a-bracket"] a {
+		text-decoration-inset: 1ch;
+	}
 	[data-remarkdown~="a-bracket"] a::before {
 		content: "["/"";
 	}
@@ -571,7 +594,7 @@
 		tab-size: 4;
 	}
 	[data-remarkdown~="pre-indent"] pre {
-		margin-inline: 0ch;
+		margin-inline: 4ch 0ch;
 	}
 	[data-remarkdown~="pre-tick"] pre::before,
 	[data-remarkdown~="pre-tick"] pre::after {
@@ -672,12 +695,23 @@
 	}
 }
 /* Demo layout and page styles */
-html {
-	background-color: white;
+:root {
+	--text-color: hsl(0 0% 12%);
+	--link-color: hsl(346 86% 54%);
+	--code-color: hsl(0 60% 31%);
+	--pseudo-color: hsl(210 60% 31% / 0.6);
+	--bg-color: hsl(0 0% 100%);
+	--bg-alt-color: hsl(0 0% 93%);
+	--bg-border-color: hsl(0 0% 86%);
+	--demo-text-color: hsl(220 50% 32%);
+	--demo-bg-color: hsl(235 80% 95%);
+	scroll-padding-top: 1lh;
+	color: var(--text-color);
+	background-color: var(--bg-color);
 }
-@media (min-width: 900px) {
-	html {
-		background-color: #eee;
+@media (width >= 900px) {
+	:root {
+		background-color: var(--bg-alt-color);
 	}
 }
 
@@ -685,76 +719,49 @@ body {
 	max-width: 660px;
 	padding: 30px;
 	margin: 0 auto;
-	color: #202020;
 }
-@media (min-width: 900px) {
+@media (width >= 900px) {
 	body {
 		margin: 30px auto;
 		padding: 40px 80px;
-		border: 1px solid #ddd;
-		background-color: white;
-		box-shadow: 3px 3px 3px -2px #ddd;
+		border: 1px solid var(--bg-border-color);
+		background-color: var(--bg-color);
+		box-shadow: 3px 3px 3px -2px var(--bg-border-color);
 	}
 }
 
-a {
-	color: #f02050;
-	text-decoration: none;
-}
-
-a:hover {
-	border-bottom: 1px solid;
-}
-
-a:focus,
-a:active {
-	color: white;
-	background-color: #f02050;
-}
-
-nav {
-	margin: 0 0 4em;
-	text-align: right;
-}
-nav > br {
-	display: none;
-}
-nav > span {
-	float: left;
-}
-@media (max-width: 900px) {
-	nav > * {
-		display: block;
-		padding-bottom: 0.4em;
-	}
-}
-
-.example {
-	margin: 1.5em -30px;
-	padding: 0.5em 30px;
-	background: #eef;
-}
-
-/* Styles page */
-#style-list tr > * {
-	white-space: nowrap;
-}
-
-@scope (.remarkdown) to (.remarkdown-off) {
-	/* Make the Markdown-like markers look cool */
+@scope (.remarkdown) to ([data-remarkdown]) {
+	/* Make the Markdown-like markers look nice */
 	::before,
 	::after {
-		opacity: 0.6;
-		color: #205080;
+		color: var(--pseudo-color);
+	}
+	a {
+		color: var(--link-color);
+		text-decoration-line: none;
+		text-decoration-thickness: 1.5px;
+		text-underline-offset: 0.25em;
+	}
+	a:hover {
+		text-decoration-line: underline;
+	}
+	a:focus-visible {
+		color: white;
+		background-color: var(--link-color);
+		outline: solid 2px var(--link-color);
+	}
+	a:focus-visible::before,
+	a:focus-visible::after {
+		color: inherit;
 	}
 	code {
-		color: #802020;
+		color: var(--code-color);
 	}
 	pre {
 		white-space: pre-wrap;
-		color: #802020;
+		color: var(--code-color);
 	}
-	@media (max-width: 700px) {
+	@media (width < 700px) {
 		pre {
 			margin-inline-start: 0;
 		}
@@ -762,5 +769,47 @@ nav > span {
 	table {
 		margin-block: 2.5em;
 		font-size: 95%;
+	}
+}
+/* Nav bar */
+nav {
+	display: flex;
+	flex-direction: column;
+	gap: 1ch;
+	margin-block: 0 2lh;
+	text-align: center;
+}
+nav > :first-child {
+	font-style: italic;
+}
+nav > br {
+	display: none;
+}
+@media (width >= 700px) {
+	nav {
+		flex-direction: row;
+		gap: 2ch;
+		text-align: right;
+	}
+	nav > :first-child {
+		margin-inline-end: auto;
+	}
+}
+
+/* Styles page */
+#styles figure {
+	overflow-x: auto;
+	margin: 1.5em -30px;
+	padding: 0.5em 30px;
+	color: var(--demo-text-color);
+	background-color: var(--demo-bg-color);
+}
+
+#styles-list tr > :first-child {
+	white-space: nowrap;
+}
+@media (width < 700px) {
+	#styles-list tr > :last-child {
+		display: none;
 	}
 }

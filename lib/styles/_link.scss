@@ -1,10 +1,13 @@
 // Links
 // Options: a-bracket, a-showurl
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-a {
 	@include selector-option("a-bracket") {
+		a {
+			text-decoration-inset: 1ch;
+		}
 		a::before {
 			@include content("[");
 		}

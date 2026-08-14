@@ -1,0 +1,49 @@
+/// Default options for ReMarkdown-zero
+/// These are meant to override the defaults in lib/_defaults.scss
+/// using the `configure` mixin:
+///
+/// 	@use "remarkdown.css/lib/rmd";
+/// 	@use "remarkdown.css/lib/zero";
+/// 	@include rmd.configure(
+/// 		$default-styles: zero.$default-styles,
+/// 		$margins: zero.$margins,
+/// 	);
+/// 	@include rmd.header();
+/// 	@include rmd.output();
+
+// oxfmt-ignore
+$default-styles: (
+	// Keep "base-text" and reset styles in defaults for compatibility with
+	// ReMarkdown v3, which used `$set-font-styles: true` by default even in
+	// the ReMarkdown-zero variant.
+	base-text,
+	hn-reset,
+	em-reset,
+	strong-reset,
+);
+
+$margins: (
+	"h1": (),
+	"h2": (),
+	"hn": (),
+	"hr": (),
+	"p": (),
+	"pre": (
+		"inline-start": 4,
+		"inline-end": 0,
+	),
+	"ol": (
+		"inline-start": 3,
+		"inline-end": 0,
+	),
+	"ul": (
+		"inline-start": 3,
+		"inline-end": 0,
+	),
+	"figure": (),
+	"blockquote": (
+		"inline-start": 2,
+		"inline-end": 0,
+	),
+	"table": (),
+);

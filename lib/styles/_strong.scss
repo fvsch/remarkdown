@@ -1,10 +1,10 @@
 // <strong>
-// Options: strong-star, strong-underscore
+// Options: strong-reset, strong-star, strong-underscore
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-strong {
-	@include selector-base($cond: config-get("set-font-styles", bool)) {
+	@include selector-option("strong-reset") {
 		strong {
 			font-style: normal;
 			font-weight: normal;

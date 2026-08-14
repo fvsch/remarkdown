@@ -1,7 +1,7 @@
 // <code>
 // Options: code-tick
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-code {
 	@include selector-option("code-tick") {

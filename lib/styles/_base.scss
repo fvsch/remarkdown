@@ -1,15 +1,16 @@
 // Base
+// Options: base-text
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-base {
-	@include selector-base($cond: config-get("set-font-styles", bool)) {
+	@include selector-option("base-text") {
 		& {
-			font-family: config-get-font-family("primary-font");
-			line-height: config-get("line-height", number);
+			@include font-family("base-font");
+			line-height: config-get("base-line-height", number);
 		}
 		:is(pre, code, kbd, samp) {
-			font-family: config-get-font-family("code-font");
+			@include font-family("code-font");
 		}
 	}
 }

@@ -1,7 +1,7 @@
 // Headings
-// Options: hn-hash, h1-underline, h2-undelrine
+// Options: hn-reset, hn-hash, h1-underline, h2-undelrine
 
-@use "../shared/all" as *;
+@use "../toolkit" as *;
 
 @mixin output-hn {
 	@include selector-option("hn-reset") {
@@ -29,41 +29,37 @@
 			}
 		}
 	}
-	%-hn-underline-common {
+	@include selector-option("h1-underline") {
+		h1 {
+			@include -hn-underline(config-get("h1-underline"));
+		}
+	}
+	@include selector-option("h2-underline") {
+		h2 {
+			@include -hn-underline(config-get("h2-underline"));
+		}
+	}
+}
+
+@mixin -hn-underline($chars) {
+	& {
 		display: table;
 		overflow: hidden;
 		position: relative;
 		padding-bottom: line();
-		&::before {
-			content: none;
-		}
-		&::after {
-			position: absolute;
-			bottom: 0;
-			inset-inline: 0;
-			height: line();
-			width: 100%;
-			overflow: hidden;
-			word-break: break-all;
-			cursor: default;
-		}
 	}
-	@include selector-option("h1-underline") {
-		$chars: config-get("h1-underline");
-		h1 {
-			@extend %-hn-underline-common;
-			&::after {
-				@include content(str-repeat($chars, 12));
-			}
-		}
+	&::before {
+		content: none;
 	}
-	@include selector-option("h2-underline") {
-		$chars: config-get("h2-underline");
-		h2 {
-			@extend %-hn-underline-common;
-			&::after {
-				@include content(str-repeat($chars, 12));
-			}
-		}
+	&::after {
+		@include content(str-repeat($chars, 12));
+		position: absolute;
+		bottom: 0;
+		inset-inline: 0;
+		height: line();
+		width: 100%;
+		overflow: hidden;
+		word-break: break-all;
+		cursor: default;
 	}
 }

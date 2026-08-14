@@ -1,59 +1,28 @@
 /// Default options for ReMarkdown
 /// To change those options, use the `configure` mixin:
 ///
-/// 	@use "remarkdown.css/lib/remarkdown";
-/// 	@include remarkdown.configure(
-/// 		$selector-base: "article",
-/// 		$selector-option: "article.%0"
+/// 	@use "remarkdown.css/lib/rmd";
+/// 	@include rmd.configure(
+/// 		$selector-base: ".rmd",
+/// 		$selector-option: ".rmd--%0"
 /// 	);
-/// 	@include remarkdown.header();
-/// 	@include remarkdown.output();
+/// 	@include rmd.header();
+/// 	@include rmd.output();
 
 // Selectors for the ReMarkdown container and options
-// -	option selector: "%o" will be replaced by the option name;
-// -	base selector: an empty string base selector ("") can be used if you want
+//
+// -	Base selector: an empty string base selector ("") can be used if you want
 // 	to use CSS nesting or CSS @scope, for example:
-// 	.remarkdown {
-// 		@include remarkdown.configure($selector-base: "", $selector-option: "&.%o");
-// 		@include remarkdown.output();
+//
+// 	@include rmd.configure($selector-base: "", $selector-option: "&.%o");
+// 	@scope (.remarkdown) {
+// 		@include rmd.output();
 // 	}
+//
+// -	Option selector: "%o" will be replaced by the option name.
+//
 $selector-base: ".remarkdown";
 $selector-option: ".remarkdown.%o";
-
-// Default style variations.
-// Separate values with whitespace. Remove or comment out options you
-// don't want. Note that all option names are singular:
-// e.g. "hr-hyphen" even if we use several hyphens to display a <hr>.
-// oxfmt-ignore
-$default-styles: (
-	hn-reset
-	hn-hash
-	// h1-underline
-	// h2-underline
-	ul-hyphen
-	// ul-star
-	// ul-plus
-	ol-decimal
-	// ol-zero
-	// ol-alpha
-	quote-gt
-	em-star
-	// em-underscore
-	strong-star
-	// strong-underscore
-	a-bracket
-	// a-showurl
-	code-tick
-	pre-indent
-	// pre-tick
-	// pre-tilde
-	// pre-tilde-full
-	hr-star
-	// hr-center
-	// hr-hyphen
-	// del-gfm
-	// table-marker
-);
 
 // Whether we should include styles for ALL alternative styles (true),
 // or only for styles listed in $default-styles (false).
@@ -61,23 +30,55 @@ $default-styles: (
 // in HTML with classes or attribute values will be impossible.
 $output-all-styles: true;
 
-// Should ReMarkdown try to define a font-family, and reset font sizes, styles
-// and weights? It's generally useful but if you want to define your fonts
-// styles separately, set this to false.
-// If false, $primary-font, $code-font and $line-height are ignored.
-$set-font-styles: true;
+// Default style variations.
+// Separate values with whitespace. Remove or comment out options you
+// don't want. Note that all option names are singular:
+// e.g. "hr-hyphen" even if we use several hyphens to display a <hr>.
+// oxfmt-ignore
+$default-styles: (
+	base-text,
+	hn-reset,
+	hn-hash,
+	// h1-underline,
+	// h2-underline,
+	ul-hyphen,
+	// ul-star,
+	// ul-plus,
+	ol-decimal,
+	// ol-zero,
+	// ol-alpha,
+	quote-gt,
+	em-reset,
+	em-star,
+	// em-underscore,
+	strong-reset,
+	strong-star,
+	// strong-underscore,
+	a-bracket,
+	// a-showurl,
+	code-tick,
+	pre-indent,
+	// pre-tick,
+	// pre-tilde,
+	// pre-tilde-full,
+	hr-star,
+	// hr-center,
+	// hr-hyphen,
+	// del-gfm,
+	// table-marker,
+);
 
 // Font stack to use.
 // AVOID using "monospace" only, or browsers might use a default small
 // text size (13px). Always define one or more font families before the
 // final ", monospace".
-$primary-font: monospace, monospace;
+$base-font: monospace, monospace;
+
+// Base line-height (as a unit-less ratio, e.g. 1.5)
+$base-line-height: 1.5;
 
 // For elements that are traditionnaly monospace, use a different font?
 $code-font: inherit;
-
-// Base line-height (as a unit-less ratio, e.g. 1.5)
-$line-height: 1.5;
 
 // Width of one step of vertical margin.
 // Typically, the height of an empty text line.
@@ -133,6 +134,8 @@ $margins: (
 	"figure": (
 		"top": 1,
 		"bottom": 1,
+		"inline-start": 0,
+		"inline-end": 0,
 	),
 	"blockquote": (
 		"top": 1,

@@ -1,15 +1,15 @@
 // Attribute-based build of ReMarkdown with no default styles
 
+@use "sass:meta";
 @use "../lib/rmd";
-@use "./zero-config" as *;
+@use "../lib/zero";
 
-@include rmd.configure(
+@include rmd.config(
+	meta.module-variables("zero"),
 	$selector-base: "[data-remarkdown]",
 	$selector-option: '[data-remarkdown~=%o]',
-	$default-styles: $default-styles,
-	$margins: $margins
 );
 
-@include rmd.header("ReMarkdown-zero %v [attr] (MIT) https://fvsch.github.io/remarkdown/");
+@include rmd.header("ReMarkdown-zero %v [attr] (MIT) %h");
 
 @include rmd.output();
