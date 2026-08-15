@@ -7,6 +7,9 @@
 	@include selector-base {
 		pre {
 			margin-block: margins("pre");
+			// Maybe a bit opinionated, but for the common use case of showing code
+			// or machine outputs rather than, say, ASCII art, it just makes sense.
+			white-space: pre-wrap;
 			tab-size: 4;
 		}
 	}

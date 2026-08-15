@@ -79,7 +79,7 @@
 
 <pre><code>.remarkdown ::before,
 .remarkdown ::after {
-	color: rgba(255, 0, 0, .5);
+	color: hsl(0 100% 100% / 0.5);
 }</code></pre>
 
 <h3>
@@ -90,14 +90,8 @@
 	ReMarkdown tells browsers to use their default <code>monospace</code> font, but you can always specify your own, as I did here:
 </p>
 
-<pre><code>/* remarkdown.css must be declared BEFORE this */
-
-.remarkdown {
-	font-family: Menlo, Monaco, "DejaVu Sans Mono",
-		Consolas, monospace;
-}
-.remarkdown pre {
-	font-family: Courier, "Courier New", monospace;
+<pre><code>.remarkdown {
+	font-family: Menlo, DejaVu Sans Mono, Consolas, monospace;
 }</code></pre>
 
 <p>
@@ -120,7 +114,7 @@
 .remarkdown h2 { font-size: 1.2em; }</code></pre>
 
 <p>
-	Alternatively, if you’re compiling your own build, there is an option to disallow ReMarkdown from setting any font style.
+	Alternatively, if you’re compiling your own build, you can remove the <code>hn-reset</code> style from <code>$default-styles</code>.
 </p>
 
 <h3>
@@ -128,20 +122,29 @@
 </h3>
 
 <p>
-	Most ReMarkdown selectors have a specificity of <code>0,0,1,1</code> or in some cases <code>0,0,1,2</code>. If your own selectors have similar weight, make sure you declare your own styles <em>after</em> <code>remarkdown.css</code>. Alternatively you can make use of id selectors or of the double-class trick:
+	Most ReMarkdown styles have a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">selector specificity</a> of <code>0,0,1,1</code> or in some cases <code>0,0,1,2</code>. If your own selectors have similar weight, make sure you declare your own styles <em>after</em> <code>remarkdown.css</code>:
 </p>
 
-<pre><code>.remarkdown h1 {
-	/* Selector has a specificity of 0,0,1,1 */
-}
-.myTitle.myTitle {
-	/* Selector matches and has a specificity of 0,0,2,0 */
-}
+<pre><code>@import "remarkdown.css/dist/remarkdown.css";
+/* Includes this selector (specificity 0,0,1,1):
+.remarkdown h1 {margin-block: 1.5lh 1lh} */
+
+/* Your style overrides (same specificity): */
+.remarkdown h1 {margin-block: 0}
 </code></pre>
 
 <p>
-	Learn more <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">about selector specificity</a>.
+	Alternatively, you can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer">CSS Layers</a> to put all ReMarkdown styles in a cascade layer with lower precedence:
 </p>
+
+<pre><code>@import "remarkdown.css/dist/remarkdown.css" layer(remarkdown);
+/* Includes this selector (specificity 0,0,1,1):
+.remarkdown h1 {margin-block: 1.5lh 1lh} */
+
+/* Your unlayered styles have priority,
+despite the lower specificity (0,0,0,1): */
+h1 {margin-block: 0}
+</code></pre>
 
 <h2 id="custom">
 	Build a custom stylesheet with Sass
