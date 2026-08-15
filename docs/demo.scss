@@ -57,15 +57,26 @@
 
 body {
 	max-width: 660px;
-	padding: 30px;
+	padding-block: 30px 50px;
+	padding-inline: 30px;
 	margin: 0 auto;
 
 	@media (width >= 900px) {
 		margin: 30px auto;
-		padding: 40px 80px;
+		padding-block: 40px 60px;
+		padding-inline: 80px;
 		border: 1px solid var(--bg-border-color);
 		background-color: var(--bg-color);
 		box-shadow: 3px 3px 3px -2px var(--bg-border-color);
+	}
+}
+
+main {
+	& > :first-child {
+		margin-top: 0;
+	}
+	& > :last-child {
+		margin-bottom: 0;
 	}
 }
 
@@ -99,6 +110,7 @@ body {
 		color: var(--code-color);
 	}
 	pre {
+		tab-size: 2;
 		white-space: pre-wrap;
 		color: var(--code-color);
 		@media (width < 700px) {
