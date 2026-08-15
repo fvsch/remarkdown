@@ -24,8 +24,9 @@
 	@include selector-option("hn-hash") {
 		$sign: config-get("heading-sign", string);
 		@for $i from 1 through 6 {
+			$chars: str-repeat($sign, $i);
 			h#{$i}::before {
-				@include content(str-repeat($sign, $i) + " ");
+				@include content($chars + " ");
 			}
 		}
 	}
@@ -43,9 +44,8 @@
 
 @mixin -hn-underline($chars) {
 	& {
-		display: table;
-		overflow: hidden;
 		position: relative;
+		width: fit-content;
 		padding-bottom: line();
 	}
 	&::before {
@@ -61,5 +61,12 @@
 		overflow: hidden;
 		word-break: break-all;
 		cursor: default;
+	}
+	// when text wraps, the underline will take up the full
+	// width of the container, and may display
+	@supports (width: round(down, 100%, 1ch)) {
+		&::after {
+			width: round(down, 100%, 1ch);
+		}
 	}
 }

@@ -51,9 +51,8 @@
 			content: "###### "/"";
 		}
 		&.h1-underline h1 {
-			display: table;
-			overflow: hidden;
 			position: relative;
+			width: fit-content;
 			padding-bottom: 1lh;
 		}
 		&.h1-underline h1::before {
@@ -70,10 +69,14 @@
 			word-break: break-all;
 			cursor: default;
 		}
+		@supports (width: round(down, 100%, 1ch)) {
+			&.h1-underline h1::after {
+				width: round(down, 100%, 1ch);
+			}
+		}
 		&.h2-underline h2 {
-			display: table;
-			overflow: hidden;
 			position: relative;
+			width: fit-content;
 			padding-bottom: 1lh;
 		}
 		&.h2-underline h2::before {
@@ -89,6 +92,11 @@
 			overflow: hidden;
 			word-break: break-all;
 			cursor: default;
+		}
+		@supports (width: round(down, 100%, 1ch)) {
+			&.h2-underline h2::after {
+				width: round(down, 100%, 1ch);
+			}
 		}
 		p {
 			margin-block: 1lh;
@@ -248,6 +256,7 @@
 		}
 		pre {
 			margin-block: 1lh;
+			white-space: pre-wrap;
 			tab-size: 4;
 		}
 		pre {
@@ -316,7 +325,7 @@
 			border-collapse: collapse;
 		}
 		&.table-marker tr > * {
-			min-width: 3ch;
+			min-width: 2ch;
 			position: relative;
 			padding: 0;
 			text-align: inherit;
@@ -394,9 +403,8 @@
 		content: "###### "/"";
 	}
 	[data-remarkdown~="h1-underline"] h1 {
-		display: table;
-		overflow: hidden;
 		position: relative;
+		width: fit-content;
 		padding-bottom: 1lh;
 	}
 	[data-remarkdown~="h1-underline"] h1::before {
@@ -413,10 +421,14 @@
 		word-break: break-all;
 		cursor: default;
 	}
+	@supports (width: round(down, 100%, 1ch)) {
+		[data-remarkdown~="h1-underline"] h1::after {
+			width: round(down, 100%, 1ch);
+		}
+	}
 	[data-remarkdown~="h2-underline"] h2 {
-		display: table;
-		overflow: hidden;
 		position: relative;
+		width: fit-content;
 		padding-bottom: 1lh;
 	}
 	[data-remarkdown~="h2-underline"] h2::before {
@@ -432,6 +444,11 @@
 		overflow: hidden;
 		word-break: break-all;
 		cursor: default;
+	}
+	@supports (width: round(down, 100%, 1ch)) {
+		[data-remarkdown~="h2-underline"] h2::after {
+			width: round(down, 100%, 1ch);
+		}
 	}
 	[data-remarkdown] p {
 		margin-block: 1lh;
@@ -591,6 +608,7 @@
 	}
 	[data-remarkdown] pre {
 		margin-block: 1lh;
+		white-space: pre-wrap;
 		tab-size: 4;
 	}
 	[data-remarkdown~="pre-indent"] pre {
@@ -659,7 +677,7 @@
 		border-collapse: collapse;
 	}
 	[data-remarkdown~="table-marker"] tr > * {
-		min-width: 3ch;
+		min-width: 2ch;
 		position: relative;
 		padding: 0;
 		text-align: inherit;
@@ -717,17 +735,26 @@
 
 body {
 	max-width: 660px;
-	padding: 30px;
+	padding-block: 30px 50px;
+	padding-inline: 30px;
 	margin: 0 auto;
 }
 @media (width >= 900px) {
 	body {
 		margin: 30px auto;
-		padding: 40px 80px;
+		padding-block: 40px 60px;
+		padding-inline: 80px;
 		border: 1px solid var(--bg-border-color);
 		background-color: var(--bg-color);
 		box-shadow: 3px 3px 3px -2px var(--bg-border-color);
 	}
+}
+
+main > :first-child {
+	margin-top: 0;
+}
+main > :last-child {
+	margin-bottom: 0;
 }
 
 @scope (.remarkdown) to ([data-remarkdown]) {
@@ -758,6 +785,7 @@ body {
 		color: var(--code-color);
 	}
 	pre {
+		tab-size: 2;
 		white-space: pre-wrap;
 		color: var(--code-color);
 	}

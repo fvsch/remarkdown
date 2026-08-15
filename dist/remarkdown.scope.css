@@ -42,9 +42,8 @@
 		content: "###### "/"";
 	}
 	&.h1-underline h1 {
-		display: table;
-		overflow: hidden;
 		position: relative;
+		width: fit-content;
 		padding-bottom: 1lh;
 	}
 	&.h1-underline h1::before {
@@ -61,10 +60,14 @@
 		word-break: break-all;
 		cursor: default;
 	}
+	@supports (width: round(down, 100%, 1ch)) {
+		&.h1-underline h1::after {
+			width: round(down, 100%, 1ch);
+		}
+	}
 	&.h2-underline h2 {
-		display: table;
-		overflow: hidden;
 		position: relative;
+		width: fit-content;
 		padding-bottom: 1lh;
 	}
 	&.h2-underline h2::before {
@@ -80,6 +83,11 @@
 		overflow: hidden;
 		word-break: break-all;
 		cursor: default;
+	}
+	@supports (width: round(down, 100%, 1ch)) {
+		&.h2-underline h2::after {
+			width: round(down, 100%, 1ch);
+		}
 	}
 	p {
 		margin-block: 1lh;
@@ -239,6 +247,7 @@
 	}
 	pre {
 		margin-block: 1lh;
+		white-space: pre-wrap;
 		tab-size: 4;
 	}
 	pre {
@@ -307,7 +316,7 @@
 		border-collapse: collapse;
 	}
 	&.table-marker tr > * {
-		min-width: 3ch;
+		min-width: 2ch;
 		position: relative;
 		padding: 0;
 		text-align: inherit;
