@@ -3,8 +3,8 @@
 
 @use "../toolkit" as *;
 
-@mixin output-ul {
-	@include selector-base {
+@mixin ul {
+	@include root() {
 		ul {
 			margin-block: margins("ul");
 			margin-inline: indents("ul");
@@ -14,13 +14,16 @@
 			margin-block: 0;
 		}
 	}
-	@include selector-option("ul-plus") {
+
+	@include option("ul-plus") {
 		@include -ul-li-before("+");
 	}
-	@include selector-option("ul-star") {
+
+	@include option("ul-star") {
 		@include -ul-li-before("*");
 	}
-	@include selector-option("ul-hyphen") {
+
+	@include option("ul-hyphen") {
 		@include -ul-li-before("-");
 	}
 }

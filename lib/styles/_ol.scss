@@ -3,8 +3,8 @@
 
 @use "../toolkit" as *;
 
-@mixin output-ol {
-	@include selector-base() {
+@mixin ol {
+	@include root() {
 		ol {
 			margin-block: margins("ol");
 			margin-inline: indents("ol");
@@ -14,13 +14,16 @@
 			margin-block: 0;
 		}
 	}
-	@include selector-option("ol-decimal") {
+
+	@include option("ol-decimal") {
 		@include -ol-li-before("decimal");
 	}
-	@include selector-option("ol-zero") {
+
+	@include option("ol-zero") {
 		@include -ol-li-before("zero");
 	}
-	@include selector-option("ol-alpha") {
+
+	@include option("ol-alpha") {
 		@include -ol-li-before("alpha");
 	}
 }

@@ -1,10 +1,14 @@
 // Horizontal rules
 // Options: hr-center, hr-star, hr-hyphen
 
+@use "../config";
 @use "../toolkit" as *;
 
-@mixin output-hr {
-	@include selector-base {
+@mixin hr {
+	$stars: config.get("hr-stars", string);
+	$dashes: config.get("hr-hyphens", string);
+
+	@include root {
 		hr {
 			height: line();
 			line-height: line();
@@ -14,19 +18,22 @@
 			color: inherit;
 		}
 	}
-	@include selector-option("hr-center") {
+
+	@include option("hr-center") {
 		hr {
 			text-align: center;
 		}
 	}
-	@include selector-option("hr-star") {
+
+	@include option("hr-star") {
 		hr::before {
-			@include content(config-get("hr-stars", string));
+			@include content($stars);
 		}
 	}
-	@include selector-option("hr-hyphen") {
+
+	@include option("hr-hyphen") {
 		hr::before {
-			@include content(config-get("hr-hyphens", string));
+			@include content($dashes);
 		}
 	}
 }

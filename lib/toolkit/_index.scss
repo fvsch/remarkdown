@@ -1,3 +1,4 @@
-@forward "./config" as config-*;
-@forward "./output";
+@forward "./mixins";
+@forward "./selector";
+@forward "./spacing";
 @forward "./utils";

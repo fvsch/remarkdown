@@ -1,15 +1,13 @@
 // Class-based build of ReMarkdown with no default styles
 
-@use "sass:meta";
 @use "../lib/rmd";
-@use "../lib/zero";
 
 @include rmd.config(
-	meta.module-variables("zero"),
-	$selector-base: ".remarkdown",
-	$selector-option: ".remarkdown.%o",
+	$preset: "zero",
+	$root-selector: ".remarkdown",
+	$option-selector: ".remarkdown.%o",
 );
 
 @include rmd.header("ReMarkdown-zero %v (MIT) %h");
 
-@include rmd.output();
+@include rmd.styles();
