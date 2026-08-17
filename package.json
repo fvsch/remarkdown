@@ -20,8 +20,10 @@
 	],
 	"type": "module",
 	"exports": {
-		"sass": "./lib/remarkdown.scss",
-		"style": "./dist/remarkdown.css"
+		".": {
+			"sass": "./lib/rmd.scss",
+			"style": "./dist/remarkdown.css"
+		}
 	},
 	"scripts": {
 		"build": "node build.js",

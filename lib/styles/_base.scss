@@ -1,13 +1,14 @@
 // Base
 // Options: base-text
 
+@use "../config";
 @use "../toolkit" as *;
 
-@mixin output-base {
-	@include selector-option("base-text") {
+@mixin base {
+	@include option("base-text") {
 		& {
 			@include font-family("base-font");
-			line-height: config-get("base-line-height", number);
+			line-height: config.get("base-line-height", number);
 		}
 		:is(pre, code, kbd, samp) {
 			@include font-family("code-font");

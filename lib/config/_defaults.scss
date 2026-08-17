@@ -1,28 +1,28 @@
 /// Default options for ReMarkdown
-/// To change those options, use the `configure` mixin:
+/// To change those options, use the `config` mixin:
 ///
-/// 	@use "remarkdown.css/lib/rmd";
-/// 	@include rmd.configure(
-/// 		$selector-base: ".rmd",
-/// 		$selector-option: ".rmd--%0"
+/// 	@use "pkg:remarkdown.css" as rmd;
+/// 	@include rmd.config(
+/// 		$root-selector: ".rmd",
+/// 		$option-selector: ".rmd--%0"
 /// 	);
 /// 	@include rmd.header();
-/// 	@include rmd.output();
+/// 	@include rmd.styles();
 
 // Selectors for the ReMarkdown container and options
 //
 // -	Base selector: an empty string base selector ("") can be used if you want
 // 	to use CSS nesting or CSS @scope, for example:
 //
-// 	@include rmd.configure($selector-base: "", $selector-option: "&.%o");
+// 	@include rmd.config($root-selector: "", $option-selector: "&.%o");
 // 	@scope (.remarkdown) {
-// 		@include rmd.output();
+// 		@include rmd.styles();
 // 	}
 //
 // -	Option selector: "%o" will be replaced by the option name.
 //
-$selector-base: ".remarkdown";
-$selector-option: ".remarkdown.%o";
+$root-selector: ".remarkdown";
+$option-selector: ".remarkdown.%o";
 
 // Whether we should include styles for ALL alternative styles (true),
 // or only for styles listed in $default-styles (false).

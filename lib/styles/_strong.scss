@@ -3,20 +3,22 @@
 
 @use "../toolkit" as *;
 
-@mixin output-strong {
-	@include selector-option("strong-reset") {
+@mixin strong {
+	@include option("strong-reset") {
 		strong {
 			font-style: normal;
 			font-weight: normal;
 		}
 	}
-	@include selector-option("strong-star") {
+
+	@include option("strong-star") {
 		strong::before,
 		strong::after {
 			@include content("**");
 		}
 	}
-	@include selector-option("strong-underscore") {
+
+	@include option("strong-underscore") {
 		strong::before,
 		strong::after {
 			@include content("__");

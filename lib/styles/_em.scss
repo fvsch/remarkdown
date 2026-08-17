@@ -3,20 +3,22 @@
 
 @use "../toolkit" as *;
 
-@mixin output-em {
-	@include selector-option("em-reset") {
+@mixin em {
+	@include option("em-reset") {
 		em {
 			font-style: normal;
 			font-weight: normal;
 		}
 	}
-	@include selector-option("em-star") {
+
+	@include option("em-star") {
 		em::before,
 		em::after {
 			@include content("*");
 		}
 	}
-	@include selector-option("em-underscore") {
+
+	@include option("em-underscore") {
 		em::before,
 		em::after {
 			@include content("_");

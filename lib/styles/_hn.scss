@@ -1,10 +1,11 @@
 // Headings
 // Options: hn-reset, hn-hash, h1-underline, h2-undelrine
 
+@use "../config";
 @use "../toolkit" as *;
 
-@mixin output-hn {
-	@include selector-option("hn-reset") {
+@mixin hn {
+	@include option("hn-reset") {
 		h1 {
 			font-size: inherit;
 			font-weight: inherit;
@@ -21,8 +22,9 @@
 			margin-block: margins("hn");
 		}
 	}
-	@include selector-option("hn-hash") {
-		$sign: config-get("heading-sign", string);
+
+	@include option("hn-hash") {
+		$sign: config.get("heading-sign", string);
 		@for $i from 1 through 6 {
 			$chars: str-repeat($sign, $i);
 			h#{$i}::before {
@@ -30,14 +32,16 @@
 			}
 		}
 	}
-	@include selector-option("h1-underline") {
+
+	@include option("h1-underline") {
 		h1 {
-			@include -hn-underline(config-get("h1-underline"));
+			@include -hn-underline(config.get("h1-underline"));
 		}
 	}
-	@include selector-option("h2-underline") {
+
+	@include option("h2-underline") {
 		h2 {
-			@include -hn-underline(config-get("h2-underline"));
+			@include -hn-underline(config.get("h2-underline"));
 		}
 	}
 }

@@ -3,15 +3,16 @@
 
 @use "../toolkit" as *;
 
-@mixin output-quote {
-	@include selector-base {
+@mixin quote {
+	@include root() {
 		blockquote {
 			margin-block: margins("blockquote");
 			margin-inline: indents("blockquote");
 			padding: 0;
 		}
 	}
-	@include selector-option("quote-gt") {
+
+	@include option("quote-gt") {
 		blockquote {
 			position: relative;
 		}

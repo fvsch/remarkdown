@@ -2,8 +2,8 @@
 
 @use "../toolkit" as *;
 
-@mixin output-para {
-	@include selector-base {
+@mixin para {
+	@include root() {
 		p {
 			margin-block: margins("p");
 		}

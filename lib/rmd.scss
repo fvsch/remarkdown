@@ -2,52 +2,55 @@
 /// Exposes three mixins:
 /// - `config`: can be used to override defaults;
 /// - `header`: outputs a CSS comment describing the library;
-/// - `output`: generates the actual styles.
+/// - `styles`: generates the actual styles.
 
 @use "sass:list";
-@use "./styles" as *;
-@use "./toolkit" as *;
+@use "sass:map";
 
-@forward "./styles";
+@use "./config";
+@use "./styles";
+@use "./toolkit" as tk;
+
+@forward "./styles" as styles-*;
 
 $version: "4.0.0-alpha.1";
 $-homepage: "https://fvsch.github.io/remarkdown/";
 
 @mixin config($args...) {
-	$options: merge-arglist($args);
-	@include config-set($options);
+	$options: tk.merge-arglist($args);
+	@include config.set($options);
 }
 
 @mixin header($title: "ReMarkdown %v - %h") {
 	$included: "all styles";
-	@if config-get("output-all-styles") != true {
+	@if config.get("output-all-styles") != true {
 		$included: "default-styles only";
 	}
-	$list: config-get("default-styles", list);
+	$list: config.get("default-styles", list);
 	@if list.length($list) == 0 {
 		$list: "none";
 	}
 	@if $title {
-		$title: str-replace($title, "%v", $version);
-		$title: str-replace($title, "%h", $-homepage);
+		$title: tk.str-replace($title, "%v", $version);
+		$title: tk.str-replace($title, "%h", $-homepage);
 		/*! #{$title} */
 		/* includes: #{$included}; defaults: #{$list}; */
 	}
 }
 
-@mixin output {
-	@include output-base;
-	@include output-hn;
-	@include output-para;
-	@include output-hr;
-	@include output-ul;
-	@include output-ol;
-	@include output-a;
-	@include output-em;
-	@include output-strong;
-	@include output-code;
-	@include output-pre;
-	@include output-quote;
-	@include output-del;
-	@include output-table;
+@mixin styles {
+	@include styles.base;
+	@include styles.hn;
+	@include styles.para;
+	@include styles.hr;
+	@include styles.ul;
+	@include styles.ol;
+	@include styles.link;
+	@include styles.em;
+	@include styles.strong;
+	@include styles.code;
+	@include styles.pre;
+	@include styles.quote;
+	@include styles.del;
+	@include styles.table;
 }

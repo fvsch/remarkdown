@@ -1,0 +1,41 @@
+@use "../config";
+@use "./utils";
+
+/// Wrap content in the base selector
+@mixin root($cond: true) {
+	@if $cond {
+		$selector: -root-selector();
+		@if $selector == "" {
+			@content;
+		} @else {
+			#{$selector} {
+				@content;
+			}
+		}
+	}
+}
+
+/// Wrap content in a selector including the option name, depending on
+/// the content of $defaults and the value of $output-all-styles.
+/// Outputs nothing if $output-all-styles is false and the option is not
+/// in $defaults.
+@mixin option($name, $cond: true) {
+	@if config.is-default($name) {
+		@include root($cond: $cond) {
+			@content;
+		}
+	} @else if $cond and config.get("output-all-styles") == true {
+		#{-option-selector($name)} {
+			@content;
+		}
+	}
+}
+
+@function -root-selector() {
+	@return config.get("root-selector", string);
+}
+
+@function -option-selector($name) {
+	$pattern: config.get("option-selector", string);
+	@return utils.str-replace($pattern, "%o", $name);
+}
