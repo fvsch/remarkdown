@@ -1,15 +1,14 @@
 /**
  * Styles for ReMarkdown demo pages
  */
-@use "sass:meta";
 @use "../lib/rmd";
-@use "../lib/zero";
 
 @layer remarkdown {
 	/// Class-based build of ReMarkdown using default styles
 	@include rmd.config(
-		$selector-base: "",
-		$selector-option: "&.%o",
+		$preset: "default",
+		$root-selector: "",
+		$option-selector: "&.%o",
 		$base-font: (
 			Menlo,
 			Consolas,
@@ -20,17 +19,17 @@
 	);
 	@include rmd.header("ReMarkdown %v [scope-custom] (MIT) %h");
 	@scope (.remarkdown) to ([data-remarkdown]) {
-		@include rmd.output();
+		@include rmd.styles();
 	}
 
 	/// Attribute-based build of ReMarkdown with no default styles
 	@include rmd.config(
-		meta.module-variables("zero"),
-		$selector-base: "[data-remarkdown]",
-		$selector-option: "[data-remarkdown~=%o]"
+		$preset: "zero",
+		$root-selector: "[data-remarkdown]",
+		$option-selector: "[data-remarkdown~=%o]"
 	);
 	@include rmd.header("ReMarkdown-zero %v [attr] (MIT) %h");
-	@include rmd.output();
+	@include rmd.styles();
 }
 
 /* Demo layout and page styles */

@@ -3,8 +3,8 @@
 
 @use "../toolkit" as *;
 
-@mixin output-del {
-	@include selector-option("del-gfm") {
+@mixin del {
+	@include option("del-gfm") {
 		del {
 			text-decoration: none;
 		}
