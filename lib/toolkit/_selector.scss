@@ -1,17 +1,17 @@
+@use "sass:meta" as *;
+
 @use "../config";
 @use "./utils";
 
 /// Wrap content in the base selector
-@mixin root($cond: true) {
-	@if $cond {
-		$selector: -root-selector();
-		@if $selector == "" {
+@mixin root() {
+	$selector: -root-selector();
+	@if $selector {
+		#{$selector} {
 			@content;
-		} @else {
-			#{$selector} {
-				@content;
-			}
 		}
+	} @else {
+		@content;
 	}
 }
 
@@ -19,12 +19,12 @@
 /// the content of $defaults and the value of $output-all-styles.
 /// Outputs nothing if $output-all-styles is false and the option is not
 /// in $defaults.
-@mixin option($name, $cond: true) {
+@mixin option($name) {
 	@if config.is-default($name) {
-		@include root($cond: $cond) {
+		@include root() {
 			@content;
 		}
-	} @else if $cond and config.get("output-all-styles") == true {
+	} @else if config.get(output-all-styles) == true {
 		#{-option-selector($name)} {
 			@content;
 		}
@@ -32,10 +32,14 @@
 }
 
 @function -root-selector() {
-	@return config.get("root-selector", string);
+	$value: config.get(root-selector);
+	@if $value == null or $value == "" {
+		@return null;
+	}
+	@return $value;
 }
 
 @function -option-selector($name) {
-	$pattern: config.get("option-selector", string);
-	@return utils.str-replace($pattern, "%o", $name);
+	$pattern: config.get(option-selector, string);
+	@return utils.str-replace($pattern, "%s", $name);
 }

@@ -6,10 +6,10 @@
 @layer remarkdown {
 	/// Class-based build of ReMarkdown using default styles
 	@include rmd.config(
-		$preset: "default",
-		$root-selector: "",
-		$option-selector: "&.%o",
-		$base-font: (
+		$preset: default,
+		$root-selector: null,
+		$option-selector: "&.%s",
+		$font: (
 			Menlo,
 			Consolas,
 			DejaVu Sans Mono,
@@ -24,11 +24,11 @@
 
 	/// Attribute-based build of ReMarkdown with no default styles
 	@include rmd.config(
-		$preset: "zero",
+		$preset: zero,
 		$root-selector: "[data-remarkdown]",
-		$option-selector: "[data-remarkdown~=%o]"
+		$option-selector: "[data-remarkdown~=%s]"
 	);
-	@include rmd.header("ReMarkdown-zero %v [attr] (MIT) %h");
+	@include rmd.header("ReMarkdown-zero %v [attr] (MIT) %u");
 	@include rmd.styles();
 }
 

@@ -1,52 +1,57 @@
-@use "sass:meta";
+@use "sass:list";
+@use "sass:meta" as *;
+
 @use "../config";
 
 /// Get a margin value in em from $margins.
 /// If not set, returns a value of 1 line.
 @function margin($element, $direction) {
-	@if $direction == "top" or $direction == "bottom" {
-		$num: config.get("margins" $element $direction);
-		@if meta.type-of($num) == number {
-			@return line($num);
-		}
-		@return line(1);
-	} @else {
+	@if not list.index(top bottom, $direction) {
 		@error "Unknown direction #{$direction}";
 	}
+	$num: config.get(margins $element $direction) or 1;
+	@return line($num);
 }
 
 /// Get both vertical margin values for an element.
 /// Returns a single value if both values are identical,
 /// or two values otherwise. Suitable for use with e.g. margin-block.
 @function margins($element) {
-	$top: margin($element, "top");
-	$bottom: margin($element, "bottom");
-	@return if(sass($top == $bottom): $top; else: $top $bottom);
+	$top: margin($element, top);
+	$bottom: margin($element, bottom);
+	@return -shorthand-pair($top, $bottom);
 }
 
 /// Get a horizontal margin (indent) value for an element.
 /// If not set, returns a value of 0.
 @function indent($element, $direction) {
-	@if $direction == "start" or $direction == "end" {
-		$num: config.get("margins" $element "inline-" + $direction) or 0;
-		$base: config.get("margin-inline-base", number);
-		@return $num * $base;
-	} @else {
+	@if not list.index(start end, $direction) {
 		@error "Unknown direction #{$direction}";
 	}
+	$num: config.get(margins $element "inline-" + $direction) or 0;
+	$base: config.get(margin-inline-base, number);
+	@return $num * $base;
 }
 
 /// Get both horizontal margin (indent) values for an element.
 /// Returns a single value if both values are identical,
 /// or two values otherwise. Suitable for use with e.g. padding-inline.
 @function indents($element) {
-	$start: indent($element, "start");
-	$end: indent($element, "end");
-	@return if(sass($start == $end): $start; else: $start $end);
+	$start: indent($element, start);
+	$end: indent($element, end);
+	@return -shorthand-pair($start, $end);
 }
 
 /// Compute the size of a text line
 @function line($count: 1) {
-	$base: config.get("margin-block-base", number);
+	$base: config.get(margin-block-base, number);
 	@return $base * $count;
+}
+
+@function -shorthand-pair($a, $b) {
+	@if $a == $b {
+		@return $a;
+	} @else {
+		@return $a $b;
+	}
 }

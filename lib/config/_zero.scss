@@ -1,15 +1,5 @@
 /// Default options for ReMarkdown-zero
-/// These are meant to override the defaults in lib/_defaults.scss
-/// using the `configure` mixin:
-///
-/// 	@use "remarkdown.css/lib/rmd";
-/// 	@use "remarkdown.css/lib/zero";
-/// 	@include rmd.configure(
-/// 		$default-styles: zero.$default-styles,
-/// 		$margins: zero.$margins,
-/// 	);
-/// 	@include rmd.header();
-/// 	@include rmd.styles();
+/// Used internally when using the `config` mixin with `$preset: "zero"`.
 
 // oxfmt-ignore
 $default-styles: (
@@ -23,27 +13,27 @@ $default-styles: (
 );
 
 $margins: (
-	"h1": (),
-	"h2": (),
-	"hn": (),
-	"hr": (),
-	"p": (),
-	"pre": (
-		"inline-start": 4,
-		"inline-end": 0,
+	h1: (),
+	h2: (),
+	hn: (),
+	hr: (),
+	p: (),
+	pre: (
+		inline-start: 4,
+		inline-end: 0,
 	),
-	"ol": (
-		"inline-start": 3,
-		"inline-end": 0,
+	ol: (
+		inline-start: 3,
+		inline-end: 0,
 	),
-	"ul": (
-		"inline-start": 3,
-		"inline-end": 0,
+	ul: (
+		inline-start: 3,
+		inline-end: 0,
 	),
-	"figure": (),
-	"blockquote": (
-		"inline-start": 2,
-		"inline-end": 0,
+	figure: (),
+	blockquote: (
+		inline-start: 2,
+		inline-end: 0,
 	),
-	"table": (),
+	table: (),
 );

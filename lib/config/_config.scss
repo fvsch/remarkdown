@@ -1,0 +1,73 @@
+/// Configure and retrieve ReMarkdown options
+/// This module copies values from defaults, and optionally overrides
+/// them when calling the config() mixin.
+
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta" as *;
+@use "sass:string";
+
+@use "./defaults";
+@use "./zero";
+
+$-DEFAULTS: module-variables(defaults);
+$-ZERO: module-variables(zero);
+$-config: -start-config(default);
+
+@function get($keys, $type: null) {
+	$value: null;
+	@if type-of($keys) == list {
+		$value: map.get($-config, $keys...);
+	} @else {
+		$value: map.get($-config, $keys);
+	}
+	@if ($type != null) and ($type != type-of($value)) and ($type != type-of(list.nth($value, 1))) {
+		@error "Config value for #{inspect($keys)} has type #{type-of($value)}, expected #{$type}";
+	}
+	@return $value;
+}
+
+@function is-default($names) {
+	$list: get(default-styles, list);
+	@each $name in $names {
+		@if list.index($list, $name) != null {
+			@return true;
+		}
+	}
+	@return false;
+}
+
+@mixin set($options) {
+	$preset: map.get($options, preset);
+	$base: -start-config($preset);
+	@each $option, $value in $options {
+		// fail for unknown and invalid options
+		$err: -check-options($option, $value);
+	}
+	$-config: map.merge($base, $options) !global;
+}
+
+@function -check-options($option, $value) {
+	@if $option != preset and not map.has-key($-DEFAULTS, $option) {
+		$list: map.keys($-DEFAULTS);
+		@error "Unknown option #{$option}, expected one of: #{$list}.";
+	}
+	@if $option == preset and not list.index(null default zero, $value) {
+		@error "Unknown $preset #{$value}, expected one of: default, zero.";
+	}
+	@if $option == root-selector and ($value != null and type-of($value) != string) {
+		@error "$root-selector must be a string or null, got: #{inspect($value)}";
+	}
+	@if $option == option-selector and (type-of($value) != string or not string.index($value, "%s")) {
+		@error "$option-selector must contain the substring '%s', got '#{inspect($value)}'";
+	}
+	@return null;
+}
+
+@function -start-config($preset: default) {
+	@if $preset == zero {
+		@return map.merge($-DEFAULTS, $-ZERO);
+	} @else {
+		@return $-DEFAULTS;
+	}
+}

@@ -5,11 +5,11 @@
 @mixin para {
 	@include root() {
 		p {
-			margin-block: margins("p");
+			margin-block: margins(p);
 		}
 		figure {
-			margin-block: margins("figure");
-			margin-inline: indents("figure");
+			margin-block: margins(figure);
+			margin-inline: indents(figure);
 		}
 	}
 }

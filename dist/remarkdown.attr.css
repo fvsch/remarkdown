@@ -1,5 +1,5 @@
 /*! ReMarkdown 4.0.0-alpha.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
-/* includes: all styles; defaults: base-text, hn-reset, hn-hash, ul-hyphen, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
+/* includes: all styles; defaults: base-text, hn-reset, hn-prefix, ul-hyphen, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
 [data-remarkdown] {
 	font-family: monospace, monospace;
 	line-height: 1.5;
@@ -43,16 +43,16 @@
 	content: "###### "/"";
 }
 
-[data-remarkdown~="h1-underline"] h1 {
+[data-remarkdown~="h1-line"] h1 {
 	position: relative;
 	width: fit-content;
 	padding-bottom: 1lh;
 }
-[data-remarkdown~="h1-underline"] h1::before {
+[data-remarkdown~="h1-line"] h1::before {
 	content: none;
 }
-[data-remarkdown~="h1-underline"] h1::after {
-	content: "========================================================================================================================"/"";
+[data-remarkdown~="h1-line"] h1::after {
+	content: "===================================================================================================="/"";
 	position: absolute;
 	bottom: 0;
 	inset-inline: 0;
@@ -63,21 +63,21 @@
 	cursor: default;
 }
 @supports (width: round(down, 100%, 1ch)) {
-	[data-remarkdown~="h1-underline"] h1::after {
+	[data-remarkdown~="h1-line"] h1::after {
 		width: round(down, 100%, 1ch);
 	}
 }
 
-[data-remarkdown~="h2-underline"] h2 {
+[data-remarkdown~="h2-line"] h2 {
 	position: relative;
 	width: fit-content;
 	padding-bottom: 1lh;
 }
-[data-remarkdown~="h2-underline"] h2::before {
+[data-remarkdown~="h2-line"] h2::before {
 	content: none;
 }
-[data-remarkdown~="h2-underline"] h2::after {
-	content: "------------------------------------------------------------------------------------------------------------------------"/"";
+[data-remarkdown~="h2-line"] h2::after {
+	content: "----------------------------------------------------------------------------------------------------"/"";
 	position: absolute;
 	bottom: 0;
 	inset-inline: 0;
@@ -88,7 +88,7 @@
 	cursor: default;
 }
 @supports (width: round(down, 100%, 1ch)) {
-	[data-remarkdown~="h2-underline"] h2::after {
+	[data-remarkdown~="h2-line"] h2::after {
 		width: round(down, 100%, 1ch);
 	}
 }

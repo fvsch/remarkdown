@@ -5,33 +5,33 @@
 @use "../toolkit" as *;
 
 @mixin hr {
-	$stars: config.get("hr-stars", string);
-	$dashes: config.get("hr-hyphens", string);
+	$stars: config.get(hr-stars, string);
+	$dashes: config.get(hr-dashes, string);
 
 	@include root {
 		hr {
 			height: line();
 			line-height: line();
-			margin-block: margins("hr");
+			margin-block: margins(hr);
 			margin-inline: 0;
 			border: none;
 			color: inherit;
 		}
 	}
 
-	@include option("hr-center") {
+	@include option(hr-center) {
 		hr {
 			text-align: center;
 		}
 	}
 
-	@include option("hr-star") {
+	@include option(hr-star) {
 		hr::before {
 			@include content($stars);
 		}
 	}
 
-	@include option("hr-hyphen") {
+	@include option(hr-hyphen) {
 		hr::before {
 			@include content($dashes);
 		}

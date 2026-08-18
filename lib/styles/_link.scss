@@ -4,7 +4,7 @@
 @use "../toolkit" as *;
 
 @mixin link {
-	@include option("a-bracket") {
+	@include option(a-bracket) {
 		a {
 			text-decoration-inset: 1ch;
 		}
@@ -16,7 +16,7 @@
 		}
 	}
 
-	@include option("a-showurl") {
+	@include option(a-showurl) {
 		a[href]::before {
 			@include content("[");
 		}
