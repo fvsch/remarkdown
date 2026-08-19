@@ -9,20 +9,21 @@
 /// 	@include rmd.header();
 /// 	@include rmd.styles();
 
-// Selectors for the ReMarkdown container and options
+// Selector for the ReMarkdown root container.
+// Use `null` to use CSS nesting or CSS @scope:
 //
-// -	Base selector: an empty string base selector ("") can be used if you want
-// 	to use CSS nesting or CSS @scope, for example:
-//
-// 	@include rmd.config($root-selector: "", $option-selector: "&.%o");
-// 	@scope (.remarkdown) {
+// 	@include rmd.config(
+// 		$root-selector: null,
+// 		$option-selector: "&.%s",
+// 	);
+// 	@scope (.remarkdown) to (.remarkdown-off) {
 // 		@include rmd.styles();
 // 	}
-//
-// -	Option selector: "%o" will be replaced by the option name.
-//
 $root-selector: ".remarkdown";
-$option-selector: ".remarkdown.%o";
+
+// Selector for optional styles.
+// "%s" will be replaced with the style's name.
+$option-selector: ".remarkdown.%s";
 
 // Whether we should include styles for ALL alternative styles (true),
 // or only for styles listed in $default-styles (false).
@@ -38,9 +39,9 @@ $output-all-styles: true;
 $default-styles: (
 	base-text,
 	hn-reset,
-	hn-hash,
-	// h1-underline,
-	// h2-underline,
+	hn-prefix,
+	// h1-line,
+	// h2-line,
 	ul-hyphen,
 	// ul-star,
 	// ul-plus,
@@ -69,22 +70,22 @@ $default-styles: (
 );
 
 // Font stack to use.
-// AVOID using "monospace" only, or browsers might use a default small
-// text size (13px). Always define one or more font families before the
-// final ", monospace".
-$base-font: monospace, monospace;
+// Should be a comma-separated list that ends with `monospace`.
+// (By default, we use `monospace, monospace`, because a single `monospace`
+// value makes browsers use a default 13px font size.)
+$font: monospace, monospace;
 
-// Base line-height (as a unit-less ratio, e.g. 1.5)
-$base-line-height: 1.5;
+// Root line-height (as a unit-less ratio, e.g. `1.5`)
+$line-height: 1.5;
 
 // For elements that are traditionnaly monospace, use a different font?
 $code-font: inherit;
 
-// Width of one step of vertical margin.
-// Typically, the height of an empty text line.
+// Size of one step of vertical margin.
+// Typically, the height of a single line of text.
 $margin-block-base: 1lh;
 
-// Width of one step of horizontal margin.
+// Size of one step of horizontal margin.
 // Typically, the width of one space character.
 $margin-inline-base: 1ch;
 
@@ -93,69 +94,72 @@ $margin-inline-base: 1ch;
 // - horizontal margind ("inline-start" and "inline-end")
 // By default we use one line for everything, but you can specify more here:
 $margins: (
-	"h1": (
-		"top": 1.5,
-		"bottom": 1,
+	h1: (
+		block: 1.5 1,
+		top: 1.5,
+		bottom: 1,
 	),
-	"h2": (
-		"top": 1.5,
-		"bottom": 1,
+	h2: (
+		top: 1.5,
+		bottom: 1,
 	),
-	"hn": (
-		"top": 1,
-		"bottom": 1,
+	hn: (
+		top: 1,
+		bottom: 1,
 	),
-	"hr": (
-		"top": 1,
-		"bottom": 1,
+	hr: (
+		top: 1,
+		bottom: 1,
 	),
-	"p": (
-		"top": 1,
-		"bottom": 1,
+	p: (
+		top: 1,
+		bottom: 1,
 	),
-	"pre": (
-		"top": 1,
-		"bottom": 1,
-		"inline-start": 4,
-		"inline-end": 0,
+	pre: (
+		top: 1,
+		bottom: 1,
+		inline-start: 4,
+		inline-end: 0,
 	),
-	"ol": (
-		"top": 1,
-		"bottom": 1,
-		"inline-start": 4,
-		"inline-end": 0,
+	ol: (
+		top: 1,
+		bottom: 1,
+		inline-start: 4,
+		inline-end: 0,
 	),
-	"ul": (
-		"top": 1,
-		"bottom": 1,
-		"inline-start": 4,
-		"inline-end": 0,
+	ul: (
+		top: 1,
+		bottom: 1,
+		inline-start: 4,
+		inline-end: 0,
 	),
-	"figure": (
-		"top": 1,
-		"bottom": 1,
-		"inline-start": 0,
-		"inline-end": 0,
+	figure: (
+		top: 1,
+		bottom: 1,
+		inline-start: 0,
+		inline-end: 0,
 	),
-	"blockquote": (
-		"top": 1,
-		"bottom": 1,
-		"inline-start": 2,
-		"inline-end": 2,
+	blockquote: (
+		top: 1,
+		bottom: 1,
+		inline-start: 2,
+		inline-end: 2,
 	),
-	"table": (
-		"top": 1,
-		"bottom": 1,
+	table: (
+		top: 1,
+		bottom: 1,
 	),
 );
 
 // HR patterns
 $hr-stars: "* * * *";
-$hr-hyphens: "-------";
+$hr-dashes: "-------";
 
-// Character used for simple headings
-$heading-sign: "#";
+// Character used as heading prefix
+$hn-prefix: "#";
 
 // Characters used for underlined headings
-$h1-underline: "==========";
-$h2-underline: "----------";
+// Recommended: use a string of ~50 characters or so. For long titles,
+// these strings will be doubled to fill the container's width.
+$h1-line: "==================================================";
+$h2-line: "--------------------------------------------------";

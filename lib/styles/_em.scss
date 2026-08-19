@@ -4,21 +4,21 @@
 @use "../toolkit" as *;
 
 @mixin em {
-	@include option("em-reset") {
+	@include option(em-reset) {
 		em {
 			font-style: normal;
 			font-weight: normal;
 		}
 	}
 
-	@include option("em-star") {
+	@include option(em-star) {
 		em::before,
 		em::after {
 			@include content("*");
 		}
 	}
 
-	@include option("em-underscore") {
+	@include option(em-underscore) {
 		em::before,
 		em::after {
 			@include content("_");

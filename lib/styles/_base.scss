@@ -5,13 +5,13 @@
 @use "../toolkit" as *;
 
 @mixin base {
-	@include option("base-text") {
+	@include option(base-text) {
 		& {
-			@include font-family("base-font");
-			line-height: config.get("base-line-height", number);
+			@include font-family(font);
+			line-height: config.get(line-height, number);
 		}
 		:is(pre, code, kbd, samp) {
-			@include font-family("code-font");
+			@include font-family(code-font);
 		}
 	}
 }

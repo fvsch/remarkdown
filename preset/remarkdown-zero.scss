@@ -3,11 +3,11 @@
 @use "../lib/rmd";
 
 @include rmd.config(
-	$preset: "zero",
+	$preset: zero,
 	$root-selector: ".remarkdown",
-	$option-selector: ".remarkdown.%o",
+	$option-selector: ".remarkdown.%s"
 );
 
-@include rmd.header("ReMarkdown-zero %v (MIT) %h");
+@include rmd.header("ReMarkdown-zero %v (MIT) %u");
 
 @include rmd.styles();

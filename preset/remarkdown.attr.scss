@@ -2,11 +2,8 @@
 
 @use "../lib/rmd";
 
-@include rmd.config(
-	$root-selector: "[data-remarkdown]",
-	$option-selector: '[data-remarkdown~=%o]'
-);
+@include rmd.config($root-selector: "[data-remarkdown]", $option-selector: "[data-remarkdown~=%s]");
 
-@include rmd.header("ReMarkdown %v [attr] (MIT) %h");
+@include rmd.header("ReMarkdown %v [attr] (MIT) %u");
 
 @include rmd.styles();

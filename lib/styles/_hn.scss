@@ -1,30 +1,30 @@
 // Headings
-// Options: hn-reset, hn-hash, h1-underline, h2-undelrine
+// Options: hn-reset, hn-prefix, h1-line, h2-line
 
 @use "../config";
 @use "../toolkit" as *;
 
 @mixin hn {
-	@include option("hn-reset") {
+	@include option(hn-reset) {
 		h1 {
 			font-size: inherit;
 			font-weight: inherit;
-			margin-block: margins("h1");
+			margin-block: margins(h1);
 		}
 		h2 {
 			font-size: inherit;
 			font-weight: inherit;
-			margin-block: margins("h2");
+			margin-block: margins(h2);
 		}
 		:is(h3, h4, h5, h6) {
 			font-size: inherit;
 			font-weight: inherit;
-			margin-block: margins("hn");
+			margin-block: margins(hn);
 		}
 	}
 
-	@include option("hn-hash") {
-		$sign: config.get("heading-sign", string);
+	@include option(hn-prefix) {
+		$sign: config.get(hn-prefix, string);
 		@for $i from 1 through 6 {
 			$chars: str-repeat($sign, $i);
 			h#{$i}::before {
@@ -33,20 +33,20 @@
 		}
 	}
 
-	@include option("h1-underline") {
+	@include option(h1-line) {
 		h1 {
-			@include -hn-underline(config.get("h1-underline"));
+			@include -hn-line(config.get(h1-line));
 		}
 	}
 
-	@include option("h2-underline") {
+	@include option(h2-line) {
 		h2 {
-			@include -hn-underline(config.get("h2-underline"));
+			@include -hn-line(config.get(h2-line));
 		}
 	}
 }
 
-@mixin -hn-underline($chars) {
+@mixin -hn-line($chars) {
 	& {
 		position: relative;
 		width: fit-content;
@@ -56,7 +56,7 @@
 		content: none;
 	}
 	&::after {
-		@include content(str-repeat($chars, 12));
+		@include content(str-repeat($chars, 2));
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;

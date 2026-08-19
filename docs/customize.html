@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="./demo.css">
 </head>
-<body class="remarkdown h1-underline h2-underline em-underscore">
+<body class="remarkdown h1-line h2-line em-underscore">
 
 <nav>
 	<span>ReMarkdown</span>
@@ -34,7 +34,7 @@
 	You can activate the <a href="./styles.html">available styles</a> by declaring them in your HTML, as classes or attribute values:
 </p>
 
-<pre><code>&lt;div class="remarkdown h1-underline ul-star">
+<pre><code>&lt;div class="remarkdown h1-line ul-star">
 	&lt;p>Using remarkdown.css&lt;/p>
 &lt;/div></code></pre>
 
@@ -46,7 +46,7 @@
 	If you don’t want to use ReMarkdown’s default styles, you can use the <a href="https://unpkg.com/remarkdown.css/dist/remarkdown-zero.css">remarkdown-zero.css</a> stylesheet instead, and declare all the styles you want explicitly.
 </p>
 
-<pre><code>&lt;div class="remarkdown hn-reset hn-hash h1-underline ul-star a-bracket pre-tick quote-gt ...">
+<pre><code>&lt;div class="remarkdown hn-reset hn-prefix h1-line ul-star a-bracket pre-tick quote-gt ...">
 	&lt;p>Using remarkdown.css&lt;/p>
 &lt;/div></code></pre>
 
@@ -61,7 +61,7 @@
 <pre><code>&lt;head>
 	&lt;link rel="stylesheet" href="https://unpkg.com/remarkdown.css/dist/remarkdown.attr.css">
 	&lt;!-- or https://unpkg.com/remarkdown.css/dist/remarkdown-zero.attr.css -->
-&lt;body data-remarkdown="h1-underline a-bracket ul-plus ol-alpha">
+&lt;body data-remarkdown="h1-line a-bracket ul-plus ol-alpha">
 	...
 &lt;/body></code></pre>
 
@@ -187,7 +187,7 @@ npm run build</code></pre>
 </p>
 
 <pre><code>$rmd-defaults:
-	hn-reset hn-hash h1-underline h2-underline
+	hn-reset hn-prefix h1-line h2-line
 	ul-star ol-decimal
 	em-underscore strong-underscore
 	hr-hyphen hr-center;</code></pre>

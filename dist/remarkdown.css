@@ -1,5 +1,5 @@
 /*! ReMarkdown 4.0.0-alpha.1 (MIT) https://fvsch.github.io/remarkdown/ */
-/* includes: all styles; defaults: base-text, hn-reset, hn-hash, ul-hyphen, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
+/* includes: all styles; defaults: base-text, hn-reset, hn-prefix, ul-hyphen, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
 .remarkdown {
 	font-family: monospace, monospace;
 	line-height: 1.5;
@@ -43,16 +43,16 @@
 	content: "###### "/"";
 }
 
-.remarkdown.h1-underline h1 {
+.remarkdown.h1-line h1 {
 	position: relative;
 	width: fit-content;
 	padding-bottom: 1lh;
 }
-.remarkdown.h1-underline h1::before {
+.remarkdown.h1-line h1::before {
 	content: none;
 }
-.remarkdown.h1-underline h1::after {
-	content: "========================================================================================================================"/"";
+.remarkdown.h1-line h1::after {
+	content: "===================================================================================================="/"";
 	position: absolute;
 	bottom: 0;
 	inset-inline: 0;
@@ -63,21 +63,21 @@
 	cursor: default;
 }
 @supports (width: round(down, 100%, 1ch)) {
-	.remarkdown.h1-underline h1::after {
+	.remarkdown.h1-line h1::after {
 		width: round(down, 100%, 1ch);
 	}
 }
 
-.remarkdown.h2-underline h2 {
+.remarkdown.h2-line h2 {
 	position: relative;
 	width: fit-content;
 	padding-bottom: 1lh;
 }
-.remarkdown.h2-underline h2::before {
+.remarkdown.h2-line h2::before {
 	content: none;
 }
-.remarkdown.h2-underline h2::after {
-	content: "------------------------------------------------------------------------------------------------------------------------"/"";
+.remarkdown.h2-line h2::after {
+	content: "----------------------------------------------------------------------------------------------------"/"";
 	position: absolute;
 	bottom: 0;
 	inset-inline: 0;
@@ -88,7 +88,7 @@
 	cursor: default;
 }
 @supports (width: round(down, 100%, 1ch)) {
-	.remarkdown.h2-underline h2::after {
+	.remarkdown.h2-line h2::after {
 		width: round(down, 100%, 1ch);
 	}
 }

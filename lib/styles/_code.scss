@@ -4,7 +4,7 @@
 @use "../toolkit" as *;
 
 @mixin code {
-	@include option("code-tick") {
+	@include option(code-tick) {
 		code::before,
 		code::after {
 			@include content("`");
