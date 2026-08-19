@@ -9,30 +9,30 @@
 
 @use "./config";
 @use "./styles";
-@use "./toolkit" as tk;
+@use "./toolkit" as *;
 
 @forward "./styles" as styles-*;
 
 $version: "4.0.0-alpha.1";
-$-homepage: "https://fvsch.github.io/remarkdown/";
+$url: "https://fvsch.github.io/remarkdown/";
 
 @mixin config($args...) {
-	$options: tk.merge-arglist($args);
+	$options: merge-arglist($args);
 	@include config.set($options);
 }
 
-@mixin header($title: "ReMarkdown %v - %h") {
+@mixin header($title: "ReMarkdown %v - %u") {
 	$included: "all styles";
-	@if config.get("output-all-styles") != true {
+	@if config.get(output-all-styles) != true {
 		$included: "default-styles only";
 	}
-	$list: config.get("default-styles", list);
+	$list: config.get(default-styles, list);
 	@if list.length($list) == 0 {
 		$list: "none";
 	}
 	@if $title {
-		$title: tk.str-replace($title, "%v", $version);
-		$title: tk.str-replace($title, "%h", $-homepage);
+		$title: str-replace($title, "%v", $version);
+		$title: str-replace($title, "%u", $url);
 		/*! #{$title} */
 		/* includes: #{$included}; defaults: #{$list}; */
 	}

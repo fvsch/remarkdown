@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="./demo.css">
 </head>
-<body class="remarkdown h1-underline h2-underline em-underscore table-marker">
+<body class="remarkdown h1-line h2-line em-underscore table-marker">
 
 <nav>
 	<span>ReMarkdown</span>
@@ -42,17 +42,17 @@
 		<td>Reset heading text styles</td>
 	</tr>
 	<tr>
-		<td><a href="#hn-base">hn-hash</a></td>
+		<td><a href="#hn-base">hn-prefix</a></td>
 		<td>Yes</td>
 		<td>Add “#” characters before headings</td>
 	</tr>
 	<tr>
-		<td><a href="#h-underline">h1-underline</a></td>
+		<td><a href="#hn-line">h1-line</a></td>
 		<td>—</td>
 		<td>Underline H1s with equals</td>
 	</tr>
 	<tr>
-		<td><a href="#h-underline">h2-underline</a></td>
+		<td><a href="#hn-line">h2-line</a></td>
 		<td>—</td>
 		<td>Underline H2s with hyphens</td>
 	</tr>
@@ -201,10 +201,10 @@
 </h2>
 
 <h3 id="hn-base">
-	Defaults: <code>hn-reset</code> and <code>hn-hash</code>
+	Defaults: <code>hn-reset</code> and <code>hn-prefix</code>
 </h3>
 
-<figure data-remarkdown="hn-hash">
+<figure data-remarkdown="hn-prefix">
 	<h1 role="presentation">Heading level 1</h1>
 	<h2 role="presentation">Heading level 2</h2>
 	<h3 role="presentation">Heading level 3</h3>
@@ -213,11 +213,11 @@
 	<h6 role="presentation">Heading level 6</h6>
 </figure>
 
-<h3 id="h-underline">
-	Options: <code>h1-underline</code> and <code>h2-underline</code>
+<h3 id="hn-line">
+	Options: <code>h1-line</code> and <code>h2-line</code>
 </h3>
 
-<figure data-remarkdown="h1-underline h2-underline code-tick">
+<figure data-remarkdown="h1-line h2-line code-tick">
 	<h1 role="presentation">Underlined H1</h1>
 	<h2 role="presentation">Underlined H2</h2>
 	<p>Underlined headings cannot be centered with <code>text-align:center</code>. You will need to use <code>auto</code> margins:</p>

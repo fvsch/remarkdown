@@ -4,9 +4,9 @@
 @use "../toolkit" as *;
 
 @mixin table {
-	@include option("table-marker") {
+	@include option(table-marker) {
 		table {
-			margin-block: margins("table");
+			margin-block: margins(table);
 			border-collapse: collapse;
 		}
 		tr > * {

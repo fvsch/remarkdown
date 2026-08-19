@@ -6,7 +6,7 @@
 @mixin pre {
 	@include root() {
 		pre {
-			margin-block: margins("pre");
+			margin-block: margins(pre);
 			// Maybe a bit opinionated, but for the common use case of showing code
 			// or machine outputs rather than, say, ASCII art, it just makes sense.
 			white-space: pre-wrap;
@@ -14,13 +14,13 @@
 		}
 	}
 
-	@include option("pre-indent") {
+	@include option(pre-indent) {
 		pre {
-			margin-inline: indents("pre");
+			margin-inline: indents(pre);
 		}
 	}
 
-	@include option("pre-tick") {
+	@include option(pre-tick) {
 		pre::before,
 		pre::after {
 			@include content("```");
@@ -30,7 +30,7 @@
 		}
 	}
 
-	@include option("pre-tilde") {
+	@include option(pre-tilde) {
 		pre::before,
 		pre::after {
 			@include content("~~~");
@@ -40,7 +40,7 @@
 		}
 	}
 
-	@include option("pre-tilde-full") {
+	@include option(pre-tilde-full) {
 		pre::before,
 		pre::after {
 			@include content(str-repeat("~~~~~~~~~~", 12));

@@ -2,13 +2,9 @@
 
 @use "../lib/rmd";
 
-@include rmd.config(
-	$preset: "zero",
-	$root-selector: "",
-	$option-selector: '&.%o',
-);
+@include rmd.config($preset: zero, $root-selector: null, $option-selector: "&.%s");
 
-@include rmd.header("ReMarkdown-zero %v [scope] (MIT) %h");
+@include rmd.header("ReMarkdown-zero %v [scope] (MIT) %u");
 
 @scope (.remarkdown) to (.remarkdown-off) {
 	@include rmd.styles();

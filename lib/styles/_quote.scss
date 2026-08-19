@@ -6,13 +6,13 @@
 @mixin quote {
 	@include root() {
 		blockquote {
-			margin-block: margins("blockquote");
-			margin-inline: indents("blockquote");
+			margin-block: margins(blockquote);
+			margin-inline: indents(blockquote);
 			padding: 0;
 		}
 	}
 
-	@include option("quote-gt") {
+	@include option(quote-gt) {
 		blockquote {
 			position: relative;
 		}

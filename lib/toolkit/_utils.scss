@@ -1,5 +1,5 @@
 @use "sass:map";
-@use "sass:meta";
+@use "sass:meta" as *;
 @use "sass:string";
 
 /// Merge positional arguments and named arguments passed to a function or mixin,
@@ -7,11 +7,11 @@
 @function merge-arglist($args) {
 	$map: ();
 	@each $arg in $args {
-		@if meta.type-of($arg) == map {
+		@if type-of($arg) == map {
 			$map: map.merge($map, $arg);
 		}
 	}
-	$map: map.merge($map, meta.keywords($args));
+	$map: map.merge($map, keywords($args));
 	@return $map;
 }
 

@@ -6,8 +6,8 @@
 @mixin ul {
 	@include root() {
 		ul {
-			margin-block: margins("ul");
-			margin-inline: indents("ul");
+			margin-block: margins(ul);
+			margin-inline: indents(ul);
 			padding: 0;
 		}
 		li ul {
@@ -15,15 +15,15 @@
 		}
 	}
 
-	@include option("ul-plus") {
+	@include option(ul-plus) {
 		@include -ul-li-before("+");
 	}
 
-	@include option("ul-star") {
+	@include option(ul-star) {
 		@include -ul-li-before("*");
 	}
 
-	@include option("ul-hyphen") {
+	@include option(ul-hyphen) {
 		@include -ul-li-before("-");
 	}
 }
@@ -36,7 +36,7 @@
 		@include content($sign);
 		float: inline-start;
 		width: 1ch;
-		margin-inline-start: indent("ul", "start") * -1;
+		margin-inline-start: indent(ul, start) * -1;
 		margin-inline-end: 1ch;
 	}
 }

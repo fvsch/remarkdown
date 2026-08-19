@@ -4,7 +4,7 @@
 @use "../toolkit" as *;
 
 @mixin del {
-	@include option("del-gfm") {
+	@include option(del-gfm) {
 		del {
 			text-decoration: none;
 		}

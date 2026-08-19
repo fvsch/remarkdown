@@ -1,5 +1,6 @@
-@use "sass:meta";
+@use "sass:meta" as *;
 @use "sass:string";
+
 @use "../config";
 
 /// Helper for generating pseudo-element content that should be ignored by screen readers
@@ -16,7 +17,7 @@
 /// or a list of strings.
 @mixin font-family($name) {
 	$value: config.get($name, string);
-	@if meta.type-of($value) == string {
+	@if type-of($value) == string {
 		$value: string.unquote($value);
 	}
 	font-family: $value;
