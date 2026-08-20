@@ -40,6 +40,6 @@
 }
 
 @function -option-selector($name) {
-	$pattern: config.get(option-selector, string);
+	$pattern: config.get(option-selector);
 	@return utils.str-replace($pattern, "%s", $name);
 }

@@ -1,0 +1,68 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta" as *;
+@use "sass:string";
+
+@use "../toolkit/utils";
+@use "./defaults";
+
+$-DEFAULTS: module-variables(defaults);
+
+@mixin check-option($name, $value) {
+	$name: string.unquote($name);
+
+	// fail for unknown and invalid options
+	@if $name != preset and not map.has-key($-DEFAULTS, $name) {
+		@error "Unknown option #{$name}, expected one of: #{map.keys($-DEFAULTS)}";
+	}
+
+	@if $name == preset {
+		@include -require-enum($name, $value, null default zero);
+	} @else if $name == root-selector {
+		@include -require-type($name, $value, "null" string);
+	} @else if $name == option-selector {
+		@include -require-type($name, $value, string);
+		@include -require-substring($name, $value, "%s");
+	} @else if $name == variable-name {
+		@include -require-type($name, $value, string);
+		@include -require-substring($name, $value, "%s");
+	} @else if $name == font or $name == code-font {
+		@include -require-type($name, $value, "null" string list);
+	} @else {
+		// fall back to checking that the type matches the default value's type
+		$default: map.get($-DEFAULTS, $name);
+		@include -require-type($name, $value, type-of($default));
+	}
+}
+
+@mixin -require-type($name, $value, $expected) {
+	$type: type-of($value);
+	@if not list.index($expected, $type) {
+		@error "Type of $#{$name} must be #{-print-list($expected)}, got: #{inspect($type)}";
+	}
+}
+
+@mixin -require-enum($name, $value, $required) {
+	@if not list.index($required, $value) {
+		@error "$#{$name} must be #{-print-list($required)}, got: #{inspect($value)}";
+	}
+}
+
+@mixin -require-substring($name, $value, $sub) {
+	@if not utils.str-contains($value, $sub) {
+		@error "$#{$name} must contain the substring #{-print-string($sub)}, got #{-print-string($value)}";
+	}
+}
+
+@function -print-list($list, $prefix: "one of ") {
+	@if list.length($list) == 1 {
+		@return inspect(list.nth($list, 1));
+	} @else {
+		$pretty: list.join($list, (), $separator: comma, $bracketed: true);
+		@return $prefix + inspect($pretty);
+	}
+}
+
+@function -print-string($str) {
+	@return string.unquote("`#{string.unquote($str)}`");
+}
