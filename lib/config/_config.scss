@@ -5,30 +5,26 @@
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta" as *;
-@use "sass:string";
 
 @use "./defaults";
+@use "./validate";
 @use "./zero";
 
-$-DEFAULTS: module-variables(defaults);
-$-ZERO: module-variables(zero);
-$-config: -start-config(default);
+$-config: -base-config(default);
 
-@function get($keys, $type: null) {
-	$value: null;
-	@if type-of($keys) == list {
-		$value: map.get($-config, $keys...);
-	} @else {
-		$value: map.get($-config, $keys);
+@function get($path) {
+	// Check that the config option exists, only checking the first element
+	$first: list.nth($path, 1);
+	@if type-of($first) != string {
+		@error "Invalid config path, expected a string or list of strings, got: #{inspect($path)}";
+	} @else if not map.has-key($-config, $first) {
+		@error "Unknown config option #{$first}";
 	}
-	@if ($type != null) and ($type != type-of($value)) and ($type != type-of(list.nth($value, 1))) {
-		@error "Config value for #{inspect($keys)} has type #{type-of($value)}, expected #{$type}";
-	}
-	@return $value;
+	@return map.get($-config, $path...);
 }
 
 @function is-default($names) {
-	$list: get(default-styles, list);
+	$list: get(default-styles);
 	@each $name in $names {
 		@if list.index($list, $name) != null {
 			@return true;
@@ -39,35 +35,17 @@ $-config: -start-config(default);
 
 @mixin set($options) {
 	$preset: map.get($options, preset);
-	$base: -start-config($preset);
+	$base: -base-config($preset);
 	@each $option, $value in $options {
-		// fail for unknown and invalid options
-		$err: -check-options($option, $value);
+		@include validate.check-option($option, $value);
 	}
 	$-config: map.merge($base, $options) !global;
 }
 
-@function -check-options($option, $value) {
-	@if $option != preset and not map.has-key($-DEFAULTS, $option) {
-		$list: map.keys($-DEFAULTS);
-		@error "Unknown option #{$option}, expected one of: #{$list}.";
-	}
-	@if $option == preset and not list.index(null default zero, $value) {
-		@error "Unknown $preset #{$value}, expected one of: default, zero.";
-	}
-	@if $option == root-selector and ($value != null and type-of($value) != string) {
-		@error "$root-selector must be a string or null, got: #{inspect($value)}";
-	}
-	@if $option == option-selector and (type-of($value) != string or not string.index($value, "%s")) {
-		@error "$option-selector must contain the substring '%s', got '#{inspect($value)}'";
-	}
-	@return null;
-}
-
-@function -start-config($preset: default) {
+@function -base-config($preset) {
+	$config: module-variables(defaults);
 	@if $preset == zero {
-		@return map.merge($-DEFAULTS, $-ZERO);
-	} @else {
-		@return $-DEFAULTS;
+		$config: map.merge($config, module-variables(zero));
 	}
+	@return $config;
 }

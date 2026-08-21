@@ -5,13 +5,25 @@
 @use "../toolkit" as *;
 
 @mixin base {
+	@include root() {
+		@include define-var(font);
+		@include define-var(code-font);
+		@include define-var(line-height);
+		@include define-var(hn-prefix);
+		@include define-var(h1-line);
+		@include define-var(h2-line);
+		@include define-var(hr-stars);
+		@include define-var(hr-dashes);
+		@include define-var(margin-block-base);
+	}
+
 	@include option(base-text) {
 		& {
-			@include font-family(font);
-			line-height: config.get(line-height, number);
+			font-family: var(var-name(font));
+			line-height: var(var-name(line-height));
 		}
 		:is(pre, code, kbd, samp) {
-			@include font-family(code-font);
+			font-family: var(var-name(code-font));
 		}
 	}
 }

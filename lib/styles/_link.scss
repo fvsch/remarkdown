@@ -1,4 +1,4 @@
-// Links
+// <a>
 // Options: a-bracket, a-showurl
 
 @use "../toolkit" as *;
@@ -17,6 +17,9 @@
 	}
 
 	@include option(a-showurl) {
+		a {
+			text-decoration-inset: 0;
+		}
 		a[href]::before {
 			@include content("[");
 		}

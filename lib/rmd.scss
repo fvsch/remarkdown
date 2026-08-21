@@ -26,7 +26,7 @@ $url: "https://fvsch.github.io/remarkdown/";
 	@if config.get(output-all-styles) != true {
 		$included: "default-styles only";
 	}
-	$list: config.get(default-styles, list);
+	$list: config.get(default-styles);
 	@if list.length($list) == 0 {
 		$list: "none";
 	}

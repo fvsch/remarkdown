@@ -25,6 +25,11 @@ $root-selector: ".remarkdown";
 // "%s" will be replaced with the style's name.
 $option-selector: ".remarkdown.%s";
 
+// Some config options will be exposed and used as CSS variables.
+// This option controls what the variables look like; "%s" will be replaced
+// with the Sass option's name (without the `$` sign).
+$variable-name: "--rmd-%s";
+
 // Whether we should include styles for ALL alternative styles (true),
 // or only for styles listed in $default-styles (false).
 // If false, the CSS build will be smaller, but setting options
@@ -33,8 +38,8 @@ $output-all-styles: true;
 
 // Default style variations.
 // Separate values with whitespace. Remove or comment out options you
-// don't want. Note that all option names are singular:
-// e.g. "hr-hyphen" even if we use several hyphens to display a <hr>.
+// don't want. Note that all option names are singular: e.g. "hr-star"
+// even if we use several star characters to display a <hr>.
 // oxfmt-ignore
 $default-styles: (
 	base-text,
@@ -63,8 +68,8 @@ $default-styles: (
 	// pre-tilde,
 	// pre-tilde-full,
 	hr-star,
+	// hr-dash,
 	// hr-center,
-	// hr-hyphen,
 	// del-gfm,
 	// table-marker,
 );
@@ -75,11 +80,11 @@ $default-styles: (
 // value makes browsers use a default 13px font size.)
 $font: monospace, monospace;
 
-// Root line-height (as a unit-less ratio, e.g. `1.5`)
-$line-height: 1.5;
-
 // For elements that are traditionnaly monospace, use a different font?
 $code-font: inherit;
+
+// Root line-height (as a unit-less ratio, e.g. `1.5`)
+$line-height: 1.5;
 
 // Size of one step of vertical margin.
 // Typically, the height of a single line of text.
@@ -95,7 +100,6 @@ $margin-inline-base: 1ch;
 // By default we use one line for everything, but you can specify more here:
 $margins: (
 	h1: (
-		block: 1.5 1,
 		top: 1.5,
 		bottom: 1,
 	),
@@ -151,15 +155,15 @@ $margins: (
 	),
 );
 
-// HR patterns
-$hr-stars: "* * * *";
-$hr-dashes: "-------";
-
 // Character used as heading prefix
 $hn-prefix: "#";
 
 // Characters used for underlined headings
-// Recommended: use a string of ~50 characters or so. For long titles,
-// these strings will be doubled to fill the container's width.
-$h1-line: "==================================================";
-$h2-line: "--------------------------------------------------";
+// Recommended: use a string of ~40 characters or so.
+// These will be tripled to fill the container's width.
+$h1-line: "========================================";
+$h2-line: "----------------------------------------";
+
+// Horizontal rules
+$hr-stars: "* * * *";
+$hr-dashes: "-------";
