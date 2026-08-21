@@ -38,12 +38,12 @@
 	--text-color: hsl(0 0% 12%);
 	--link-color: hsl(346 86% 54%);
 	--code-color: hsl(0 60% 31%);
-	--pseudo-color: hsl(210 60% 31% / 0.6);
+	--pseudo-color: hsl(220 70% 35% / 0.5);
 	--bg-color: hsl(0 0% 100%);
 	--bg-alt-color: hsl(0 0% 93%);
 	--bg-border-color: hsl(0 0% 86%);
-	--demo-text-color: hsl(220 50% 32%);
-	--demo-bg-color: hsl(235 80% 95%);
+	--demo-text-color: hsl(180 70% 26%);
+	--demo-bg-color: hsl(200 60% 94%);
 
 	scroll-padding-top: 1lh;
 	color: var(--text-color);
@@ -55,15 +55,17 @@
 }
 
 body {
-	max-width: 660px;
-	padding-block: 30px 50px;
-	padding-inline: 30px;
-	margin: 0 auto;
+	--body-padding-inline: 2rem;
+	margin: 0;
+	padding-block: 2rem 3rem;
+	padding-inline: var(--body-padding-inline);
 
 	@media (width >= 900px) {
-		margin: 30px auto;
-		padding-block: 40px 60px;
-		padding-inline: 80px;
+		--body-padding-inline: 4.5rem;
+		max-width: 66ch;
+		margin-block: 2rem;
+		margin-inline: auto;
+		padding-block: 2.5rem 3.5rem;
 		border: 1px solid var(--bg-border-color);
 		background-color: var(--bg-color);
 		box-shadow: 3px 3px 3px -2px var(--bg-border-color);
@@ -154,8 +156,11 @@ nav {
 #styles {
 	figure {
 		overflow-x: auto;
-		margin: 1.5em -30px;
-		padding: 0.5em 30px;
+		margin-block: 1lh;
+		margin-inline: calc(var(--body-padding-inline) * -1);
+		padding-block: 0.5lh;
+		padding-inline: var(--body-padding-inline);
+		border-bottom: solid 3px hsl(from currentColor h 80% 20% / 0.1);
 		color: var(--demo-text-color);
 		background-color: var(--demo-bg-color);
 	}

@@ -1,12 +1,21 @@
 /*! ReMarkdown 4.0.0-alpha.1 [scope] (MIT) https://fvsch.github.io/remarkdown/ */
 /* includes: all styles; defaults: base-text, hn-reset, hn-prefix, ul-hyphen, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
 @scope (.remarkdown) to (.remarkdown-off) {
+	--rmd-font: monospace, monospace;
+	--rmd-code-font: inherit;
+	--rmd-line-height: 1.5;
+	--rmd-hn-prefix: "#";
+	--rmd-h1-line: "========================================";
+	--rmd-h2-line: "----------------------------------------";
+	--rmd-hr-stars: "* * * *";
+	--rmd-hr-dashes: "-------";
+	--rmd-margin-block-base: 1lh;
 	& {
-		font-family: monospace, monospace;
-		line-height: 1.5;
+		font-family: var(--rmd-font);
+		line-height: var(--rmd-line-height);
 	}
 	:is(pre, code, kbd, samp) {
-		font-family: inherit;
+		font-family: var(--rmd-code-font);
 	}
 	h1 {
 		font-size: inherit;
@@ -24,22 +33,25 @@
 		margin-block: 1lh;
 	}
 	h1::before {
-		content: "# "/"";
+		content: var(--rmd-hn-prefix) " "/"";
 	}
 	h2::before {
-		content: "## "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 	}
 	h3::before {
-		content: "### "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 	}
 	h4::before {
-		content: "#### "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			" "/"";
 	}
 	h5::before {
-		content: "##### "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			var(--rmd-hn-prefix) " "/"";
 	}
 	h6::before {
-		content: "###### "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 	}
 	&.h1-line h1 {
 		position: relative;
@@ -50,7 +62,7 @@
 		content: none;
 	}
 	&.h1-line h1::after {
-		content: "===================================================================================================="/"";
+		content: var(--rmd-h1-line) var(--rmd-h1-line) var(--rmd-h1-line)/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
@@ -74,7 +86,7 @@
 		content: none;
 	}
 	&.h2-line h2::after {
-		content: "----------------------------------------------------------------------------------------------------"/"";
+		content: var(--rmd-h2-line) var(--rmd-h2-line) var(--rmd-h2-line)/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
@@ -108,10 +120,10 @@
 		text-align: center;
 	}
 	hr::before {
-		content: "* * * *"/"";
+		content: var(--rmd-hr-stars)/"";
 	}
-	&.hr-hyphen hr::before {
-		content: "-------"/"";
+	&.hr-dash hr::before {
+		content: var(--rmd-hr-dashes)/"";
 	}
 	ul {
 		margin-block: 1lh;
@@ -205,6 +217,9 @@
 	}
 	a::after {
 		content: "]"/"";
+	}
+	&.a-showurl a {
+		text-decoration-inset: 0;
 	}
 	&.a-showurl a[href]::before {
 		content: "["/"";

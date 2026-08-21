@@ -92,6 +92,16 @@
 		<td>Use “&gt;” signs for blockquotes</td>
 	</tr>
 	<tr>
+		<td><a href="#a-bracket">a-bracket</a></td>
+		<td>Yes</td>
+		<td>Add square brackets around links.</td>
+	</tr>
+	<tr>
+		<td><a href="#a-showurl">a-showurl</a></td>
+		<td>—</td>
+		<td>Show URLs after links</td>
+	</tr>
+	<tr>
 		<td><a href="#em-base">em-reset</a></td>
 		<td>Yes</td>
 		<td>Reset EM font style</td>
@@ -122,31 +132,6 @@
 		<td>Surround STRONGs with “__”</td>
 	</tr>
 	<tr>
-		<td><a href="#a-bracket">a-bracket</a></td>
-		<td>Yes</td>
-		<td>Add square brackets around links.</td>
-	</tr>
-	<tr>
-		<td><a href="#a-showurl">a-showurl</a></td>
-		<td>—</td>
-		<td>Show URLs after links</td>
-	</tr>
-	<tr>
-		<td><a href="#hr-star">hr-star</a></td>
-		<td>Yes</td>
-		<td>Use “*” signs for HRs</td>
-	</tr>
-	<tr>
-		<td><a href="#hr-hyphen">hr-hyphen</a></td>
-		<td>—</td>
-		<td>Use “-” signs for HRs</td>
-	</tr>
-	<tr>
-		<td><a href="#hr-center">hr-center</a></td>
-		<td>—</td>
-		<td>Horizontally center HRs</td>
-	</tr>
-	<tr>
 		<td><a href="#code-tick">code-tick</a></td>
 		<td>Yes</td>
 		<td>Wrap CODE in “`” (backticks)</td>
@@ -170,6 +155,21 @@
 		<td><a href="#pre-tilde-full">pre-tilde-full</a></td>
 		<td>—</td>
 		<td>Wrap PRE in a full line of “~”</td>
+	</tr>
+	<tr>
+		<td><a href="#hr-star">hr-star</a></td>
+		<td>Yes</td>
+		<td>Use “*” signs for HRs</td>
+	</tr>
+	<tr>
+		<td><a href="#hr-dash">hr-dash</a></td>
+		<td>—</td>
+		<td>Use “-” signs for HRs</td>
+	</tr>
+	<tr>
+		<td><a href="#hr-center">hr-center</a></td>
+		<td>—</td>
+		<td>Horizontally center HRs</td>
 	</tr>
 	<tr>
 		<td><a href="#del-gfm">del-gfm</a></td>
@@ -339,6 +339,32 @@
 </figure>
 
 <h2>
+	Links
+</h2>
+
+<h3 id="a-bracket">
+	Default: <code>a-bracket</code>
+</h3>
+
+<figure data-remarkdown="a-bracket">
+	<p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
+	and let me play among the stars.
+	Let me see what spring is like
+	on a-Jupiter and Mars.</p>
+</figure>
+
+<h3 id="a-showurl">
+	Option: <code>a-showurl</code>
+</h3>
+
+<figure data-remarkdown="a-showurl">
+	<p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
+	and let me play among the stars.
+	Let me see what spring is like
+	on a-Jupiter and Mars.</p>
+</figure>
+
+<h2>
 	Emphasis
 </h2>
 
@@ -372,61 +398,6 @@
 
 <figure data-remarkdown="strong-underscore">
 	<p>This is figurative. <strong>Literally.</strong></p>
-</figure>
-
-<h2>
-	Links
-</h2>
-
-<h3 id="a-bracket">
-	Default: <code>a-bracket</code>
-</h3>
-
-<figure data-remarkdown="a-bracket">
-	<p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
-	and let me play among the stars.
-	Let me see what spring is like
-	on a-Jupiter and Mars.</p>
-</figure>
-
-<h3 id="a-showurl">
-	Option: <code>a-showurl</code>
-</h3>
-
-<figure data-remarkdown="a-showurl">
-	<p>Fly me to <a href="https://en.wikipedia.org/wiki/Fly_Me_to_the_Moon">the moon</a>,
-	and let me play among the stars.
-	Let me see what spring is like
-	on a-Jupiter and Mars.</p>
-</figure>
-
-<h2>
-	Horizontal rules
-</h2>
-
-<h3 id="hr-star">
-	Default: <code>hr-star</code>
-</h3>
-
-<figure data-remarkdown="hr-star">
-	<hr>
-</figure>
-
-<h3 id="hr-hyphen">
-	Option: <code>hr-hyphen</code>
-</h3>
-
-<figure data-remarkdown="hr-hyphen">
-	<hr>
-</figure>
-
-<h3 id="hr-center">
-	Option: <code>hr-center</code>
-</h3>
-
-<figure data-remarkdown="hr-center">
-	<div data-remarkdown="hr-star"><hr></div>
-	<div data-remarkdown="hr-hyphen"><hr></div>
 </figure>
 
 <h2>
@@ -476,6 +447,35 @@
 
 <figure data-remarkdown="pre-tilde-full">
 	<pre><code>A code block</code></pre>
+</figure>
+
+<h2>
+	Horizontal rules
+</h2>
+
+<h3 id="hr-star">
+	Default: <code>hr-star</code>
+</h3>
+
+<figure data-remarkdown="hr-star">
+	<hr>
+</figure>
+
+<h3 id="hr-dash">
+	Option: <code>hr-dash</code>
+</h3>
+
+<figure data-remarkdown="hr-dash">
+	<hr>
+</figure>
+
+<h3 id="hr-center">
+	Option: <code>hr-center</code>
+</h3>
+
+<figure data-remarkdown="hr-center">
+	<div data-remarkdown="hr-star"><hr></div>
+	<div data-remarkdown="hr-dash"><hr></div>
 </figure>
 
 <h2>

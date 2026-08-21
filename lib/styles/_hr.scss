@@ -1,12 +1,12 @@
-// Horizontal rules
-// Options: hr-center, hr-star, hr-hyphen
+// <hr>
+// Options: hr-center, hr-star, hr-dash
 
 @use "../config";
 @use "../toolkit" as *;
 
 @mixin hr {
-	$stars: config.get(hr-stars, string);
-	$dashes: config.get(hr-dashes, string);
+	$stars: var(var-name(hr-stars));
+	$dashes: var(var-name(hr-dashes));
 
 	@include root {
 		hr {
@@ -31,7 +31,7 @@
 		}
 	}
 
-	@include option(hr-hyphen) {
+	@include option(hr-dash) {
 		hr::before {
 			@include content($dashes);
 		}

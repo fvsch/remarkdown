@@ -15,6 +15,10 @@
 	@return $map;
 }
 
+@function str-contains($str, $search) {
+	@return type-of($str) == string and string.index($str, $search) != null;
+}
+
 @function str-join($list, $joiner: "") {
 	$acc: "";
 	@each $item in $list {

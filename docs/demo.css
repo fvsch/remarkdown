@@ -5,17 +5,21 @@
 	/*! ReMarkdown 4.0.0-alpha.1 [scope-custom] (MIT) %h */
 	/* includes: all styles; defaults: base-text, hn-reset, hn-prefix, ul-hyphen, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
 	@scope (.remarkdown) to ([data-remarkdown]) {
+		--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
+		--rmd-code-font: inherit;
+		--rmd-line-height: 1.5;
+		--rmd-hn-prefix: "#";
+		--rmd-h1-line: "========================================";
+		--rmd-h2-line: "----------------------------------------";
+		--rmd-hr-stars: "* * * *";
+		--rmd-hr-dashes: "-------";
+		--rmd-margin-block-base: 1lh;
 		& {
-			font-family:
-				Menlo,
-				Consolas,
-				DejaVu Sans Mono,
-				ui-monospace,
-				monospace;
-			line-height: 1.5;
+			font-family: var(--rmd-font);
+			line-height: var(--rmd-line-height);
 		}
 		:is(pre, code, kbd, samp) {
-			font-family: inherit;
+			font-family: var(--rmd-code-font);
 		}
 		h1 {
 			font-size: inherit;
@@ -33,22 +37,25 @@
 			margin-block: 1lh;
 		}
 		h1::before {
-			content: "# "/"";
+			content: var(--rmd-hn-prefix) " "/"";
 		}
 		h2::before {
-			content: "## "/"";
+			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 		}
 		h3::before {
-			content: "### "/"";
+			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 		}
 		h4::before {
-			content: "#### "/"";
+			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+				" "/"";
 		}
 		h5::before {
-			content: "##### "/"";
+			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+				var(--rmd-hn-prefix) " "/"";
 		}
 		h6::before {
-			content: "###### "/"";
+			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+				var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 		}
 		&.h1-line h1 {
 			position: relative;
@@ -59,7 +66,7 @@
 			content: none;
 		}
 		&.h1-line h1::after {
-			content: "===================================================================================================="/"";
+			content: var(--rmd-h1-line) var(--rmd-h1-line) var(--rmd-h1-line)/"";
 			position: absolute;
 			bottom: 0;
 			inset-inline: 0;
@@ -83,7 +90,7 @@
 			content: none;
 		}
 		&.h2-line h2::after {
-			content: "----------------------------------------------------------------------------------------------------"/"";
+			content: var(--rmd-h2-line) var(--rmd-h2-line) var(--rmd-h2-line)/"";
 			position: absolute;
 			bottom: 0;
 			inset-inline: 0;
@@ -117,10 +124,10 @@
 			text-align: center;
 		}
 		hr::before {
-			content: "* * * *"/"";
+			content: var(--rmd-hr-stars)/"";
 		}
-		&.hr-hyphen hr::before {
-			content: "-------"/"";
+		&.hr-dash hr::before {
+			content: var(--rmd-hr-dashes)/"";
 		}
 		ul {
 			margin-block: 1lh;
@@ -214,6 +221,9 @@
 		}
 		a::after {
 			content: "]"/"";
+		}
+		&.a-showurl a {
+			text-decoration-inset: 0;
 		}
 		&.a-showurl a[href]::before {
 			content: "["/"";
@@ -363,11 +373,22 @@
 	/*! ReMarkdown-zero 4.0.0-alpha.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
 	/* includes: all styles; defaults: base-text, hn-reset, em-reset, strong-reset; */
 	[data-remarkdown] {
-		font-family: monospace, monospace;
-		line-height: 1.5;
+		--rmd-font: monospace, monospace;
+		--rmd-code-font: inherit;
+		--rmd-line-height: 1.5;
+		--rmd-hn-prefix: "#";
+		--rmd-h1-line: "========================================";
+		--rmd-h2-line: "----------------------------------------";
+		--rmd-hr-stars: "* * * *";
+		--rmd-hr-dashes: "-------";
+		--rmd-margin-block-base: 1lh;
+	}
+	[data-remarkdown] {
+		font-family: var(--rmd-font);
+		line-height: var(--rmd-line-height);
 	}
 	[data-remarkdown] :is(pre, code, kbd, samp) {
-		font-family: inherit;
+		font-family: var(--rmd-code-font);
 	}
 	[data-remarkdown] h1 {
 		font-size: inherit;
@@ -385,22 +406,25 @@
 		margin-block: 1lh;
 	}
 	[data-remarkdown~="hn-prefix"] h1::before {
-		content: "# "/"";
+		content: var(--rmd-hn-prefix) " "/"";
 	}
 	[data-remarkdown~="hn-prefix"] h2::before {
-		content: "## "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 	}
 	[data-remarkdown~="hn-prefix"] h3::before {
-		content: "### "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 	}
 	[data-remarkdown~="hn-prefix"] h4::before {
-		content: "#### "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			" "/"";
 	}
 	[data-remarkdown~="hn-prefix"] h5::before {
-		content: "##### "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			var(--rmd-hn-prefix) " "/"";
 	}
 	[data-remarkdown~="hn-prefix"] h6::before {
-		content: "###### "/"";
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 	}
 	[data-remarkdown~="h1-line"] h1 {
 		position: relative;
@@ -411,7 +435,7 @@
 		content: none;
 	}
 	[data-remarkdown~="h1-line"] h1::after {
-		content: "===================================================================================================="/"";
+		content: var(--rmd-h1-line) var(--rmd-h1-line) var(--rmd-h1-line)/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
@@ -435,7 +459,7 @@
 		content: none;
 	}
 	[data-remarkdown~="h2-line"] h2::after {
-		content: "----------------------------------------------------------------------------------------------------"/"";
+		content: var(--rmd-h2-line) var(--rmd-h2-line) var(--rmd-h2-line)/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
@@ -469,10 +493,10 @@
 		text-align: center;
 	}
 	[data-remarkdown~="hr-star"] hr::before {
-		content: "* * * *"/"";
+		content: var(--rmd-hr-stars)/"";
 	}
-	[data-remarkdown~="hr-hyphen"] hr::before {
-		content: "-------"/"";
+	[data-remarkdown~="hr-dash"] hr::before {
+		content: var(--rmd-hr-dashes)/"";
 	}
 	[data-remarkdown] ul {
 		margin-block: 1lh;
@@ -566,6 +590,9 @@
 	}
 	[data-remarkdown~="a-bracket"] a::after {
 		content: "]"/"";
+	}
+	[data-remarkdown~="a-showurl"] a {
+		text-decoration-inset: 0;
 	}
 	[data-remarkdown~="a-showurl"] a[href]::before {
 		content: "["/"";
@@ -717,12 +744,12 @@
 	--text-color: hsl(0 0% 12%);
 	--link-color: hsl(346 86% 54%);
 	--code-color: hsl(0 60% 31%);
-	--pseudo-color: hsl(210 60% 31% / 0.6);
+	--pseudo-color: hsl(220 70% 35% / 0.5);
 	--bg-color: hsl(0 0% 100%);
 	--bg-alt-color: hsl(0 0% 93%);
 	--bg-border-color: hsl(0 0% 86%);
-	--demo-text-color: hsl(220 50% 32%);
-	--demo-bg-color: hsl(235 80% 95%);
+	--demo-text-color: hsl(180 70% 26%);
+	--demo-bg-color: hsl(200 60% 94%);
 	scroll-padding-top: 1lh;
 	color: var(--text-color);
 	background-color: var(--bg-color);
@@ -734,16 +761,18 @@
 }
 
 body {
-	max-width: 660px;
-	padding-block: 30px 50px;
-	padding-inline: 30px;
-	margin: 0 auto;
+	--body-padding-inline: 2rem;
+	margin: 0;
+	padding-block: 2rem 3rem;
+	padding-inline: var(--body-padding-inline);
 }
 @media (width >= 900px) {
 	body {
-		margin: 30px auto;
-		padding-block: 40px 60px;
-		padding-inline: 80px;
+		--body-padding-inline: 4.5rem;
+		max-width: 66ch;
+		margin-block: 2rem;
+		margin-inline: auto;
+		padding-block: 2.5rem 3.5rem;
 		border: 1px solid var(--bg-border-color);
 		background-color: var(--bg-color);
 		box-shadow: 3px 3px 3px -2px var(--bg-border-color);
@@ -827,8 +856,11 @@ nav > br {
 /* Styles page */
 #styles figure {
 	overflow-x: auto;
-	margin: 1.5em -30px;
-	padding: 0.5em 30px;
+	margin-block: 1lh;
+	margin-inline: calc(var(--body-padding-inline) * -1);
+	padding-block: 0.5lh;
+	padding-inline: var(--body-padding-inline);
+	border-bottom: solid 3px hsl(from currentColor h 80% 20%/0.1);
 	color: var(--demo-text-color);
 	background-color: var(--demo-bg-color);
 }

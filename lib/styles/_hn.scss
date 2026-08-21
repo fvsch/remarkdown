@@ -1,6 +1,8 @@
 // Headings
 // Options: hn-reset, hn-prefix, h1-line, h2-line
 
+@use "sass:list";
+
 @use "../config";
 @use "../toolkit" as *;
 
@@ -24,29 +26,30 @@
 	}
 
 	@include option(hn-prefix) {
-		$sign: config.get(hn-prefix, string);
+		$prefix: var(var-name(hn-prefix));
 		@for $i from 1 through 6 {
-			$chars: str-repeat($sign, $i);
 			h#{$i}::before {
-				@include content($chars + " ");
+				@include content($prefix, $repeat: $i, $suffix: " ");
 			}
 		}
 	}
 
 	@include option(h1-line) {
+		$line: var(var-name(h1-line));
 		h1 {
-			@include -hn-line(config.get(h1-line));
+			@include -hn-line($line);
 		}
 	}
 
 	@include option(h2-line) {
+		$line: var(var-name(h2-line));
 		h2 {
-			@include -hn-line(config.get(h2-line));
+			@include -hn-line($line);
 		}
 	}
 }
 
-@mixin -hn-line($chars) {
+@mixin -hn-line($line) {
 	& {
 		position: relative;
 		width: fit-content;
@@ -56,7 +59,7 @@
 		content: none;
 	}
 	&::after {
-		@include content(str-repeat($chars, 2));
+		@include content($line, $repeat: 3);
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
@@ -66,8 +69,9 @@
 		word-break: break-all;
 		cursor: default;
 	}
-	// when text wraps, the underline will take up the full
-	// width of the container, and may display
+	// When text wraps, the underline will take up the full width of the
+	// container, and may display characters that get cut off. We can cut
+	// characters off cleanup by rounding down the width.
 	@supports (width: round(down, 100%, 1ch)) {
 		&::after {
 			width: round(down, 100%, 1ch);
