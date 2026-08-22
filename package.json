@@ -31,8 +31,8 @@
 		"start": "servitsy docs"
 	},
 	"devDependencies": {
-		"oxfmt": "^0.63.0",
-		"sass": "^1.102.0",
+		"oxfmt": "^0.64.0",
+		"sass": "^1.103.1",
 		"servitsy": "^0.6.0"
 	}
 }

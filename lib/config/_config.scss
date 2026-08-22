@@ -12,6 +12,15 @@
 
 $-config: -base-config(default);
 
+@mixin set($options) {
+	$preset: map.get($options, preset);
+	$base: -base-config($preset);
+	@each $option, $value in $options {
+		@include validate.check-option($option, $value);
+	}
+	$-config: map.merge($base, $options) !global;
+}
+
 @function get($path) {
 	// Check that the config option exists, only checking the first element
 	$first: list.nth($path, 1);
@@ -23,23 +32,15 @@ $-config: -base-config(default);
 	@return map.get($-config, $path...);
 }
 
-@function is-default($names) {
-	$list: get(default-styles);
+/// Return the first option name found in $default-styles
+@function default-option($names) {
+	$defaults: get(default-styles);
 	@each $name in $names {
-		@if list.index($list, $name) != null {
-			@return true;
+		@if list.index($defaults, $name) {
+			@return $name;
 		}
 	}
-	@return false;
-}
-
-@mixin set($options) {
-	$preset: map.get($options, preset);
-	$base: -base-config($preset);
-	@each $option, $value in $options {
-		@include validate.check-option($option, $value);
-	}
-	$-config: map.merge($base, $options) !global;
+	@return null;
 }
 
 @function -base-config($preset) {

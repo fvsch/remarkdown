@@ -139,15 +139,26 @@
 
 .remarkdown ul {
 	margin-block: 1lh;
-	margin-inline: 3ch 0ch;
-	padding: 0;
+	margin-inline: 0;
+	padding-inline: 3ch 0ch;
 }
-.remarkdown li ul {
-	margin-block: 0;
+.remarkdown :where(ol, ul) ul {
+	margin-block: 0ch;
+}
+
+.remarkdown.ul-dash ul {
+	list-style-type: none;
+}
+.remarkdown.ul-dash ul > li::before {
+	content: "-"/"";
+	float: inline-start;
+	width: 1ch;
+	margin-inline-start: -3ch;
+	margin-inline-end: 1ch;
 }
 
 .remarkdown.ul-plus ul {
-	list-style: none;
+	list-style-type: none;
 }
 .remarkdown.ul-plus ul > li::before {
 	content: "+"/"";
@@ -158,7 +169,7 @@
 }
 
 .remarkdown.ul-star ul {
-	list-style: none;
+	list-style-type: none;
 }
 .remarkdown.ul-star ul > li::before {
 	content: "*"/"";
@@ -168,65 +179,50 @@
 	margin-inline-end: 1ch;
 }
 
-.remarkdown.ul-hyphen ul {
-	list-style: none;
-}
-.remarkdown.ul-hyphen ul > li::before {
-	content: "-"/"";
-	float: inline-start;
-	width: 1ch;
-	margin-inline-start: -3ch;
-	margin-inline-end: 1ch;
-}
-
 .remarkdown ol {
 	margin-block: 1lh;
-	margin-inline: 3ch 0ch;
-	padding: 0;
+	margin-inline: 0;
+	padding-inline: 3ch 0ch;
+	counter-reset: rmd-ol;
 }
-.remarkdown li ol {
+.remarkdown :where(ol, ul) ol {
 	margin-block: 0;
+}
+.remarkdown ol > li {
+	counter-increment: rmd-ol;
 }
 
 .remarkdown.ol-decimal ol {
 	list-style: none;
-	counter-reset: rmd-ol;
-}
-.remarkdown.ol-decimal ol > li {
-	counter-increment: rmd-ol;
 }
 .remarkdown.ol-decimal ol > li::before {
+	content: counter(rmd-ol) "."/"";
 	float: inline-start;
+	min-width: 2ch;
 	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
-	min-width: 2ch;
-	content: counter(rmd-ol) "."/"";
 }
 
 .remarkdown.ol-zero ol {
 	list-style: none;
 }
 .remarkdown.ol-zero ol > li::before {
+	content: "0" "."/"";
 	float: inline-start;
+	min-width: 2ch;
 	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
-	min-width: 2ch;
-	content: "0."/"";
 }
 
 .remarkdown.ol-alpha ol {
 	list-style: none;
-	counter-reset: rmd-ol;
-}
-.remarkdown.ol-alpha ol > li {
-	counter-increment: rmd-ol;
 }
 .remarkdown.ol-alpha ol > li::before {
+	content: counter(rmd-ol, lower-alpha) "."/"";
 	float: inline-start;
+	min-width: 2ch;
 	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
-	min-width: 2ch;
-	content: counter(rmd-ol, lower-alpha) "."/"";
 }
 
 .remarkdown.a-bracket a {

@@ -67,8 +67,7 @@
 		@error "Unknown direction #{$direction}";
 	}
 	$num: config.get(margins $element "inline-#{$direction}") or 0;
-	$base: config.get(margin-inline-base);
-	@return $num * $base;
+	@return col($num);
 }
 
 /// Get both horizontal margin (indent) values for an element.
@@ -83,6 +82,12 @@
 /// Compute the size of a text line
 @function line($count: 1) {
 	$base: config.get(margin-block-base);
+	@return $base * $count;
+}
+
+/// Compute the size of a text column (typically, one fixed-width character)
+@function col($count: 1) {
+	$base: config.get(margin-inline-base);
 	@return $base * $count;
 }
 
