@@ -1,42 +1,45 @@
 // <ul>
-// Options: ul-star, ul-plus, ul-hyphen
+// Options: ul-dash, ul-plus, ul-star
 
 @use "../toolkit" as *;
 
 @mixin ul {
+	$options: (
+		ul-dash: "-",
+		ul-plus: "+",
+		ul-star: "*",
+	);
+
 	@include root() {
 		ul {
 			margin-block: margins(ul);
-			margin-inline: indents(ul);
-			padding: 0;
+			margin-inline: 0;
+			padding-inline: indents(ul);
 		}
-		li ul {
-			margin-block: 0;
+		:where(ol, ul) ul {
+			margin-block: 1ch * 0;
 		}
 	}
 
-	@include option(ul-plus) {
-		@include -ul-li-before("+");
-	}
-
-	@include option(ul-star) {
-		@include -ul-li-before("*");
-	}
-
-	@include option(ul-hyphen) {
-		@include -ul-li-before("-");
+	@each $option, $bullet in $options {
+		@include -ul-option($option, $bullet);
 	}
 }
 
-@mixin -ul-li-before($sign) {
-	ul {
-		list-style: none;
-	}
-	ul > li::before {
-		@include content($sign);
-		float: inline-start;
-		width: 1ch;
-		margin-inline-start: indent(ul, start) * -1;
-		margin-inline-end: 1ch;
+@mixin -ul-option($option, $bullet) {
+	@include option($option) {
+		ul {
+			// Alternatively, we could use a string value for list-style-type,
+			// instead of generating a ::before. The issue is that the generated
+			// ::marker will be harder to style and position correctly.
+			list-style-type: none;
+		}
+		ul > li::before {
+			@include content($bullet);
+			float: inline-start;
+			width: col(1);
+			margin-inline-start: indent(ul, start) * -1;
+			margin-inline-end: col(1);
+		}
 	}
 }

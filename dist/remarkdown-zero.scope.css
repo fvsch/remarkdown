@@ -127,14 +127,24 @@
 	}
 	ul {
 		margin-block: 1lh;
-		margin-inline: 3ch 0ch;
-		padding: 0;
+		margin-inline: 0;
+		padding-inline: 3ch 0ch;
 	}
-	li ul {
-		margin-block: 0;
+	:where(ol, ul) ul {
+		margin-block: 0ch;
+	}
+	&.ul-dash ul {
+		list-style-type: none;
+	}
+	&.ul-dash ul > li::before {
+		content: "-"/"";
+		float: inline-start;
+		width: 1ch;
+		margin-inline-start: -3ch;
+		margin-inline-end: 1ch;
 	}
 	&.ul-plus ul {
-		list-style: none;
+		list-style-type: none;
 	}
 	&.ul-plus ul > li::before {
 		content: "+"/"";
@@ -144,7 +154,7 @@
 		margin-inline-end: 1ch;
 	}
 	&.ul-star ul {
-		list-style: none;
+		list-style-type: none;
 	}
 	&.ul-star ul > li::before {
 		content: "*"/"";
@@ -153,61 +163,47 @@
 		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
 	}
-	&.ul-hyphen ul {
-		list-style: none;
-	}
-	&.ul-hyphen ul > li::before {
-		content: "-"/"";
-		float: inline-start;
-		width: 1ch;
-		margin-inline-start: -3ch;
-		margin-inline-end: 1ch;
-	}
 	ol {
 		margin-block: 1lh;
-		margin-inline: 3ch 0ch;
-		padding: 0;
+		margin-inline: 0;
+		padding-inline: 3ch 0ch;
+		counter-reset: rmd-ol;
 	}
-	li ol {
+	:where(ol, ul) ol {
 		margin-block: 0;
+	}
+	ol > li {
+		counter-increment: rmd-ol;
 	}
 	&.ol-decimal ol {
 		list-style: none;
-		counter-reset: rmd-ol;
-	}
-	&.ol-decimal ol > li {
-		counter-increment: rmd-ol;
 	}
 	&.ol-decimal ol > li::before {
+		content: counter(rmd-ol) "."/"";
 		float: inline-start;
+		min-width: 2ch;
 		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
-		min-width: 2ch;
-		content: counter(rmd-ol) "."/"";
 	}
 	&.ol-zero ol {
 		list-style: none;
 	}
 	&.ol-zero ol > li::before {
+		content: "0" "."/"";
 		float: inline-start;
+		min-width: 2ch;
 		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
-		min-width: 2ch;
-		content: "0."/"";
 	}
 	&.ol-alpha ol {
 		list-style: none;
-		counter-reset: rmd-ol;
-	}
-	&.ol-alpha ol > li {
-		counter-increment: rmd-ol;
 	}
 	&.ol-alpha ol > li::before {
+		content: counter(rmd-ol, lower-alpha) "."/"";
 		float: inline-start;
+		min-width: 2ch;
 		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
-		min-width: 2ch;
-		content: counter(rmd-ol, lower-alpha) "."/"";
 	}
 	&.a-bracket a {
 		text-decoration-inset: 1ch;

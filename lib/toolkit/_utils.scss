@@ -36,6 +36,15 @@
 	@return $result;
 }
 
+@function str-pad-end($str, $char, $target-length) {
+	$count: $target-length - string.length($str);
+	@if $count > 0 {
+		@return $str + str-repeat($char, $count);
+	} @else {
+		@return $str;
+	}
+}
+
 @function str-replace($subject, $search, $replacement: "") {
 	$index: string.index($subject, $search);
 	@if $index {
