@@ -20,7 +20,7 @@
 /// Outputs nothing if $output-all-styles is false and the option is not
 /// in $defaults.
 @mixin option($name) {
-	@if config.is-default($name) {
+	@if config.default-option($name) {
 		@include root() {
 			@content;
 		}
