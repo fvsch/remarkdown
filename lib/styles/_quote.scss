@@ -4,6 +4,9 @@
 @use "../toolkit" as *;
 
 @mixin quote {
+	$quote-mark-ltr: str-repeat(">\A", 20);
+	$quote-mark-rtl: str-repeat("<\A", 20);
+
 	@include root() {
 		blockquote {
 			margin-block: margins(blockquote);
@@ -14,10 +17,14 @@
 
 	@include option(quote-gt) {
 		blockquote {
+			@include define-var(quote-mark, $quote-mark-ltr);
 			position: relative;
 		}
+		blockquote:dir(rtl) {
+			@include define-var(quote-mark, $quote-mark-rtl);
+		}
 		blockquote::before {
-			@include content(str-repeat(">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A", 20));
+			@include content(rmd-var(quote-mark), $repeat: 4);
 			position: absolute;
 			inset-block: 0;
 			inset-inline-start: -2ch;
@@ -25,9 +32,6 @@
 			overflow: hidden;
 			white-space: pre;
 			cursor: default;
-		}
-		blockquote:dir(rtl)::before {
-			@include content(str-repeat("<\A<\A<\A<\A<\A<\A<\A<\A<\A<\A", 20));
 		}
 	}
 }

@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<title>ReMarkdown — Available styles</title>
 	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="./demo.css">
+	<link rel="stylesheet" href="./docs.css">
 </head>
-<body class="remarkdown h1-line h2-line em-underscore table-marker">
+<body class="remarkdown h1-line h2-line em-underscore table-border">
 
 <nav>
 	<span>ReMarkdown</span>
@@ -172,14 +172,24 @@
 		<td>Horizontally center HRs</td>
 	</tr>
 	<tr>
-		<td><a href="#del-gfm">del-gfm</a></td>
+		<td><a href="#del-tilde">del-tilde</a></td>
 		<td>—</td>
 		<td>Wrap DEL in “~~” (<a href="https://help.github.com/articles/github-flavored-markdown#strikethrough">GFM style</a>)</td>
 	</tr>
 	<tr>
-		<td><a href="#table-marker">table-marker</a></td>
+		<td><a href="#table-reset">table-reset</a></td>
 		<td>—</td>
-		<td>Add markers to TABLE (<a href="https://michelf.ca/projects/php-markdown/extra/#table">syntax</a>)</td>
+		<td>Plain text rendering for TABLE</td>
+	</tr>
+	<tr>
+		<td><a href="#table-border">table-border</a></td>
+		<td>—</td>
+		<td>Use “|” and “-” for TABLE borders</td>
+	</tr>
+	<tr>
+		<td><a href="#table-border-full">table-border-full</a></td>
+		<td>—</td>
+		<td>Add left and right borders</td>
 	</tr>
 </table>
 
@@ -482,31 +492,34 @@
 	Other
 </h2>
 
-<h3 id="del-gfm">
-	Option: <code>del-gfm</code>
+<h3 id="del-tilde">
+	Option: <code>del-tilde</code>
 </h3>
 
-<figure data-remarkdown="del-gfm">
-	<p>ReMarkdown is <del>ridiculous</del> <ins>excellent</ins>.</p>
+<figure data-remarkdown="del-tilde">
+	<p>ReMarkdown is <del>preposterous</del> <ins>peculiar</ins>.</p>
 </figure>
 
 <h2>
 	Tables
 </h2>
 
-<h3 id="table-marker">
-	Option: <code>table-marker</code>
+<h3 id="table-reset">
+	Option: <code>table-reset</code>
 </h3>
 
-<p>Print <code>|</code> separators between columns, and <code>--</code> underlines below column headers. This style draws inspiration from <a href="https://michelf.ca/projects/php-markdown/extra/#table">Markdown Extra</a>.</p>
+<p>Resets some table styles: no borders, no centered text, no bold table headers.</p>
 
-<figure data-remarkdown="table-marker">
+<figure data-remarkdown="table-reset">
 	<table>
+	<thead>
 		<tr>
 			<th scope="col">Col 1</th>
 			<th scope="col">Col 2</th>
 			<th scope="col">Col 3</th>
 		</tr>
+	</thead>
+	<tbody>
 		<tr>
 			<td>Lorem ipsum</td>
 			<td>Dolor sit amet</td>
@@ -517,25 +530,67 @@
 			<td>Excepturi laudantium molestiae nam</td>
 			<td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
 		</tr>
+	</tbody>
 	</table>
 </figure>
 
-<p>Row headers don’t have markers:</p>
+<h3 id="table-border">
+	Option: <code>table-border</code>
+</h3>
 
-<figure data-remarkdown="table-marker">
+<p>Print <code>|</code> separators between columns, and <code>--</code> underlines below column headers. This style draws inspiration from <a href="https://michelf.ca/projects/php-markdown/extra/#table">Markdown Extra</a>.</p>
+
+<figure data-remarkdown="table-border">
 	<table>
+	<thead>
 		<tr>
-			<th scope="row">Row 1</th>
+			<th scope="col">Col 1</th>
+			<th scope="col">Col 2</th>
+			<th scope="col">Col 3</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
 			<td>Lorem ipsum</td>
 			<td>Dolor sit amet</td>
 			<td>Consectetur adipisicing elit</td>
 		</tr>
 		<tr>
-			<th scope="row">Row 2</th>
 			<td>Quae enim corrupti</td>
 			<td>Excepturi laudantium molestiae nam</td>
 			<td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
 		</tr>
+	</tbody>
+	</table>
+</figure>
+
+<h3 id="table-border-full">
+	Option: <code>table-border-full</code>
+</h3>
+
+<p>Also print <code>|</code> borders at the left and right edges of the table. Works in Chrome and Firefox, but only partially in Safari (rightmost border will be missing; WebKit doesn’t support pseudo-elements for <code>&lt;tr&gt;</code>).</p>
+
+<figure data-remarkdown="table-border-full">
+	<table>
+	<thead>
+		<tr>
+			<th scope="col">Col 1</th>
+			<th scope="col">Col 2</th>
+			<th scope="col">Col 3</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Lorem ipsum</td>
+			<td>Dolor sit amet</td>
+			<td>Consectetur adipisicing elit</td>
+		</tr>
+		<tr>
+			<td>Quae enim corrupti</td>
+			<td>Excepturi laudantium molestiae nam</td>
+			<td>Repellat ab nostrum, est tempora minus dolores magni voluptatibus?</td>
+		</tr>
+	</tbody>
 	</table>
 </figure>
 

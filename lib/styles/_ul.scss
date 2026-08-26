@@ -37,9 +37,9 @@
 		ul > li::before {
 			@include content($bullet);
 			float: inline-start;
-			width: col(1);
+			width: col();
 			margin-inline-start: indent(ul, start) * -1;
-			margin-inline-end: col(1);
+			margin-inline-end: col();
 		}
 	}
 }

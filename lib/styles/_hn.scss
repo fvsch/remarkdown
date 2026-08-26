@@ -26,7 +26,7 @@
 	}
 
 	@include option(hn-prefix) {
-		$prefix: var(var-name(hn-prefix));
+		$prefix: rmd-var(hn-prefix);
 		@for $i from 1 through 6 {
 			h#{$i}::before {
 				@include content($prefix, $repeat: $i, $suffix: " ");
@@ -35,14 +35,14 @@
 	}
 
 	@include option(h1-line) {
-		$line: var(var-name(h1-line));
+		$line: rmd-var(h1-line);
 		h1 {
 			@include -hn-line($line);
 		}
 	}
 
 	@include option(h2-line) {
-		$line: var(var-name(h2-line));
+		$line: rmd-var(h2-line);
 		h2 {
 			@include -hn-line($line);
 		}
@@ -53,7 +53,7 @@
 	& {
 		position: relative;
 		width: fit-content;
-		padding-bottom: line();
+		padding-bottom: row();
 	}
 	&::before {
 		content: none;
@@ -63,7 +63,7 @@
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
-		height: line();
+		height: row();
 		width: 100%;
 		overflow: hidden;
 		word-break: break-all;
