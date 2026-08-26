@@ -1,7 +1,19 @@
 /**
- * Styles for ReMarkdown demo pages
+ * Styles for ReMarkdown documentation pages.
+ *
+ * Includes two builds of ReMarkdown:
+ *
+ * 1. `.remarkdown` class and `default` options preset;
+ * 2. `[data-remarkdown]` attribute and `zero` options preset.
+ *
+ * We're using CSS scoping with `@scope (.remarkdown) to ([data-remarkdown])`
+ * to ensure that we can switch from one build to the other in the same HTML page.
  */
+
 @use "../lib/rmd";
+
+$breakpoint-small: 40em;
+$breakpoint-medium: 56em;
 
 @layer remarkdown {
 	/// Class-based build of ReMarkdown using default styles
@@ -49,22 +61,22 @@
 	color: var(--text-color);
 	background-color: var(--bg-color);
 
-	@media (width >= 900px) {
+	@media (width >= $breakpoint-medium) {
 		background-color: var(--bg-alt-color);
 	}
 }
 
 body {
 	--body-padding-inline: 2rem;
-	margin: 0;
+	max-width: 66ch;
+	margin-block: 0;
+	margin-inline: auto;
 	padding-block: 2rem 3rem;
 	padding-inline: var(--body-padding-inline);
 
-	@media (width >= 900px) {
+	@media (width >= $breakpoint-medium) {
 		--body-padding-inline: 4.5rem;
-		max-width: 66ch;
 		margin-block: 2rem;
-		margin-inline: auto;
 		padding-block: 2.5rem 3.5rem;
 		border: 1px solid var(--bg-border-color);
 		background-color: var(--bg-color);
@@ -114,7 +126,7 @@ main {
 		tab-size: 2;
 		white-space: pre-wrap;
 		color: var(--code-color);
-		@media (width < 700px) {
+		@media (width < $breakpoint-small) {
 			margin-inline-start: 0;
 		}
 	}
@@ -141,7 +153,7 @@ nav {
 		display: none;
 	}
 
-	@media (width >= 700px) {
+	@media (width >= $breakpoint-small) {
 		flex-direction: row;
 		gap: 2ch;
 		text-align: right;
@@ -170,7 +182,7 @@ nav {
 	tr > :first-child {
 		white-space: nowrap;
 	}
-	@media (width < 700px) {
+	@media (width < $breakpoint-small) {
 		tr > :last-child {
 			display: none;
 		}
