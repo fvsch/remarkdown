@@ -1,19 +1,21 @@
 // <hr>
 // Options: hr-center, hr-star, hr-dash
 
-@use "../config";
 @use "../toolkit" as *;
 
 @mixin hr {
-	$stars: var(var-name(hr-stars));
-	$dashes: var(var-name(hr-dashes));
-
-	@include root {
+	@include root() {
 		hr {
-			height: line();
-			line-height: line();
+			height: auto;
 			margin-block: margins(hr);
 			margin-inline: 0;
+			line-height: inherit;
+			text-align: start;
+		}
+	}
+
+	@include option(hr-star hr-dash) {
+		hr {
 			border: none;
 			color: inherit;
 		}
@@ -25,15 +27,18 @@
 		}
 	}
 
+
 	@include option(hr-star) {
 		hr::before {
-			@include content($stars);
+			@include content(rmd-var(hr-stars));
+			display: block;
 		}
 	}
 
 	@include option(hr-dash) {
 		hr::before {
-			@include content($dashes);
+			@include content(rmd-var(hr-dashes));
+			display: block;
 		}
 	}
 }

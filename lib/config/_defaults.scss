@@ -70,8 +70,9 @@ $default-styles: (
 	hr-star,
 	// hr-dash,
 	// hr-center,
-	// del-gfm,
-	// table-marker,
+	// del-tilde,
+	// table-reset,
+	// table-border,
 );
 
 // Font stack to use.
@@ -86,18 +87,10 @@ $code-font: inherit;
 // Root line-height (as a unit-less ratio, e.g. `1.5`)
 $line-height: 1.5;
 
-// Size of one step of vertical margin.
-// Typically, the height of a single line of text.
-$margin-block-base: 1lh;
-
-// Size of one step of horizontal margin.
-// Typically, the width of one space character.
-$margin-inline-base: 1ch;
-
 // Vertical and horizontal margins for elements, as unitless numbers:
-// - vertical margins ("top" and "bottom") are multiples of the base line-height.
-// - horizontal margind ("inline-start" and "inline-end")
-// By default we use one line for everything, but you can specify more here:
+// - vertical margins ("top" and "bottom") are multiples of the base line-height;
+// - horizontal margins ("inline-start" and "inline-end") are multiples of the
+//   width of a single space (`1ch`).
 $margins: (
 	h1: (
 		top: 1.5,
@@ -167,3 +160,7 @@ $h2-line: "----------------------------------------";
 // Horizontal rules
 $hr-stars: "* * * *";
 $hr-dashes: "-------";
+
+// Table decorations
+$table-vline: "|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A";
+$table-hline: "----------------------------------------";

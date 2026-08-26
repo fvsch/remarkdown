@@ -9,7 +9,8 @@
 	--rmd-h2-line: "----------------------------------------";
 	--rmd-hr-stars: "* * * *";
 	--rmd-hr-dashes: "-------";
-	--rmd-margin-block-base: 1lh;
+	--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+	--rmd-table-hline: "----------------------------------------";
 }
 
 [data-remarkdown] {
@@ -117,10 +118,15 @@
 }
 
 [data-remarkdown] hr {
-	height: 1lh;
-	line-height: 1lh;
+	height: auto;
 	margin-block: 1lh;
 	margin-inline: 0;
+	line-height: inherit;
+	text-align: start;
+}
+
+[data-remarkdown~="hr-star"] hr,
+[data-remarkdown~="hr-dash"] hr {
 	border: none;
 	color: inherit;
 }
@@ -131,10 +137,12 @@
 
 [data-remarkdown~="hr-star"] hr::before {
 	content: var(--rmd-hr-stars)/"";
+	display: block;
 }
 
 [data-remarkdown~="hr-dash"] hr::before {
 	content: var(--rmd-hr-dashes)/"";
+	display: block;
 }
 
 [data-remarkdown] ul {
@@ -335,10 +343,15 @@
 }
 
 [data-remarkdown~="quote-gt"] blockquote {
+	--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 	position: relative;
 }
+[data-remarkdown~="quote-gt"] blockquote:dir(rtl) {
+	--rmd-quote-mark: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+}
 [data-remarkdown~="quote-gt"] blockquote::before {
-	content: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a"/"";
+	content: var(--rmd-quote-mark) var(--rmd-quote-mark) var(--rmd-quote-mark)
+		var(--rmd-quote-mark)/"";
 	position: absolute;
 	inset-block: 0;
 	inset-inline-start: -2ch;
@@ -347,54 +360,120 @@
 	white-space: pre;
 	cursor: default;
 }
-[data-remarkdown~="quote-gt"] blockquote:dir(rtl)::before {
-	content: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a"/"";
-}
 
-[data-remarkdown~="del-gfm"] del {
-	text-decoration: none;
+[data-remarkdown~="del-tilde"] del {
+	text-decoration-inset: 2.2ch;
+	text-decoration-thickness: round(up, 0.08em, 0.5px);
 }
-[data-remarkdown~="del-gfm"] del::before,
-[data-remarkdown~="del-gfm"] del::after {
+[data-remarkdown~="del-tilde"] del::before,
+[data-remarkdown~="del-tilde"] del::after {
 	content: "~~"/"";
 }
 
-[data-remarkdown~="table-marker"] table {
+[data-remarkdown~="table-reset"] table {
 	margin-block: 1lh;
 	border-collapse: collapse;
 }
-[data-remarkdown~="table-marker"] tr > * {
-	min-width: 2ch;
-	position: relative;
-	padding: 0;
-	text-align: inherit;
-	vertical-align: top;
-	font-weight: normal;
+[data-remarkdown~="table-reset"] tr > * {
+	padding-block: 0;
+	padding-inline: 1ch;
 	border: none;
+	vertical-align: top;
+	font-weight: inherit;
+	text-align: match-parent;
 }
-[data-remarkdown~="table-marker"] tr > * + * {
-	padding-inline-start: 3ch;
+[data-remarkdown~="table-reset"] tr > :first-child {
+	padding-inline-start: 0;
 }
-[data-remarkdown~="table-marker"] tr:first-child > th:not([scope="row"]) {
+[data-remarkdown~="table-reset"] tr > :last-child {
+	padding-inline-end: 0;
+}
+
+[data-remarkdown~="table-border"] table,
+[data-remarkdown~="table-border-full"] table {
+	--inset-start: 1ch;
+	--inset-end: 1ch;
+	margin-block: 1lh;
+	border-collapse: collapse;
+}
+[data-remarkdown~="table-border"] tr > *,
+[data-remarkdown~="table-border-full"] tr > * {
+	position: relative;
+	padding-block: 0;
+	padding-inline-start: var(--inset-start);
+	padding-inline-end: var(--inset-end);
+	border: none;
+	vertical-align: top;
+	font-weight: inherit;
+	text-align: match-parent;
+}
+
+[data-remarkdown~="table-border"] tr > :first-child {
+	--inset-start: 0ch;
+}
+[data-remarkdown~="table-border"] tr > :last-child {
+	--inset-end: 0ch;
+}
+
+[data-remarkdown~="table-border"] :is(thead th, thead td, th[scope="col"]),
+[data-remarkdown~="table-border-full"] :is(thead th, thead td, th[scope="col"]) {
+	--inset-total: calc(var(--inset-start) + var(--inset-end));
 	padding-bottom: 1lh;
 }
-[data-remarkdown~="table-marker"] tr:first-child > th:not([scope="row"])::after {
-	content: "--------------------------------------------------------------------------------------------------------------"/"";
+[data-remarkdown~="table-border"] :is(thead th, thead td, th[scope="col"])::after,
+[data-remarkdown~="table-border-full"] :is(thead th, thead td, th[scope="col"])::after {
+	content: var(--rmd-table-hline) var(--rmd-table-hline)/"";
 	position: absolute;
 	bottom: 0;
-	inset-inline: 0;
+	inset-inline-start: var(--inset-start);
+	width: calc(100% - var(--inset-total));
+	max-width: 100%;
+	height: 1lh;
 	overflow: hidden;
 	word-break: break-all;
-	height: 1lh;
 }
-[data-remarkdown~="table-marker"] tr:first-child > * + th:not([scope="row"])::after {
-	inset-inline-start: 3ch;
+@supports (width: round(down, 100%, 1ch)) {
+	[data-remarkdown~="table-border"] :is(thead th, thead td, th[scope="col"])::after,
+	[data-remarkdown~="table-border-full"] :is(thead th, thead td, th[scope="col"])::after {
+		width: round(down, 100% - var(--inset-total), 1ch);
+	}
 }
-[data-remarkdown~="table-marker"] tr > * + *::before {
-	content: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a"/"";
+[data-remarkdown~="table-border"] tr > *::before,
+[data-remarkdown~="table-border-full"] tr > *::before {
+	content: none;
 	position: absolute;
 	inset-block: 0;
-	inset-inline-start: 1ch;
+	inset-inline-start: 0;
+	width: 1ch;
 	overflow: hidden;
 	white-space: pre;
+}
+
+[data-remarkdown~="table-border"] table {
+	--inset-start: 2ch;
+}
+[data-remarkdown~="table-border"] tr > :not(:first-child)::before {
+	content: var(--rmd-table-vline)/"";
+}
+
+[data-remarkdown~="table-border-full"] table {
+	--inset-start: 2ch;
+}
+[data-remarkdown~="table-border-full"] tr {
+	position: relative;
+}
+[data-remarkdown~="table-border-full"] tr::after {
+	content: var(--rmd-table-vline)/"";
+	position: absolute;
+	inset-block: 0;
+	inset-inline-end: 0;
+	width: 1ch;
+	overflow: hidden;
+	white-space: pre;
+}
+[data-remarkdown~="table-border-full"] tr > :last-child {
+	--inset-end: 2ch;
+}
+[data-remarkdown~="table-border-full"] tr > *::before {
+	content: var(--rmd-table-vline)/"";
 }

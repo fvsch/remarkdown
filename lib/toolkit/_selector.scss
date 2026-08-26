@@ -1,3 +1,4 @@
+@use "sass:list";
 @use "sass:meta" as *;
 
 @use "../config";
@@ -5,7 +6,7 @@
 
 /// Wrap content in the base selector
 @mixin root() {
-	$selector: -root-selector();
+	$selector: root-selector();
 	@if $selector {
 		#{$selector} {
 			@content;
@@ -15,23 +16,23 @@
 	}
 }
 
-/// Wrap content in a selector including the option name, depending on
+/// Wrap content in a selector including the option name(s), depending on
 /// the content of $defaults and the value of $output-all-styles.
 /// Outputs nothing if $output-all-styles is false and the option is not
-/// in $defaults.
-@mixin option($name) {
-	@if config.default-option($name) {
+/// in $default-styles.
+@mixin option($names) {
+	@if config.default-option($names) {
 		@include root() {
 			@content;
 		}
 	} @else if config.get(output-all-styles) == true {
-		#{-option-selector($name)} {
+		#{option-selector($names)} {
 			@content;
 		}
 	}
 }
 
-@function -root-selector() {
+@function root-selector() {
 	$value: config.get(root-selector);
 	@if $value == null or $value == "" {
 		@return null;
@@ -39,7 +40,12 @@
 	@return $value;
 }
 
-@function -option-selector($name) {
+@function option-selector($names) {
 	$pattern: config.get(option-selector);
-	@return utils.str-replace($pattern, "%s", $name);
+	$selectors: ();
+	@each $name in $names {
+		$selector: utils.str-replace($pattern, "%s", $name);
+		$selectors: list.append($selectors, $selector, $separator: comma);
+	}
+	@return $selectors;
 }

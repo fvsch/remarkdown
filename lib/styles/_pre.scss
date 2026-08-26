@@ -54,6 +54,6 @@
 @mixin -pre-fence-pseudo {
 	display: block;
 	width: 100%;
-	height: line();
+	height: row();
 	cursor: default;
 }
