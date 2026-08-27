@@ -1,6 +1,7 @@
 // <pre>
 // Options: pre-indent, pre-tick, pre-tilde, pre-tilde-full
 
+@use "../config";
 @use "../toolkit" as *;
 
 @mixin pre {
@@ -20,11 +21,26 @@
 		}
 	}
 
+	@include option(pre-tick pre-tilde pre-tilde-full) {
+		pre {
+			margin-inline: 0;
+		}
+		pre::before,
+		pre::after {
+			content: none;
+			display: block;
+			width: 100%;
+			height: row();
+			overflow: hidden;
+			word-break: break-all;
+			pointer-events: none;
+		}
+	}
+
 	@include option(pre-tick) {
 		pre::before,
 		pre::after {
-			@include content("```");
-			@include -pre-fence-pseudo;
+			@include content(rmd-var(pre-ticks));
 			position: relative;
 			top: 0.25em;
 		}
@@ -33,27 +49,14 @@
 	@include option(pre-tilde) {
 		pre::before,
 		pre::after {
-			@include content("~~~");
-			@include -pre-fence-pseudo;
-			overflow: hidden;
-			word-break: break-all;
+			@include content(rmd-var(pre-tilde));
 		}
 	}
 
 	@include option(pre-tilde-full) {
 		pre::before,
 		pre::after {
-			@include content(str-repeat("~~~~~~~~~~", 12));
-			@include -pre-fence-pseudo;
-			overflow: hidden;
-			word-break: break-all;
+			@include content(rmd-var(pre-tilde-line));
 		}
 	}
-}
-
-@mixin -pre-fence-pseudo {
-	display: block;
-	width: 100%;
-	height: row();
-	cursor: default;
 }

@@ -79,7 +79,7 @@ $default-styles: (
 // Should be a comma-separated list that ends with `monospace`.
 // (By default, we use `monospace, monospace`, because a single `monospace`
 // value makes browsers use a default 13px font size.)
-$font: monospace, monospace;
+$font: ui-monospace, monospace;
 
 // For elements that are traditionnaly monospace, use a different font?
 $code-font: inherit;
@@ -160,6 +160,11 @@ $h2-line: "----------------------------------------";
 // Horizontal rules
 $hr-stars: "* * * *";
 $hr-dashes: "-------";
+
+// Pre decorations
+$pre-ticks: "```";
+$pre-tilde: "~~~";
+$pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
 // Table decorations
 $table-vline: "|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A";

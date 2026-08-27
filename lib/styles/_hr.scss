@@ -27,7 +27,6 @@
 		}
 	}
 
-
 	@include option(hr-star) {
 		hr::before {
 			@include content(rmd-var(hr-stars));
