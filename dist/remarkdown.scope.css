@@ -1,7 +1,7 @@
 /*! ReMarkdown 4.0.0-alpha.1 [scope] (MIT) https://fvsch.github.io/remarkdown/ */
 /* includes: all styles; defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
 @scope (.remarkdown) to (.remarkdown-off) {
-	--rmd-font: monospace, monospace;
+	--rmd-font: ui-monospace, monospace;
 	--rmd-code-font: inherit;
 	--rmd-line-height: 1.5;
 	--rmd-hn-prefix: "#";
@@ -9,6 +9,9 @@
 	--rmd-h2-line: "----------------------------------------";
 	--rmd-hr-stars: "* * * *";
 	--rmd-hr-dashes: "-------";
+	--rmd-pre-ticks: "```";
+	--rmd-pre-tilde: "~~~";
+	--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 	--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 	--rmd-table-hline: "----------------------------------------";
 	& {
@@ -270,35 +273,38 @@
 	pre {
 		margin-inline: 4ch 0ch;
 	}
+	&.pre-tick pre,
+	&.pre-tilde pre,
+	&.pre-tilde-full pre {
+		margin-inline: 0;
+	}
 	&.pre-tick pre::before,
-	&.pre-tick pre::after {
-		content: "```"/"";
+	&.pre-tick pre::after,
+	&.pre-tilde pre::before,
+	&.pre-tilde pre::after,
+	&.pre-tilde-full pre::before,
+	&.pre-tilde-full pre::after {
+		content: none;
 		display: block;
 		width: 100%;
 		height: 1lh;
-		cursor: default;
+		overflow: hidden;
+		word-break: break-all;
+		pointer-events: none;
+	}
+	&.pre-tick pre::before,
+	&.pre-tick pre::after {
+		content: var(--rmd-pre-ticks)/"";
 		position: relative;
 		top: 0.25em;
 	}
 	&.pre-tilde pre::before,
 	&.pre-tilde pre::after {
-		content: "~~~"/"";
-		display: block;
-		width: 100%;
-		height: 1lh;
-		cursor: default;
-		overflow: hidden;
-		word-break: break-all;
+		content: var(--rmd-pre-tilde)/"";
 	}
 	&.pre-tilde-full pre::before,
 	&.pre-tilde-full pre::after {
-		content: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"/"";
-		display: block;
-		width: 100%;
-		height: 1lh;
-		cursor: default;
-		overflow: hidden;
-		word-break: break-all;
+		content: var(--rmd-pre-tilde-line)/"";
 	}
 	blockquote {
 		margin-block: 1lh;
