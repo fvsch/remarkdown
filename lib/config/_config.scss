@@ -18,7 +18,7 @@ $-config: -base-config(default);
 	@each $option, $value in $options {
 		@include validate.check-option($option, $value);
 	}
-	$-config: map.merge($base, $options) !global;
+	$-config: -merge-options($base, $options) !global;
 }
 
 @function get($path) {
@@ -49,4 +49,13 @@ $-config: -base-config(default);
 		$config: map.merge($config, module-variables(zero));
 	}
 	@return $config;
+}
+
+@function -merge-options($base, $options) {
+	@if map.has-key($base, margins) and map.has-key($options, margins) {
+		$m1: map.get($base, margins);
+		$m2: map.get($options, margins);
+		$options: map.set($options, margins, map.merge($m1, $m2));
+	}
+	@return map.merge($base, $options);
 }
