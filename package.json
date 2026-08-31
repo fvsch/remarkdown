@@ -2,7 +2,7 @@
 	"name": "remarkdown.css",
 	"version": "4.0.0-alpha.1",
 	"license": "MIT",
-	"description": "ReMarkdown styles HTML to look like plain Markdown text.",
+	"description": "Remarkdown makes HTML look like plain Markdown text",
 	"homepage": "https://fvsch.github.io/remarkdown/",
 	"repository": {
 		"type": "git",

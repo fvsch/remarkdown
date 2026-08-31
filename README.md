@@ -1,6 +1,6 @@
-# ReMarkdown
+# Remarkdown
 
-ReMarkdown styles HTML to look like plain Markdown text.
+Remarkdown styles HTML to look like plain Markdown text.
 
 - [online demo and docs][docs]
 - [npm: remarkdown.css][npm]
@@ -9,9 +9,9 @@ Markdown is [a plain-text syntax by John Gruber][markdown]. Some styles are insp
 
 ## Documentation
 
-- [Using ReMarkdown][docs]
+- [Using Remarkdown][docs]
 - [Available styles][styles]
-- [Customizing ReMarkdown][customize]
+- [Customizing Remarkdown][customize]
 
 
 [npm]: https://www.npmjs.com/package/remarkdown.css
