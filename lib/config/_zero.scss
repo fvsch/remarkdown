@@ -1,11 +1,11 @@
-/// Default options for ReMarkdown-zero
+/// Default options for Remarkdown-zero
 /// Used internally when using the `config` mixin with `$preset: "zero"`.
 
 // oxfmt-ignore
 $default-styles: (
 	// Keep "base-text" and reset styles in defaults for compatibility with
-	// ReMarkdown v3, which used `$set-font-styles: true` by default even in
-	// the ReMarkdown-zero variant.
+	// Remarkdown v3, which used `$set-font-styles: true` by default even in
+	// the Remarkdown-zero variant.
 	base-text,
 	hn-reset,
 	em-reset,

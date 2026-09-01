@@ -1,7 +1,7 @@
 /**
- * Styles for ReMarkdown documentation pages.
+ * Styles for Remarkdown documentation pages.
  *
- * Includes two builds of ReMarkdown:
+ * Includes two builds of Remarkdown:
  *
  * 1. `.remarkdown` class and `default` options preset;
  * 2. `[data-remarkdown]` attribute and `zero` options preset.
@@ -10,7 +10,7 @@
  * to ensure that we can switch from one build to the other in the same HTML page.
  */
 @layer remarkdown {
-	/*! ReMarkdown 4.0.0-alpha.1 [scope-custom] (MIT) %h */
+	/*! Remarkdown 4.0.0-alpha.1 [scope-custom] (MIT) %h */
 	/* includes: all styles; defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
 	@scope (.remarkdown) to ([data-remarkdown]) {
 		--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
@@ -452,7 +452,7 @@
 			content: var(--rmd-table-vline)/"";
 		}
 	}
-	/*! ReMarkdown-zero 4.0.0-alpha.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
+	/*! Remarkdown-zero 4.0.0-alpha.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
 	/* includes: all styles; defaults: base-text, hn-reset, em-reset, strong-reset; */
 	[data-remarkdown] {
 		--rmd-font: ui-monospace, monospace;
@@ -908,6 +908,7 @@
 	--demo-text-color: hsl(180 70% 26%);
 	--demo-bg-color: hsl(200 60% 94%);
 	scroll-padding-top: 1lh;
+	font-size: 112.5%;
 	color: var(--text-color);
 	background-color: var(--bg-color);
 }

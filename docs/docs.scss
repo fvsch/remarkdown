@@ -1,7 +1,7 @@
 /**
- * Styles for ReMarkdown documentation pages.
+ * Styles for Remarkdown documentation pages.
  *
- * Includes two builds of ReMarkdown:
+ * Includes two builds of Remarkdown:
  *
  * 1. `.remarkdown` class and `default` options preset;
  * 2. `[data-remarkdown]` attribute and `zero` options preset.
@@ -16,7 +16,7 @@ $breakpoint-small: 40em;
 $breakpoint-medium: 56em;
 
 @layer remarkdown {
-	/// Class-based build of ReMarkdown using default styles
+	/// Class-based build of Remarkdown using default styles
 	@include rmd.config(
 		$preset: default,
 		$root-selector: null,
@@ -29,18 +29,18 @@ $breakpoint-medium: 56em;
 			monospace,
 		)
 	);
-	@include rmd.header("ReMarkdown %v [scope-custom] (MIT) %h");
+	@include rmd.header("Remarkdown %v [scope-custom] (MIT) %h");
 	@scope (.remarkdown) to ([data-remarkdown]) {
 		@include rmd.styles();
 	}
 
-	/// Attribute-based build of ReMarkdown with no default styles
+	/// Attribute-based build of Remarkdown with no default styles
 	@include rmd.config(
 		$preset: zero,
 		$root-selector: "[data-remarkdown]",
 		$option-selector: "[data-remarkdown~=%s]"
 	);
-	@include rmd.header("ReMarkdown-zero %v [attr] (MIT) %u");
+	@include rmd.header("Remarkdown-zero %v [attr] (MIT) %u");
 	@include rmd.styles();
 }
 
@@ -58,6 +58,7 @@ $breakpoint-medium: 56em;
 	--demo-bg-color: hsl(200 60% 94%);
 
 	scroll-padding-top: 1lh;
+	font-size: 112.5%;
 	color: var(--text-color);
 	background-color: var(--bg-color);
 

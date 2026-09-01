@@ -1,4 +1,4 @@
-// Class-based build of ReMarkdown with no default styles
+// Class-based build of Remarkdown with no default styles
 
 @use "../lib/rmd";
 
@@ -8,6 +8,6 @@
 	$option-selector: ".remarkdown.%s"
 );
 
-@include rmd.header("ReMarkdown-zero %v (MIT) %u");
+@include rmd.header("Remarkdown-zero %v (MIT) %u");
 
 @include rmd.styles();

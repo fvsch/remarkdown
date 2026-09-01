@@ -1,9 +1,9 @@
-// Class-based build of ReMarkdown using default styles
+// Class-based build of Remarkdown using default styles
 
 @use "../lib/rmd";
 
 @include rmd.config($root-selector: ".remarkdown", $option-selector: ".remarkdown.%s");
 
-@include rmd.header("ReMarkdown %v (MIT) %u");
+@include rmd.header("Remarkdown %v (MIT) %u");
 
 @include rmd.styles();
