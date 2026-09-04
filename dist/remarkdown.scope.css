@@ -1,5 +1,5 @@
 /*! Remarkdown 4.0.0-alpha.1 [scope] (MIT) https://fvsch.github.io/remarkdown/ */
-/* includes: all styles; defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
+/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
 @scope (.remarkdown) to (.no-remarkdown) {
 	--rmd-font: ui-monospace, monospace;
 	--rmd-code-font: inherit;

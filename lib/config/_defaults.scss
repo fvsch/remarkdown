@@ -4,7 +4,7 @@
 /// 	@use "pkg:remarkdown.css" as rmd;
 /// 	@include rmd.config(
 /// 		$root-selector: ".rmd",
-/// 		$option-selector: ".rmd--%0"
+/// 		$option-selector: ".rmd--%s"
 /// 	);
 /// 	@include rmd.header();
 /// 	@include rmd.styles();
@@ -30,49 +30,54 @@ $option-selector: ".remarkdown.%s";
 // with the Sass option's name (without the `$` sign).
 $variable-name: "--rmd-%s";
 
-// Whether we should include styles for ALL alternative styles (true),
-// or only for styles listed in $default-styles (false).
-// If false, the CSS build will be smaller, but setting options
-// in HTML with classes or attribute values will be impossible.
-$output-all-styles: true;
-
-// Default style variations.
-// Separate values with whitespace. Remove or comment out options you
-// don't want. Note that all option names are singular: e.g. "hr-star"
-// even if we use several star characters to display a <hr>.
-// oxfmt-ignore
-$default-styles: (
+// Default styles.
+// These will be defined using the `$root-selector`, which means
+// that they will be enabled when using the main Remarkdown activation
+// pattern in HTML: `<element class="remarkdown">…</element>`
+// or `<element data-remarkdown>…</element>`.
+$defaults: (
 	base-text,
 	hn-reset,
 	hn-prefix,
-	// h1-line,
-	// h2-line,
 	ul-dash,
-	// ul-star,
-	// ul-plus,
 	ol-decimal,
-	// ol-zero,
-	// ol-alpha,
 	quote-gt,
 	em-reset,
 	em-star,
-	// em-underscore,
 	strong-reset,
 	strong-star,
-	// strong-underscore,
 	a-bracket,
-	// a-showurl,
 	code-tick,
 	pre-indent,
-	// pre-tick,
-	// pre-tilde,
-	// pre-tilde-full,
-	hr-star,
-	// hr-dash,
-	// hr-center,
-	// del-tilde,
-	// table-reset,
-	// table-border,
+	hr-star
+);
+
+// Optional styles.
+// These will be defined using the `$option-selector`, which means
+// that they must be activated in HTML using a pattern like
+// `<element class="remarkdown option-name">…</element>` or
+// `<element data-remarkdown="option-name">…</element>`.
+// Note: styles ommited from both `$defaults` and `$options` will
+// be skipped in the final output.
+$options: (
+	h1-line,
+	h2-line,
+	ul-star,
+	ul-plus,
+	ol-zero,
+	ol-alpha,
+	em-underscore,
+	strong-underscore,
+	a-showurl,
+	pre-tick,
+	pre-tilde,
+	pre-tilde-full,
+	hr-dash,
+	hr-center,
+	del-tilde,
+	table-reset,
+	table-border,
+	table-border-full
 );
 
 // Font stack to use.
@@ -148,10 +153,10 @@ $margins: (
 	),
 );
 
-// Character used as heading prefix
+// Character used as heading prefix (ATX-style headings)
 $hn-prefix: "#";
 
-// Characters used for underlined headings
+// Characters used for underlined headings (setext-style headings)
 // Recommended: use a string of ~40 characters or so.
 // These will be tripled to fill the container's width.
 $h1-line: "========================================";
@@ -167,5 +172,5 @@ $pre-tilde: "~~~";
 $pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 
 // Table decorations
-$table-vline: "|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A|\A";
+$table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 $table-hline: "----------------------------------------";

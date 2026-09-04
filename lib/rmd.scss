@@ -18,24 +18,14 @@ $url: "https://fvsch.github.io/remarkdown/";
 
 @mixin config($args...) {
 	$options: merge-arglist($args);
-	@include config.set($options);
+	@include config.set($options, $initialize: true);
 }
 
 @mixin header($title: "Remarkdown %v - %u") {
-	$included: "all styles";
-	@if config.get(output-all-styles) != true {
-		$included: "default-styles only";
-	}
-	$list: config.get(default-styles);
-	@if list.length($list) == 0 {
-		$list: "none";
-	}
-	@if $title {
-		$title: str-replace($title, "%v", $version);
-		$title: str-replace($title, "%u", $url);
-		/*! #{$title} */
-		/* includes: #{$included}; defaults: #{$list}; */
-	}
+	$title: -title-placeholders($title);
+	$defaults: -option-list(defaults);
+	/*! #{$title} */
+	/* defaults: #{$defaults} */
 }
 
 @mixin styles {
@@ -53,4 +43,18 @@ $url: "https://fvsch.github.io/remarkdown/";
 	@include styles.quote;
 	@include styles.del;
 	@include styles.table;
+}
+
+@function -title-placeholders($title) {
+	$title: str-replace($title, "%v", $version);
+	$title: str-replace($title, "%u", $url);
+	@return $title;
+}
+
+@function -option-list($key) {
+	$list: config.get($key);
+	@if list.length($list) > 0 {
+		@return list.join((), $list, $separator: comma);
+	}
+	@return "none";
 }

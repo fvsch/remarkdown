@@ -50,10 +50,10 @@ $breakpoint-medium: 56em;
 	--text-color: hsl(0 0% 12%);
 	--link-color: hsl(346 86% 54%);
 	--code-color: hsl(0 60% 31%);
-	--pseudo-color: hsl(220 70% 35% / 0.5);
+	--pseudo-color: hsl(220 70% 35% / 0.55);
 	--bg-color: hsl(0 0% 100%);
 	--bg-alt-color: hsl(0 0% 93%);
-	--bg-border-color: hsl(0 0% 86%);
+	--bg-border-color: hsl(0 0% 82%);
 	--demo-text-color: hsl(180 70% 26%);
 	--demo-bg-color: hsl(200 60% 94%);
 
@@ -79,9 +79,9 @@ body {
 		--body-padding-inline: 4.5rem;
 		margin-block: 2rem;
 		padding-block: 2.5rem 3.5rem;
-		border: 1px solid var(--bg-border-color);
+		border: 3px solid var(--bg-border-color);
 		background-color: var(--bg-color);
-		box-shadow: 3px 3px 3px -2px var(--bg-border-color);
+		box-shadow: 1ch 1ch 0 -3px var(--bg-border-color);
 	}
 }
 
