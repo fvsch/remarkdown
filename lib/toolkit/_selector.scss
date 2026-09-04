@@ -16,17 +16,20 @@
 	}
 }
 
-/// Wrap content in a selector including the option name(s), depending on
-/// the content of $defaults and the value of $output-all-styles.
-/// Outputs nothing if $output-all-styles is false and the option is not
-/// in $default-styles.
+/// Wrap content in a selector including the option name(s).
+/// - Uses the root selector if at least one option name is in `$defaults`.
+/// - Otherwise, uses an option selector (or a list of option selectors)
+///   for names present in `$options`.
+/// - Outputs nothing if none of the provided names are present in
+///   `$defaults` or `$options`.
 @mixin option($names) {
-	@if config.default-option($names) {
+	@if config.has-default($names) {
 		@include root() {
 			@content;
 		}
-	} @else if config.get(output-all-styles) == true {
-		#{option-selector($names)} {
+	} @else if config.has-option($names) {
+		$options: config.filter-options($names);
+		#{option-selector($options)} {
 			@content;
 		}
 	}

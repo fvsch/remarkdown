@@ -11,7 +11,7 @@
  */
 @layer remarkdown {
 	/*! Remarkdown 4.0.0-alpha.1 [scope-custom] (MIT) %h */
-	/* includes: all styles; defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star; */
+	/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
 	@scope (.remarkdown) to ([data-remarkdown]) {
 		--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
 		--rmd-code-font: inherit;
@@ -453,7 +453,7 @@
 		}
 	}
 	/*! Remarkdown-zero 4.0.0-alpha.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
-	/* includes: all styles; defaults: base-text, hn-reset, em-reset, strong-reset; */
+	/* defaults: base-text, hn-reset, em-reset, strong-reset */
 	[data-remarkdown] {
 		--rmd-font: ui-monospace, monospace;
 		--rmd-code-font: inherit;
@@ -901,10 +901,10 @@
 	--text-color: hsl(0 0% 12%);
 	--link-color: hsl(346 86% 54%);
 	--code-color: hsl(0 60% 31%);
-	--pseudo-color: hsl(220 70% 35% / 0.5);
+	--pseudo-color: hsl(220 70% 35% / 0.55);
 	--bg-color: hsl(0 0% 100%);
 	--bg-alt-color: hsl(0 0% 93%);
-	--bg-border-color: hsl(0 0% 86%);
+	--bg-border-color: hsl(0 0% 82%);
 	--demo-text-color: hsl(180 70% 26%);
 	--demo-bg-color: hsl(200 60% 94%);
 	scroll-padding-top: 1lh;
@@ -931,9 +931,9 @@ body {
 		--body-padding-inline: 4.5rem;
 		margin-block: 2rem;
 		padding-block: 2.5rem 3.5rem;
-		border: 1px solid var(--bg-border-color);
+		border: 3px solid var(--bg-border-color);
 		background-color: var(--bg-color);
-		box-shadow: 3px 3px 3px -2px var(--bg-border-color);
+		box-shadow: 1ch 1ch 0 -3px var(--bg-border-color);
 	}
 }
 
