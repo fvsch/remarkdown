@@ -41,7 +41,7 @@ $defaults: (
 	hn-prefix,
 	ul-dash,
 	ol-decimal,
-	quote-gt,
+	quote-mark,
 	em-reset,
 	em-star,
 	strong-reset,
@@ -170,6 +170,10 @@ $hr-dashes: "-------";
 $pre-ticks: "```";
 $pre-tilde: "~~~";
 $pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+// Block quotes
+$quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+$quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 
 // Table decorations
 $table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";

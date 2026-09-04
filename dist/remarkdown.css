@@ -1,5 +1,5 @@
 /*! Remarkdown 4.0.0-alpha.1 (MIT) https://fvsch.github.io/remarkdown/ */
-/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
+/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
 .remarkdown {
 	--rmd-font: ui-monospace, monospace;
 	--rmd-code-font: inherit;
@@ -12,6 +12,8 @@
 	--rmd-pre-ticks: "```";
 	--rmd-pre-tilde: "~~~";
 	--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+	--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+	--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 	--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 	--rmd-table-hline: "----------------------------------------";
 }
@@ -344,23 +346,22 @@
 
 .remarkdown blockquote {
 	margin-block: 1lh;
-	margin-inline: 2ch;
-	padding: 0;
+	margin-inline: 0;
+	padding-inline: 2ch;
 }
 
 .remarkdown blockquote {
-	--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 	position: relative;
 }
 .remarkdown blockquote:dir(rtl) {
-	--rmd-quote-mark: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+	--rmd-quote-mark: var(--rmd-quote-rtl);
 }
 .remarkdown blockquote::before {
 	content: var(--rmd-quote-mark) var(--rmd-quote-mark) var(--rmd-quote-mark)
 		var(--rmd-quote-mark)/"";
 	position: absolute;
 	inset-block: 0;
-	inset-inline-start: -2ch;
+	inset-inline-start: 0ch;
 	width: 1ch;
 	overflow: hidden;
 	white-space: pre;

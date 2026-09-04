@@ -1,37 +1,43 @@
 // <blockquote>
-// Option: quote-gt
+// Option: quote-mark
+
+@use "sass:math";
 
 @use "../toolkit" as *;
 
 @mixin quote {
-	$quote-mark-ltr: str-repeat(">\A", 20);
-	$quote-mark-rtl: str-repeat("<\A", 20);
-
 	@include root() {
 		blockquote {
 			margin-block: margins(blockquote);
-			margin-inline: indents(blockquote);
-			padding: 0;
+			margin-inline: 0;
+			padding-inline: indents(blockquote);
 		}
 	}
 
-	@include option(quote-gt) {
+	@include option(quote-mark) {
 		blockquote {
-			@include define-var(quote-mark, $quote-mark-ltr);
 			position: relative;
 		}
 		blockquote:dir(rtl) {
-			@include define-var(quote-mark, $quote-mark-rtl);
+			@include define-var(quote-mark, rmd-var(quote-rtl));
 		}
 		blockquote::before {
 			@include content(rmd-var(quote-mark), $repeat: 4);
 			position: absolute;
 			inset-block: 0;
-			inset-inline-start: -2ch;
+			inset-inline-start: -marker-inset();
 			width: 1ch;
 			overflow: hidden;
 			white-space: pre;
 			cursor: default;
 		}
 	}
+}
+
+@function -marker-inset() {
+	$indent: indent(blockquote, start);
+	@if math.unit($indent) == ch {
+		@return $indent - 2ch;
+	}
+	@return -2ch;
 }

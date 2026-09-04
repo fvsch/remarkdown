@@ -11,7 +11,7 @@
  */
 @layer remarkdown {
 	/*! Remarkdown 4.0.0-alpha.1 [scope-custom] (MIT) %h */
-	/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-gt, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
+	/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
 	@scope (.remarkdown) to ([data-remarkdown]) {
 		--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
 		--rmd-code-font: inherit;
@@ -24,6 +24,8 @@
 		--rmd-pre-ticks: "```";
 		--rmd-pre-tilde: "~~~";
 		--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+		--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+		--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 		--rmd-table-hline: "----------------------------------------";
 		& {
@@ -320,22 +322,21 @@
 		}
 		blockquote {
 			margin-block: 1lh;
-			margin-inline: 2ch;
-			padding: 0;
+			margin-inline: 0;
+			padding-inline: 2ch;
 		}
 		blockquote {
-			--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 			position: relative;
 		}
 		blockquote:dir(rtl) {
-			--rmd-quote-mark: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+			--rmd-quote-mark: var(--rmd-quote-rtl);
 		}
 		blockquote::before {
 			content: var(--rmd-quote-mark) var(--rmd-quote-mark) var(--rmd-quote-mark)
 				var(--rmd-quote-mark)/"";
 			position: absolute;
 			inset-block: 0;
-			inset-inline-start: -2ch;
+			inset-inline-start: 0ch;
 			width: 1ch;
 			overflow: hidden;
 			white-space: pre;
@@ -466,6 +467,8 @@
 		--rmd-pre-ticks: "```";
 		--rmd-pre-tilde: "~~~";
 		--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+		--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+		--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 		--rmd-table-hline: "----------------------------------------";
 	}
@@ -764,22 +767,21 @@
 	}
 	[data-remarkdown] blockquote {
 		margin-block: 1lh;
-		margin-inline: 2ch 0ch;
-		padding: 0;
+		margin-inline: 0;
+		padding-inline: 2ch 0ch;
 	}
-	[data-remarkdown~="quote-gt"] blockquote {
-		--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+	[data-remarkdown~="quote-mark"] blockquote {
 		position: relative;
 	}
-	[data-remarkdown~="quote-gt"] blockquote:dir(rtl) {
-		--rmd-quote-mark: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+	[data-remarkdown~="quote-mark"] blockquote:dir(rtl) {
+		--rmd-quote-mark: var(--rmd-quote-rtl);
 	}
-	[data-remarkdown~="quote-gt"] blockquote::before {
+	[data-remarkdown~="quote-mark"] blockquote::before {
 		content: var(--rmd-quote-mark) var(--rmd-quote-mark) var(--rmd-quote-mark)
 			var(--rmd-quote-mark)/"";
 		position: absolute;
 		inset-block: 0;
-		inset-inline-start: -2ch;
+		inset-inline-start: 0ch;
 		width: 1ch;
 		overflow: hidden;
 		white-space: pre;
