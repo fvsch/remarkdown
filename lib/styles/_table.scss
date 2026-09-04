@@ -1,0 +1,123 @@
+// <table>
+// Option: table-border
+
+@use "../toolkit" as *;
+
+@mixin table {
+	@include option(table-reset) {
+		table {
+			margin-block: margins(table);
+			border-collapse: collapse;
+		}
+		tr > * {
+			padding-block: 0;
+			padding-inline: col(1);
+			border: none;
+			vertical-align: top;
+			font-weight: inherit;
+			text-align: match-parent;
+		}
+		tr > :first-child {
+			padding-inline-start: 0;
+		}
+		tr > :last-child {
+			padding-inline-end: 0;
+		}
+	}
+
+	@include option(table-border table-border-full) {
+		table {
+			--inset-start: #{col()};
+			--inset-end: #{col()};
+			margin-block: margins(table);
+			border-collapse: collapse;
+		}
+		tr > * {
+			position: relative;
+			padding-block: 0;
+			padding-inline-start: var(--inset-start);
+			padding-inline-end: var(--inset-end);
+			border: none;
+			vertical-align: top;
+			font-weight: inherit;
+			text-align: match-parent;
+		}
+	}
+
+	@include option(table-border) {
+		tr > :first-child {
+			--inset-start: 0ch;
+		}
+		tr > :last-child {
+			--inset-end: 0ch;
+		}
+	}
+
+	@include option(table-border table-border-full) {
+		// th markers
+		:is(thead th, thead td, th[scope="col"]) {
+			--inset-total: calc(var(--inset-start) + var(--inset-end));
+			padding-bottom: row();
+
+			&::after {
+				@include content(rmd-var(table-hline), $repeat: 2);
+				position: absolute;
+				bottom: 0;
+				inset-inline-start: var(--inset-start);
+				width: calc(100% - var(--inset-total));
+				max-width: 100%;
+				height: row();
+				overflow: hidden;
+				word-break: break-all;
+
+				@supports (width: round(down, 100%, 1ch)) {
+					width: round(down, 100% - var(--inset-total), 1ch);
+				}
+			}
+		}
+
+		// column markers (shared style)
+		tr > *::before {
+			content: none;
+			position: absolute;
+			inset-block: 0;
+			inset-inline-start: 0;
+			width: col();
+			overflow: hidden;
+			white-space: pre;
+		}
+	}
+
+	@include option(table-border) {
+		table {
+			--inset-start: #{col(2)};
+		}
+		tr > :not(:first-child)::before {
+			@include content(rmd-var(table-vline));
+		}
+	}
+
+	@include option(table-border-full) {
+		table {
+			--inset-start: #{col(2)};
+		}
+		tr {
+			position: relative;
+		}
+		tr::after {
+			@include content(rmd-var(table-vline));
+			position: absolute;
+			inset-block: 0;
+			inset-inline-end: 0;
+			width: col();
+			overflow: hidden;
+			white-space: pre;
+		}
+		tr > :last-child {
+			--inset-end: #{col(2)};
+		}
+		tr > *::before {
+			@include content(rmd-var(table-vline));
+		}
+	}
+}

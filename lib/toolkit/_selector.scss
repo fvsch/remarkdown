@@ -1,0 +1,54 @@
+@use "sass:list";
+@use "sass:meta" as *;
+
+@use "../config";
+@use "./utils";
+
+/// Wrap content in the base selector
+@mixin root() {
+	$selector: root-selector();
+	@if $selector {
+		#{$selector} {
+			@content;
+		}
+	} @else {
+		@content;
+	}
+}
+
+/// Wrap content in a selector including the option name(s).
+/// - Uses the root selector if at least one option name is in `$defaults`.
+/// - Otherwise, uses an option selector (or a list of option selectors)
+///   for names present in `$options`.
+/// - Outputs nothing if none of the provided names are present in
+///   `$defaults` or `$options`.
+@mixin option($names) {
+	@if config.has-default($names) {
+		@include root() {
+			@content;
+		}
+	} @else if config.has-option($names) {
+		$options: config.filter-options($names);
+		#{option-selector($options)} {
+			@content;
+		}
+	}
+}
+
+@function root-selector() {
+	$value: config.get(root-selector);
+	@if $value == null or $value == "" {
+		@return null;
+	}
+	@return $value;
+}
+
+@function option-selector($names) {
+	$pattern: config.get(option-selector);
+	$selectors: ();
+	@each $name in $names {
+		$selector: utils.str-replace($pattern, "%s", $name);
+		$selectors: list.append($selectors, $selector, $separator: comma);
+	}
+	@return $selectors;
+}

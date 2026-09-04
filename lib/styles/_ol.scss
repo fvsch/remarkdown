@@ -1,0 +1,48 @@
+// <ol>
+// Options: ol-decimal, ol-zero, ol-alpha
+
+@use "sass:string";
+@use "../toolkit" as *;
+
+@mixin ol {
+	@include root() {
+		ol {
+			margin-block: margins(ol);
+			margin-inline: 0;
+			padding-inline: indents(ol);
+			counter-reset: rmd-ol;
+		}
+		:where(ol, ul) ol {
+			margin-block: 0;
+		}
+		ol > li {
+			counter-increment: rmd-ol;
+		}
+	}
+
+	@each $option in (ol-decimal ol-zero ol-alpha) {
+		@include -ol-option($option);
+	}
+}
+
+@mixin -ol-option($option) {
+	$content: counter(rmd-ol);
+	@if $option == ol-alpha {
+		$content: counter(rmd-ol, lower-alpha);
+	} @else if $option == ol-zero {
+		$content: "0";
+	}
+
+	@include option($option) {
+		ol {
+			list-style: none;
+		}
+		ol > li::before {
+			@include content($content ".");
+			float: inline-start;
+			min-width: 2ch;
+			margin-inline-start: indent(ol, start) * -1;
+			margin-inline-end: 1ch;
+		}
+	}
+}

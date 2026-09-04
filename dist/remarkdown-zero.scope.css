@@ -1,0 +1,443 @@
+/*! Remarkdown-zero 4.0.0-alpha.1 [scope] (MIT) https://fvsch.github.io/remarkdown/ */
+/* defaults: base-text, hn-reset, em-reset, strong-reset */
+@scope (.remarkdown) to (.no-remarkdown) {
+	--rmd-font: ui-monospace, monospace;
+	--rmd-code-font: inherit;
+	--rmd-line-height: 1.5;
+	--rmd-hn-prefix: "#";
+	--rmd-h1-line: "========================================";
+	--rmd-h2-line: "----------------------------------------";
+	--rmd-hr-stars: "* * * *";
+	--rmd-hr-dashes: "-------";
+	--rmd-pre-ticks: "```";
+	--rmd-pre-tilde: "~~~";
+	--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+	--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+	--rmd-table-hline: "----------------------------------------";
+	& {
+		font-family: var(--rmd-font);
+		line-height: var(--rmd-line-height);
+	}
+	:is(pre, code, kbd, samp) {
+		font-family: var(--rmd-code-font);
+	}
+	h1 {
+		font-size: inherit;
+		font-weight: inherit;
+		margin-block: 1lh;
+	}
+	h2 {
+		font-size: inherit;
+		font-weight: inherit;
+		margin-block: 1lh;
+	}
+	:is(h3, h4, h5, h6) {
+		font-size: inherit;
+		font-weight: inherit;
+		margin-block: 1lh;
+	}
+	&.hn-prefix h1::before {
+		content: var(--rmd-hn-prefix) " "/"";
+	}
+	&.hn-prefix h2::before {
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
+	}
+	&.hn-prefix h3::before {
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
+	}
+	&.hn-prefix h4::before {
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			" "/"";
+	}
+	&.hn-prefix h5::before {
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			var(--rmd-hn-prefix) " "/"";
+	}
+	&.hn-prefix h6::before {
+		content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
+	}
+	&.h1-line h1 {
+		position: relative;
+		width: fit-content;
+		padding-bottom: 1lh;
+	}
+	&.h1-line h1::before {
+		content: none;
+	}
+	&.h1-line h1::after {
+		content: var(--rmd-h1-line) var(--rmd-h1-line) var(--rmd-h1-line)/"";
+		position: absolute;
+		bottom: 0;
+		inset-inline: 0;
+		height: 1lh;
+		width: 100%;
+		overflow: hidden;
+		word-break: break-all;
+		cursor: default;
+	}
+	@supports (width: round(down, 100%, 1ch)) {
+		&.h1-line h1::after {
+			width: round(down, 100%, 1ch);
+		}
+	}
+	&.h2-line h2 {
+		position: relative;
+		width: fit-content;
+		padding-bottom: 1lh;
+	}
+	&.h2-line h2::before {
+		content: none;
+	}
+	&.h2-line h2::after {
+		content: var(--rmd-h2-line) var(--rmd-h2-line) var(--rmd-h2-line)/"";
+		position: absolute;
+		bottom: 0;
+		inset-inline: 0;
+		height: 1lh;
+		width: 100%;
+		overflow: hidden;
+		word-break: break-all;
+		cursor: default;
+	}
+	@supports (width: round(down, 100%, 1ch)) {
+		&.h2-line h2::after {
+			width: round(down, 100%, 1ch);
+		}
+	}
+	p {
+		margin-block: 1lh;
+	}
+	figure {
+		margin-block: 1lh;
+		margin-inline: 0ch;
+	}
+	hr {
+		height: auto;
+		margin-block: 1lh;
+		margin-inline: 0;
+		line-height: inherit;
+		text-align: start;
+	}
+	&.hr-star hr,
+	&.hr-dash hr {
+		border: none;
+		color: inherit;
+	}
+	&.hr-center hr {
+		text-align: center;
+	}
+	&.hr-star hr::before {
+		content: var(--rmd-hr-stars)/"";
+		display: block;
+	}
+	&.hr-dash hr::before {
+		content: var(--rmd-hr-dashes)/"";
+		display: block;
+	}
+	ul {
+		margin-block: 1lh;
+		margin-inline: 0;
+		padding-inline: 3ch 0ch;
+	}
+	:where(ol, ul) ul {
+		margin-block: 0ch;
+	}
+	&.ul-dash ul {
+		list-style-type: none;
+	}
+	&.ul-dash ul > li::before {
+		content: "-"/"";
+		float: inline-start;
+		width: 1ch;
+		margin-inline-start: -3ch;
+		margin-inline-end: 1ch;
+	}
+	&.ul-plus ul {
+		list-style-type: none;
+	}
+	&.ul-plus ul > li::before {
+		content: "+"/"";
+		float: inline-start;
+		width: 1ch;
+		margin-inline-start: -3ch;
+		margin-inline-end: 1ch;
+	}
+	&.ul-star ul {
+		list-style-type: none;
+	}
+	&.ul-star ul > li::before {
+		content: "*"/"";
+		float: inline-start;
+		width: 1ch;
+		margin-inline-start: -3ch;
+		margin-inline-end: 1ch;
+	}
+	ol {
+		margin-block: 1lh;
+		margin-inline: 0;
+		padding-inline: 3ch 0ch;
+		counter-reset: rmd-ol;
+	}
+	:where(ol, ul) ol {
+		margin-block: 0;
+	}
+	ol > li {
+		counter-increment: rmd-ol;
+	}
+	&.ol-decimal ol {
+		list-style: none;
+	}
+	&.ol-decimal ol > li::before {
+		content: counter(rmd-ol) "."/"";
+		float: inline-start;
+		min-width: 2ch;
+		margin-inline-start: -3ch;
+		margin-inline-end: 1ch;
+	}
+	&.ol-zero ol {
+		list-style: none;
+	}
+	&.ol-zero ol > li::before {
+		content: "0" "."/"";
+		float: inline-start;
+		min-width: 2ch;
+		margin-inline-start: -3ch;
+		margin-inline-end: 1ch;
+	}
+	&.ol-alpha ol {
+		list-style: none;
+	}
+	&.ol-alpha ol > li::before {
+		content: counter(rmd-ol, lower-alpha) "."/"";
+		float: inline-start;
+		min-width: 2ch;
+		margin-inline-start: -3ch;
+		margin-inline-end: 1ch;
+	}
+	&.a-bracket a {
+		text-decoration-inset: 1ch;
+	}
+	&.a-bracket a::before {
+		content: "["/"";
+	}
+	&.a-bracket a::after {
+		content: "]"/"";
+	}
+	&.a-showurl a {
+		text-decoration-inset: 0;
+	}
+	&.a-showurl a[href]::before {
+		content: "["/"";
+	}
+	&.a-showurl a[href]::after {
+		content: "](" attr(href) ")"/"";
+		word-break: break-all;
+	}
+	em {
+		font-style: normal;
+		font-weight: normal;
+	}
+	&.em-star em::before,
+	&.em-star em::after {
+		content: "*"/"";
+	}
+	&.em-underscore em::before,
+	&.em-underscore em::after {
+		content: "_"/"";
+	}
+	strong {
+		font-style: normal;
+		font-weight: normal;
+	}
+	&.strong-star strong::before,
+	&.strong-star strong::after {
+		content: "**"/"";
+	}
+	&.strong-underscore strong::before,
+	&.strong-underscore strong::after {
+		content: "__"/"";
+	}
+	&.code-tick code::before,
+	&.code-tick code::after {
+		content: "`"/"";
+	}
+	&.code-tick pre code::before,
+	&.code-tick pre code::after {
+		content: none;
+	}
+	pre {
+		margin-block: 1lh;
+		white-space: pre-wrap;
+		tab-size: 4;
+	}
+	&.pre-indent pre {
+		margin-inline: 4ch 0ch;
+	}
+	&.pre-tick pre,
+	&.pre-tilde pre,
+	&.pre-tilde-full pre {
+		margin-inline: 0;
+	}
+	&.pre-tick pre::before,
+	&.pre-tick pre::after,
+	&.pre-tilde pre::before,
+	&.pre-tilde pre::after,
+	&.pre-tilde-full pre::before,
+	&.pre-tilde-full pre::after {
+		content: none;
+		display: block;
+		width: 100%;
+		height: 1lh;
+		overflow: hidden;
+		word-break: break-all;
+		pointer-events: none;
+	}
+	&.pre-tick pre::before,
+	&.pre-tick pre::after {
+		content: var(--rmd-pre-ticks)/"";
+		position: relative;
+		top: 0.25em;
+	}
+	&.pre-tilde pre::before,
+	&.pre-tilde pre::after {
+		content: var(--rmd-pre-tilde)/"";
+	}
+	&.pre-tilde-full pre::before,
+	&.pre-tilde-full pre::after {
+		content: var(--rmd-pre-tilde-line)/"";
+	}
+	blockquote {
+		margin-block: 1lh;
+		margin-inline: 2ch 0ch;
+		padding: 0;
+	}
+	&.quote-gt blockquote {
+		--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+		position: relative;
+	}
+	&.quote-gt blockquote:dir(rtl) {
+		--rmd-quote-mark: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+	}
+	&.quote-gt blockquote::before {
+		content: var(--rmd-quote-mark) var(--rmd-quote-mark) var(--rmd-quote-mark)
+			var(--rmd-quote-mark)/"";
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: -2ch;
+		width: 1ch;
+		overflow: hidden;
+		white-space: pre;
+		cursor: default;
+	}
+	&.del-tilde del {
+		text-decoration-inset: 2.2ch;
+		text-decoration-thickness: round(up, 0.08em, 0.5px);
+	}
+	&.del-tilde del::before,
+	&.del-tilde del::after {
+		content: "~~"/"";
+	}
+	&.table-reset table {
+		margin-block: 1lh;
+		border-collapse: collapse;
+	}
+	&.table-reset tr > * {
+		padding-block: 0;
+		padding-inline: 1ch;
+		border: none;
+		vertical-align: top;
+		font-weight: inherit;
+		text-align: match-parent;
+	}
+	&.table-reset tr > :first-child {
+		padding-inline-start: 0;
+	}
+	&.table-reset tr > :last-child {
+		padding-inline-end: 0;
+	}
+	&.table-border table,
+	&.table-border-full table {
+		--inset-start: 1ch;
+		--inset-end: 1ch;
+		margin-block: 1lh;
+		border-collapse: collapse;
+	}
+	&.table-border tr > *,
+	&.table-border-full tr > * {
+		position: relative;
+		padding-block: 0;
+		padding-inline-start: var(--inset-start);
+		padding-inline-end: var(--inset-end);
+		border: none;
+		vertical-align: top;
+		font-weight: inherit;
+		text-align: match-parent;
+	}
+	&.table-border tr > :first-child {
+		--inset-start: 0ch;
+	}
+	&.table-border tr > :last-child {
+		--inset-end: 0ch;
+	}
+	&.table-border :is(thead th, thead td, th[scope="col"]),
+	&.table-border-full :is(thead th, thead td, th[scope="col"]) {
+		--inset-total: calc(var(--inset-start) + var(--inset-end));
+		padding-bottom: 1lh;
+	}
+	&.table-border :is(thead th, thead td, th[scope="col"])::after,
+	&.table-border-full :is(thead th, thead td, th[scope="col"])::after {
+		content: var(--rmd-table-hline) var(--rmd-table-hline)/"";
+		position: absolute;
+		bottom: 0;
+		inset-inline-start: var(--inset-start);
+		width: calc(100% - var(--inset-total));
+		max-width: 100%;
+		height: 1lh;
+		overflow: hidden;
+		word-break: break-all;
+	}
+	@supports (width: round(down, 100%, 1ch)) {
+		&.table-border :is(thead th, thead td, th[scope="col"])::after,
+		&.table-border-full :is(thead th, thead td, th[scope="col"])::after {
+			width: round(down, 100% - var(--inset-total), 1ch);
+		}
+	}
+	&.table-border tr > *::before,
+	&.table-border-full tr > *::before {
+		content: none;
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 0;
+		width: 1ch;
+		overflow: hidden;
+		white-space: pre;
+	}
+	&.table-border table {
+		--inset-start: 2ch;
+	}
+	&.table-border tr > :not(:first-child)::before {
+		content: var(--rmd-table-vline)/"";
+	}
+	&.table-border-full table {
+		--inset-start: 2ch;
+	}
+	&.table-border-full tr {
+		position: relative;
+	}
+	&.table-border-full tr::after {
+		content: var(--rmd-table-vline)/"";
+		position: absolute;
+		inset-block: 0;
+		inset-inline-end: 0;
+		width: 1ch;
+		overflow: hidden;
+		white-space: pre;
+	}
+	&.table-border-full tr > :last-child {
+		--inset-end: 2ch;
+	}
+	&.table-border-full tr > *::before {
+		content: var(--rmd-table-vline)/"";
+	}
+}

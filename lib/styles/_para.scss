@@ -1,0 +1,15 @@
+// <p>, <figure>
+
+@use "../toolkit" as *;
+
+@mixin para {
+	@include root() {
+		p {
+			margin-block: margins(p);
+		}
+		figure {
+			margin-block: margins(figure);
+			margin-inline: indents(figure);
+		}
+	}
+}

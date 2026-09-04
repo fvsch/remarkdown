@@ -1,0 +1,102 @@
+@use "sass:list";
+@use "sass:meta" as *;
+@use "sass:string";
+
+@use "../config";
+@use "./utils" as *;
+
+/// Define a CSS custom property
+@mixin define-var($name, $value) {
+	@if $value != null {
+		#{var-name($name)}: $value;
+	}
+}
+
+@function rmd-var($name, $default: null) {
+	$prop: var-name($name);
+	@if $default != null {
+		@return var($prop, $default);
+	} @else {
+		@return var($prop);
+	}
+}
+
+/// CSS custom property name using the pattern in the $variable-name option
+@function var-name($name) {
+	$base: config.get(variable-name) or "--%s";
+	$prop: str-replace($base, "%s", $name);
+	@return string.unquote($prop);
+}
+
+/// Helper for generating pseudo-element content
+@mixin content($value, $alt: "", $repeat: 1, $suffix: null) {
+	$list: ();
+	@for $i from 1 through $repeat {
+		$list: list.append($list, $value, $separator: space);
+	}
+	@if $suffix {
+		$list: list.append($list, $suffix, $separator: space);
+	}
+	// Ideally we can double the empty alt string with `speak: never`,
+	// but browser support seems nonexistent, so maybe best not to include it?
+	// @if $alt == "" {
+	// 	speak: never;
+	// }
+	@if $alt {
+		content: $list / $alt;
+	} @else {
+		content: $list;
+	}
+}
+
+/// Get a margin value in em from $margins.
+/// If not set, returns a value of 1 line.
+@function margin($element, $direction) {
+	@if not list.index(top bottom, $direction) {
+		@error "Unknown direction #{$direction}";
+	}
+	$num: config.get(margins $element $direction) or 1;
+	@return row($num);
+}
+
+/// Get both vertical margin values for an element.
+/// Returns a single value if both values are identical,
+/// or two values otherwise. Suitable for use with e.g. margin-block.
+@function margins($element) {
+	$top: margin($element, top);
+	$bottom: margin($element, bottom);
+	@return -short-pair($top, $bottom);
+}
+
+/// Get a horizontal margin (indent) value for an element.
+/// If not set, returns a value of 0.
+@function indent($element, $direction) {
+	@if not list.index(start end, $direction) {
+		@error "Unknown direction #{$direction}";
+	}
+	$num: config.get(margins $element "inline-#{$direction}") or 0;
+	@return col($num);
+}
+
+/// Get both horizontal margin (indent) values for an element.
+/// Returns a single value if both values are identical,
+/// or two values otherwise. Suitable for use with e.g. padding-inline.
+@function indents($element) {
+	$start: indent($element, start);
+	$end: indent($element, end);
+	@return -short-pair($start, $end);
+}
+
+/// Compute the size of a text line
+@function row($count: 1) {
+	@return $count * 1lh;
+}
+
+/// Compute the size of a text column
+@function col($count: 1) {
+	@return $count * 1ch;
+}
+
+@function -short-pair($a, $b) {
+	@return if(sass($a == $b): $a; else: $a $b);
+}

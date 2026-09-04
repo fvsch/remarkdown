@@ -1,0 +1,62 @@
+// <pre>
+// Options: pre-indent, pre-tick, pre-tilde, pre-tilde-full
+
+@use "../config";
+@use "../toolkit" as *;
+
+@mixin pre {
+	@include root() {
+		pre {
+			margin-block: margins(pre);
+			// Maybe a bit opinionated, but for the common use case of showing code
+			// or machine outputs rather than, say, ASCII art, it just makes sense.
+			white-space: pre-wrap;
+			tab-size: 4;
+		}
+	}
+
+	@include option(pre-indent) {
+		pre {
+			margin-inline: indents(pre);
+		}
+	}
+
+	@include option(pre-tick pre-tilde pre-tilde-full) {
+		pre {
+			margin-inline: 0;
+		}
+		pre::before,
+		pre::after {
+			content: none;
+			display: block;
+			width: 100%;
+			height: row();
+			overflow: hidden;
+			word-break: break-all;
+			pointer-events: none;
+		}
+	}
+
+	@include option(pre-tick) {
+		pre::before,
+		pre::after {
+			@include content(rmd-var(pre-ticks));
+			position: relative;
+			top: 0.25em;
+		}
+	}
+
+	@include option(pre-tilde) {
+		pre::before,
+		pre::after {
+			@include content(rmd-var(pre-tilde));
+		}
+	}
+
+	@include option(pre-tilde-full) {
+		pre::before,
+		pre::after {
+			@include content(rmd-var(pre-tilde-line));
+		}
+	}
+}

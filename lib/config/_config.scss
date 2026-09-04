@@ -1,0 +1,195 @@
+/// Read and write Remarkdown configuration
+
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta" as *;
+@use "sass:string";
+
+@use "../toolkit/utils";
+@use "./defaults";
+@use "./zero";
+
+$-DEFAULTS: module-variables(defaults);
+$-ZERO: module-variables(zero);
+
+/// Full list of styling options
+$-ALL-STYLES: (
+	a-bracket,
+	a-showurl,
+	base-text,
+	code-tick,
+	del-tilde,
+	em-reset,
+	em-star,
+	em-underscore,
+	h1-line,
+	h2-line,
+	hn-prefix,
+	hn-reset,
+	hr-center,
+	hr-dash,
+	hr-star,
+	ol-alpha,
+	ol-decimal,
+	ol-zero,
+	pre-indent,
+	pre-tick,
+	pre-tilde,
+	pre-tilde-full,
+	quote-gt,
+	strong-reset,
+	strong-star,
+	strong-underscore,
+	table-border,
+	table-border-full,
+	table-reset,
+	ul-dash,
+	ul-plus,
+	ul-star
+);
+
+/// Holds the configuration state
+$-config: base(default);
+
+/// Return a copy of the default config for the "default" or "zero" preset
+@function base($preset: default) {
+	@if $preset == null or $preset == default {
+		@return $-DEFAULTS;
+	} @else if $preset == zero {
+		@return map.merge($-DEFAULTS, $-ZERO);
+	} @else {
+		@error "$preset must be one of (null, default, zero), got: #{inspect($preset)}";
+	}
+}
+
+/// Write configuration values
+@mixin set($config, $initialize: false) {
+	@each $name, $value in $config {
+		@include -check-config-entry($name, $value);
+	}
+	@if $initialize {
+		$base: base(map.get($config, preset));
+		$-config: -merge-config($base, $config) !global;
+	} @else {
+		$-config: -merge-config($-config, $config) !global;
+	}
+}
+
+/// Read from the current config
+@function get($path) {
+	// Check that the config option exists, only checking the first element
+	$first: list.nth($path, 1);
+	@if type-of($first) != string {
+		@error "Invalid config path, expected a string or list of strings, got: #{inspect($path)}";
+	} @else if not map.has-key($-config, $first) {
+		@error "Unknown config option #{$first}";
+	}
+	@return map.get($-config, $path...);
+}
+
+/// Return the first option name found in $defaults
+@function has-default($names) {
+	@return -find-item(get(defaults), $names);
+}
+
+/// Return the first option name found in $options
+@function has-option($names) {
+	@return -find-item(get(options), $names);
+}
+
+/// Keep option names found in $options
+@function filter-options($names) {
+	$options: get(options);
+	$found: ();
+	@each $name in $names {
+		@if list.index($options, $name) {
+			$found: list.append($found, $name);
+		}
+	}
+	@return $found;
+}
+
+@function -find-item($list, $items) {
+	@each $item in $items {
+		@if list.index($list, $item) {
+			@return $item;
+		}
+	}
+	@return null;
+}
+
+@function -merge-config($base, $overrides) {
+	@if map.has-key($base, margins) and map.has-key($overrides, margins) {
+		$m1: map.get($base, margins);
+		$m2: map.get($overrides, margins);
+		$overrides: map.set($overrides, margins, map.merge($m1, $m2));
+	}
+	@return map.merge($base, $overrides);
+}
+
+@mixin -check-config-entry($name, $value) {
+	$name: string.unquote($name);
+
+	// fail for unknown and invalid options
+	@if $name != preset and not map.has-key($-DEFAULTS, $name) {
+		@error "Unknown option #{$name}, expected one of: #{map.keys($-DEFAULTS)}";
+	}
+
+	@if $name == preset {
+		@include -require-enum($name, $value, null default zero);
+	} @else if $name == defaults or $name == options {
+		@include -require-type($name, $value, list);
+		@include -check-options($name, $value);
+	} @else if $name == root-selector {
+		@include -require-type($name, $value, "null" string);
+	} @else if $name == option-selector or $name == variable-name {
+		@include -require-type($name, $value, string);
+		@include -require-substring($name, $value, "%s");
+	} @else if $name == font or $name == code-font {
+		@include -require-type($name, $value, "null" string list);
+	} @else {
+		// fall back to checking that the type matches the default value's type
+		$default: map.get($-DEFAULTS, $name);
+		@include -require-type($name, $value, type-of($default));
+	}
+}
+
+@mixin -check-options($name, $list) {
+	@each $item in $list {
+		@if not list.index($-ALL-STYLES, $item) {
+			@error "$#{$name} has unknown option #{-print-string($item)}, expected #{-print-list($-ALL-STYLES)}";
+		}
+	}
+}
+
+@mixin -require-type($name, $value, $expected) {
+	$type: type-of($value);
+	@if not list.index($expected, $type) {
+		@error "Type of $#{$name} must be #{-print-list($expected)}, got: #{inspect($type)}";
+	}
+}
+
+@mixin -require-enum($name, $value, $required) {
+	@if not list.index($required, $value) {
+		@error "$#{$name} must be #{-print-list($required)}, got: #{inspect($value)}";
+	}
+}
+
+@mixin -require-substring($name, $value, $sub) {
+	@if not utils.str-contains($value, $sub) {
+		@error "$#{$name} must contain the substring #{-print-string($sub)}, got #{-print-string($value)}";
+	}
+}
+
+@function -print-list($list, $prefix: "one of ") {
+	@if list.length($list) == 1 {
+		@return string.unquote("`#{inspect(list.nth($list, 1))}`");
+	} @else {
+		$pretty: list.join($list, (), $separator: comma, $bracketed: false);
+		@return string.unquote("#{$prefix}`#{inspect($pretty)}`");
+	}
+}
+
+@function -print-string($str) {
+	@return string.unquote("`#{string.unquote($str)}`");
+}

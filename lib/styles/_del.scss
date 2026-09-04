@@ -1,0 +1,17 @@
+// <del>
+// Options: del-tilde
+
+@use "../toolkit" as *;
+
+@mixin del {
+	@include option(del-tilde) {
+		del {
+			text-decoration-inset: 2.2ch;
+			text-decoration-thickness: round(up, 0.08em, 0.5px);
+		}
+		del::before,
+		del::after {
+			@include content("~~");
+		}
+	}
+}

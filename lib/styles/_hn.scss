@@ -1,0 +1,80 @@
+// Headings
+// Options: hn-reset, hn-prefix, h1-line, h2-line
+
+@use "sass:list";
+
+@use "../config";
+@use "../toolkit" as *;
+
+@mixin hn {
+	@include option(hn-reset) {
+		h1 {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-block: margins(h1);
+		}
+		h2 {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-block: margins(h2);
+		}
+		:is(h3, h4, h5, h6) {
+			font-size: inherit;
+			font-weight: inherit;
+			margin-block: margins(hn);
+		}
+	}
+
+	@include option(hn-prefix) {
+		$prefix: rmd-var(hn-prefix);
+		@for $i from 1 through 6 {
+			h#{$i}::before {
+				@include content($prefix, $repeat: $i, $suffix: " ");
+			}
+		}
+	}
+
+	@include option(h1-line) {
+		$line: rmd-var(h1-line);
+		h1 {
+			@include -hn-line($line);
+		}
+	}
+
+	@include option(h2-line) {
+		$line: rmd-var(h2-line);
+		h2 {
+			@include -hn-line($line);
+		}
+	}
+}
+
+@mixin -hn-line($line) {
+	& {
+		position: relative;
+		width: fit-content;
+		padding-bottom: row();
+	}
+	&::before {
+		content: none;
+	}
+	&::after {
+		@include content($line, $repeat: 3);
+		position: absolute;
+		bottom: 0;
+		inset-inline: 0;
+		height: row();
+		width: 100%;
+		overflow: hidden;
+		word-break: break-all;
+		cursor: default;
+	}
+	// When text wraps, the underline will take up the full width of the
+	// container, and may display characters that get cut off. We can cut
+	// characters off cleanup by rounding down the width.
+	@supports (width: round(down, 100%, 1ch)) {
+		&::after {
+			width: round(down, 100%, 1ch);
+		}
+	}
+}

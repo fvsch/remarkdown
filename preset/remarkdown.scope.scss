@@ -1,0 +1,11 @@
+// Scope-based build of Remarkdown using default styles
+
+@use "../lib/rmd";
+
+@include rmd.config($root-selector: null, $option-selector: "&.%s");
+
+@include rmd.header("Remarkdown %v [scope] (MIT) %u");
+
+@scope (.remarkdown) to (.no-remarkdown) {
+	@include rmd.styles();
+}

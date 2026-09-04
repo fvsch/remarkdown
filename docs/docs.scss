@@ -1,0 +1,191 @@
+/**
+ * Styles for Remarkdown documentation pages.
+ *
+ * Includes two builds of Remarkdown:
+ *
+ * 1. `.remarkdown` class and `default` options preset;
+ * 2. `[data-remarkdown]` attribute and `zero` options preset.
+ *
+ * We're using CSS scoping with `@scope (.remarkdown) to ([data-remarkdown])`
+ * to ensure that we can switch from one build to the other in the same HTML page.
+ */
+
+@use "../lib/rmd";
+
+$breakpoint-small: 40em;
+$breakpoint-medium: 56em;
+
+@layer remarkdown {
+	/// Class-based build of Remarkdown using default styles
+	@include rmd.config(
+		$preset: default,
+		$root-selector: null,
+		$option-selector: "&.%s",
+		$font: (
+			Menlo,
+			Consolas,
+			DejaVu Sans Mono,
+			ui-monospace,
+			monospace,
+		)
+	);
+	@include rmd.header("Remarkdown %v [scope-custom] (MIT) %h");
+	@scope (.remarkdown) to ([data-remarkdown]) {
+		@include rmd.styles();
+	}
+
+	/// Attribute-based build of Remarkdown with no default styles
+	@include rmd.config(
+		$preset: zero,
+		$root-selector: "[data-remarkdown]",
+		$option-selector: "[data-remarkdown~=%s]"
+	);
+	@include rmd.header("Remarkdown-zero %v [attr] (MIT) %u");
+	@include rmd.styles();
+}
+
+/* Demo layout and page styles */
+
+:root {
+	--text-color: hsl(0 0% 12%);
+	--link-color: hsl(346 86% 54%);
+	--code-color: hsl(0 60% 31%);
+	--pseudo-color: hsl(220 70% 35% / 0.55);
+	--bg-color: hsl(0 0% 100%);
+	--bg-alt-color: hsl(0 0% 93%);
+	--bg-border-color: hsl(0 0% 82%);
+	--demo-text-color: hsl(180 70% 26%);
+	--demo-bg-color: hsl(200 60% 94%);
+
+	scroll-padding-top: 1lh;
+	font-size: 112.5%;
+	color: var(--text-color);
+	background-color: var(--bg-color);
+
+	@media (width >= $breakpoint-medium) {
+		background-color: var(--bg-alt-color);
+	}
+}
+
+body {
+	--body-padding-inline: 2rem;
+	max-width: 66ch;
+	margin-block: 0;
+	margin-inline: auto;
+	padding-block: 2rem 3rem;
+	padding-inline: var(--body-padding-inline);
+
+	@media (width >= $breakpoint-medium) {
+		--body-padding-inline: 4.5rem;
+		margin-block: 2rem;
+		padding-block: 2.5rem 3.5rem;
+		border: 3px solid var(--bg-border-color);
+		background-color: var(--bg-color);
+		box-shadow: 1ch 1ch 0 -3px var(--bg-border-color);
+	}
+}
+
+main {
+	& > :first-child {
+		margin-top: 0;
+	}
+	& > :last-child {
+		margin-bottom: 0;
+	}
+}
+
+@scope (.remarkdown) to ([data-remarkdown]) {
+	/* Make the Markdown-like markers look nice */
+	::before,
+	::after {
+		color: var(--pseudo-color);
+	}
+
+	a {
+		color: var(--link-color);
+		text-decoration-line: none;
+		text-decoration-thickness: 1.5px;
+		text-underline-offset: 0.25em;
+	}
+	a:hover {
+		text-decoration-line: underline;
+	}
+	a:focus-visible {
+		color: white;
+		background-color: var(--link-color);
+		outline: solid 2px var(--link-color);
+		&::before,
+		&::after {
+			color: inherit;
+		}
+	}
+
+	code {
+		color: var(--code-color);
+	}
+	pre {
+		tab-size: 2;
+		white-space: pre-wrap;
+		color: var(--code-color);
+		@media (width < $breakpoint-small) {
+			margin-inline-start: 0;
+		}
+	}
+
+	table {
+		margin-block: 2.5em;
+		font-size: 95%;
+	}
+}
+
+/* Nav bar */
+
+nav {
+	display: flex;
+	flex-direction: column;
+	gap: 1ch;
+	margin-block: 0 2lh;
+	text-align: center;
+
+	& > :first-child {
+		font-style: italic;
+	}
+	& > br {
+		display: none;
+	}
+
+	@media (width >= $breakpoint-small) {
+		flex-direction: row;
+		gap: 2ch;
+		text-align: right;
+		& > :first-child {
+			margin-inline-end: auto;
+		}
+	}
+}
+
+/* Styles page */
+
+#styles {
+	figure {
+		overflow-x: auto;
+		margin-block: 1lh;
+		margin-inline: calc(var(--body-padding-inline) * -1);
+		padding-block: 0.5lh;
+		padding-inline: var(--body-padding-inline);
+		border-bottom: solid 3px hsl(from currentColor h 80% 20% / 0.1);
+		color: var(--demo-text-color);
+		background-color: var(--demo-bg-color);
+	}
+}
+
+#styles-list {
+	tr > :first-child {
+		white-space: nowrap;
+	}
+	@media (width < $breakpoint-small) {
+		tr > :last-child {
+			display: none;
+		}
+	}
+}

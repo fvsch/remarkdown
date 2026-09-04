@@ -1,0 +1,176 @@
+/// Default options for Remarkdown
+/// To change those options, use the `config` mixin:
+///
+/// 	@use "pkg:remarkdown.css" as rmd;
+/// 	@include rmd.config(
+/// 		$root-selector: ".rmd",
+/// 		$option-selector: ".rmd--%s"
+/// 	);
+/// 	@include rmd.header();
+/// 	@include rmd.styles();
+
+// Selector for the Remarkdown root container.
+// Use `null` to use CSS nesting or CSS @scope:
+//
+// 	@include rmd.config(
+// 		$root-selector: null,
+// 		$option-selector: "&.%s",
+// 	);
+// 	@scope (.remarkdown) to (.no-remarkdown) {
+// 		@include rmd.styles();
+// 	}
+$root-selector: ".remarkdown";
+
+// Selector for optional styles.
+// "%s" will be replaced with the style's name.
+$option-selector: ".remarkdown.%s";
+
+// Some config options will be exposed and used as CSS variables.
+// This option controls what the variables look like; "%s" will be replaced
+// with the Sass option's name (without the `$` sign).
+$variable-name: "--rmd-%s";
+
+// Default styles.
+// These will be defined using the `$root-selector`, which means
+// that they will be enabled when using the main Remarkdown activation
+// pattern in HTML: `<element class="remarkdown">…</element>`
+// or `<element data-remarkdown>…</element>`.
+$defaults: (
+	base-text,
+	hn-reset,
+	hn-prefix,
+	ul-dash,
+	ol-decimal,
+	quote-gt,
+	em-reset,
+	em-star,
+	strong-reset,
+	strong-star,
+	a-bracket,
+	code-tick,
+	pre-indent,
+	hr-star
+);
+
+// Optional styles.
+// These will be defined using the `$option-selector`, which means
+// that they must be activated in HTML using a pattern like
+// `<element class="remarkdown option-name">…</element>` or
+// `<element data-remarkdown="option-name">…</element>`.
+// Note: styles ommited from both `$defaults` and `$options` will
+// be skipped in the final output.
+$options: (
+	h1-line,
+	h2-line,
+	ul-star,
+	ul-plus,
+	ol-zero,
+	ol-alpha,
+	em-underscore,
+	strong-underscore,
+	a-showurl,
+	pre-tick,
+	pre-tilde,
+	pre-tilde-full,
+	hr-dash,
+	hr-center,
+	del-tilde,
+	table-reset,
+	table-border,
+	table-border-full
+);
+
+// Font stack to use.
+// Should be a comma-separated list that ends with `monospace`.
+// (By default, we use `monospace, monospace`, because a single `monospace`
+// value makes browsers use a default 13px font size.)
+$font: ui-monospace, monospace;
+
+// For elements that are traditionnaly monospace, use a different font?
+$code-font: inherit;
+
+// Root line-height (as a unit-less ratio, e.g. `1.5`)
+$line-height: 1.5;
+
+// Vertical and horizontal margins for elements, as unitless numbers:
+// - vertical margins ("top" and "bottom") are multiples of the base line-height;
+// - horizontal margins ("inline-start" and "inline-end") are multiples of the
+//   width of a single space (`1ch`).
+$margins: (
+	h1: (
+		top: 1.5,
+		bottom: 1,
+	),
+	h2: (
+		top: 1.5,
+		bottom: 1,
+	),
+	hn: (
+		top: 1,
+		bottom: 1,
+	),
+	hr: (
+		top: 1,
+		bottom: 1,
+	),
+	p: (
+		top: 1,
+		bottom: 1,
+	),
+	pre: (
+		top: 1,
+		bottom: 1,
+		inline-start: 4,
+		inline-end: 0,
+	),
+	ol: (
+		top: 1,
+		bottom: 1,
+		inline-start: 4,
+		inline-end: 0,
+	),
+	ul: (
+		top: 1,
+		bottom: 1,
+		inline-start: 4,
+		inline-end: 0,
+	),
+	figure: (
+		top: 1,
+		bottom: 1,
+		inline-start: 0,
+		inline-end: 0,
+	),
+	blockquote: (
+		top: 1,
+		bottom: 1,
+		inline-start: 2,
+		inline-end: 2,
+	),
+	table: (
+		top: 1,
+		bottom: 1,
+	),
+);
+
+// Character used as heading prefix (ATX-style headings)
+$hn-prefix: "#";
+
+// Characters used for underlined headings (setext-style headings)
+// Recommended: use a string of ~40 characters or so.
+// These will be tripled to fill the container's width.
+$h1-line: "========================================";
+$h2-line: "----------------------------------------";
+
+// Horizontal rules
+$hr-stars: "* * * *";
+$hr-dashes: "-------";
+
+// Pre decorations
+$pre-ticks: "```";
+$pre-tilde: "~~~";
+$pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+// Table decorations
+$table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+$table-hline: "----------------------------------------";

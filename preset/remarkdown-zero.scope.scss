@@ -1,0 +1,11 @@
+// Attribute-based build of Remarkdown with no default styles
+
+@use "../lib/rmd";
+
+@include rmd.config($preset: zero, $root-selector: null, $option-selector: "&.%s");
+
+@include rmd.header("Remarkdown-zero %v [scope] (MIT) %u");
+
+@scope (.remarkdown) to (.no-remarkdown) {
+	@include rmd.styles();
+}

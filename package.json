@@ -1,41 +1,40 @@
 {
-  "name": "remarkdown.css",
-  "version": "3.1.0",
-  "license": "MIT",
-  "author": "Florens Verschelde",
-  "repository": "https://github.com/fvsch/remarkdown",
-  "keywords": [
-    "css",
-    "markdown"
-  ],
-
-  "scripts": {
-    "build": "node src/build.js",
-    "start": "serve docs"
-  },
-  "devDependencies": {
-    "prettier": "^2.1.2",
-    "sass": "^1.26.11",
-    "serve": "^11.3.2"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "useTabs": false,
-    "overrides": [
-      {
-        "files": "*.scss",
-        "options": {
-          "singleQuote": false
-        }
-      },
-      {
-        "files": "*.css",
-        "options": {
-          "singleQuote": false
-        }
-      }
-    ]
-  }
+	"name": "remarkdown.css",
+	"version": "4.0.0-alpha.1",
+	"license": "MIT",
+	"description": "Remarkdown makes HTML look like plain Markdown text",
+	"homepage": "https://fvsch.github.io/remarkdown/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fvsch/remarkdown.git"
+	},
+	"author": "Florens Verschelde",
+	"keywords": [
+		"css",
+		"markdown"
+	],
+	"files": [
+		"README.md",
+		"dist",
+		"lib"
+	],
+	"type": "module",
+	"exports": {
+		".": {
+			"browser": "./dist/remarkdown.css",
+			"style": "./dist/remarkdown.css",
+			"sass": "./lib/rmd.scss"
+		}
+	},
+	"browser": "./dist/remarkdown.css",
+	"scripts": {
+		"build": "node build.js",
+		"format": "oxfmt --write '**/*.scss' '**/*.js'",
+		"start": "servitsy docs"
+	},
+	"devDependencies": {
+		"oxfmt": "^0.66.0",
+		"sass": "^1.103.1",
+		"servitsy": "^0.6.0"
+	}
 }

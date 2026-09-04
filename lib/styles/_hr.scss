@@ -1,0 +1,43 @@
+// <hr>
+// Options: hr-center, hr-star, hr-dash
+
+@use "../toolkit" as *;
+
+@mixin hr {
+	@include root() {
+		hr {
+			height: auto;
+			margin-block: margins(hr);
+			margin-inline: 0;
+			line-height: inherit;
+			text-align: start;
+		}
+	}
+
+	@include option(hr-star hr-dash) {
+		hr {
+			border: none;
+			color: inherit;
+		}
+	}
+
+	@include option(hr-center) {
+		hr {
+			text-align: center;
+		}
+	}
+
+	@include option(hr-star) {
+		hr::before {
+			@include content(rmd-var(hr-stars));
+			display: block;
+		}
+	}
+
+	@include option(hr-dash) {
+		hr::before {
+			@include content(rmd-var(hr-dashes));
+			display: block;
+		}
+	}
+}
