@@ -1,12 +1,9 @@
-// <p>, <figure>
+// <figure>
 
 @use "../toolkit" as *;
 
-@mixin para {
+@mixin figure {
 	@include root() {
-		p {
-			margin-block: margins(p);
-		}
 		figure {
 			margin-block: margins(figure);
 			margin-inline: indents(figure);

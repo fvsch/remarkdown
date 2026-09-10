@@ -32,7 +32,7 @@
 			width: 100%;
 			height: row();
 			overflow: hidden;
-			word-break: break-all;
+			white-space: nowrap;
 			pointer-events: none;
 		}
 	}
@@ -56,7 +56,7 @@
 	@include option(pre-tilde-full) {
 		pre::before,
 		pre::after {
-			@include content(rmd-var(pre-tilde-line));
+			@include content(rmd-var(pre-tilde-line), $repeat: 4);
 		}
 	}
 }
