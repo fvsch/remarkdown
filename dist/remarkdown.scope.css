@@ -1,21 +1,23 @@
 /*! Remarkdown 4.0.0-alpha.1 [scope] (MIT) https://fvsch.github.io/remarkdown/ */
 /* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
 @scope (.remarkdown) to (.no-remarkdown) {
-	--rmd-font: ui-monospace, monospace;
-	--rmd-code-font: inherit;
-	--rmd-line-height: 1.5;
-	--rmd-hn-prefix: "#";
-	--rmd-h1-line: "========================================";
-	--rmd-h2-line: "----------------------------------------";
-	--rmd-hr-stars: "* * * *";
-	--rmd-hr-dashes: "-------";
-	--rmd-pre-ticks: "```";
-	--rmd-pre-tilde: "~~~";
-	--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
-	--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
-	--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
-	--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
-	--rmd-table-hline: "----------------------------------------";
+	& {
+		--rmd-font: ui-monospace, monospace;
+		--rmd-code-font: inherit;
+		--rmd-line-height: 1.5;
+		--rmd-hn-prefix: "#";
+		--rmd-h1-line: "========================================";
+		--rmd-h2-line: "----------------------------------------";
+		--rmd-hr-stars: "* * * *";
+		--rmd-hr-dashes: "-------";
+		--rmd-pre-ticks: "```";
+		--rmd-pre-tilde: "~~~";
+		--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+		--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+		--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+		--rmd-table-hline: "----------------------------------------";
+	}
 	& {
 		font-family: var(--rmd-font);
 		line-height: var(--rmd-line-height);
@@ -68,15 +70,15 @@
 		content: none;
 	}
 	&.h1-line h1::after {
-		content: var(--rmd-h1-line) var(--rmd-h1-line) var(--rmd-h1-line)/"";
+		content: var(--rmd-h1-line) var(--rmd-h1-line) var(--rmd-h1-line) var(--rmd-h1-line)/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
 		height: 1lh;
 		width: 100%;
 		overflow: hidden;
-		word-break: break-all;
-		cursor: default;
+		white-space: nowrap;
+		pointer-events: none;
 	}
 	@supports (width: round(down, 100%, 1ch)) {
 		&.h1-line h1::after {
@@ -92,15 +94,15 @@
 		content: none;
 	}
 	&.h2-line h2::after {
-		content: var(--rmd-h2-line) var(--rmd-h2-line) var(--rmd-h2-line)/"";
+		content: var(--rmd-h2-line) var(--rmd-h2-line) var(--rmd-h2-line) var(--rmd-h2-line)/"";
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
 		height: 1lh;
 		width: 100%;
 		overflow: hidden;
-		word-break: break-all;
-		cursor: default;
+		white-space: nowrap;
+		pointer-events: none;
 	}
 	@supports (width: round(down, 100%, 1ch)) {
 		&.h2-line h2::after {
@@ -141,7 +143,7 @@
 		margin-inline: 0;
 		padding-inline: 4ch 0ch;
 	}
-	:where(ol, ul) ul {
+	li ul {
 		margin-block: 0ch;
 	}
 	ul {
@@ -180,7 +182,7 @@
 		padding-inline: 4ch 0ch;
 		counter-reset: rmd-ol;
 	}
-	:where(ol, ul) ol {
+	li ol {
 		margin-block: 0;
 	}
 	ol > li {
@@ -215,6 +217,70 @@
 		min-width: 2ch;
 		margin-inline-start: -4ch;
 		margin-inline-end: 1ch;
+	}
+	pre {
+		margin-block: 1lh;
+		white-space: pre-wrap;
+		tab-size: 4;
+	}
+	pre {
+		margin-inline: 4ch 0ch;
+	}
+	&.pre-tick pre,
+	&.pre-tilde pre,
+	&.pre-tilde-full pre {
+		margin-inline: 0;
+	}
+	&.pre-tick pre::before,
+	&.pre-tick pre::after,
+	&.pre-tilde pre::before,
+	&.pre-tilde pre::after,
+	&.pre-tilde-full pre::before,
+	&.pre-tilde-full pre::after {
+		content: none;
+		display: block;
+		width: 100%;
+		height: 1lh;
+		overflow: hidden;
+		white-space: nowrap;
+		pointer-events: none;
+	}
+	&.pre-tick pre::before,
+	&.pre-tick pre::after {
+		content: var(--rmd-pre-ticks)/"";
+		position: relative;
+		top: 0.25em;
+	}
+	&.pre-tilde pre::before,
+	&.pre-tilde pre::after {
+		content: var(--rmd-pre-tilde)/"";
+	}
+	&.pre-tilde-full pre::before,
+	&.pre-tilde-full pre::after {
+		content: var(--rmd-pre-tilde-line) var(--rmd-pre-tilde-line) var(--rmd-pre-tilde-line)
+			var(--rmd-pre-tilde-line)/"";
+	}
+	blockquote {
+		margin-block: 1lh;
+		margin-inline: 0;
+		padding-inline: 2ch;
+	}
+	blockquote {
+		position: relative;
+	}
+	blockquote:dir(rtl) {
+		--rmd-quote-mark: var(--rmd-quote-rtl);
+	}
+	blockquote::before {
+		content: var(--rmd-quote-mark) var(--rmd-quote-mark) var(--rmd-quote-mark)
+			var(--rmd-quote-mark)/"";
+		position: absolute;
+		inset-block: 0;
+		inset-inline-start: 0ch;
+		width: 1ch;
+		overflow: hidden;
+		white-space: pre;
+		cursor: default;
 	}
 	a {
 		text-decoration-inset: 1ch;
@@ -266,69 +332,6 @@
 	pre code::before,
 	pre code::after {
 		content: none;
-	}
-	pre {
-		margin-block: 1lh;
-		white-space: pre-wrap;
-		tab-size: 4;
-	}
-	pre {
-		margin-inline: 4ch 0ch;
-	}
-	&.pre-tick pre,
-	&.pre-tilde pre,
-	&.pre-tilde-full pre {
-		margin-inline: 0;
-	}
-	&.pre-tick pre::before,
-	&.pre-tick pre::after,
-	&.pre-tilde pre::before,
-	&.pre-tilde pre::after,
-	&.pre-tilde-full pre::before,
-	&.pre-tilde-full pre::after {
-		content: none;
-		display: block;
-		width: 100%;
-		height: 1lh;
-		overflow: hidden;
-		word-break: break-all;
-		pointer-events: none;
-	}
-	&.pre-tick pre::before,
-	&.pre-tick pre::after {
-		content: var(--rmd-pre-ticks)/"";
-		position: relative;
-		top: 0.25em;
-	}
-	&.pre-tilde pre::before,
-	&.pre-tilde pre::after {
-		content: var(--rmd-pre-tilde)/"";
-	}
-	&.pre-tilde-full pre::before,
-	&.pre-tilde-full pre::after {
-		content: var(--rmd-pre-tilde-line)/"";
-	}
-	blockquote {
-		margin-block: 1lh;
-		margin-inline: 0;
-		padding-inline: 2ch;
-	}
-	blockquote {
-		position: relative;
-	}
-	blockquote:dir(rtl) {
-		--rmd-quote-mark: var(--rmd-quote-rtl);
-	}
-	blockquote::before {
-		content: var(--rmd-quote-mark) var(--rmd-quote-mark) var(--rmd-quote-mark)
-			var(--rmd-quote-mark)/"";
-		position: absolute;
-		inset-block: 0;
-		inset-inline-start: 0ch;
-		width: 1ch;
-		overflow: hidden;
-		white-space: pre;
-		cursor: default;
 	}
 	&.del-tilde del {
 		text-decoration-inset: 2.2ch;
@@ -395,7 +398,8 @@
 		max-width: 100%;
 		height: 1lh;
 		overflow: hidden;
-		word-break: break-all;
+		white-space: nowrap;
+		pointer-events: none;
 	}
 	@supports (width: round(down, 100%, 1ch)) {
 		&.table-border :is(thead th, thead td, th[scope="col"])::after,
@@ -417,7 +421,7 @@
 		--inset-start: 2ch;
 	}
 	&.table-border tr > :not(:first-child)::before {
-		content: var(--rmd-table-vline)/"";
+		content: var(--rmd-table-vline) var(--rmd-table-vline)/"";
 	}
 	&.table-border-full table {
 		--inset-start: 2ch;
@@ -426,7 +430,7 @@
 		position: relative;
 	}
 	&.table-border-full tr::after {
-		content: var(--rmd-table-vline)/"";
+		content: var(--rmd-table-vline) var(--rmd-table-vline)/"";
 		position: absolute;
 		inset-block: 0;
 		inset-inline-end: 0;
@@ -438,6 +442,6 @@
 		--inset-end: 2ch;
 	}
 	&.table-border-full tr > *::before {
-		content: var(--rmd-table-vline)/"";
+		content: var(--rmd-table-vline) var(--rmd-table-vline)/"";
 	}
 }

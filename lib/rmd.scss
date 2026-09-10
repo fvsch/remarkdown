@@ -30,17 +30,18 @@ $url: "https://fvsch.github.io/remarkdown/";
 
 @mixin styles {
 	@include styles.base;
-	@include styles.hn;
-	@include styles.para;
+	@include styles.heading;
+	@include styles.p;
+	@include styles.figure;
 	@include styles.hr;
 	@include styles.ul;
 	@include styles.ol;
+	@include styles.pre;
+	@include styles.quote;
 	@include styles.link;
 	@include styles.em;
 	@include styles.strong;
 	@include styles.code;
-	@include styles.pre;
-	@include styles.quote;
 	@include styles.del;
 	@include styles.table;
 }
