@@ -60,7 +60,7 @@
 			padding-bottom: row();
 
 			&::after {
-				@include content(rmd-var(table-hline), $repeat: 2);
+				@include -table-hline;
 				position: absolute;
 				bottom: 0;
 				inset-inline-start: var(--inset-start);
@@ -68,7 +68,8 @@
 				max-width: 100%;
 				height: row();
 				overflow: hidden;
-				word-break: break-all;
+				white-space: nowrap;
+				pointer-events: none;
 
 				@supports (width: round(down, 100%, 1ch)) {
 					width: round(down, 100% - var(--inset-total), 1ch);
@@ -93,7 +94,7 @@
 			--inset-start: #{col(2)};
 		}
 		tr > :not(:first-child)::before {
-			@include content(rmd-var(table-vline));
+			@include -table-vline;
 		}
 	}
 
@@ -105,7 +106,7 @@
 			position: relative;
 		}
 		tr::after {
-			@include content(rmd-var(table-vline));
+			@include -table-vline;
 			position: absolute;
 			inset-block: 0;
 			inset-inline-end: 0;
@@ -117,7 +118,15 @@
 			--inset-end: #{col(2)};
 		}
 		tr > *::before {
-			@include content(rmd-var(table-vline));
+			@include -table-vline;
 		}
 	}
+}
+
+@mixin -table-hline {
+	@include content(rmd-var(table-hline), $repeat: 2);
+}
+
+@mixin -table-vline {
+	@include content(rmd-var(table-vline), $repeat: 2);
 }

@@ -12,7 +12,7 @@
 			padding-inline: indents(ol);
 			counter-reset: rmd-ol;
 		}
-		:where(ol, ul) ol {
+		li ol {
 			margin-block: 0;
 		}
 		ol > li {

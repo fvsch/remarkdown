@@ -16,7 +16,7 @@
 			margin-inline: 0;
 			padding-inline: indents(ul);
 		}
-		:where(ol, ul) ul {
+		li ul {
 			margin-block: 1ch * 0;
 		}
 	}

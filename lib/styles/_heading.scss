@@ -6,7 +6,7 @@
 @use "../config";
 @use "../toolkit" as *;
 
-@mixin hn {
+@mixin heading {
 	@include option(hn-reset) {
 		h1 {
 			font-size: inherit;
@@ -35,21 +35,19 @@
 	}
 
 	@include option(h1-line) {
-		$line: rmd-var(h1-line);
 		h1 {
-			@include -hn-line($line);
+			@include -heading-line(rmd-var(h1-line));
 		}
 	}
 
 	@include option(h2-line) {
-		$line: rmd-var(h2-line);
 		h2 {
-			@include -hn-line($line);
+			@include -heading-line(rmd-var(h2-line));
 		}
 	}
 }
 
-@mixin -hn-line($line) {
+@mixin -heading-line($line) {
 	& {
 		position: relative;
 		width: fit-content;
@@ -59,15 +57,15 @@
 		content: none;
 	}
 	&::after {
-		@include content($line, $repeat: 3);
+		@include content($line, $repeat: 4);
 		position: absolute;
 		bottom: 0;
 		inset-inline: 0;
 		height: row();
 		width: 100%;
 		overflow: hidden;
-		word-break: break-all;
-		cursor: default;
+		white-space: nowrap;
+		pointer-events: none;
 	}
 	// When text wraps, the underline will take up the full width of the
 	// container, and may display characters that get cut off. We can cut
