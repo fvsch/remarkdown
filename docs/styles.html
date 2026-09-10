@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Remarkdown — Available styles</title>
+	<title>Remarkdown styles</title>
 	<meta name="viewport" content="width=device-width">
+	<link rel="canonical" href="https://fvsch.github.io/remarkdown/styles">
 	<link rel="stylesheet" href="./docs.css">
 </head>
 <body class="remarkdown h1-line h2-line em-underscore table-border">
@@ -13,21 +14,25 @@
 	<br>
 	<a href="./">about</a>
 	<em>styles</em>
-	<a href="./customize.html">customize</a>
+	<a href="./config">config</a>
 </nav>
 
 <main id="styles">
 
-<h1>Demo of available styles</h1>
+<h1>
+	Remarkdown styles
+</h1>
+
 <p>
-	All styles that are listed as “Default” here will be active when using the default <a href="https://cdn.jsdelivr.net/npm/remarkdown.css/dist/remarkdown.css">remarkdown.css</a> build.
-	No need to specify <code>class="remarkdown style-name"</code> for those.
-	On the other hand, if you want to either disable them or include them in a <a href="./customize.html">custom build</a>, it’s helpful to know the style’s name and what it does.
+	Here are all the styles provided by Remarkdown. The “default” ones are enabled in the <a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css">remarkdown.css</a> stylesheet. </p>
+
+<p>
+	You can also use <a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.css">remarkdown-zero.css</a> which has no default styles, and enable styles with HTML classes. And for more control, you can use Sass to make a <a href="./config#sass">custom build</a> with your prefered default styles.
 </p>
 
 <table id="styles-list">
 	<tr>
-		<th scope="col">Option name</th>
+		<th scope="col">Style name</th>
 		<th scope="col">Default</th>
 		<th scope="col">Description</th>
 	</tr>

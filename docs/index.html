@@ -4,16 +4,17 @@
 	<meta charset="utf-8">
 	<title>Remarkdown makes HTML look like plain Markdown text</title>
 	<meta name="viewport" content="width=device-width">
+	<link rel="canonical" href="https://fvsch.github.io/remarkdown/">
 	<link rel="stylesheet" href="./docs.css">
 </head>
-<body class="remarkdown h1-line h2-line em-underscore">
+<body class="remarkdown h1-line h2-line em-underscore table-reset table-border">
 
 <nav>
 	<span>Remarkdown</span>
 	<br>
 	<em>about</em>
-	<a href="./styles.html">styles</a>
-	<a href="./customize.html">customize</a>
+	<a href="./styles">styles</a>
+	<a href="./config">config</a>
 </nav>
 
 <main>
@@ -23,35 +24,125 @@
 </h1>
 
 <p>
-	The text you’re reading right now is not plain text, but semantic HTML <em>styled</em> like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> text. Right-click and inspect this page to get a feel for how it works.
+	This is a <code>&lt;p&gt;</code> element. That heading above is a real <code>&lt;h1&gt;</code>. Normal semantic HTML, <em>styled</em> to look like plain text.
+</p>
+
+<p>
+	That’s Remarkdown in a nutshell: a stylesheet that styles HTML to look like <a href="https://daringfireball.net/projects/markdown/">Markdown</a> text. I’m not sure it’s useful, I’ve rarely used it myself; I just made it because I could.
 </p>
 
 <h2>
-	Using Remarkdown
+	Usage with a CDN
 </h2>
 
 <p>
-	It’s as simple as downloading <a href="https://cdn.jsdelivr.net/npm/remarkdown.css/dist/remarkdown.css">remarkdown.css</a>, and adding the <code>remarkdown</code> class to a container:
+	You can use Remarkdown with a <abbr title="Content Delivery Network">CDN</abbr> like <a href="https://www.jsdelivr.com/">jsDelivr</a> (recommended) or <a href="https://unpkg.com/">unpkg</a>. When using the main <a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css">remarkdown.css</a> stylesheet, you will need to add <code>class="remarkdown"</code> on a container wrapping all the text you want to style, like this:
 </p>
 
 <pre><code>&lt;!doctype html>
 &lt;html lang="en">
 &lt;head>
 	&lt;title>Using Remarkdown&lt;/title>
-	<b>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remarkdown.css/dist/remarkdown.css"></b>
+	&lt;link rel="stylesheet" <mark>href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css"</mark>>
 &lt;/head>
-&lt;body <b>class="remarkdown"</b>>
+&lt;body <mark>class="remarkdown"</mark>>
 	&lt;h1>Hello World&lt;/h1>
 	&lt;p>A paragraph.&lt;/p>
 &lt;/body>
 &lt;/html></code></pre>
 
+<p>
+	There are a few <a href="./styles">alternate styles</a> you can pick from. For example, <code>class="remarkdown h1-line ul-star"</code> enables underlined <code>&lt;h1></code>s and asterisks for bullets.
+</p>
+
 <h2>
-	Make it your own
+	Usage with npm
 </h2>
 
 <p>
-	Remarkdown is broken down into <a href="./styles.html">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
+	Remarkdown is published as a npm package named <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>. If you’re working in a project using <code>npm</code> (or <code>pnpm</code> or <code>yarn</code>, etc.) and maybe a code bundler like <a href="https://vite.dev/">Vite</a>, you should be able to install Remarkdown like so:
+</p>
+
+<pre><code>npm install remarkdown.css</code></pre>
+
+<p>
+	Then in your JavaScript modules or CSS files, import one of the compiled stylesheets in the package’s <code>dist</code> folder:
+</p>
+
+<pre><code>// In a JS module processed by a bundler
+import "remarkdown.css/dist/remarkdown.css";</code></pre>
+
+<pre><code>/* Or in a CSS file processed by a bundler */
+@import "remarkdown.css/dist/remarkdown.css";
+</code></pre>
+
+<p>
+	The <code>remarkdown.css</code> package is also a Sass library, which can be used in Sass modules (<code>.scss</code> files):
+</p>
+
+<pre><code>@use "pkg:remarkdown.css" as rmd;
+@include rmd.config();
+@include rmd.header();
+@include rmd.styles();
+</code></pre>
+
+<p>
+	Using it with Sass lets you customize the output further, especially when using the `config()` mixin. See <a href="./config#sass">“Build a custom stylesheet with Sass”</a> for details.
+</p>
+
+<h2>
+	Remarkdown variants
+</h2>
+
+<p>
+	The pre-built Remarkdown stylesheet comes in a few variants, which change:
+	what default styles are enabled; how optional styles are declared in HTML.
+</p>
+
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Stylesheet</th>
+			<th scope="col">Defaults</th>
+			<th scope="col">Selectors</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css">remarkdown.css</a></td>
+			<td>Normal</td>
+			<td>Classes</td>
+		</tr>
+		<tr>
+			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.attr.css">remarkdown.attr.css</a></td>
+			<td>Normal</td>
+			<td><code>data-remarkdown</code> attribute</td>
+		</tr>
+		<tr>
+			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.scope.css">remarkdown.scope.css</a></td>
+			<td>Normal</td>
+			<td>Classes with CSS <code>@scope</code></td>
+		</tr>
+		<tr>
+			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.css">remarkdown-zero.css</a></td>
+			<td>Resets only</td>
+			<td>Classes</td>
+		</tr>
+		<tr>
+			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.attr.css">remarkdown.attr.css</a></td>
+			<td>Normal</td>
+			<td><code>data-remarkdown</code> attribute</td>
+		</tr>
+		<tr>
+			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.scope.css">remarkdown.scope.css</a></td>
+			<td>Normal</td>
+			<td>Classes with CSS <code>@scope</code></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>
+	Remarkdown is broken down into <a href="./styles">a list of styles</a>, and the default <code>remarkdown.css</code> uses a dozen of them by default.
 </p>
 
 <p>
@@ -63,7 +154,7 @@
 &lt;/body></code></pre>
 
 <p>
-	Take a look at the <a href="./customize.html">customize</a> page for different ways to disable, enable or override styles, change the defaults, change how selectors look, etc.
+	Take a look at the <a href="./config">config</a> page for different ways to disable, enable or override styles, change the defaults, change how selectors look, etc.
 </p>
 
 <h2>
@@ -72,16 +163,16 @@
 
 <ul>
 	<li>
-		GitHub: <a href="https://github.com/fvsch/remarkdown">fvsch/remarkdown</a>
+		Package: <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>
 	</li>
 	<li>
-		npm: <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>
+		Repository: <a href="https://github.com/fvsch/remarkdown">fvsch/remarkdown</a>
 	</li>
 	<li>
-		Copyright: <a href="https://github.com/fvsch/remarkdown/blob/main/LICENSE">MIT License</a>
+		License: <a href="https://github.com/fvsch/remarkdown/blob/main/LICENSE">MIT License</a>
 	</li>
 	<li>
-		Browser support: recent browsers, targetting <a href="https://web-platform-dx.github.io/baseline/">Baseline Widely Available</a>
+		Browser support: targetting <a href="https://web-platform-dx.github.io/baseline/">Baseline Widely Available</a>
 	</li>
 	<li>
 		Similar projects: <a href="https://mrcoles.com/demo/markdown-css/">Peter Coles’ Markdown.css</a>
