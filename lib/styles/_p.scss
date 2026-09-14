@@ -3,7 +3,7 @@
 @use "../toolkit" as *;
 
 @mixin p {
-	@include root() {
+	@include default() {
 		p {
 			margin-block: margins(p);
 		}

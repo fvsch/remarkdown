@@ -5,7 +5,7 @@
 @use "../toolkit" as *;
 
 @mixin pre {
-	@include root() {
+	@include default() {
 		pre {
 			margin-block: margins(pre);
 			// Maybe a bit opinionated, but for the common use case of showing code

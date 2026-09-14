@@ -21,9 +21,9 @@
 	}
 }
 
-/// CSS custom property name using the pattern in the $variable-name option
+/// CSS custom property name using the pattern in the $variables option
 @function var-name($name) {
-	$base: config.get(variable-name) or "--%s";
+	$base: config.get(variables) or "--%s";
 	$prop: str-replace($base, "%s", $name);
 	@return string.unquote($prop);
 }

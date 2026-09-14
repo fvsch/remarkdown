@@ -5,7 +5,7 @@
 @use "../toolkit" as *;
 
 @mixin ol {
-	@include root() {
+	@include default() {
 		ol {
 			margin-block: margins(ol);
 			margin-inline: 0;
