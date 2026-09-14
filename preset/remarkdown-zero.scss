@@ -1,13 +1,19 @@
-// Class-based build of Remarkdown with no default styles
+// Build of Remarkdown using minimal default styles
+// and `.remarkdown` class selectors with @scope.
 
 @use "../lib/rmd";
 
 @include rmd.config(
 	$preset: zero,
-	$root-selector: ".remarkdown",
-	$option-selector: ".remarkdown.%s"
+	$selectors: (
+		default: "",
+		option: ":scope.%s",
+		root: ":scope",
+	)
 );
 
 @include rmd.header("Remarkdown-zero %v (MIT) %u");
 
-@include rmd.styles();
+@scope (.remarkdown) to (.no-remarkdown) {
+	@include rmd.styles();
+}

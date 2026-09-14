@@ -10,7 +10,7 @@
 		ul-star: "*",
 	);
 
-	@include root() {
+	@include default() {
 		ul {
 			margin-block: margins(ul);
 			margin-inline: 0;

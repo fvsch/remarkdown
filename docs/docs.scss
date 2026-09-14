@@ -19,8 +19,11 @@ $breakpoint-medium: 56em;
 	/// Class-based build of Remarkdown using default styles
 	@include rmd.config(
 		$preset: default,
-		$root-selector: null,
-		$option-selector: "&.%s",
+		$selectors: (
+			default: "",
+			option: ":scope.%s",
+			root: ":scope",
+		),
 		$font: (
 			Menlo,
 			Consolas,
@@ -37,8 +40,11 @@ $breakpoint-medium: 56em;
 	/// Attribute-based build of Remarkdown with no default styles
 	@include rmd.config(
 		$preset: zero,
-		$root-selector: "[data-remarkdown]",
-		$option-selector: "[data-remarkdown~=%s]"
+		$selectors: (
+			default: "[data-remarkdown]",
+			option: "[data-remarkdown~='%s']",
+			root: "[data-remarkdown]",
+		)
 	);
 	@include rmd.header("Remarkdown-zero %v [attr] (MIT) %u");
 	@include rmd.styles();

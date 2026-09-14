@@ -137,20 +137,43 @@ $-config: base(default);
 
 	@if $name == preset {
 		@include -require-enum($name, $value, null default zero);
+	} @else if $name == selectors {
+		@include -check-selectors($name, $value);
+	} @else if $name == variables {
+		@include -require-type($name, $value, string);
+		@include -require-substring($name, $value, "--");
+		@include -require-substring($name, $value, "%s");
 	} @else if $name == defaults or $name == options {
 		@include -require-type($name, $value, list);
 		@include -check-options($name, $value);
-	} @else if $name == root-selector {
-		@include -require-type($name, $value, "null" string);
-	} @else if $name == option-selector or $name == variable-name {
-		@include -require-type($name, $value, string);
-		@include -require-substring($name, $value, "%s");
 	} @else if $name == font or $name == code-font {
 		@include -require-type($name, $value, "null" string list);
 	} @else {
 		// fall back to checking that the type matches the default value's type
 		$default: map.get($-DEFAULTS, $name);
 		@include -require-type($name, $value, type-of($default));
+	}
+}
+
+@mixin -check-selectors($name, $map) {
+	@if type-of($map) != map {
+		@error "$#{$name} must be a map, got: #{inspect($map)}";
+	}
+	@each $key in (default, option) {
+		@if not map.has-key($map, $key) {
+			@error "$#{$name} must have a '#{$key}' key, got: #{inspect($map)}";
+		}
+	}
+	@each $key, $value in $map {
+		@if type-of($value) != string {
+			@error "$#{$name}.#{$key} must be a string, got: #{inspect($value)}";
+		}
+		@if $value == "" and $key != default {
+			@error "$#{$name}.#{$key} cannot be an empty string";
+		}
+		@if $key == option {
+			@include -require-substring("#{$name}.#{$key}", $value, "%s");
+		}
 	}
 }
 

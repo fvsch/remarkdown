@@ -1,0 +1,30 @@
+// CSS variables
+
+@use "../config";
+@use "../toolkit" as *;
+
+@mixin vars {
+	$vars: (
+		font,
+		code-font,
+		line-height,
+		hn-prefix,
+		h1-line,
+		h2-line,
+		hr-stars,
+		hr-dashes,
+		pre-ticks,
+		pre-tilde,
+		pre-tilde-line,
+		quote-mark,
+		quote-rtl,
+		table-vline,
+		table-hline
+	);
+
+	@include default($scope: root) {
+		@each $var in $vars {
+			@include define-var($var, config.get($var));
+		}
+	}
+}

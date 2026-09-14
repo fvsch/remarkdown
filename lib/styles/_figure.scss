@@ -3,7 +3,7 @@
 @use "../toolkit" as *;
 
 @mixin figure {
-	@include root() {
+	@include default() {
 		figure {
 			margin-block: margins(figure);
 			margin-inline: indents(figure);
