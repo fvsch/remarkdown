@@ -13,7 +13,7 @@
 
 @forward "./styles" as styles-*;
 
-$version: "4.0.0-alpha.1";
+$version: "4.0.0-beta.1";
 $url: "https://fvsch.github.io/remarkdown/";
 
 @mixin config($args...) {
@@ -29,6 +29,7 @@ $url: "https://fvsch.github.io/remarkdown/";
 }
 
 @mixin styles {
+	@include styles.vars;
 	@include styles.base;
 	@include styles.heading;
 	@include styles.p;

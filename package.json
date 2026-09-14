@@ -1,6 +1,6 @@
 {
 	"name": "remarkdown.css",
-	"version": "4.0.0-alpha.1",
+	"version": "4.0.0-beta.1",
 	"license": "MIT",
 	"description": "Remarkdown makes HTML look like plain Markdown text",
 	"homepage": "https://fvsch.github.io/remarkdown/",
@@ -16,7 +16,8 @@
 	"files": [
 		"README.md",
 		"dist",
-		"lib"
+		"lib",
+		"preset"
 	],
 	"type": "module",
 	"exports": {

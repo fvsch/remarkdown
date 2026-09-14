@@ -4,9 +4,10 @@
 @use "../config";
 @use "./utils";
 
-/// Wrap content in the base selector
-@mixin root() {
-	$selector: root-selector();
+/// Wrap content in the default selector
+/// (Or optionally the root selector)
+@mixin default($scope: default) {
+	$selector: default-selector($scope);
 	@if $selector {
 		#{$selector} {
 			@content;
@@ -17,14 +18,14 @@
 }
 
 /// Wrap content in a selector including the option name(s).
-/// - Uses the root selector if at least one option name is in `$defaults`.
+/// - Uses the default selector if at least one option name is in `$defaults`.
 /// - Otherwise, uses an option selector (or a list of option selectors)
 ///   for names present in `$options`.
 /// - Outputs nothing if none of the provided names are present in
 ///   `$defaults` or `$options`.
-@mixin option($names) {
+@mixin option($names, $default-scope: default) {
 	@if config.has-default($names) {
-		@include root() {
+		@include default($default-scope) {
 			@content;
 		}
 	} @else if config.has-option($names) {
@@ -35,8 +36,8 @@
 	}
 }
 
-@function root-selector() {
-	$value: config.get(root-selector);
+@function default-selector($scope: default) {
+	$value: config.get(selectors $scope);
 	@if $value == null or $value == "" {
 		@return null;
 	}
@@ -44,7 +45,7 @@
 }
 
 @function option-selector($names) {
-	$pattern: config.get(option-selector);
+	$pattern: config.get(selectors option);
 	$selectors: ();
 	@each $name in $names {
 		$selector: utils.str-replace($pattern, "%s", $name);

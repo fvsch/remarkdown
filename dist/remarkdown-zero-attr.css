@@ -1,5 +1,5 @@
-/*! Remarkdown 4.0.0-alpha.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
-/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
+/*! Remarkdown-zero 4.0.0-beta.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
+/* defaults: base-text, hn-reset, em-reset, strong-reset */
 [data-remarkdown] {
 	--rmd-font: ui-monospace, monospace;
 	--rmd-code-font: inherit;
@@ -22,6 +22,7 @@
 	font-family: var(--rmd-font);
 	line-height: var(--rmd-line-height);
 }
+
 [data-remarkdown] :is(pre, code, kbd, samp) {
 	font-family: var(--rmd-code-font);
 }
@@ -29,12 +30,12 @@
 [data-remarkdown] h1 {
 	font-size: inherit;
 	font-weight: inherit;
-	margin-block: 1.5lh 1lh;
+	margin-block: 1lh;
 }
 [data-remarkdown] h2 {
 	font-size: inherit;
 	font-weight: inherit;
-	margin-block: 1.5lh 1lh;
+	margin-block: 1lh;
 }
 [data-remarkdown] :is(h3, h4, h5, h6) {
 	font-size: inherit;
@@ -42,24 +43,24 @@
 	margin-block: 1lh;
 }
 
-[data-remarkdown] h1::before {
+[data-remarkdown~="hn-prefix"] h1::before {
 	content: var(--rmd-hn-prefix) " "/"";
 }
-[data-remarkdown] h2::before {
+[data-remarkdown~="hn-prefix"] h2::before {
 	content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 }
-[data-remarkdown] h3::before {
+[data-remarkdown~="hn-prefix"] h3::before {
 	content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 }
-[data-remarkdown] h4::before {
+[data-remarkdown~="hn-prefix"] h4::before {
 	content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
 		" "/"";
 }
-[data-remarkdown] h5::before {
+[data-remarkdown~="hn-prefix"] h5::before {
 	content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
 		var(--rmd-hn-prefix) " "/"";
 }
-[data-remarkdown] h6::before {
+[data-remarkdown~="hn-prefix"] h6::before {
 	content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
 		var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 }
@@ -131,7 +132,8 @@
 	text-align: start;
 }
 
-[data-remarkdown] hr {
+[data-remarkdown~="hr-star"] hr,
+[data-remarkdown~="hr-dash"] hr {
 	border: none;
 	color: inherit;
 }
@@ -140,7 +142,7 @@
 	text-align: center;
 }
 
-[data-remarkdown] hr::before {
+[data-remarkdown~="hr-star"] hr::before {
 	content: var(--rmd-hr-stars)/"";
 	display: block;
 }
@@ -153,20 +155,20 @@
 [data-remarkdown] ul {
 	margin-block: 1lh;
 	margin-inline: 0;
-	padding-inline: 4ch 0ch;
+	padding-inline: 3ch 0ch;
 }
 [data-remarkdown] li ul {
 	margin-block: 0ch;
 }
 
-[data-remarkdown] ul {
+[data-remarkdown~="ul-dash"] ul {
 	list-style-type: none;
 }
-[data-remarkdown] ul > li::before {
+[data-remarkdown~="ul-dash"] ul > li::before {
 	content: "-"/"";
 	float: inline-start;
 	width: 1ch;
-	margin-inline-start: -4ch;
+	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
 }
 
@@ -177,7 +179,7 @@
 	content: "+"/"";
 	float: inline-start;
 	width: 1ch;
-	margin-inline-start: -4ch;
+	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
 }
 
@@ -188,14 +190,14 @@
 	content: "*"/"";
 	float: inline-start;
 	width: 1ch;
-	margin-inline-start: -4ch;
+	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
 }
 
 [data-remarkdown] ol {
 	margin-block: 1lh;
 	margin-inline: 0;
-	padding-inline: 4ch 0ch;
+	padding-inline: 3ch 0ch;
 	counter-reset: rmd-ol;
 }
 [data-remarkdown] li ol {
@@ -205,14 +207,14 @@
 	counter-increment: rmd-ol;
 }
 
-[data-remarkdown] ol {
+[data-remarkdown~="ol-decimal"] ol {
 	list-style: none;
 }
-[data-remarkdown] ol > li::before {
+[data-remarkdown~="ol-decimal"] ol > li::before {
 	content: counter(rmd-ol) "."/"";
 	float: inline-start;
 	min-width: 2ch;
-	margin-inline-start: -4ch;
+	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
 }
 
@@ -223,7 +225,7 @@
 	content: "0" "."/"";
 	float: inline-start;
 	min-width: 2ch;
-	margin-inline-start: -4ch;
+	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
 }
 
@@ -234,7 +236,7 @@
 	content: counter(rmd-ol, lower-alpha) "."/"";
 	float: inline-start;
 	min-width: 2ch;
-	margin-inline-start: -4ch;
+	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
 }
 
@@ -244,7 +246,7 @@
 	tab-size: 4;
 }
 
-[data-remarkdown] pre {
+[data-remarkdown~="pre-indent"] pre {
 	margin-inline: 4ch 0ch;
 }
 
@@ -289,16 +291,16 @@
 [data-remarkdown] blockquote {
 	margin-block: 1lh;
 	margin-inline: 0;
-	padding-inline: 2ch;
+	padding-inline: 2ch 0ch;
 }
 
-[data-remarkdown] blockquote {
+[data-remarkdown~="quote-mark"] blockquote {
 	position: relative;
 }
-[data-remarkdown] blockquote:dir(rtl) {
+[data-remarkdown~="quote-mark"] blockquote:dir(rtl) {
 	--rmd-quote-mark: var(--rmd-quote-rtl);
 }
-[data-remarkdown] blockquote::before {
+[data-remarkdown~="quote-mark"] blockquote::before {
 	content: var(--rmd-quote-mark) var(--rmd-quote-mark) var(--rmd-quote-mark)
 		var(--rmd-quote-mark)/"";
 	position: absolute;
@@ -310,13 +312,13 @@
 	cursor: default;
 }
 
-[data-remarkdown] a {
+[data-remarkdown~="a-bracket"] a {
 	text-decoration-inset: 1ch;
 }
-[data-remarkdown] a::before {
+[data-remarkdown~="a-bracket"] a::before {
 	content: "["/"";
 }
-[data-remarkdown] a::after {
+[data-remarkdown~="a-bracket"] a::after {
 	content: "]"/"";
 }
 
@@ -336,8 +338,8 @@
 	font-weight: normal;
 }
 
-[data-remarkdown] em::before,
-[data-remarkdown] em::after {
+[data-remarkdown~="em-star"] em::before,
+[data-remarkdown~="em-star"] em::after {
 	content: "*"/"";
 }
 
@@ -351,8 +353,8 @@
 	font-weight: normal;
 }
 
-[data-remarkdown] strong::before,
-[data-remarkdown] strong::after {
+[data-remarkdown~="strong-star"] strong::before,
+[data-remarkdown~="strong-star"] strong::after {
 	content: "**"/"";
 }
 
@@ -361,12 +363,12 @@
 	content: "__"/"";
 }
 
-[data-remarkdown] code::before,
-[data-remarkdown] code::after {
+[data-remarkdown~="code-tick"] code::before,
+[data-remarkdown~="code-tick"] code::after {
 	content: "`"/"";
 }
-[data-remarkdown] pre code::before,
-[data-remarkdown] pre code::after {
+[data-remarkdown~="code-tick"] pre code::before,
+[data-remarkdown~="code-tick"] pre code::after {
 	content: none;
 }
 

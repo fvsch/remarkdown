@@ -1,0 +1,17 @@
+// Build of Remarkdown using default styles
+// and `data-remarkdown` attribute selectors.
+
+@use "../lib/rmd";
+
+@include rmd.config(
+	$preset: default,
+	$selectors: (
+		default: "[data-remarkdown]",
+		option: "[data-remarkdown~='%s']",
+		root: "[data-remarkdown]",
+	)
+);
+
+@include rmd.header("Remarkdown %v [attr] (MIT) %u");
+
+@include rmd.styles();

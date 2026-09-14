@@ -6,7 +6,7 @@
 @use "../toolkit" as *;
 
 @mixin quote {
-	@include root() {
+	@include default() {
 		blockquote {
 			margin-block: margins(blockquote);
 			margin-inline: 0;

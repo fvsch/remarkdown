@@ -1,34 +1,47 @@
 /// Default options for Remarkdown
 /// To change those options, use the `config` mixin:
 ///
-/// 	@use "pkg:remarkdown.css" as rmd;
-/// 	@include rmd.config(
-/// 		$root-selector: ".rmd",
-/// 		$option-selector: ".rmd--%s"
-/// 	);
-/// 	@include rmd.header();
-/// 	@include rmd.styles();
+///	@use "pkg:remarkdown.css" as rmd;
+///	@include rmd.config(
+///		$selectors: (default: ".rmd", option: ".rmd--%s", root: ".rmd"),
+///		$variables: "--rmd-%s",
+///	);
+///	@include rmd.header();
+///	@include rmd.styles();
 
-// Selector for the Remarkdown root container.
-// Use `null` to use CSS nesting or CSS @scope:
-//
-// 	@include rmd.config(
-// 		$root-selector: null,
-// 		$option-selector: "&.%s",
-// 	);
-// 	@scope (.remarkdown) to (.no-remarkdown) {
-// 		@include rmd.styles();
-// 	}
-$root-selector: ".remarkdown";
-
-// Selector for optional styles.
-// "%s" will be replaced with the style's name.
-$option-selector: ".remarkdown.%s";
+/// Selector patterns
+/// Some advanced configurations may require using `&` or an empty string
+/// for some selectors, for example with CSS `@scope`:
+///
+///	@use "pkg:remarkdown.css" as rmd;
+///	@include rmd.config(
+///		$selectors: (
+///			default: "",
+///			option: "&.%s",
+///			root: "&",
+///		),
+///	);
+///	@scope (.remarkdown) to (.no-remarkdown) {
+///		@include rmd.styles();
+///	}
+$selectors: (
+	// Selector used for scoping default styles.
+	// Can be an empty string for no scoping (styles apply to whole page),
+	// or if scoping is already handled by CSS `@scope`.
+	default: ".remarkdown",
+	// Selector pattern for optional styles.
+	// "%s" will be replaced with the style's name.
+	option: ".remarkdown.%s",
+	// Selector for the Remarkdown root container,
+	// used to declare CSS variables and `base-text` styles.
+	// Typically identical to `$selectors.default`.
+	root: ".remarkdown",
+);
 
 // Some config options will be exposed and used as CSS variables.
 // This option controls what the variables look like; "%s" will be replaced
 // with the Sass option's name (without the `$` sign).
-$variable-name: "--rmd-%s";
+$variables: "--rmd-%s";
 
 // Default styles.
 // These will be defined using the `$root-selector`, which means
