@@ -43,6 +43,7 @@
 	"scripts": {
 		"build": "node build.js",
 		"format": "oxfmt --write '**/*.scss' '**/*.js'",
+		"prepack": "pnpm run build",
 		"start": "servitsy docs"
 	},
 	"devDependencies": {
