@@ -17,8 +17,6 @@
 		--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 		--rmd-table-hline: "----------------------------------------";
-	}
-	:scope {
 		font-family: var(--rmd-font);
 		line-height: var(--rmd-line-height);
 	}
@@ -122,8 +120,6 @@
 		margin-inline: 0;
 		line-height: inherit;
 		text-align: start;
-	}
-	hr {
 		border: none;
 		color: inherit;
 	}
@@ -142,45 +138,30 @@
 		margin-block: 1lh;
 		margin-inline: 0;
 		padding-inline: 4ch 0ch;
+		list-style-type: none;
 	}
 	li ul {
 		margin-block: 0ch;
 	}
-	ul {
-		list-style-type: none;
-	}
 	ul > li::before {
-		content: "-"/"";
 		float: inline-start;
 		width: 1ch;
 		margin-inline-start: -4ch;
 		margin-inline-end: 1ch;
-	}
-	:scope.ul-plus ul {
-		list-style-type: none;
+		content: "-"/"";
 	}
 	:scope.ul-plus ul > li::before {
 		content: "+"/"";
-		float: inline-start;
-		width: 1ch;
-		margin-inline-start: -4ch;
-		margin-inline-end: 1ch;
-	}
-	:scope.ul-star ul {
-		list-style-type: none;
 	}
 	:scope.ul-star ul > li::before {
 		content: "*"/"";
-		float: inline-start;
-		width: 1ch;
-		margin-inline-start: -4ch;
-		margin-inline-end: 1ch;
 	}
 	ol {
 		margin-block: 1lh;
 		margin-inline: 0;
 		padding-inline: 4ch 0ch;
 		counter-reset: rmd-ol;
+		list-style-type: none;
 	}
 	li ol {
 		margin-block: 0;
@@ -188,42 +169,23 @@
 	ol > li {
 		counter-increment: rmd-ol;
 	}
-	ol {
-		list-style: none;
-	}
 	ol > li::before {
+		float: inline-start;
+		min-width: 2ch;
+		margin-inline-start: -4ch;
+		margin-inline-end: 1ch;
 		content: counter(rmd-ol) "."/"";
-		float: inline-start;
-		min-width: 2ch;
-		margin-inline-start: -4ch;
-		margin-inline-end: 1ch;
-	}
-	:scope.ol-zero ol {
-		list-style: none;
-	}
-	:scope.ol-zero ol > li::before {
-		content: "0" "."/"";
-		float: inline-start;
-		min-width: 2ch;
-		margin-inline-start: -4ch;
-		margin-inline-end: 1ch;
-	}
-	:scope.ol-alpha ol {
-		list-style: none;
 	}
 	:scope.ol-alpha ol > li::before {
 		content: counter(rmd-ol, lower-alpha) "."/"";
-		float: inline-start;
-		min-width: 2ch;
-		margin-inline-start: -4ch;
-		margin-inline-end: 1ch;
+	}
+	:scope.ol-zero ol > li::before {
+		content: "0."/"";
 	}
 	pre {
 		margin-block: 1lh;
 		white-space: pre-wrap;
 		tab-size: 4;
-	}
-	pre {
 		margin-inline: 4ch 0ch;
 	}
 	:scope.pre-tick pre,
@@ -264,8 +226,6 @@
 		margin-block: 1lh;
 		margin-inline: 0;
 		padding-inline: 2ch;
-	}
-	blockquote {
 		position: relative;
 	}
 	blockquote:dir(rtl) {

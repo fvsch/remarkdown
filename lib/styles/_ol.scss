@@ -5,6 +5,8 @@
 @use "../toolkit" as *;
 
 @mixin ol {
+	$options: ol-decimal ol-zero ol-alpha;
+
 	@include default() {
 		ol {
 			margin-block: margins(ol);
@@ -20,29 +22,33 @@
 		}
 	}
 
-	@each $option in (ol-decimal ol-zero ol-alpha) {
-		@include -ol-option($option);
-	}
-}
-
-@mixin -ol-option($option) {
-	$content: counter(rmd-ol);
-	@if $option == ol-alpha {
-		$content: counter(rmd-ol, lower-alpha);
-	} @else if $option == ol-zero {
-		$content: "0";
-	}
-
-	@include option($option) {
+	@include option(ol-decimal ol-alpha ol-zero) {
 		ol {
-			list-style: none;
+			list-style-type: none;
 		}
 		ol > li::before {
-			@include content($content ".");
 			float: inline-start;
 			min-width: 2ch;
 			margin-inline-start: indent(ol, start) * -1;
 			margin-inline-end: 1ch;
+		}
+	}
+
+	@include option(ol-decimal) {
+		ol > li::before {
+			@include content(counter(rmd-ol) ".");
+		}
+	}
+
+	@include option(ol-alpha) {
+		ol > li::before {
+			@include content(counter(rmd-ol, lower-alpha) ".");
+		}
+	}
+
+	@include option(ol-zero) {
+		ol > li::before {
+			@include content("0.");
 		}
 	}
 }

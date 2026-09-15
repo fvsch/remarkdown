@@ -2,7 +2,17 @@ import { access, constants, writeFile } from 'node:fs/promises';
 import { basename, join } from 'node:path';
 import { compileAsync } from 'sass';
 import { format } from 'oxfmt';
+import postcss from 'postcss';
+import dupSelectors from 'postcss-combine-duplicated-selectors';
+
 import oxfmtConfig from './.oxfmtrc.json' with { type: 'json' };
+
+// postcss([require('postcss-combine-duplicated-selectors')])
+//     .process(css, {from: 'src/app.css', to: 'app.css'})
+//     .then((result) => {
+//       fs.writeFileSync('app.css', result.css);
+//       if (result.map) fs.writeFileSync('app.css.map', result.map);
+//     });
 
 buildAll([
 	['preset/remarkdown.scss', 'dist'],
@@ -33,13 +43,17 @@ async function buildStylesheet(inputFilename, outFilename) {
 		return { input: inputFilename, out: null, size: null };
 	}
 
-	const { css } = await compileAsync(inputFile);
-	const { code } = await format(basename(outFile), css, oxfmtConfig);
-	await writeFile(outFile, code);
+	const sassed = await compileAsync(inputFile);
+	const postcssed = await postcss([dupSelectors]).process(sassed.css, {
+		from: outFilename,
+		to: outFilename,
+	});
+	const formatted = await format(basename(outFile), postcssed.css, oxfmtConfig);
+	await writeFile(outFile, formatted.code);
 
 	return {
 		input: inputFilename,
 		out: outFilename,
-		size: code.length + ' B',
+		size: formatted.code.length + ' B',
 	};
 }
