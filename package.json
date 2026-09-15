@@ -1,6 +1,6 @@
 {
 	"name": "remarkdown.css",
-	"version": "4.0.0-beta.1",
+	"version": "4.0.0-beta.2",
 	"license": "MIT",
 	"description": "Remarkdown makes HTML look like plain Markdown text",
 	"homepage": "https://fvsch.github.io/remarkdown/",
@@ -11,6 +11,7 @@
 	"author": "Florens Verschelde",
 	"keywords": [
 		"css",
+		"sass",
 		"markdown"
 	],
 	"files": [
@@ -25,20 +26,9 @@
 			"sass": "./lib/rmd.scss",
 			"style": "./dist/remarkdown.css",
 			"browser": "./dist/remarkdown.css"
-		},
-		"./attr.css": {
-			"style": "./dist/remarkdown.attr.css",
-			"browser": "./dist/remarkdown.attr.css"
-		},
-		"./zero.css": {
-			"style": "./dist/remarkdown-zero.css",
-			"browser": "./dist/remarkdown-zero.css"
-		},
-		"./zero.attr.css": {
-			"style": "./dist/remarkdown-zero.attr.css",
-			"browser": "./dist/remarkdown-zero.attr.css"
 		}
 	},
+	"style": "./dist/remarkdown.css",
 	"browser": "./dist/remarkdown.css",
 	"scripts": {
 		"build": "node build.js",
