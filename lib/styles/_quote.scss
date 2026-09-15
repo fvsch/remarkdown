@@ -1,0 +1,43 @@
+// <blockquote>
+// Option: quote-mark
+
+@use "sass:math";
+
+@use "../toolkit" as *;
+
+@mixin quote {
+	@include default() {
+		blockquote {
+			margin-block: margins(blockquote);
+			margin-inline: 0;
+			padding-inline: indents(blockquote);
+		}
+	}
+
+	@include option(quote-mark) {
+		blockquote {
+			position: relative;
+		}
+		blockquote:dir(rtl) {
+			@include define-var(quote-mark, rmd-var(quote-rtl));
+		}
+		blockquote::before {
+			@include content(rmd-var(quote-mark), $repeat: 4);
+			position: absolute;
+			inset-block: 0;
+			inset-inline-start: -marker-inset();
+			width: 1ch;
+			overflow: hidden;
+			white-space: pre;
+			cursor: default;
+		}
+	}
+}
+
+@function -marker-inset() {
+	$indent: indent(blockquote, start);
+	@if math.unit($indent) == ch {
+		@return $indent - 2ch;
+	}
+	@return -2ch;
+}

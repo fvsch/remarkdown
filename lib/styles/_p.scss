@@ -1,0 +1,11 @@
+// <p>
+
+@use "../toolkit" as *;
+
+@mixin p {
+	@include default() {
+		p {
+			margin-block: margins(p);
+		}
+	}
+}

@@ -1,0 +1,27 @@
+// <strong>
+// Options: strong-reset, strong-star, strong-underscore
+
+@use "../toolkit" as *;
+
+@mixin strong {
+	@include option(strong-reset) {
+		strong {
+			font-style: normal;
+			font-weight: normal;
+		}
+	}
+
+	@include option(strong-star) {
+		strong::before,
+		strong::after {
+			@include content("**");
+		}
+	}
+
+	@include option(strong-underscore) {
+		strong::before,
+		strong::after {
+			@include content("__");
+		}
+	}
+}
