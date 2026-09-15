@@ -22,9 +22,21 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"browser": "./dist/remarkdown.css",
+			"sass": "./lib/rmd.scss",
 			"style": "./dist/remarkdown.css",
-			"sass": "./lib/rmd.scss"
+			"browser": "./dist/remarkdown.css"
+		},
+		"./attr.css": {
+			"style": "./dist/remarkdown.attr.css",
+			"browser": "./dist/remarkdown.attr.css"
+		},
+		"./zero.css": {
+			"style": "./dist/remarkdown-zero.css",
+			"browser": "./dist/remarkdown-zero.css"
+		},
+		"./zero.attr.css": {
+			"style": "./dist/remarkdown-zero.attr.css",
+			"browser": "./dist/remarkdown-zero.attr.css"
 		}
 	},
 	"browser": "./dist/remarkdown.css",
