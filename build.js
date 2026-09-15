@@ -1,24 +1,17 @@
 import { access, constants, writeFile } from 'node:fs/promises';
 import { basename, join } from 'node:path';
-import { compileAsync } from 'sass';
 import { format } from 'oxfmt';
 import postcss from 'postcss';
 import dupSelectors from 'postcss-combine-duplicated-selectors';
+import { compileAsync } from 'sass';
 
 import oxfmtConfig from './.oxfmtrc.json' with { type: 'json' };
 
-// postcss([require('postcss-combine-duplicated-selectors')])
-//     .process(css, {from: 'src/app.css', to: 'app.css'})
-//     .then((result) => {
-//       fs.writeFileSync('app.css', result.css);
-//       if (result.map) fs.writeFileSync('app.css.map', result.map);
-//     });
-
 buildAll([
 	['preset/remarkdown.scss', 'dist'],
-	['preset/remarkdown-attr.scss', 'dist'],
+	['preset/remarkdown.attr.scss', 'dist'],
 	['preset/remarkdown-zero.scss', 'dist'],
-	['preset/remarkdown-zero-attr.scss', 'dist'],
+	['preset/remarkdown-zero.attr.scss', 'dist'],
 	['docs/docs.scss', 'docs'],
 ]);
 
