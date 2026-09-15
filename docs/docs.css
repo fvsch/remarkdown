@@ -29,8 +29,6 @@
 			--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 			--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 			--rmd-table-hline: "----------------------------------------";
-		}
-		:scope {
 			font-family: var(--rmd-font);
 			line-height: var(--rmd-line-height);
 		}
@@ -134,8 +132,6 @@
 			margin-inline: 0;
 			line-height: inherit;
 			text-align: start;
-		}
-		hr {
 			border: none;
 			color: inherit;
 		}
@@ -154,45 +150,30 @@
 			margin-block: 1lh;
 			margin-inline: 0;
 			padding-inline: 4ch 0ch;
+			list-style-type: none;
 		}
 		li ul {
 			margin-block: 0ch;
 		}
-		ul {
-			list-style-type: none;
-		}
 		ul > li::before {
-			content: "-"/"";
 			float: inline-start;
 			width: 1ch;
 			margin-inline-start: -4ch;
 			margin-inline-end: 1ch;
-		}
-		:scope.ul-plus ul {
-			list-style-type: none;
+			content: "-"/"";
 		}
 		:scope.ul-plus ul > li::before {
 			content: "+"/"";
-			float: inline-start;
-			width: 1ch;
-			margin-inline-start: -4ch;
-			margin-inline-end: 1ch;
-		}
-		:scope.ul-star ul {
-			list-style-type: none;
 		}
 		:scope.ul-star ul > li::before {
 			content: "*"/"";
-			float: inline-start;
-			width: 1ch;
-			margin-inline-start: -4ch;
-			margin-inline-end: 1ch;
 		}
 		ol {
 			margin-block: 1lh;
 			margin-inline: 0;
 			padding-inline: 4ch 0ch;
 			counter-reset: rmd-ol;
+			list-style-type: none;
 		}
 		li ol {
 			margin-block: 0;
@@ -200,43 +181,27 @@
 		ol > li {
 			counter-increment: rmd-ol;
 		}
-		ol {
-			list-style: none;
-		}
 		ol > li::before {
+			float: inline-start;
+			min-width: 2ch;
+			margin-inline-start: -4ch;
+			margin-inline-end: 1ch;
 			content: counter(rmd-ol) "."/"";
-			float: inline-start;
-			min-width: 2ch;
-			margin-inline-start: -4ch;
-			margin-inline-end: 1ch;
-		}
-		:scope.ol-zero ol {
-			list-style: none;
-		}
-		:scope.ol-zero ol > li::before {
-			content: "0" "."/"";
-			float: inline-start;
-			min-width: 2ch;
-			margin-inline-start: -4ch;
-			margin-inline-end: 1ch;
-		}
-		:scope.ol-alpha ol {
-			list-style: none;
 		}
 		:scope.ol-alpha ol > li::before {
 			content: counter(rmd-ol, lower-alpha) "."/"";
-			float: inline-start;
-			min-width: 2ch;
-			margin-inline-start: -4ch;
-			margin-inline-end: 1ch;
+		}
+		:scope.ol-zero ol > li::before {
+			content: "0."/"";
 		}
 		pre {
 			margin-block: 1lh;
 			white-space: pre-wrap;
 			tab-size: 4;
-		}
-		pre {
 			margin-inline: 4ch 0ch;
+			tab-size: 2;
+			white-space: pre-wrap;
+			color: var(--code-color);
 		}
 		:scope.pre-tick pre,
 		:scope.pre-tilde pre,
@@ -276,8 +241,6 @@
 			margin-block: 1lh;
 			margin-inline: 0;
 			padding-inline: 2ch;
-		}
-		blockquote {
 			position: relative;
 		}
 		blockquote:dir(rtl) {
@@ -296,6 +259,10 @@
 		}
 		a {
 			text-decoration-inset: 1ch;
+			color: var(--link-color);
+			text-decoration-line: none;
+			text-decoration-thickness: 1.5px;
+			text-underline-offset: 0.25em;
 		}
 		a::before {
 			content: "["/"";
@@ -475,8 +442,6 @@
 		--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 		--rmd-table-hline: "----------------------------------------";
-	}
-	[data-remarkdown] {
 		font-family: var(--rmd-font);
 		line-height: var(--rmd-line-height);
 	}
@@ -605,35 +570,27 @@
 	[data-remarkdown] li ul {
 		margin-block: 0ch;
 	}
-	[data-remarkdown~="ul-dash"] ul {
-		list-style-type: none;
-	}
-	[data-remarkdown~="ul-dash"] ul > li::before {
-		content: "-"/"";
-		float: inline-start;
-		width: 1ch;
-		margin-inline-start: -3ch;
-		margin-inline-end: 1ch;
-	}
-	[data-remarkdown~="ul-plus"] ul {
-		list-style-type: none;
-	}
-	[data-remarkdown~="ul-plus"] ul > li::before {
-		content: "+"/"";
-		float: inline-start;
-		width: 1ch;
-		margin-inline-start: -3ch;
-		margin-inline-end: 1ch;
-	}
+	[data-remarkdown~="ul-dash"] ul,
+	[data-remarkdown~="ul-plus"] ul,
 	[data-remarkdown~="ul-star"] ul {
 		list-style-type: none;
 	}
+	[data-remarkdown~="ul-dash"] ul > li::before,
+	[data-remarkdown~="ul-plus"] ul > li::before,
 	[data-remarkdown~="ul-star"] ul > li::before {
-		content: "*"/"";
 		float: inline-start;
 		width: 1ch;
 		margin-inline-start: -3ch;
 		margin-inline-end: 1ch;
+	}
+	[data-remarkdown~="ul-dash"] ul > li::before {
+		content: "-"/"";
+	}
+	[data-remarkdown~="ul-plus"] ul > li::before {
+		content: "+"/"";
+	}
+	[data-remarkdown~="ul-star"] ul > li::before {
+		content: "*"/"";
 	}
 	[data-remarkdown] ol {
 		margin-block: 1lh;
@@ -647,35 +604,27 @@
 	[data-remarkdown] ol > li {
 		counter-increment: rmd-ol;
 	}
-	[data-remarkdown~="ol-decimal"] ol {
-		list-style: none;
+	[data-remarkdown~="ol-decimal"] ol,
+	[data-remarkdown~="ol-alpha"] ol,
+	[data-remarkdown~="ol-zero"] ol {
+		list-style-type: none;
+	}
+	[data-remarkdown~="ol-decimal"] ol > li::before,
+	[data-remarkdown~="ol-alpha"] ol > li::before,
+	[data-remarkdown~="ol-zero"] ol > li::before {
+		float: inline-start;
+		min-width: 2ch;
+		margin-inline-start: -3ch;
+		margin-inline-end: 1ch;
 	}
 	[data-remarkdown~="ol-decimal"] ol > li::before {
 		content: counter(rmd-ol) "."/"";
-		float: inline-start;
-		min-width: 2ch;
-		margin-inline-start: -3ch;
-		margin-inline-end: 1ch;
-	}
-	[data-remarkdown~="ol-zero"] ol {
-		list-style: none;
-	}
-	[data-remarkdown~="ol-zero"] ol > li::before {
-		content: "0" "."/"";
-		float: inline-start;
-		min-width: 2ch;
-		margin-inline-start: -3ch;
-		margin-inline-end: 1ch;
-	}
-	[data-remarkdown~="ol-alpha"] ol {
-		list-style: none;
 	}
 	[data-remarkdown~="ol-alpha"] ol > li::before {
 		content: counter(rmd-ol, lower-alpha) "."/"";
-		float: inline-start;
-		min-width: 2ch;
-		margin-inline-start: -3ch;
-		margin-inline-end: 1ch;
+	}
+	[data-remarkdown~="ol-zero"] ol > li::before {
+		content: "0."/"";
 	}
 	[data-remarkdown] pre {
 		margin-block: 1lh;
@@ -958,12 +907,6 @@ main > :last-child {
 	::after {
 		color: var(--pseudo-color);
 	}
-	a {
-		color: var(--link-color);
-		text-decoration-line: none;
-		text-decoration-thickness: 1.5px;
-		text-underline-offset: 0.25em;
-	}
 	a:hover {
 		text-decoration-line: underline;
 	}
@@ -977,11 +920,6 @@ main > :last-child {
 		color: inherit;
 	}
 	code {
-		color: var(--code-color);
-	}
-	pre {
-		tab-size: 2;
-		white-space: pre-wrap;
 		color: var(--code-color);
 	}
 	@media (width < 40em) {
