@@ -16,9 +16,6 @@
 	--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
 	--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 	--rmd-table-hline: "----------------------------------------";
-}
-
-[data-remarkdown] {
 	font-family: var(--rmd-font);
 	line-height: var(--rmd-line-height);
 }
@@ -161,37 +158,30 @@
 	margin-block: 0ch;
 }
 
-[data-remarkdown~="ul-dash"] ul {
-	list-style-type: none;
-}
-[data-remarkdown~="ul-dash"] ul > li::before {
-	content: "-"/"";
-	float: inline-start;
-	width: 1ch;
-	margin-inline-start: -3ch;
-	margin-inline-end: 1ch;
-}
-
-[data-remarkdown~="ul-plus"] ul {
-	list-style-type: none;
-}
-[data-remarkdown~="ul-plus"] ul > li::before {
-	content: "+"/"";
-	float: inline-start;
-	width: 1ch;
-	margin-inline-start: -3ch;
-	margin-inline-end: 1ch;
-}
-
+[data-remarkdown~="ul-dash"] ul,
+[data-remarkdown~="ul-plus"] ul,
 [data-remarkdown~="ul-star"] ul {
 	list-style-type: none;
 }
+[data-remarkdown~="ul-dash"] ul > li::before,
+[data-remarkdown~="ul-plus"] ul > li::before,
 [data-remarkdown~="ul-star"] ul > li::before {
-	content: "*"/"";
 	float: inline-start;
 	width: 1ch;
 	margin-inline-start: -3ch;
 	margin-inline-end: 1ch;
+}
+
+[data-remarkdown~="ul-dash"] ul > li::before {
+	content: "-"/"";
+}
+
+[data-remarkdown~="ul-plus"] ul > li::before {
+	content: "+"/"";
+}
+
+[data-remarkdown~="ul-star"] ul > li::before {
+	content: "*"/"";
 }
 
 [data-remarkdown] ol {
@@ -207,37 +197,30 @@
 	counter-increment: rmd-ol;
 }
 
-[data-remarkdown~="ol-decimal"] ol {
-	list-style: none;
+[data-remarkdown~="ol-decimal"] ol,
+[data-remarkdown~="ol-alpha"] ol,
+[data-remarkdown~="ol-zero"] ol {
+	list-style-type: none;
 }
+[data-remarkdown~="ol-decimal"] ol > li::before,
+[data-remarkdown~="ol-alpha"] ol > li::before,
+[data-remarkdown~="ol-zero"] ol > li::before {
+	float: inline-start;
+	min-width: 2ch;
+	margin-inline-start: -3ch;
+	margin-inline-end: 1ch;
+}
+
 [data-remarkdown~="ol-decimal"] ol > li::before {
 	content: counter(rmd-ol) "."/"";
-	float: inline-start;
-	min-width: 2ch;
-	margin-inline-start: -3ch;
-	margin-inline-end: 1ch;
 }
 
-[data-remarkdown~="ol-zero"] ol {
-	list-style: none;
-}
-[data-remarkdown~="ol-zero"] ol > li::before {
-	content: "0" "."/"";
-	float: inline-start;
-	min-width: 2ch;
-	margin-inline-start: -3ch;
-	margin-inline-end: 1ch;
-}
-
-[data-remarkdown~="ol-alpha"] ol {
-	list-style: none;
-}
 [data-remarkdown~="ol-alpha"] ol > li::before {
 	content: counter(rmd-ol, lower-alpha) "."/"";
-	float: inline-start;
-	min-width: 2ch;
-	margin-inline-start: -3ch;
-	margin-inline-end: 1ch;
+}
+
+[data-remarkdown~="ol-zero"] ol > li::before {
+	content: "0."/"";
 }
 
 [data-remarkdown] pre {

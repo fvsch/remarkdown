@@ -35,7 +35,9 @@
 	},
 	"devDependencies": {
 		"oxfmt": "^0.67.0",
-		"sass": "^1.104.0",
+		"postcss": "^8.5.28",
+		"postcss-combine-duplicated-selectors": "^10.0.3",
+		"sass": "^1.104.1",
 		"servitsy": "^0.6.0"
 	}
 }
