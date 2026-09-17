@@ -32,8 +32,8 @@ $breakpoint-medium: 56em;
 			monospace,
 		)
 	);
-	@include rmd.header("Remarkdown %v [scope-custom] (MIT) %h");
-	@scope (.remarkdown) to ([data-remarkdown]) {
+	@include rmd.header("Remarkdown %v (MIT) %h");
+	@scope (.remarkdown) to (.no-remarkdown, [data-remarkdown]) {
 		@include rmd.styles();
 	}
 
@@ -100,7 +100,7 @@ main {
 	}
 }
 
-@scope (.remarkdown) to ([data-remarkdown]) {
+@scope (.remarkdown) to (.no-remarkdown, [data-remarkdown]) {
 	/* Make the Markdown-like markers look nice */
 	::before,
 	::after {

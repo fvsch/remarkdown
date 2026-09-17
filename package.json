@@ -37,7 +37,7 @@
 		"start": "servitsy docs"
 	},
 	"devDependencies": {
-		"oxfmt": "^0.67.0",
+		"oxfmt": "^0.68.0",
 		"postcss": "^8.5.28",
 		"postcss-combine-duplicated-selectors": "^10.0.3",
 		"sass": "^1.104.1",
