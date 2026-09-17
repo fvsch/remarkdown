@@ -10,9 +10,9 @@
  * to ensure that we can switch from one build to the other in the same HTML page.
  */
 @layer remarkdown {
-	/*! Remarkdown 4.0.0-beta.1 [scope-custom] (MIT) %h */
+	/*! Remarkdown 4.0.0-beta.2 (MIT) %h */
 	/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
-	@scope (.remarkdown) to ([data-remarkdown]) {
+	@scope (.remarkdown) to (.no-remarkdown, [data-remarkdown]) {
 		:scope {
 			--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
 			--rmd-code-font: inherit;
@@ -424,7 +424,7 @@
 			content: var(--rmd-table-vline) var(--rmd-table-vline)/"";
 		}
 	}
-	/*! Remarkdown-zero 4.0.0-beta.1 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
+	/*! Remarkdown-zero 4.0.0-beta.2 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
 	/* defaults: base-text, hn-reset, em-reset, strong-reset */
 	[data-remarkdown] {
 		--rmd-font: ui-monospace, monospace;
@@ -901,7 +901,7 @@ main > :last-child {
 	margin-bottom: 0;
 }
 
-@scope (.remarkdown) to ([data-remarkdown]) {
+@scope (.remarkdown) to (.no-remarkdown, [data-remarkdown]) {
 	/* Make the Markdown-like markers look nice */
 	::before,
 	::after {

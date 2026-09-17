@@ -1,5 +1,6 @@
 @use "sass:list";
 @use "sass:meta" as *;
+@use "sass:selector";
 
 @use "../config";
 @use "./utils";
@@ -48,8 +49,9 @@
 	$pattern: config.get(selectors option);
 	$selectors: ();
 	@each $name in $names {
-		$selector: utils.str-replace($pattern, "%s", $name);
-		$selectors: list.append($selectors, $selector, $separator: comma);
+		$str: utils.str-replace($pattern, "%s", $name);
+		$next: selector.parse($str);
+		$selectors: list.join($selectors, $next, $separator: comma);
 	}
 	@return $selectors;
 }
