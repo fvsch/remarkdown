@@ -139,13 +139,13 @@ $margins: (
 	ol: (
 		top: 1,
 		bottom: 1,
-		inline-start: 4,
+		inline-start: 3,
 		inline-end: 0,
 	),
 	ul: (
 		top: 1,
 		bottom: 1,
-		inline-start: 4,
+		inline-start: 3,
 		inline-end: 0,
 	),
 	figure: (
@@ -175,9 +175,13 @@ $hn-prefix: "#";
 $h1-line: "========================================";
 $h2-line: "----------------------------------------";
 
-// Horizontal rules
-$hr-stars: "* * * *";
-$hr-dashes: "-------";
+// List bullets
+$ul-dash: "-";
+$ul-star: "*";
+$ul-plus: "+";
+
+// Punctuation mark used with list counters
+$ol-mark: ".";
 
 // Pre decorations
 $pre-ticks: "```";
@@ -187,6 +191,10 @@ $pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 // Block quotes
 $quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 $quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+
+// Horizontal rules
+$hr-stars: "* * * *";
+$hr-dashes: "-------";
 
 // Table decorations
 $table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";

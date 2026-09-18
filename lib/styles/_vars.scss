@@ -4,26 +4,32 @@
 @use "../toolkit" as *;
 
 @mixin vars {
-	$vars: (
-		font,
-		code-font,
-		line-height,
+	$chars: (
 		hn-prefix,
 		h1-line,
 		h2-line,
-		hr-stars,
-		hr-dashes,
+		ul-dash,
+		ul-star,
+		ul-plus,
+		ol-mark,
 		pre-ticks,
 		pre-tilde,
 		pre-tilde-line,
 		quote-mark,
 		quote-rtl,
+		hr-stars,
+		hr-dashes,
 		table-vline,
 		table-hline
 	);
 
 	@include default($scope: root) {
-		@each $var in $vars {
+		@include define-var(font, config.get(font));
+		@include define-var(code-font, config.get(code-font));
+		@include define-var(line-height, config.get(line-height));
+		@include define-var(ul-indent, indent(ul, start));
+		@include define-var(ol-indent, indent(ol, start));
+		@each $var in $chars {
 			@include define-var($var, config.get($var));
 		}
 	}

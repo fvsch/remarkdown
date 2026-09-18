@@ -17,16 +17,22 @@
 			--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
 			--rmd-code-font: inherit;
 			--rmd-line-height: 1.5;
+			--rmd-ul-indent: 3ch;
+			--rmd-ol-indent: 3ch;
 			--rmd-hn-prefix: "#";
 			--rmd-h1-line: "========================================";
 			--rmd-h2-line: "----------------------------------------";
-			--rmd-hr-stars: "* * * *";
-			--rmd-hr-dashes: "-------";
+			--rmd-ul-dash: "-";
+			--rmd-ul-star: "*";
+			--rmd-ul-plus: "+";
+			--rmd-ol-mark: ".";
 			--rmd-pre-ticks: "```";
 			--rmd-pre-tilde: "~~~";
 			--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 			--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 			--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+			--rmd-hr-stars: "* * * *";
+			--rmd-hr-dashes: "-------";
 			--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 			--rmd-table-hline: "----------------------------------------";
 			font-family: var(--rmd-font);
@@ -34,6 +40,69 @@
 		}
 		:is(pre, code, kbd, samp) {
 			font-family: var(--rmd-code-font);
+		}
+		a {
+			text-decoration-inset: 1ch;
+			color: var(--link-color);
+			text-decoration-line: none;
+			text-decoration-thickness: 1.5px;
+			text-underline-offset: 0.25em;
+		}
+		a::before {
+			content: "["/"";
+		}
+		a::after {
+			content: "]"/"";
+		}
+		:scope.a-showurl a {
+			text-decoration-inset: 0;
+		}
+		:scope.a-showurl a[href]::before {
+			content: "["/"";
+		}
+		:scope.a-showurl a[href]::after {
+			content: "](" attr(href) ")"/"";
+			word-break: break-all;
+		}
+		em {
+			font-style: normal;
+			font-weight: normal;
+		}
+		em::before,
+		em::after {
+			content: "*"/"";
+		}
+		:scope.em-underscore em::before,
+		:scope.em-underscore em::after {
+			content: "_"/"";
+		}
+		strong {
+			font-style: normal;
+			font-weight: normal;
+		}
+		strong::before,
+		strong::after {
+			content: "**"/"";
+		}
+		:scope.strong-underscore strong::before,
+		:scope.strong-underscore strong::after {
+			content: "__"/"";
+		}
+		code::before,
+		code::after {
+			content: "`"/"";
+		}
+		pre code::before,
+		pre code::after {
+			content: none;
+		}
+		:scope.del-tilde del {
+			text-decoration-inset: 2.2ch;
+			text-decoration-thickness: round(up, 0.08em, 0.5px);
+		}
+		:scope.del-tilde del::before,
+		:scope.del-tilde del::after {
+			content: "~~"/"";
 		}
 		h1 {
 			font-size: inherit;
@@ -124,54 +193,37 @@
 		}
 		figure {
 			margin-block: 1lh;
-			margin-inline: 0ch;
-		}
-		hr {
-			height: auto;
-			margin-block: 1lh;
 			margin-inline: 0;
-			line-height: inherit;
-			text-align: start;
-			border: none;
-			color: inherit;
-		}
-		:scope.hr-center hr {
-			text-align: center;
-		}
-		hr::before {
-			content: var(--rmd-hr-stars)/"";
-			display: block;
-		}
-		:scope.hr-dash hr::before {
-			content: var(--rmd-hr-dashes)/"";
-			display: block;
 		}
 		ul {
 			margin-block: 1lh;
 			margin-inline: 0;
-			padding-inline: 4ch 0ch;
+			padding-inline-start: var(--rmd-ul-indent);
+			padding-inline-end: 0;
 			list-style-type: none;
+			--rmd-ul-marker: var(--rmd-ul-dash);
 		}
 		li ul {
-			margin-block: 0ch;
+			margin-block: 0;
 		}
 		ul > li::before {
+			content: var(--rmd-ul-marker)/"";
 			float: inline-start;
 			width: 1ch;
-			margin-inline-start: -4ch;
+			margin-inline-start: min(var(--rmd-ul-indent) * -1, 0ch);
 			margin-inline-end: 1ch;
-			content: "-"/"";
 		}
-		:scope.ul-plus ul > li::before {
-			content: "+"/"";
+		:scope.ul-star ul {
+			--rmd-ul-marker: var(--rmd-ul-star);
 		}
-		:scope.ul-star ul > li::before {
-			content: "*"/"";
+		:scope.ul-plus ul {
+			--rmd-ul-marker: var(--rmd-ul-plus);
 		}
 		ol {
 			margin-block: 1lh;
 			margin-inline: 0;
-			padding-inline: 4ch 0ch;
+			padding-inline-start: var(--rmd-ol-indent);
+			padding-inline-end: 0;
 			counter-reset: rmd-ol;
 			list-style-type: none;
 		}
@@ -184,21 +236,21 @@
 		ol > li::before {
 			float: inline-start;
 			min-width: 2ch;
-			margin-inline-start: -4ch;
+			margin-inline-start: min(var(--rmd-ol-indent) * -1, 0ch);
 			margin-inline-end: 1ch;
-			content: counter(rmd-ol) "."/"";
+			content: counter(rmd-ol) var(--rmd-ol-mark)/"";
 		}
 		:scope.ol-alpha ol > li::before {
-			content: counter(rmd-ol, lower-alpha) "."/"";
+			content: counter(rmd-ol, lower-alpha) var(--rmd-ol-mark)/"";
 		}
 		:scope.ol-zero ol > li::before {
-			content: "0."/"";
+			content: "0" var(--rmd-ol-mark)/"";
 		}
 		pre {
 			margin-block: 1lh;
 			white-space: pre-wrap;
 			tab-size: 4;
-			margin-inline: 4ch 0ch;
+			margin-inline: 4ch 0;
 			tab-size: 2;
 			white-space: pre-wrap;
 			color: var(--code-color);
@@ -257,68 +309,25 @@
 			white-space: pre;
 			cursor: default;
 		}
-		a {
-			text-decoration-inset: 1ch;
-			color: var(--link-color);
-			text-decoration-line: none;
-			text-decoration-thickness: 1.5px;
-			text-underline-offset: 0.25em;
+		hr {
+			height: auto;
+			margin-block: 1lh;
+			margin-inline: 0;
+			line-height: inherit;
+			text-align: start;
+			border: none;
+			color: inherit;
 		}
-		a::before {
-			content: "["/"";
+		:scope.hr-center hr {
+			text-align: center;
 		}
-		a::after {
-			content: "]"/"";
+		hr::before {
+			content: var(--rmd-hr-stars)/"";
+			display: block;
 		}
-		:scope.a-showurl a {
-			text-decoration-inset: 0;
-		}
-		:scope.a-showurl a[href]::before {
-			content: "["/"";
-		}
-		:scope.a-showurl a[href]::after {
-			content: "](" attr(href) ")"/"";
-			word-break: break-all;
-		}
-		em {
-			font-style: normal;
-			font-weight: normal;
-		}
-		em::before,
-		em::after {
-			content: "*"/"";
-		}
-		:scope.em-underscore em::before,
-		:scope.em-underscore em::after {
-			content: "_"/"";
-		}
-		strong {
-			font-style: normal;
-			font-weight: normal;
-		}
-		strong::before,
-		strong::after {
-			content: "**"/"";
-		}
-		:scope.strong-underscore strong::before,
-		:scope.strong-underscore strong::after {
-			content: "__"/"";
-		}
-		code::before,
-		code::after {
-			content: "`"/"";
-		}
-		pre code::before,
-		pre code::after {
-			content: none;
-		}
-		:scope.del-tilde del {
-			text-decoration-inset: 2.2ch;
-			text-decoration-thickness: round(up, 0.08em, 0.5px);
-		}
-		:scope.del-tilde del::before,
-		:scope.del-tilde del::after {
-			content: "~~"/"";
+		:scope.hr-dash hr::before {
+			content: var(--rmd-hr-dashes)/"";
+			display: block;
 		}
 		:scope.table-reset table {
 			margin-block: 1lh;
@@ -430,16 +439,22 @@
 		--rmd-font: ui-monospace, monospace;
 		--rmd-code-font: inherit;
 		--rmd-line-height: 1.5;
+		--rmd-ul-indent: 3ch;
+		--rmd-ol-indent: 3ch;
 		--rmd-hn-prefix: "#";
 		--rmd-h1-line: "========================================";
 		--rmd-h2-line: "----------------------------------------";
-		--rmd-hr-stars: "* * * *";
-		--rmd-hr-dashes: "-------";
+		--rmd-ul-dash: "-";
+		--rmd-ul-star: "*";
+		--rmd-ul-plus: "+";
+		--rmd-ol-mark: ".";
 		--rmd-pre-ticks: "```";
 		--rmd-pre-tilde: "~~~";
 		--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 		--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 		--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+		--rmd-hr-stars: "* * * *";
+		--rmd-hr-dashes: "-------";
 		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 		--rmd-table-hline: "----------------------------------------";
 		font-family: var(--rmd-font);
@@ -447,6 +462,65 @@
 	}
 	[data-remarkdown] :is(pre, code, kbd, samp) {
 		font-family: var(--rmd-code-font);
+	}
+	[data-remarkdown~="a-bracket"] a {
+		text-decoration-inset: 1ch;
+	}
+	[data-remarkdown~="a-bracket"] a::before {
+		content: "["/"";
+	}
+	[data-remarkdown~="a-bracket"] a::after {
+		content: "]"/"";
+	}
+	[data-remarkdown~="a-showurl"] a {
+		text-decoration-inset: 0;
+	}
+	[data-remarkdown~="a-showurl"] a[href]::before {
+		content: "["/"";
+	}
+	[data-remarkdown~="a-showurl"] a[href]::after {
+		content: "](" attr(href) ")"/"";
+		word-break: break-all;
+	}
+	[data-remarkdown] em {
+		font-style: normal;
+		font-weight: normal;
+	}
+	[data-remarkdown~="em-star"] em::before,
+	[data-remarkdown~="em-star"] em::after {
+		content: "*"/"";
+	}
+	[data-remarkdown~="em-underscore"] em::before,
+	[data-remarkdown~="em-underscore"] em::after {
+		content: "_"/"";
+	}
+	[data-remarkdown] strong {
+		font-style: normal;
+		font-weight: normal;
+	}
+	[data-remarkdown~="strong-star"] strong::before,
+	[data-remarkdown~="strong-star"] strong::after {
+		content: "**"/"";
+	}
+	[data-remarkdown~="strong-underscore"] strong::before,
+	[data-remarkdown~="strong-underscore"] strong::after {
+		content: "__"/"";
+	}
+	[data-remarkdown~="code-tick"] code::before,
+	[data-remarkdown~="code-tick"] code::after {
+		content: "`"/"";
+	}
+	[data-remarkdown~="code-tick"] pre code::before,
+	[data-remarkdown~="code-tick"] pre code::after {
+		content: none;
+	}
+	[data-remarkdown~="del-tilde"] del {
+		text-decoration-inset: 2.2ch;
+		text-decoration-thickness: round(up, 0.08em, 0.5px);
+	}
+	[data-remarkdown~="del-tilde"] del::before,
+	[data-remarkdown~="del-tilde"] del::after {
+		content: "~~"/"";
 	}
 	[data-remarkdown] h1 {
 		font-size: inherit;
@@ -537,65 +611,45 @@
 	}
 	[data-remarkdown] figure {
 		margin-block: 1lh;
-		margin-inline: 0ch;
-	}
-	[data-remarkdown] hr {
-		height: auto;
-		margin-block: 1lh;
 		margin-inline: 0;
-		line-height: inherit;
-		text-align: start;
-	}
-	[data-remarkdown~="hr-star"] hr,
-	[data-remarkdown~="hr-dash"] hr {
-		border: none;
-		color: inherit;
-	}
-	[data-remarkdown~="hr-center"] hr {
-		text-align: center;
-	}
-	[data-remarkdown~="hr-star"] hr::before {
-		content: var(--rmd-hr-stars)/"";
-		display: block;
-	}
-	[data-remarkdown~="hr-dash"] hr::before {
-		content: var(--rmd-hr-dashes)/"";
-		display: block;
 	}
 	[data-remarkdown] ul {
 		margin-block: 1lh;
 		margin-inline: 0;
-		padding-inline: 3ch 0ch;
+		padding-inline-start: var(--rmd-ul-indent);
+		padding-inline-end: 0;
 	}
 	[data-remarkdown] li ul {
-		margin-block: 0ch;
+		margin-block: 0;
 	}
 	[data-remarkdown~="ul-dash"] ul,
-	[data-remarkdown~="ul-plus"] ul,
-	[data-remarkdown~="ul-star"] ul {
+	[data-remarkdown~="ul-star"] ul,
+	[data-remarkdown~="ul-plus"] ul {
 		list-style-type: none;
 	}
 	[data-remarkdown~="ul-dash"] ul > li::before,
-	[data-remarkdown~="ul-plus"] ul > li::before,
-	[data-remarkdown~="ul-star"] ul > li::before {
+	[data-remarkdown~="ul-star"] ul > li::before,
+	[data-remarkdown~="ul-plus"] ul > li::before {
+		content: var(--rmd-ul-marker)/"";
 		float: inline-start;
 		width: 1ch;
-		margin-inline-start: -3ch;
+		margin-inline-start: min(var(--rmd-ul-indent) * -1, 0ch);
 		margin-inline-end: 1ch;
 	}
-	[data-remarkdown~="ul-dash"] ul > li::before {
-		content: "-"/"";
+	[data-remarkdown~="ul-dash"] ul {
+		--rmd-ul-marker: var(--rmd-ul-dash);
 	}
-	[data-remarkdown~="ul-plus"] ul > li::before {
-		content: "+"/"";
+	[data-remarkdown~="ul-star"] ul {
+		--rmd-ul-marker: var(--rmd-ul-star);
 	}
-	[data-remarkdown~="ul-star"] ul > li::before {
-		content: "*"/"";
+	[data-remarkdown~="ul-plus"] ul {
+		--rmd-ul-marker: var(--rmd-ul-plus);
 	}
 	[data-remarkdown] ol {
 		margin-block: 1lh;
 		margin-inline: 0;
-		padding-inline: 3ch 0ch;
+		padding-inline-start: var(--rmd-ol-indent);
+		padding-inline-end: 0;
 		counter-reset: rmd-ol;
 	}
 	[data-remarkdown] li ol {
@@ -614,17 +668,17 @@
 	[data-remarkdown~="ol-zero"] ol > li::before {
 		float: inline-start;
 		min-width: 2ch;
-		margin-inline-start: -3ch;
+		margin-inline-start: min(var(--rmd-ol-indent) * -1, 0ch);
 		margin-inline-end: 1ch;
 	}
 	[data-remarkdown~="ol-decimal"] ol > li::before {
-		content: counter(rmd-ol) "."/"";
+		content: counter(rmd-ol) var(--rmd-ol-mark)/"";
 	}
 	[data-remarkdown~="ol-alpha"] ol > li::before {
-		content: counter(rmd-ol, lower-alpha) "."/"";
+		content: counter(rmd-ol, lower-alpha) var(--rmd-ol-mark)/"";
 	}
 	[data-remarkdown~="ol-zero"] ol > li::before {
-		content: "0."/"";
+		content: "0" var(--rmd-ol-mark)/"";
 	}
 	[data-remarkdown] pre {
 		margin-block: 1lh;
@@ -632,7 +686,7 @@
 		tab-size: 4;
 	}
 	[data-remarkdown~="pre-indent"] pre {
-		margin-inline: 4ch 0ch;
+		margin-inline: 4ch 0;
 	}
 	[data-remarkdown~="pre-tick"] pre,
 	[data-remarkdown~="pre-tilde"] pre,
@@ -671,7 +725,7 @@
 	[data-remarkdown] blockquote {
 		margin-block: 1lh;
 		margin-inline: 0;
-		padding-inline: 2ch 0ch;
+		padding-inline: 2ch 0;
 	}
 	[data-remarkdown~="quote-mark"] blockquote {
 		position: relative;
@@ -690,64 +744,28 @@
 		white-space: pre;
 		cursor: default;
 	}
-	[data-remarkdown~="a-bracket"] a {
-		text-decoration-inset: 1ch;
+	[data-remarkdown] hr {
+		height: auto;
+		margin-block: 1lh;
+		margin-inline: 0;
+		line-height: inherit;
+		text-align: start;
 	}
-	[data-remarkdown~="a-bracket"] a::before {
-		content: "["/"";
+	[data-remarkdown~="hr-star"] hr,
+	[data-remarkdown~="hr-dash"] hr {
+		border: none;
+		color: inherit;
 	}
-	[data-remarkdown~="a-bracket"] a::after {
-		content: "]"/"";
+	[data-remarkdown~="hr-center"] hr {
+		text-align: center;
 	}
-	[data-remarkdown~="a-showurl"] a {
-		text-decoration-inset: 0;
+	[data-remarkdown~="hr-star"] hr::before {
+		content: var(--rmd-hr-stars)/"";
+		display: block;
 	}
-	[data-remarkdown~="a-showurl"] a[href]::before {
-		content: "["/"";
-	}
-	[data-remarkdown~="a-showurl"] a[href]::after {
-		content: "](" attr(href) ")"/"";
-		word-break: break-all;
-	}
-	[data-remarkdown] em {
-		font-style: normal;
-		font-weight: normal;
-	}
-	[data-remarkdown~="em-star"] em::before,
-	[data-remarkdown~="em-star"] em::after {
-		content: "*"/"";
-	}
-	[data-remarkdown~="em-underscore"] em::before,
-	[data-remarkdown~="em-underscore"] em::after {
-		content: "_"/"";
-	}
-	[data-remarkdown] strong {
-		font-style: normal;
-		font-weight: normal;
-	}
-	[data-remarkdown~="strong-star"] strong::before,
-	[data-remarkdown~="strong-star"] strong::after {
-		content: "**"/"";
-	}
-	[data-remarkdown~="strong-underscore"] strong::before,
-	[data-remarkdown~="strong-underscore"] strong::after {
-		content: "__"/"";
-	}
-	[data-remarkdown~="code-tick"] code::before,
-	[data-remarkdown~="code-tick"] code::after {
-		content: "`"/"";
-	}
-	[data-remarkdown~="code-tick"] pre code::before,
-	[data-remarkdown~="code-tick"] pre code::after {
-		content: none;
-	}
-	[data-remarkdown~="del-tilde"] del {
-		text-decoration-inset: 2.2ch;
-		text-decoration-thickness: round(up, 0.08em, 0.5px);
-	}
-	[data-remarkdown~="del-tilde"] del::before,
-	[data-remarkdown~="del-tilde"] del::after {
-		content: "~~"/"";
+	[data-remarkdown~="hr-dash"] hr::before {
+		content: var(--rmd-hr-dashes)/"";
+		display: block;
 	}
 	[data-remarkdown~="table-reset"] table {
 		margin-block: 1lh;
