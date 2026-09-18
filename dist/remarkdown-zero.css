@@ -5,16 +5,22 @@
 		--rmd-font: ui-monospace, monospace;
 		--rmd-code-font: inherit;
 		--rmd-line-height: 1.5;
+		--rmd-ul-indent: 3ch;
+		--rmd-ol-indent: 3ch;
 		--rmd-hn-prefix: "#";
 		--rmd-h1-line: "========================================";
 		--rmd-h2-line: "----------------------------------------";
-		--rmd-hr-stars: "* * * *";
-		--rmd-hr-dashes: "-------";
+		--rmd-ul-dash: "-";
+		--rmd-ul-star: "*";
+		--rmd-ul-plus: "+";
+		--rmd-ol-mark: ".";
 		--rmd-pre-ticks: "```";
 		--rmd-pre-tilde: "~~~";
 		--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 		--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 		--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+		--rmd-hr-stars: "* * * *";
+		--rmd-hr-dashes: "-------";
 		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 		--rmd-table-hline: "----------------------------------------";
 		font-family: var(--rmd-font);
@@ -22,6 +28,65 @@
 	}
 	:is(pre, code, kbd, samp) {
 		font-family: var(--rmd-code-font);
+	}
+	:scope.a-bracket a {
+		text-decoration-inset: 1ch;
+	}
+	:scope.a-bracket a::before {
+		content: "["/"";
+	}
+	:scope.a-bracket a::after {
+		content: "]"/"";
+	}
+	:scope.a-showurl a {
+		text-decoration-inset: 0;
+	}
+	:scope.a-showurl a[href]::before {
+		content: "["/"";
+	}
+	:scope.a-showurl a[href]::after {
+		content: "](" attr(href) ")"/"";
+		word-break: break-all;
+	}
+	em {
+		font-style: normal;
+		font-weight: normal;
+	}
+	:scope.em-star em::before,
+	:scope.em-star em::after {
+		content: "*"/"";
+	}
+	:scope.em-underscore em::before,
+	:scope.em-underscore em::after {
+		content: "_"/"";
+	}
+	strong {
+		font-style: normal;
+		font-weight: normal;
+	}
+	:scope.strong-star strong::before,
+	:scope.strong-star strong::after {
+		content: "**"/"";
+	}
+	:scope.strong-underscore strong::before,
+	:scope.strong-underscore strong::after {
+		content: "__"/"";
+	}
+	:scope.code-tick code::before,
+	:scope.code-tick code::after {
+		content: "`"/"";
+	}
+	:scope.code-tick pre code::before,
+	:scope.code-tick pre code::after {
+		content: none;
+	}
+	:scope.del-tilde del {
+		text-decoration-inset: 2.2ch;
+		text-decoration-thickness: round(up, 0.08em, 0.5px);
+	}
+	:scope.del-tilde del::before,
+	:scope.del-tilde del::after {
+		content: "~~"/"";
 	}
 	h1 {
 		font-size: inherit;
@@ -112,65 +177,45 @@
 	}
 	figure {
 		margin-block: 1lh;
-		margin-inline: 0ch;
-	}
-	hr {
-		height: auto;
-		margin-block: 1lh;
 		margin-inline: 0;
-		line-height: inherit;
-		text-align: start;
-	}
-	:scope.hr-star hr,
-	:scope.hr-dash hr {
-		border: none;
-		color: inherit;
-	}
-	:scope.hr-center hr {
-		text-align: center;
-	}
-	:scope.hr-star hr::before {
-		content: var(--rmd-hr-stars)/"";
-		display: block;
-	}
-	:scope.hr-dash hr::before {
-		content: var(--rmd-hr-dashes)/"";
-		display: block;
 	}
 	ul {
 		margin-block: 1lh;
 		margin-inline: 0;
-		padding-inline: 3ch 0ch;
+		padding-inline-start: var(--rmd-ul-indent);
+		padding-inline-end: 0;
 	}
 	li ul {
-		margin-block: 0ch;
+		margin-block: 0;
 	}
 	:scope.ul-dash ul,
-	:scope.ul-plus ul,
-	:scope.ul-star ul {
+	:scope.ul-star ul,
+	:scope.ul-plus ul {
 		list-style-type: none;
 	}
 	:scope.ul-dash ul > li::before,
-	:scope.ul-plus ul > li::before,
-	:scope.ul-star ul > li::before {
+	:scope.ul-star ul > li::before,
+	:scope.ul-plus ul > li::before {
+		content: var(--rmd-ul-marker)/"";
 		float: inline-start;
 		width: 1ch;
-		margin-inline-start: -3ch;
+		margin-inline-start: min(var(--rmd-ul-indent) * -1, 0ch);
 		margin-inline-end: 1ch;
 	}
-	:scope.ul-dash ul > li::before {
-		content: "-"/"";
+	:scope.ul-dash ul {
+		--rmd-ul-marker: var(--rmd-ul-dash);
 	}
-	:scope.ul-plus ul > li::before {
-		content: "+"/"";
+	:scope.ul-star ul {
+		--rmd-ul-marker: var(--rmd-ul-star);
 	}
-	:scope.ul-star ul > li::before {
-		content: "*"/"";
+	:scope.ul-plus ul {
+		--rmd-ul-marker: var(--rmd-ul-plus);
 	}
 	ol {
 		margin-block: 1lh;
 		margin-inline: 0;
-		padding-inline: 3ch 0ch;
+		padding-inline-start: var(--rmd-ol-indent);
+		padding-inline-end: 0;
 		counter-reset: rmd-ol;
 	}
 	li ol {
@@ -189,17 +234,17 @@
 	:scope.ol-zero ol > li::before {
 		float: inline-start;
 		min-width: 2ch;
-		margin-inline-start: -3ch;
+		margin-inline-start: min(var(--rmd-ol-indent) * -1, 0ch);
 		margin-inline-end: 1ch;
 	}
 	:scope.ol-decimal ol > li::before {
-		content: counter(rmd-ol) "."/"";
+		content: counter(rmd-ol) var(--rmd-ol-mark)/"";
 	}
 	:scope.ol-alpha ol > li::before {
-		content: counter(rmd-ol, lower-alpha) "."/"";
+		content: counter(rmd-ol, lower-alpha) var(--rmd-ol-mark)/"";
 	}
 	:scope.ol-zero ol > li::before {
-		content: "0."/"";
+		content: "0" var(--rmd-ol-mark)/"";
 	}
 	pre {
 		margin-block: 1lh;
@@ -207,7 +252,7 @@
 		tab-size: 4;
 	}
 	:scope.pre-indent pre {
-		margin-inline: 4ch 0ch;
+		margin-inline: 4ch 0;
 	}
 	:scope.pre-tick pre,
 	:scope.pre-tilde pre,
@@ -246,7 +291,7 @@
 	blockquote {
 		margin-block: 1lh;
 		margin-inline: 0;
-		padding-inline: 2ch 0ch;
+		padding-inline: 2ch 0;
 	}
 	:scope.quote-mark blockquote {
 		position: relative;
@@ -265,64 +310,28 @@
 		white-space: pre;
 		cursor: default;
 	}
-	:scope.a-bracket a {
-		text-decoration-inset: 1ch;
+	hr {
+		height: auto;
+		margin-block: 1lh;
+		margin-inline: 0;
+		line-height: inherit;
+		text-align: start;
 	}
-	:scope.a-bracket a::before {
-		content: "["/"";
+	:scope.hr-star hr,
+	:scope.hr-dash hr {
+		border: none;
+		color: inherit;
 	}
-	:scope.a-bracket a::after {
-		content: "]"/"";
+	:scope.hr-center hr {
+		text-align: center;
 	}
-	:scope.a-showurl a {
-		text-decoration-inset: 0;
+	:scope.hr-star hr::before {
+		content: var(--rmd-hr-stars)/"";
+		display: block;
 	}
-	:scope.a-showurl a[href]::before {
-		content: "["/"";
-	}
-	:scope.a-showurl a[href]::after {
-		content: "](" attr(href) ")"/"";
-		word-break: break-all;
-	}
-	em {
-		font-style: normal;
-		font-weight: normal;
-	}
-	:scope.em-star em::before,
-	:scope.em-star em::after {
-		content: "*"/"";
-	}
-	:scope.em-underscore em::before,
-	:scope.em-underscore em::after {
-		content: "_"/"";
-	}
-	strong {
-		font-style: normal;
-		font-weight: normal;
-	}
-	:scope.strong-star strong::before,
-	:scope.strong-star strong::after {
-		content: "**"/"";
-	}
-	:scope.strong-underscore strong::before,
-	:scope.strong-underscore strong::after {
-		content: "__"/"";
-	}
-	:scope.code-tick code::before,
-	:scope.code-tick code::after {
-		content: "`"/"";
-	}
-	:scope.code-tick pre code::before,
-	:scope.code-tick pre code::after {
-		content: none;
-	}
-	:scope.del-tilde del {
-		text-decoration-inset: 2.2ch;
-		text-decoration-thickness: round(up, 0.08em, 0.5px);
-	}
-	:scope.del-tilde del::before,
-	:scope.del-tilde del::after {
-		content: "~~"/"";
+	:scope.hr-dash hr::before {
+		content: var(--rmd-hr-dashes)/"";
+		display: block;
 	}
 	:scope.table-reset table {
 		margin-block: 1lh;

@@ -4,16 +4,22 @@
 	--rmd-font: ui-monospace, monospace;
 	--rmd-code-font: inherit;
 	--rmd-line-height: 1.5;
+	--rmd-ul-indent: 3ch;
+	--rmd-ol-indent: 3ch;
 	--rmd-hn-prefix: "#";
 	--rmd-h1-line: "========================================";
 	--rmd-h2-line: "----------------------------------------";
-	--rmd-hr-stars: "* * * *";
-	--rmd-hr-dashes: "-------";
+	--rmd-ul-dash: "-";
+	--rmd-ul-star: "*";
+	--rmd-ul-plus: "+";
+	--rmd-ol-mark: ".";
 	--rmd-pre-ticks: "```";
 	--rmd-pre-tilde: "~~~";
 	--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 	--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
 	--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+	--rmd-hr-stars: "* * * *";
+	--rmd-hr-dashes: "-------";
 	--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 	--rmd-table-hline: "----------------------------------------";
 	font-family: var(--rmd-font);
@@ -22,6 +28,75 @@
 
 [data-remarkdown] :is(pre, code, kbd, samp) {
 	font-family: var(--rmd-code-font);
+}
+
+[data-remarkdown~="a-bracket"] a {
+	text-decoration-inset: 1ch;
+}
+[data-remarkdown~="a-bracket"] a::before {
+	content: "["/"";
+}
+[data-remarkdown~="a-bracket"] a::after {
+	content: "]"/"";
+}
+
+[data-remarkdown~="a-showurl"] a {
+	text-decoration-inset: 0;
+}
+[data-remarkdown~="a-showurl"] a[href]::before {
+	content: "["/"";
+}
+[data-remarkdown~="a-showurl"] a[href]::after {
+	content: "](" attr(href) ")"/"";
+	word-break: break-all;
+}
+
+[data-remarkdown] em {
+	font-style: normal;
+	font-weight: normal;
+}
+
+[data-remarkdown~="em-star"] em::before,
+[data-remarkdown~="em-star"] em::after {
+	content: "*"/"";
+}
+
+[data-remarkdown~="em-underscore"] em::before,
+[data-remarkdown~="em-underscore"] em::after {
+	content: "_"/"";
+}
+
+[data-remarkdown] strong {
+	font-style: normal;
+	font-weight: normal;
+}
+
+[data-remarkdown~="strong-star"] strong::before,
+[data-remarkdown~="strong-star"] strong::after {
+	content: "**"/"";
+}
+
+[data-remarkdown~="strong-underscore"] strong::before,
+[data-remarkdown~="strong-underscore"] strong::after {
+	content: "__"/"";
+}
+
+[data-remarkdown~="code-tick"] code::before,
+[data-remarkdown~="code-tick"] code::after {
+	content: "`"/"";
+}
+[data-remarkdown~="code-tick"] pre code::before,
+[data-remarkdown~="code-tick"] pre code::after {
+	content: none;
+}
+
+[data-remarkdown~="del-tilde"] del {
+	text-decoration-inset: 2.2ch;
+	text-decoration-thickness: round(up, 0.08em, 0.5px);
+}
+[data-remarkdown~="del-tilde"] del::before,
+[data-remarkdown~="del-tilde"] del::after {
+	content: "~~"/"";
 }
 
 [data-remarkdown] h1 {
@@ -118,76 +193,51 @@
 
 [data-remarkdown] figure {
 	margin-block: 1lh;
-	margin-inline: 0ch;
-}
-
-[data-remarkdown] hr {
-	height: auto;
-	margin-block: 1lh;
 	margin-inline: 0;
-	line-height: inherit;
-	text-align: start;
-}
-
-[data-remarkdown~="hr-star"] hr,
-[data-remarkdown~="hr-dash"] hr {
-	border: none;
-	color: inherit;
-}
-
-[data-remarkdown~="hr-center"] hr {
-	text-align: center;
-}
-
-[data-remarkdown~="hr-star"] hr::before {
-	content: var(--rmd-hr-stars)/"";
-	display: block;
-}
-
-[data-remarkdown~="hr-dash"] hr::before {
-	content: var(--rmd-hr-dashes)/"";
-	display: block;
 }
 
 [data-remarkdown] ul {
 	margin-block: 1lh;
 	margin-inline: 0;
-	padding-inline: 3ch 0ch;
+	padding-inline-start: var(--rmd-ul-indent);
+	padding-inline-end: 0;
 }
 [data-remarkdown] li ul {
-	margin-block: 0ch;
+	margin-block: 0;
 }
 
 [data-remarkdown~="ul-dash"] ul,
-[data-remarkdown~="ul-plus"] ul,
-[data-remarkdown~="ul-star"] ul {
+[data-remarkdown~="ul-star"] ul,
+[data-remarkdown~="ul-plus"] ul {
 	list-style-type: none;
 }
 [data-remarkdown~="ul-dash"] ul > li::before,
-[data-remarkdown~="ul-plus"] ul > li::before,
-[data-remarkdown~="ul-star"] ul > li::before {
+[data-remarkdown~="ul-star"] ul > li::before,
+[data-remarkdown~="ul-plus"] ul > li::before {
+	content: var(--rmd-ul-marker)/"";
 	float: inline-start;
 	width: 1ch;
-	margin-inline-start: -3ch;
+	margin-inline-start: min(var(--rmd-ul-indent) * -1, 0ch);
 	margin-inline-end: 1ch;
 }
 
-[data-remarkdown~="ul-dash"] ul > li::before {
-	content: "-"/"";
+[data-remarkdown~="ul-dash"] ul {
+	--rmd-ul-marker: var(--rmd-ul-dash);
 }
 
-[data-remarkdown~="ul-plus"] ul > li::before {
-	content: "+"/"";
+[data-remarkdown~="ul-star"] ul {
+	--rmd-ul-marker: var(--rmd-ul-star);
 }
 
-[data-remarkdown~="ul-star"] ul > li::before {
-	content: "*"/"";
+[data-remarkdown~="ul-plus"] ul {
+	--rmd-ul-marker: var(--rmd-ul-plus);
 }
 
 [data-remarkdown] ol {
 	margin-block: 1lh;
 	margin-inline: 0;
-	padding-inline: 3ch 0ch;
+	padding-inline-start: var(--rmd-ol-indent);
+	padding-inline-end: 0;
 	counter-reset: rmd-ol;
 }
 [data-remarkdown] li ol {
@@ -207,20 +257,20 @@
 [data-remarkdown~="ol-zero"] ol > li::before {
 	float: inline-start;
 	min-width: 2ch;
-	margin-inline-start: -3ch;
+	margin-inline-start: min(var(--rmd-ol-indent) * -1, 0ch);
 	margin-inline-end: 1ch;
 }
 
 [data-remarkdown~="ol-decimal"] ol > li::before {
-	content: counter(rmd-ol) "."/"";
+	content: counter(rmd-ol) var(--rmd-ol-mark)/"";
 }
 
 [data-remarkdown~="ol-alpha"] ol > li::before {
-	content: counter(rmd-ol, lower-alpha) "."/"";
+	content: counter(rmd-ol, lower-alpha) var(--rmd-ol-mark)/"";
 }
 
 [data-remarkdown~="ol-zero"] ol > li::before {
-	content: "0."/"";
+	content: "0" var(--rmd-ol-mark)/"";
 }
 
 [data-remarkdown] pre {
@@ -230,7 +280,7 @@
 }
 
 [data-remarkdown~="pre-indent"] pre {
-	margin-inline: 4ch 0ch;
+	margin-inline: 4ch 0;
 }
 
 [data-remarkdown~="pre-tick"] pre,
@@ -274,7 +324,7 @@
 [data-remarkdown] blockquote {
 	margin-block: 1lh;
 	margin-inline: 0;
-	padding-inline: 2ch 0ch;
+	padding-inline: 2ch 0;
 }
 
 [data-remarkdown~="quote-mark"] blockquote {
@@ -295,73 +345,32 @@
 	cursor: default;
 }
 
-[data-remarkdown~="a-bracket"] a {
-	text-decoration-inset: 1ch;
-}
-[data-remarkdown~="a-bracket"] a::before {
-	content: "["/"";
-}
-[data-remarkdown~="a-bracket"] a::after {
-	content: "]"/"";
+[data-remarkdown] hr {
+	height: auto;
+	margin-block: 1lh;
+	margin-inline: 0;
+	line-height: inherit;
+	text-align: start;
 }
 
-[data-remarkdown~="a-showurl"] a {
-	text-decoration-inset: 0;
-}
-[data-remarkdown~="a-showurl"] a[href]::before {
-	content: "["/"";
-}
-[data-remarkdown~="a-showurl"] a[href]::after {
-	content: "](" attr(href) ")"/"";
-	word-break: break-all;
+[data-remarkdown~="hr-star"] hr,
+[data-remarkdown~="hr-dash"] hr {
+	border: none;
+	color: inherit;
 }
 
-[data-remarkdown] em {
-	font-style: normal;
-	font-weight: normal;
+[data-remarkdown~="hr-center"] hr {
+	text-align: center;
 }
 
-[data-remarkdown~="em-star"] em::before,
-[data-remarkdown~="em-star"] em::after {
-	content: "*"/"";
+[data-remarkdown~="hr-star"] hr::before {
+	content: var(--rmd-hr-stars)/"";
+	display: block;
 }
 
-[data-remarkdown~="em-underscore"] em::before,
-[data-remarkdown~="em-underscore"] em::after {
-	content: "_"/"";
-}
-
-[data-remarkdown] strong {
-	font-style: normal;
-	font-weight: normal;
-}
-
-[data-remarkdown~="strong-star"] strong::before,
-[data-remarkdown~="strong-star"] strong::after {
-	content: "**"/"";
-}
-
-[data-remarkdown~="strong-underscore"] strong::before,
-[data-remarkdown~="strong-underscore"] strong::after {
-	content: "__"/"";
-}
-
-[data-remarkdown~="code-tick"] code::before,
-[data-remarkdown~="code-tick"] code::after {
-	content: "`"/"";
-}
-[data-remarkdown~="code-tick"] pre code::before,
-[data-remarkdown~="code-tick"] pre code::after {
-	content: none;
-}
-
-[data-remarkdown~="del-tilde"] del {
-	text-decoration-inset: 2.2ch;
-	text-decoration-thickness: round(up, 0.08em, 0.5px);
-}
-[data-remarkdown~="del-tilde"] del::before,
-[data-remarkdown~="del-tilde"] del::after {
-	content: "~~"/"";
+[data-remarkdown~="hr-dash"] hr::before {
+	content: var(--rmd-hr-dashes)/"";
+	display: block;
 }
 
 [data-remarkdown~="table-reset"] table {

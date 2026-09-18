@@ -4,24 +4,19 @@
 @use "../toolkit" as *;
 
 @mixin ul {
-	$options: (
-		ul-dash: "-",
-		ul-plus: "+",
-		ul-star: "*",
-	);
-
 	@include default() {
 		ul {
 			margin-block: margins(ul);
 			margin-inline: 0;
-			padding-inline: indents(ul);
+			padding-inline-start: rmd-var(ul-indent);
+			padding-inline-end: indent(ul, end);
 		}
 		li ul {
-			margin-block: 1ch * 0;
+			margin-block: 0;
 		}
 	}
 
-	@include option(ul-dash ul-plus ul-star) {
+	@include option(ul-dash ul-star ul-plus) {
 		ul {
 			// Alternatively, we could use a string value for list-style-type,
 			// instead of generating a ::before. The issue is that the generated
@@ -29,22 +24,19 @@
 			list-style-type: none;
 		}
 		ul > li::before {
-			@include -ul-before-common;
+			@include content(rmd-var(ul-marker));
+			float: inline-start;
+			width: col();
+			margin-inline-start: min(rmd-var(ul-indent) * -1, 0ch);
+			margin-inline-end: col();
 		}
 	}
 
-	@each $option, $bullet in $options {
+	@each $option in (ul-dash ul-star ul-plus) {
 		@include option($option) {
-			ul > li::before {
-				@include content($bullet);
+			ul {
+				@include define-var(ul-marker, rmd-var($option));
 			}
 		}
 	}
-}
-
-@mixin -ul-before-common() {
-	float: inline-start;
-	width: col();
-	margin-inline-start: indent(ul, start) * -1;
-	margin-inline-end: col();
 }
