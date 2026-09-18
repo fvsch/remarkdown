@@ -89,12 +89,18 @@
 
 /// Compute the size of a text line
 @function row($count: 1) {
-	@return $count * 1lh;
+	@if $count != 0 {
+		@return $count * 1lh;
+	}
+	@return 0;
 }
 
 /// Compute the size of a text column
 @function col($count: 1) {
-	@return $count * 1ch;
+	@if $count != 0 {
+		@return $count * 1ch;
+	}
+	@return 0;
 }
 
 @function -short-pair($a, $b) {
