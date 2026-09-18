@@ -1,0 +1,13 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"printWidth": 100,
+	"useTabs": true,
+	"sortPackageJson": false,
+	"ignorePatterns": [],
+	"overrides": [
+		{
+			"files": ["**/*.js"],
+			"options": { "singleQuote": true }
+		}
+	]
+}

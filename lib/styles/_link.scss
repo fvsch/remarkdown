@@ -1,0 +1,31 @@
+// <a>
+// Options: a-bracket, a-showurl
+
+@use "../toolkit" as *;
+
+@mixin link {
+	@include option(a-bracket) {
+		a {
+			text-decoration-inset: 1ch;
+		}
+		a::before {
+			@include content("[");
+		}
+		a::after {
+			@include content("]");
+		}
+	}
+
+	@include option(a-showurl) {
+		a {
+			text-decoration-inset: 0;
+		}
+		a[href]::before {
+			@include content("[");
+		}
+		a[href]::after {
+			@include content("](" attr(href) ")");
+			word-break: break-all;
+		}
+	}
+}

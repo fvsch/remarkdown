@@ -1,0 +1,17 @@
+// <code>
+// Options: code-tick
+
+@use "../toolkit" as *;
+
+@mixin code {
+	@include option(code-tick) {
+		code::before,
+		code::after {
+			@include content("`");
+		}
+		pre code::before,
+		pre code::after {
+			content: none;
+		}
+	}
+}

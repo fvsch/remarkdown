@@ -1,0 +1,62 @@
+/// The remarkdown.css Sass library
+/// Exposes three mixins:
+/// - `config`: can be used to override defaults;
+/// - `header`: outputs a CSS comment describing the library;
+/// - `styles`: generates the actual styles.
+
+@use "sass:list";
+@use "sass:map";
+
+@use "./config";
+@use "./styles";
+@use "./toolkit" as *;
+
+@forward "./styles" as styles-*;
+
+$version: "4.0.0-beta.2";
+$url: "https://fvsch.github.io/remarkdown/";
+
+@mixin config($args...) {
+	$options: merge-arglist($args);
+	@include config.set($options, $initialize: true);
+}
+
+@mixin header($title: "Remarkdown %v - %u") {
+	$title: -title-placeholders($title);
+	$defaults: -option-list(defaults);
+	/*! #{$title} */
+	/* defaults: #{$defaults} */
+}
+
+@mixin styles {
+	@include styles.vars;
+	@include styles.base;
+	@include styles.link;
+	@include styles.em;
+	@include styles.strong;
+	@include styles.code;
+	@include styles.del;
+	@include styles.heading;
+	@include styles.p;
+	@include styles.figure;
+	@include styles.ul;
+	@include styles.ol;
+	@include styles.pre;
+	@include styles.quote;
+	@include styles.hr;
+	@include styles.table;
+}
+
+@function -title-placeholders($title) {
+	$title: str-replace($title, "%v", $version);
+	$title: str-replace($title, "%u", $url);
+	@return $title;
+}
+
+@function -option-list($key) {
+	$list: config.get($key);
+	@if list.length($list) > 0 {
+		@return list.join((), $list, $separator: comma);
+	}
+	@return "none";
+}

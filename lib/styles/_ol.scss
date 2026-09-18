@@ -1,0 +1,55 @@
+// <ol>
+// Options: ol-decimal, ol-zero, ol-alpha
+
+@use "sass:string";
+@use "../toolkit" as *;
+
+@mixin ol {
+	$mark: rmd-var(ol-mark);
+
+	@include default() {
+		ol {
+			margin-block: margins(ol);
+			margin-inline: 0;
+			padding-inline-start: rmd-var(ol-indent);
+			padding-inline-end: indent(ol, end);
+			counter-reset: rmd-ol;
+		}
+		li ol {
+			margin-block: 0;
+		}
+		ol > li {
+			counter-increment: rmd-ol;
+		}
+	}
+
+	@include option(ol-decimal ol-alpha ol-zero) {
+		ol {
+			list-style-type: none;
+		}
+		ol > li::before {
+			float: inline-start;
+			min-width: 2ch;
+			margin-inline-start: min(rmd-var(ol-indent) * -1, 0ch);
+			margin-inline-end: 1ch;
+		}
+	}
+
+	@include option(ol-decimal) {
+		ol > li::before {
+			@include content(counter(rmd-ol) $mark);
+		}
+	}
+
+	@include option(ol-alpha) {
+		ol > li::before {
+			@include content(counter(rmd-ol, lower-alpha) $mark);
+		}
+	}
+
+	@include option(ol-zero) {
+		ol > li::before {
+			@include content("0" $mark);
+		}
+	}
+}

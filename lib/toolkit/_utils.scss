@@ -1,0 +1,57 @@
+@use "sass:map";
+@use "sass:meta" as *;
+@use "sass:string";
+
+/// Merge positional arguments and named arguments passed to a function or mixin,
+/// provided the positional arguments are maps themselves.
+@function merge-arglist($args) {
+	$map: ();
+	@each $arg in $args {
+		@if type-of($arg) == map {
+			$map: map.merge($map, $arg);
+		}
+	}
+	$map: map.merge($map, keywords($args));
+	@return $map;
+}
+
+@function str-contains($str, $search) {
+	@return type-of($str) == string and string.index($str, $search) != null;
+}
+
+@function str-join($list, $joiner: "") {
+	$acc: "";
+	@each $item in $list {
+		$sep: if(sass($acc): $joiner; else: "");
+		$acc: $acc + $sep + $item;
+	}
+	@return string.quote($acc);
+}
+
+@function str-repeat($str, $times) {
+	$result: "";
+	@for $i from 1 through $times {
+		$result: $result + $str;
+	}
+	@return $result;
+}
+
+@function str-pad-end($str, $char, $target-length) {
+	$count: $target-length - string.length($str);
+	@if $count > 0 {
+		@return $str + str-repeat($char, $count);
+	} @else {
+		@return $str;
+	}
+}
+
+@function str-replace($subject, $search, $replacement: "") {
+	$index: string.index($subject, $search);
+	@if $index {
+		$start: string.slice($subject, 1, $index - 1);
+		$end: string.slice($subject, $index + string.length($search));
+		@return $start + $replacement + str-replace($end, $search, $replacement);
+	} @else {
+		@return $subject;
+	}
+}
