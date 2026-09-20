@@ -31,16 +31,20 @@
 	"style": "./dist/remarkdown.css",
 	"browser": "./dist/remarkdown.css",
 	"scripts": {
-		"build": "node build.js",
+		"build": "node build.ts",
 		"format": "oxfmt --write '**/*.scss' '**/*.js'",
 		"prepack": "pnpm run build",
-		"start": "servitsy docs"
+		"start": "servitsy docs",
+		"test": "vitest run"
 	},
 	"devDependencies": {
+		"@types/node": "^24.13.5",
 		"oxfmt": "^0.68.0",
 		"postcss": "^8.5.28",
 		"postcss-combine-duplicated-selectors": "^10.0.3",
 		"sass": "^1.104.1",
-		"servitsy": "^0.6.0"
+		"servitsy": "^0.6.0",
+		"typescript": "^7.0.2",
+		"vitest": "^5.0.1"
 	}
 }

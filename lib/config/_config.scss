@@ -49,7 +49,7 @@ $-ALL-STYLES: (
 );
 
 /// Holds the configuration state
-$-config: base(default);
+$-config: $-DEFAULTS;
 
 /// Return a copy of the default config for the "default" or "zero" preset
 @function base($preset: default) {

@@ -21,7 +21,7 @@ $url: "https://fvsch.github.io/remarkdown/";
 	@include config.set($options, $initialize: true);
 }
 
-@mixin header($title: "Remarkdown %v - %u") {
+@mixin header($title: "Remarkdown %v (MIT) %u") {
 	$title: -title-placeholders($title);
 	$defaults: -option-list(defaults);
 	/*! #{$title} */
