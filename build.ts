@@ -8,24 +8,24 @@ import { compileAsync } from 'sass';
 import oxfmtConfig from './.oxfmtrc.json' with { type: 'json' };
 
 buildAll([
-	['preset/remarkdown.scss', 'dist'],
-	['preset/remarkdown.attr.scss', 'dist'],
-	['preset/remarkdown-zero.scss', 'dist'],
-	['preset/remarkdown-zero.attr.scss', 'dist'],
-	['docs/docs.scss', 'docs'],
+	{ input: 'preset/remarkdown.scss', dest: 'dist' },
+	{ input: 'preset/remarkdown.attr.scss', dest: 'dist' },
+	{ input: 'preset/remarkdown-zero.scss', dest: 'dist' },
+	{ input: 'preset/remarkdown-zero.attr.scss', dest: 'dist' },
+	{ input: 'docs/docs.scss', dest: 'docs' },
 ]);
 
-async function buildAll(sources) {
+async function buildAll(sources: { input: string; dest: string }[]) {
 	const results = await Promise.all(
-		sources.map(([input, outDir]) => {
-			const out = join(outDir, basename(input, '.scss') + '.css');
+		sources.map(({ input, dest }) => {
+			const out = join(dest, basename(input, '.scss') + '.css');
 			return buildStylesheet(input, out);
 		}),
 	);
 	console.table(results.filter(Boolean), ['input', 'out', 'size']);
 }
 
-async function buildStylesheet(inputFilename, outFilename) {
+async function buildStylesheet(inputFilename: string, outFilename: string) {
 	const inputFile = join(import.meta.dirname, inputFilename);
 	const outFile = join(import.meta.dirname, outFilename);
 
