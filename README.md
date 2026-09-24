@@ -1,13 +1,23 @@
+# Remarkdown
 
-# ReMarkdown
+Remarkdown styles HTML to look like plain Markdown text.
 
-ReMarkdown is a stylesheet that makes HTML look like raw Markdown text.
-Take a look at the [online demo and documentation](https://fvsch.github.io/remarkdown/).
+- [online demo and docs][docs]
+- [npm: remarkdown.css][npm]
 
-Markdown is [a plain-text syntax by John Gruber](https://daringfireball.net/projects/markdown/). This project also takes inspiration from variants such as PHP Markdown Extra and GitHub Flavored Markdown.
+Markdown is [a plain-text syntax by John Gruber][markdown]. Some styles are inspired by [PHP Markdown Extra][md-extra] and [GitHub Flavored Markdown][md-gfm].
 
 ## Documentation
 
-- [Using ReMarkdown](https://fvsch.github.io/remarkdown/)
-- [Available styles](https://fvsch.github.io/remarkdown/styles.html)
-- [Customizing ReMarkdown](https://fvsch.github.io/remarkdown/customize.html)
+- [Using Remarkdown][docs]
+- [Available styles][styles]
+- [Customizing Remarkdown][customize]
+
+
+[npm]: https://www.npmjs.com/package/remarkdown.css
+[docs]: https://fvsch.github.io/remarkdown/
+[styles]: https://fvsch.github.io/remarkdown/styles.html
+[customize]: https://fvsch.github.io/remarkdown/customize.html
+[markdown]: https://daringfireball.net/projects/markdown/
+[md-extra]: https://michelf.ca/projects/php-markdown/extra/
+[md-gfm]: https://github.github.com/gfm/
