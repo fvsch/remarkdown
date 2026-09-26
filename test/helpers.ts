@@ -13,10 +13,24 @@ export function localPath(subPath?: string) {
 	return subPath ? join(rootDir, subPath) : rootDir;
 }
 
-export function compileScss(scss: string) {
+export const scss = (strings: string | TemplateStringsArray, ...values: any[]) => {
+	if (typeof strings === 'string') {
+		return compileScss(strings);
+	}
+	return compileScss(String.raw({ raw: strings }, ...values));
+};
+
+function compileScss(scss: string) {
 	const loadPaths = [rootDir];
-	const prefix = `@use "./lib/rmd" as rmd;\n`;
-	const result = compileString(prefix + scss, { loadPaths });
+	const fullScss = `
+	@use "sass:list";
+	@use "sass:map";
+	@use "sass:meta";
+	@use "./lib/rmd" as rmd;
+	@use "./test/helpers" as test;
+	${scss}
+	`;
+	const result = compileString(fullScss, { loadPaths });
 	return result.css;
 }
 
@@ -26,10 +40,19 @@ export function findHeader(css: string, assert = false) {
 	return header;
 }
 
-export function findSubhead(css: string, assert = false) {
+export function findDefaults(css: string, assert = false) {
 	const subhead = findComment(css, 'defaults: ');
-	if (assert) expect(subhead, 'subhead comment not found').toBeTruthy();
-	return subhead;
+	if (assert) {
+		expect(subhead, 'subhead comment not found').toBeTypeOf('string');
+	}
+	const list: string[] = subhead?.split(', ') ?? [];
+	return list.toSorted();
+}
+
+export function findOutput(css: string, assert = false) {
+	const output = findComment(css, 'TEST: ');
+	if (assert) expect(output, 'test output not found').toBeTruthy();
+	return output;
 }
 
 function findComment(css: string, prefix: string) {
