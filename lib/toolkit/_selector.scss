@@ -30,7 +30,7 @@
 			@content;
 		}
 	} @else if config.has-option($names) {
-		$options: config.filter-options($names);
+		$options: -filter-options($names);
 		#{option-selector($options)} {
 			@content;
 		}
@@ -54,4 +54,16 @@
 		$selectors: list.join($selectors, $next, $separator: comma);
 	}
 	@return $selectors;
+}
+
+/// Keep option names found in $options
+@function -filter-options($names) {
+	$options: config.get(options);
+	$found: ();
+	@each $name in $names {
+		@if list.index($options, $name) {
+			$found: list.append($found, $name);
+		}
+	}
+	@return $found;
 }

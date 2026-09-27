@@ -5,19 +5,16 @@
 /// - `styles`: generates the actual styles.
 
 @use "sass:list";
-@use "sass:map";
 
 @use "./config";
 @use "./styles";
-@use "./toolkit" as *;
+@use "./toolkit";
 
-@forward "./styles" as styles-*;
-
-$version: "4.0.0-beta.2";
 $url: "https://fvsch.github.io/remarkdown/";
+$version: "4.0.0-beta.2";
 
 @mixin config($args...) {
-	$options: merge-arglist($args);
+	$options: toolkit.merge-arglist($args);
 	@include config.set($options, $initialize: true);
 }
 
@@ -48,8 +45,8 @@ $url: "https://fvsch.github.io/remarkdown/";
 }
 
 @function -title-placeholders($title) {
-	$title: str-replace($title, "%v", $version);
-	$title: str-replace($title, "%u", $url);
+	$title: toolkit.str-replace($title, "%v", $version);
+	$title: toolkit.str-replace($title, "%u", $url);
 	@return $title;
 }
 

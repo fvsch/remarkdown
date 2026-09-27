@@ -3,9 +3,19 @@ import { parse } from 'postcss';
 import { compileString } from 'sass';
 import { expect } from 'vitest';
 
-import packageJson from '../package.json' with { type: 'json' };
+import packageJson from '../../package.json' with { type: 'json' };
 
-const rootDir = join(import.meta.dirname, '..');
+const rootDir = join(import.meta.dirname, '..', '..');
+
+const scssPrefix = `
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "./lib/rmd" as rmd;
+@use "./lib/config" as rmd-config;
+@use "./lib/styles" as rmd-styles;
+@use "./test/shared/helpers" as test;
+`.trimStart();
 
 export const pkg = packageJson;
 
@@ -21,17 +31,10 @@ export const scss = (strings: string | TemplateStringsArray, ...values: any[]) =
 };
 
 function compileScss(scss: string) {
-	const loadPaths = [rootDir];
-	const fullScss = `
-	@use "sass:list";
-	@use "sass:map";
-	@use "sass:meta";
-	@use "./lib/rmd" as rmd;
-	@use "./test/helpers" as test;
-	${scss}
-	`;
-	const result = compileString(fullScss, { loadPaths });
-	return result.css;
+	const { css } = compileString(scssPrefix + scss, {
+		loadPaths: [rootDir],
+	});
+	return css;
 }
 
 export function findHeader(css: string, assert = false) {

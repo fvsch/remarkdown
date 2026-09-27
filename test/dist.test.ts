@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import { expect, test } from 'vitest';
 
-import { DIST_STYLESHEETS } from './constants';
-import { pkg, localPath, findHeader } from './helpers';
+import { DIST_STYLESHEETS } from './shared/data';
+import { pkg, localPath, findHeader } from './shared/helpers';
 
 test('only expected stylesheets are present', () => {
 	const expected = DIST_STYLESHEETS.map((s) => s.path).toSorted();
