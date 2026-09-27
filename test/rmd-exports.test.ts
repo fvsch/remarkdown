@@ -1,63 +1,48 @@
 import { describe, expect, test } from 'vitest';
 
-import { findOutput, scss } from './helpers';
+import { RMD_EXPORTS, RMD_CONFIG_EXPORTS, RMD_STYLES_EXPORTS } from './shared/data';
+import { findOutput, scss } from './shared/helpers';
 
-const RMD_MIXINS = [
-	'config',
-	'header',
-	'styles',
-	'styles-base',
-	'styles-code',
-	'styles-del',
-	'styles-em',
-	'styles-figure',
-	'styles-heading',
-	'styles-hr',
-	'styles-link',
-	'styles-ol',
-	'styles-p',
-	'styles-pre',
-	'styles-quote',
-	'styles-strong',
-	'styles-table',
-	'styles-ul',
-	'styles-vars',
+const namespaces = [
+	{ name: 'rmd', ...RMD_EXPORTS },
+	{ name: 'rmd-config', ...RMD_CONFIG_EXPORTS },
+	{ name: 'rmd-styles', ...RMD_STYLES_EXPORTS },
 ];
 
-const RMD_VARIABLES = ['url', 'version'];
-
-describe('rmd namespace', () => {
-	test('exports expected mixins', () => {
-		const css = scss`
-			$mixins: meta.module-mixins("rmd");
-			@include test.array(map.keys($mixins));
-		`;
-		const mixins = findArray(css);
-		expect(mixins.toSorted()).toEqual(RMD_MIXINS);
-	});
-
-	test('exports expected variables', () => {
-		const css = scss`
-			$vars: meta.module-variables("rmd");
-			@include test.array(map.keys($vars));
-		`;
-		const vars = findArray(css);
-		expect(vars.toSorted()).toEqual(RMD_VARIABLES);
-	});
-
-	test('exports no functions', () => {
-		const css = scss`
-			$fns: meta.module-functions("rmd");
+for (const ns of namespaces) {
+	describe(`${ns.name} namespace`, () => {
+		test('exports expected functions', () => {
+			const css = scss`
+			$fns: meta.module-functions("${ns.name}");
 			@include test.array(map.keys($fns));
 		`;
-		const vars = findArray(css);
-		expect(vars.toSorted()).toEqual([]);
+			const vars = findArray(css);
+			expect(vars.toSorted()).toEqual(ns.functions);
+		});
+
+		test('exports expected mixins', () => {
+			const css = scss`
+			$mixins: meta.module-mixins("${ns.name}");
+			@include test.array(map.keys($mixins));
+		`;
+			const mixins = findArray(css);
+			expect(mixins.toSorted()).toEqual(ns.mixins);
+		});
+
+		test('exports expected variables', () => {
+			const css = scss`
+			$vars: meta.module-variables("${ns.name}");
+			@include test.array(map.keys($vars));
+		`;
+			const vars = findArray(css);
+			expect(vars.toSorted()).toEqual(ns.variables);
+		});
 	});
-});
+}
 
 function findArray(css: string): string[] {
-	const output = findOutput(css, true);
-	const data = JSON.parse(output!) as string[];
+	const output = (findOutput(css, true) ?? '').replace(/,\]$/, ']');
+	const data = JSON.parse(output) as string[];
 	expect(data).toBeInstanceOf(Array);
 	return data;
 }

@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { RMD_STYLE_DEFAULTS } from './constants';
-import { findDefaults, findHeader, pkg, scss } from './helpers';
+import { RMD_DEFAULTS } from './shared/data';
+import { findDefaults, findHeader, pkg, scss } from './shared/helpers';
 
 describe('rmd.header', () => {
 	test('outputs correct package version', () => {
@@ -25,7 +25,7 @@ describe('rmd.header', () => {
 			@include rmd.header();
 		`;
 		const defaults = findDefaults(css, true);
-		expect(defaults).toEqual(RMD_STYLE_DEFAULTS);
+		expect(defaults).toEqual(RMD_DEFAULTS);
 	});
 
 	test('reflects changes to $defaults', () => {

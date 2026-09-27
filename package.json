@@ -26,6 +26,12 @@
 			"sass": "./lib/rmd.scss",
 			"style": "./dist/remarkdown.css",
 			"browser": "./dist/remarkdown.css"
+		},
+		"./lib/config": {
+			"sass": "./lib/config/_index.scss"
+		},
+		"./lib/styles": {
+			"sass": "./lib/styles/_index.scss"
 		}
 	},
 	"style": "./dist/remarkdown.css",
