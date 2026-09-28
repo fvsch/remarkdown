@@ -1,0 +1,8 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+
+@mixin array($data) {
+	$out: list.join([], $data, $separator: comma, $bracketed: true);
+	/* TEST: #{meta.inspect($out)} */
+}
