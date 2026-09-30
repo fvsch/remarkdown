@@ -17,7 +17,7 @@ for (const { path, brand, selector, size } of DIST_STYLESHEETS) {
 		expect(css.length).toBeGreaterThan(Math.min(...size));
 		expect(css.length).toBeLessThan(Math.max(...size));
 
-		const header = findHeader(css, true);
+		const header = findHeader(css);
 		expect(header).toMatch(`${brand} ${pkg.version}`);
 		expect(header).toMatch(pkg.license);
 		expect(header).toMatch(pkg.homepage);
