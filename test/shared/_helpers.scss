@@ -1,8 +1,16 @@
 @use "sass:list";
 @use "sass:map";
-@use "sass:meta";
+@use "sass:meta" as *;
+@use "sass:string";
 
-@mixin array($data) {
-	$out: list.join([], $data, $separator: comma, $bracketed: true);
-	/* TEST: #{meta.inspect($out)} */
+@mixin array($data, $id: "TEST") {
+	$list: [];
+	@each $item in $data {
+		$list: list.append($list, string.quote($item), $separator: comma);
+	}
+	@include dump($list, $id);
+}
+
+@mixin dump($data, $id: "TEST") {
+	/* #{$id}: #{inspect($data)} */
 }

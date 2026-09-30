@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { RMD_EXPORTS, RMD_CONFIG_EXPORTS, RMD_STYLES_EXPORTS } from './shared/data';
-import { findOutput, scss } from './shared/helpers';
+import { findArray, scss } from './shared/helpers';
 
 const namespaces = [
 	{ name: 'rmd', ...RMD_EXPORTS },
@@ -38,11 +38,4 @@ for (const ns of namespaces) {
 			expect(vars.toSorted()).toEqual(ns.variables);
 		});
 	});
-}
-
-function findArray(css: string): string[] {
-	const output = (findOutput(css, true) ?? '').replace(/,\]$/, ']');
-	const data = JSON.parse(output) as string[];
-	expect(data).toBeInstanceOf(Array);
-	return data;
 }
