@@ -8,7 +8,7 @@ describe('rmd.header', () => {
 		const css = scss`
 			@include rmd.header();
 		`;
-		const header = findHeader(css, true);
+		const header = findHeader(css);
 		expect(header).toMatch(`Remarkdown ${pkg.version}`);
 	});
 
@@ -16,7 +16,7 @@ describe('rmd.header', () => {
 		const css = scss`
 			@include rmd.header($title: "[Remarkdown](%u)");
 		`;
-		const header = findHeader(css, true);
+		const header = findHeader(css);
 		expect(header).toBe(`[Remarkdown](${pkg.homepage})`);
 	});
 
@@ -24,7 +24,7 @@ describe('rmd.header', () => {
 		const css = scss`
 			@include rmd.header();
 		`;
-		const defaults = findDefaults(css, true);
+		const defaults = findDefaults(css);
 		expect(defaults).toEqual(RMD_DEFAULTS);
 	});
 
@@ -34,7 +34,7 @@ describe('rmd.header', () => {
 			@include rmd.config($defaults: (${customDefaults.join(', ')}));
 			@include rmd.header();
 		`;
-		const defaults = findDefaults(css, true);
+		const defaults = findDefaults(css);
 		expect(defaults).toEqual(customDefaults);
 	});
 });

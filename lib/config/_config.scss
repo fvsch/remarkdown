@@ -16,12 +16,13 @@ $-config: $-DEFAULTS;
 
 /// Return a copy of the default config for the "default" or "zero" preset
 @function base($preset: default) {
+	$err: validate.require-enum(preset, $preset, null "default" "zero");
 	@if $preset == null or $preset == default {
 		@return $-DEFAULTS;
 	} @else if $preset == zero {
 		@return map.merge($-DEFAULTS, $-ZERO);
 	} @else {
-		@error "$preset must be one of (null, default, zero), got: #{inspect($preset)}";
+		@error "$preset must be one of (null, \"default\", \"zero\"), got: #{inspect($preset)}";
 	}
 }
 
@@ -54,14 +55,21 @@ $-config: $-DEFAULTS;
 
 /// Write configuration values
 @mixin set($config, $initialize: false) {
-	@each $name, $value in $config {
-		@include validate.check-config-entry($name, $value);
-	}
+	@include -check-config($config);
 	@if $initialize {
 		$base: base(map.get($config, preset));
 		$-config: -merge-config($base, $config) !global;
 	} @else {
 		$-config: -merge-config($-config, $config) !global;
+	}
+}
+
+@mixin -check-config($config) {
+	@each $name, $value in $config {
+		$err: validate.check-config-entry($name, $value);
+		@if $err {
+			@error $err;
+		}
 	}
 }
 
@@ -74,11 +82,19 @@ $-config: $-DEFAULTS;
 	@return null;
 }
 
-@function -merge-config($base, $overrides) {
-	@if map.has-key($base, margins) and map.has-key($overrides, margins) {
+@function -merge-config($base, $conf) {
+	// merge $margins
+	@if map.has-key($base, margins) and map.has-key($conf, margins) {
 		$m1: map.get($base, margins);
-		$m2: map.get($overrides, margins);
-		$overrides: map.set($overrides, margins, map.merge($m1, $m2));
+		$m2: map.get($conf, margins);
+		$conf: map.set($conf, margins, map.merge($m1, $m2));
 	}
-	@return map.merge($base, $overrides);
+	// ensure defaults and options are lists
+	@each $key in (defaults, options) {
+		$value: map.get($conf, $key);
+		@if type-of($value) == string {
+			$conf: map.set($conf, $key, list.append((), $value, $separator: comma));
+		}
+	}
+	@return map.merge($base, $conf);
 }
