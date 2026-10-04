@@ -70,28 +70,14 @@ $defaults: (
 // that they must be activated in HTML using a pattern like
 // `<element class="remarkdown option-name">…</element>` or
 // `<element data-remarkdown="option-name">…</element>`.
-// Note: styles ommited from both `$defaults` and `$options` will
-// be skipped in the final output.
-$options: (
-	h1-line,
-	h2-line,
-	ul-star,
-	ul-plus,
-	ol-zero,
-	ol-alpha,
-	em-underscore,
-	strong-underscore,
-	a-showurl,
-	pre-tick,
-	pre-tilde,
-	pre-tilde-full,
-	hr-dash,
-	hr-center,
-	del-tilde,
-	table-reset,
-	table-border,
-	table-border-full
-);
+//
+// Options can be set in two ways:
+// 1. With a boolean value: all styles not in `$defaults` are treated as options
+//    (for `true`) or excluded from the final output (for `false`).
+// 2. With a list of strings: all listed styles are treated as options,
+//    and styles not listed in either `$defaults` or `$options` are omitted in
+//    the final output.
+$options: true;
 
 // Font stack to use.
 // Should be a comma-separated list that ends with `monospace`.

@@ -5,6 +5,7 @@
 @use "sass:meta" as *;
 
 @use "./defaults";
+@use "./styles";
 @use "./validate";
 @use "./zero";
 
@@ -13,6 +14,17 @@ $-ZERO: module-variables(zero);
 
 /// Holds the configuration state
 $-config: $-DEFAULTS;
+
+/// Write configuration values
+@mixin set($config, $initialize: false) {
+	@include -check-config($config);
+	@if $initialize {
+		$base: base(map.get($config, preset));
+		$-config: -merge-config($base, $config) !global;
+	} @else {
+		$-config: -merge-config($-config, $config) !global;
+	}
+}
 
 /// Return a copy of the default config for the "default" or "zero" preset
 @function base($preset: default) {
@@ -27,7 +39,11 @@ $-config: $-DEFAULTS;
 }
 
 /// Read from the current config
-@function get($path) {
+@function get($path: null) {
+	// Return full config if no path is provided
+	@if $path == null {
+		@return map.merge((), $-config);
+	}
 	// Check that the config option exists, only checking the first element
 	$first: list.nth($path, 1);
 	@if type-of($first) != string {
@@ -38,29 +54,34 @@ $-config: $-DEFAULTS;
 	@return map.get($-config, $path...);
 }
 
-/// Dump the current configuration
-@function get-all() {
-	@return map.merge((), $-config);
-}
-
-/// Return the first option name found in $-DEFAULTS
+/// Check if any style name in $names is a default style
 @function has-default($names) {
-	@return -find-item(get(defaults), $names);
+	$in-defaults: in-defaults($names);
+	@return list.length($in-defaults) > 0;
 }
 
-/// Return the first option name found in $options
+/// Check if any style name in $names is an optional style
 @function has-option($names) {
-	@return -find-item(get(options), $names);
+	$in-options: in-options($names);
+	@return list.length($in-options) > 0;
 }
 
-/// Write configuration values
-@mixin set($config, $initialize: false) {
-	@include -check-config($config);
-	@if $initialize {
-		$base: base(map.get($config, preset));
-		$-config: -merge-config($base, $config) !global;
+/// Return style names that are default styles
+@function in-defaults($names) {
+	$defaults: get(defaults);
+	@return styles.filter($names, $include: $defaults);
+}
+
+/// Return style names that are optional styles
+@function in-options($names) {
+	$defaults: get(defaults);
+	$options: get(options);
+	@if $options == false {
+		@return ();
+	} @else if $options == true {
+		@return styles.filter($names, $exclude: $defaults);
 	} @else {
-		$-config: -merge-config($-config, $config) !global;
+		@return styles.filter($names, $include: $options, $exclude: $defaults);
 	}
 }
 
@@ -71,15 +92,6 @@ $-config: $-DEFAULTS;
 			@error $err;
 		}
 	}
-}
-
-@function -find-item($list, $items) {
-	@each $item in $items {
-		@if list.index($list, $item) {
-			@return $item;
-		}
-	}
-	@return null;
 }
 
 @function -merge-config($base, $conf) {
