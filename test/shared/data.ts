@@ -25,6 +25,68 @@ export const DIST_STYLESHEETS = [
 	},
 ];
 
+export const RMD_CONFIG_KEYS = [
+	'selectors',
+	'variables',
+	'defaults',
+	'options',
+	'font',
+	'code-font',
+	'line-height',
+	'margins',
+	'hn-prefix',
+	'h1-line',
+	'h2-line',
+	'ul-dash',
+	'ul-star',
+	'ul-plus',
+	'ol-mark',
+	'pre-ticks',
+	'pre-tilde',
+	'pre-tilde-line',
+	'quote-mark',
+	'quote-rtl',
+	'hr-stars',
+	'hr-dashes',
+	'table-vline',
+	'table-hline',
+];
+
+export const RMD_ALL_STYLES = [
+	'a-bracket',
+	'a-showurl',
+	'base-text',
+	'code-tick',
+	'del-tilde',
+	'em-reset',
+	'em-star',
+	'em-underscore',
+	'h1-line',
+	'h2-line',
+	'hn-prefix',
+	'hn-reset',
+	'hr-center',
+	'hr-dash',
+	'hr-star',
+	'ol-alpha',
+	'ol-decimal',
+	'ol-zero',
+	'pre-indent',
+	'pre-tick',
+	'pre-tilde',
+	'pre-tilde-full',
+	'quote-mark',
+	'strong-reset',
+	'strong-star',
+	'strong-underscore',
+	'table-border',
+	'table-border-full',
+	'table-reset',
+	'ul-dash',
+	'ul-plus',
+	'ul-star',
+];
+
 export const RMD_DEFAULTS = [
 	'a-bracket',
 	'base-text',
@@ -56,13 +118,22 @@ export const RMD_EXPORTS: SassExportsKeys = {
 	variables: ['url', 'version'],
 };
 
-export const RMD_CONFIG_EXPORTS: SassExportsKeys = {
-	functions: ['base', 'get', 'get-all', 'has-default', 'has-option'],
+export const CONFIG_EXPORTS: SassExportsKeys = {
+	functions: [
+		'all-styles',
+		'base',
+		'get',
+		'has-default',
+		'has-option',
+		'in-defaults',
+		'in-options',
+		'is-style',
+	],
 	mixins: ['set'],
 	variables: [],
 };
 
-export const RMD_STYLES_EXPORTS: SassExportsKeys = {
+export const STYLES_EXPORTS: SassExportsKeys = {
 	functions: [],
 	mixins: [
 		'base',

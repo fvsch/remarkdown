@@ -5,42 +5,7 @@
 
 @use "../toolkit/utils";
 @use "./defaults";
-
-/// Full list of styling options
-$-ALL-STYLES: (
-	a-bracket,
-	a-showurl,
-	base-text,
-	code-tick,
-	del-tilde,
-	em-reset,
-	em-star,
-	em-underscore,
-	h1-line,
-	h2-line,
-	hn-prefix,
-	hn-reset,
-	hr-center,
-	hr-dash,
-	hr-star,
-	ol-alpha,
-	ol-decimal,
-	ol-zero,
-	pre-indent,
-	pre-tick,
-	pre-tilde,
-	pre-tilde-full,
-	quote-mark,
-	strong-reset,
-	strong-star,
-	strong-underscore,
-	table-border,
-	table-border-full,
-	table-reset,
-	ul-dash,
-	ul-plus,
-	ul-star
-);
+@use "./styles";
 
 $-DEFAULTS: module-variables(defaults);
 
@@ -58,8 +23,13 @@ $-DEFAULTS: module-variables(defaults);
 	} @else if $name == variables {
 		$msg: require-type($name, $value, "string") or require-substring($name, $value, "--") or
 			require-substring($name, $value, "%s");
-	} @else if $name == defaults or $name == options {
+	} @else if $name == defaults {
 		$msg: require-type($name, $value, "string" "list") or check-options($name, $value);
+	} @else if $name == options {
+		$msg: require-type($name, $value, "bool" "string" "list");
+		@if type-of($value) != bool {
+			$msg: $msg or check-options($name, $value);
+		}
 	} @else if $name == font or $name == code-font {
 		$msg: require-type($name, $value, "null" "string" "list");
 	} @else {
@@ -95,8 +65,8 @@ $-DEFAULTS: module-variables(defaults);
 
 @function check-options($name, $list) {
 	@each $item in $list {
-		@if not list.index($-ALL-STYLES, $item) {
-			@return "$#{$name} has unknown option #{-print-string($item)}, expected #{-print-list($-ALL-STYLES)}";
+		@if not styles.is-style($item) {
+			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list(styles.all-styles())}";
 		}
 	}
 	@return null;
