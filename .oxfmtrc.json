@@ -2,12 +2,17 @@
 	"$schema": "./node_modules/oxfmt/configuration_schema.json",
 	"printWidth": 100,
 	"useTabs": true,
+	"tabWidth": 2,
 	"sortPackageJson": false,
 	"ignorePatterns": [],
 	"overrides": [
 		{
 			"files": ["**/*.js", "**/*.ts"],
 			"options": { "singleQuote": true }
+		},
+		{
+			"files": ["**/*.{yaml,yml}"],
+			"options": { "useTabs": false }
 		}
 	]
 }
