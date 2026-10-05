@@ -43,10 +43,6 @@
 		}
 		a {
 			text-decoration-inset: 1ch;
-			color: var(--link-color);
-			text-decoration-line: none;
-			text-decoration-thickness: 1.5px;
-			text-underline-offset: 0.25em;
 		}
 		a::before {
 			content: "["/"";
@@ -251,9 +247,6 @@
 			white-space: pre-wrap;
 			tab-size: 4;
 			margin-inline: 4ch 0;
-			tab-size: 2;
-			white-space: pre-wrap;
-			color: var(--code-color);
 		}
 		:scope.pre-tick pre,
 		:scope.pre-tilde pre,
@@ -925,6 +918,12 @@ main > :last-child {
 	::after {
 		color: var(--pseudo-color);
 	}
+	a {
+		color: var(--link-color);
+		text-decoration-line: none;
+		text-decoration-thickness: 1.5px;
+		text-underline-offset: 0.25em;
+	}
 	a:hover {
 		text-decoration-line: underline;
 	}
@@ -938,6 +937,11 @@ main > :last-child {
 		color: inherit;
 	}
 	code {
+		color: var(--code-color);
+	}
+	pre {
+		tab-size: 2;
+		white-space: pre-wrap;
 		color: var(--code-color);
 	}
 	@media (width < 40em) {
