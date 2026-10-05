@@ -18,8 +18,8 @@ importers:
         specifier: ^8.5.28
         version: 8.5.28
       postcss-combine-duplicated-selectors:
-        specifier: ^10.0.3
-        version: 10.0.3(postcss@8.5.28)
+        specifier: ^11.0.0
+        version: 11.0.0(postcss@8.5.28)
       sass:
         specifier: ^1.105.1
         version: 1.105.1
@@ -662,15 +662,18 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
-  postcss-combine-duplicated-selectors@10.0.3:
-    resolution: {integrity: sha512-IP0BmwFloCskv7DV7xqvzDXqMHpwdczJa6ZvIW8abgHdcIHs9mCJX2ltFhu3EwA51ozp13DByng30+Ke+eIExA==}
-    engines: {node: ^10.0.0 || ^12.0.0 || >=14.0.0}
+  postcss-combine-duplicated-selectors@11.0.0:
+    resolution: {integrity: sha512-vUMUhOJZzC/tDhjF7mLB3/HK/dod6BnTXCYwABRlwZ5pzNfBSjr88fv3DS+nHbYjkEzBBv0yyvNeOSA9Jxxg3g==}
+    engines: {node: '>=24'}
     peerDependencies:
       postcss: ^8.1.0
 
-  postcss-selector-parser@6.1.4:
-    resolution: {integrity: sha512-bIoJLOmjCO1S9XdY/DcnR5hJxvrDir1PbGChrzXG3vw0/FOliy/fA3dmdhQ441kah4gKv+TwckGzex6wNS5cnQ==}
+  postcss-selector-parser@7.1.6:
+    resolution: {integrity: sha512-7qASPzhKF2l2KLboRZux8CCTRMdGiV08vWmyKzPz22qZ7ZjQBOeY7rNzNoCLSUiftJ7HUq0GERHmxw/t0dCdMw==}
     engines: {node: '>=4'}
+
+  postcss-value-parser@4.2.0:
+    resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
 
   postcss@8.5.28:
     resolution: {integrity: sha512-RRuzqDtt5Y9h3quz5hWhK+TPnsmVs6WwSU6LkJMeY4HstUEDuYTG8UJSdawMRzmzAtV+KEoG8N3Qg2qLy5vM/A==}
@@ -1201,15 +1204,18 @@ snapshots:
 
   picomatch@4.0.7: {}
 
-  postcss-combine-duplicated-selectors@10.0.3(postcss@8.5.28):
+  postcss-combine-duplicated-selectors@11.0.0(postcss@8.5.28):
     dependencies:
       postcss: 8.5.28
-      postcss-selector-parser: 6.1.4
+      postcss-selector-parser: 7.1.6
+      postcss-value-parser: 4.2.0
 
-  postcss-selector-parser@6.1.4:
+  postcss-selector-parser@7.1.6:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
+
+  postcss-value-parser@4.2.0: {}
 
   postcss@8.5.28:
     dependencies:
