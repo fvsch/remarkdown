@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width">
 	<link rel="stylesheet" href="./docs.css">
 	<script type="module">
-		if (document.location.pathname.match(/\/customize(\.html)?$/)) {
+		if (/\/customize(\.html)?$/.test(document.location.pathname)) {
 			document.location = new URL('./config', document.location);
 		}
 	</script>
