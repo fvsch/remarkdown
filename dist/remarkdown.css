@@ -29,22 +29,22 @@
 	:is(pre, code, kbd, samp) {
 		font-family: var(--rmd-code-font);
 	}
-	a {
+	:any-link {
 		text-decoration-inset: 1ch;
 	}
-	a::before {
+	:any-link::before {
 		content: "["/"";
 	}
-	a::after {
+	:any-link::after {
 		content: "]"/"";
 	}
-	:scope.a-showurl a {
+	:scope.a-showurl :any-link {
 		text-decoration-inset: 0;
 	}
-	:scope.a-showurl a[href]::before {
+	:scope.a-showurl :any-link::before {
 		content: "["/"";
 	}
-	:scope.a-showurl a[href]::after {
+	:scope.a-showurl :any-link::after {
 		content: "](" attr(href) ")"/"";
 		word-break: break-all;
 	}

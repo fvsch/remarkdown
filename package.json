@@ -45,8 +45,9 @@
 	},
 	"devDependencies": {
 		"@types/node": "^24.13.5",
-		"oxfmt": "^0.71.0",
-		"postcss": "^8.5.28",
+		"happy-dom": "^20.14.6",
+		"oxfmt": "^0.72.0",
+		"postcss": "^8.5.29",
 		"postcss-combine-duplicated-selectors": "^11.0.0",
 		"sass": "^1.105.1",
 		"servitsy": "^0.6.0",

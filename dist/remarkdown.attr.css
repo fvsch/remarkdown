@@ -30,23 +30,23 @@
 	font-family: var(--rmd-code-font);
 }
 
-[data-remarkdown] a {
+[data-remarkdown] :any-link {
 	text-decoration-inset: 1ch;
 }
-[data-remarkdown] a::before {
+[data-remarkdown] :any-link::before {
 	content: "["/"";
 }
-[data-remarkdown] a::after {
+[data-remarkdown] :any-link::after {
 	content: "]"/"";
 }
 
-[data-remarkdown~="a-showurl"] a {
+[data-remarkdown~="a-showurl"] :any-link {
 	text-decoration-inset: 0;
 }
-[data-remarkdown~="a-showurl"] a[href]::before {
+[data-remarkdown~="a-showurl"] :any-link::before {
 	content: "["/"";
 }
-[data-remarkdown~="a-showurl"] a[href]::after {
+[data-remarkdown~="a-showurl"] :any-link::after {
 	content: "](" attr(href) ")"/"";
 	word-break: break-all;
 }
