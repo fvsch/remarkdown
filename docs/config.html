@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Configuring Remarkdown</title>
+	<meta name="viewport" content="width=device-width">
+	<link rel="canonical" href="https://fvsch.github.io/remarkdown/config">
+	<link rel="stylesheet" href="./docs.css">
+</head>
+<body class="remarkdown h1-line h2-line em-underscore">
+
+<nav>
+	<span>Remarkdown</span>
+	<br>
+	<a href="./">about</a>
+	<a href="./styles">styles</a>
+	<em>config</em>
+</nav>
+
+<main>
+
+<h1>
+	Configuring Remarkdown
+</h1>
+
+<p>
+	There are three ways to customize Remarkdown:
+</p>
+
+<ol>
+	<li><a href="#html">HTML classes or attributes</a></li>
+	<li><a href="#css">CSS variables and overrides</a></li>
+	<li><a href="#sass">Custom Sass builds</a></li>
+</ol>
+
+<h2 id="html">
+	Picking optional styles in HTML
+</h2>
+
+<p>
+	Enable <a href="./styles">optional styles</a> by combining the <code>remarkdown</code> class and the optional style classes:
+</p>
+
+<pre><code>&lt;div class="remarkdown <mark>h1-line ul-star</mark>">
+	&lt;h1>Using remarkdown.css&lt;/h1>
+	…
+&lt;/div></code></pre>
+
+<p>
+	With the <a href="https://cdn.jsdelivr.net/npm/remarkdown.css/dist/remarkdown.attr.css">remarkdown.attr.css</a> variant, use the <code>data-remarkdown</code> attribute instead:
+</p>
+
+<pre><code>&lt;div data-remarkdown="<mark>h1-line ul-star</mark>">
+	&lt;h1>Using remarkdown.attr.css&lt;/h1>
+	…
+&lt;/div></code></pre>
+
+<p>
+	If you don’t want to use Remarkdown’s default styles, you can use the <a href="https://cdn.jsdelivr.net/npm/remarkdown.css/dist/remarkdown-zero.css">remarkdown-zero.css</a> stylesheet instead (or <a href="https://cdn.jsdelivr.net/npm/remarkdown.css/dist/remarkdown-zero.attr.css">remarkdown-zero.attr.css</a>), and declare all the styles you want explicitly.
+</p>
+
+<pre><code>&lt;div class="remarkdown <mark>hn-prefix h1-line ul-plus ol-alpha a-bracket pre-tick quote-mark …</mark>">
+	&lt;h1>Using remarkdown-zero.css&lt;/h1>
+	…
+&lt;/div></code></pre>
+
+<h2 id="css">
+	CSS variables and overrides
+</h2>
+
+<p>
+	Remarkdown defines a few CSS variables:
+</p>
+
+<pre><code>.remarkdown {
+	--rmd-font: ui-monospace, monospace;
+	--rmd-code-font: inherit;
+	--rmd-line-height: 1.5;
+	--rmd-hn-prefix: "#";
+	--rmd-h1-line: "====================";
+	--rmd-h2-line: "--------------------";
+	--rmd-hr-stars: "* * * *";
+	--rmd-hr-dashes: "-------";
+	--rmd-pre-ticks: "```";
+	--rmd-pre-tilde: "~~~";
+	--rmd-pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~";
+	--rmd-quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+	--rmd-quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+	--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+	--rmd-table-hline: "--------------------";
+}</code></pre>
+
+<p>
+	Use these variables to tweak Remarkdown’s <code>font-family</code>, or the characters used in syntax markers.
+</p>
+
+<pre><code>.remarkdown {
+	--rmd-font: Consolas, Menlo, ui-monospace, monospace;
+	--rmd-h2-line: "~~~~~~~~~~~~~~~~~~~~";
+	--rmd-hr-stars: "*_* *_* *_*";
+}</code></pre>
+
+<p>
+	Note that colors and other cosmetic styles are not handled by these CSS variables. If you want to tweak colors and more, you will need to write your own style overrides. Here are a few examples.
+</p>
+
+<h3>
+	Make markers pop?!
+</h3>
+
+<pre><code>.remarkdown {
+	::before,
+	::after {
+		color: hsl(190 44% 36%);
+		text-shadow: 1px 2px hsl(190 66% 75%);
+		opacity: 0.75;
+	}
+}</code></pre>
+
+<h3>
+	Make titles big again
+</h3>
+
+<p>
+	Remarkdown sets the <code>font-size</code> of headings to <code>100%</code> to better achieve that plain text look (since most plain text editors and file formats use the same font size for all text). But if you want big titles anyway, it’s easy:
+</p>
+
+<pre><code>.remarkdown {
+	h1 { font-size: 1.5rem; font-weight: bold; }
+	h2 { font-size: 1.2rem; }
+}</code></pre>
+
+<p>
+	(Alternatively, if you’re <a href="sass">compiling your own build</a>, you can remove the <code>hn-reset</code> style from <code>$defaults</code>.)
+</p>
+
+<h3>
+	Beware of selector specificity
+</h3>
+
+<p>
+	Most Remarkdown styles have a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity">selector specificity</a> of <code>0,0,1,1</code> or in some cases <code>0,0,1,2</code>. If your own selectors have similar weight, make sure you declare your own styles <em>after</em> <code>remarkdown.css</code>:
+</p>
+
+<pre><code>@import "remarkdown.css/dist/remarkdown.css";
+/* Includes this selector (specificity 0,0,1,1):
+.remarkdown h1 { margin-block: 1.5lh 1lh; } */
+
+/* Your style overrides (same specificity): */
+.remarkdown h1 { margin-block: 0; }
+</code></pre>
+
+<p>
+	Alternatively, you can use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer">CSS Layers</a> to put all Remarkdown styles in a cascade layer with lower precedence:
+</p>
+
+<pre><code>@import "remarkdown.css/dist/remarkdown.css" <mark>layer(remarkdown)</mark>;
+/* Includes this selector (specificity 0,0,1,1):
+.remarkdown h1 { margin-block: 1.5lh 1lh; } */
+
+/* Your unlayered styles have priority,
+despite the lower specificity (0,0,0,1): */
+h1 { margin-block: 0; }
+</code></pre>
+
+<h2 id="sass">
+	Build a custom stylesheet with Sass
+</h2>
+
+<p>
+	Remarkdown is written in <a href="https://sass-lang.com/">Sass</a>, <a href="https://www.npmjs.com/package/remarkdown.css">published to npm</a>, and can be imported as a Sass library to generate a custom Remarkdown variant with your own config.
+</p>
+
+<p>
+	This part assumes that you are using Node.js and a toolchain that supports Sass, whether that’s npm and the <a href="https://npmjs.com/package/sass">sass</a> package directly, or a bundler like <a href="https://vite.dev/">Vite</a>.
+</p>
+
+<p>
+	Install Remarkdown and Sass using npm (or pnpm or a similar package manager):
+</p>
+
+<pre><code>npm install sass remarkdown.css</code></pre>
+
+<p>
+	Then you should be able to import <code>remarkdown.css</code> in any <code>.scss</code> stylesheet:
+</p>
+
+<pre><code>@import "pkg:remarkdown.css" as rmd;
+@include rmd.header();
+@include rmd.styles();</code></pre>
+
+<p>
+	If the <code>remarkdown.css</code> package is installed but Sass cannot find <code>pkg:remarkdown.css</code>, you may need to <a href="https://sass-lang.com/blog/announcing-pkg-importers/">configure Sass to resolve <code>pkg:</code> specifiers</a>. Or you can fall back to relative imports instead:
+</p>
+
+<pre><code>@import "./path/to/node_modules/remarkdown.css" as rmd;
+@include rmd.header();
+@include rmd.styles();</code></pre>
+
+<h3>
+	Example: custom selectors
+</h3>
+
+<p>
+	Remarkdown selectors can be configured with the <code>config()</code> mixin and the <code>$root-selector</code> and <code>$option-selector</code> variables. The default build of Remarkdown uses this configuration:
+</p>
+
+<pre><code>@import "pkg:remarkdown.css" as rmd;
+
+@include rmd.config(
+	$root-selector: ".remarkdown",
+	$option-selector: ".remarkdown.%s"
+);
+
+@include rmd.header();
+@include rmd.styles();</code></pre>
+
+<p>
+	Note that in <code>$option-selector</code>, the substring <code>%s</code> will be replaced by the optional style’s name, so that <code>.remarkdown.%s</code> becomes, for example, <code>.remarkdown.h1-line</code>.
+</p>
+
+<p>
+	Here is a somewhat contrived example that uses CSS nesting and <code>data-*</code> attributes:
+</p>
+
+<pre><code>@import "pkg:remarkdown.css" as rmd;
+
+@include rmd.config(
+	$root-selector: "&",
+	$option-selector: "&[data-%s]"
+);
+
+@include rmd.header();
+
+[data-remarkdown] {
+	@include rmd.styles();
+}</code></pre>
+
+<h3>
+	Example: selecting default styles
+</h3>
+
+<p>
+	Use the <code>$defaults</code> variable to change the styles that should be applied by default (i.e. styles that will be defined using the <code>$root-selector</code> instead of the <code>$option-selector</code>).
+</p>
+
+<pre><code>@import "pkg:remarkdown.css" as rmd;
+
+@include rmd.config(
+	$defaults: (
+		hn-reset,
+		hn-prefix,
+		h1-line,
+		h2-line,
+		ul-star,
+		ol-alpha,
+		strong-reset,
+		strong-underscore,
+		hr-dash,
+		hr-center
+	)
+);
+
+@include rmd.header();
+@include rmd.styles();</code></pre>
+
+<p>
+	You will need to list all the styles you want to see apply by default. That can be a fairly long list (as above). For instance, if I omit both <code>em-star</code> and <code>em-underscore</code>, EM elements won’t have any visible markers.
+</p>
+
+<p>
+	All styles not listed in <code>$defaults</code> will still be part of the CSS output, but they will use an optional style selector, and so will need enabling in HTML:
+</p>
+
+<pre><code>&lt;div class="remarkdown <mark>em-reset em-star</mark>"&gt;
+	&lt;p&gt;Hello &lt;em&gt;world&lt;/em&gt;!&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+<h3>
+	Example: limit or remove optional styles
+</h3>
+
+<p>
+	If you customize the default Remarkdown styles with <code>$defaults</code>, you may not need the remaining styles in the CSS output at all. This is where the <code>$options</code> variable comes in.
+</p>
+
+<p>
+	You can explicitly list all styles that should be
+</p>
+
+<p>
+	By setting the <code>$rmd-output-all-styles</code> option to <code>false</code>, Remarkdown will only output those styles that are listed in <code>$rmd-defaults</code>. This can be useful if you want to pick a set of default styles, don’t intend to ever use the alternative styles, and want to make a smaller CSS file.
+</p>
+
+<p>
+	Currently the default build with all styles included is close to 8&nbsp;KB, while the same defaults with no alternative styles included is down to 4&nbsp;KB.
+</p>
+
+</main>
+
+</body>
+</html>

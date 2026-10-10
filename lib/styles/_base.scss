@@ -1,0 +1,17 @@
+// Base
+// Options: base-text
+
+@use "../toolkit" as *;
+
+@mixin base {
+	@include option(base-text, $default-scope: root) {
+		font-family: rmd-var(font);
+		line-height: rmd-var(line-height);
+	}
+
+	@include option(base-text, $default-scope: default) {
+		:is(pre, code, kbd, samp) {
+			font-family: rmd-var(code-font);
+		}
+	}
+}

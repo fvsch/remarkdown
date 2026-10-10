@@ -1,0 +1,127 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta" as *;
+@use "sass:string";
+
+@use "../toolkit/utils";
+@use "./defaults";
+@use "./styles";
+
+$-DEFAULTS: module-variables(defaults);
+
+@function check-config-entry($name, $value) {
+	$name: string.unquote($name);
+	$msg: null;
+
+	// fail for unknown and invalid options
+	@if $name != preset and not map.has-key($-DEFAULTS, $name) {
+		$msg: "Unknown option $#{$name}, expected #{-print-list(map.keys($-DEFAULTS))}";
+	} @else if $name == preset {
+		$msg: require-enum($name, $value, null "default" "zero");
+	} @else if $name == selectors {
+		$msg: check-selectors($name, $value);
+	} @else if $name == variables {
+		$msg: require-type($name, $value, "string") or require-substring($name, $value, "--") or
+			require-substring($name, $value, "%s");
+	} @else if $name == defaults {
+		$msg: require-type($name, $value, "string" "list") or check-options($name, $value);
+	} @else if $name == options {
+		$msg: require-type($name, $value, "bool" "string" "list");
+		@if type-of($value) != bool {
+			$msg: $msg or check-options($name, $value);
+		}
+	} @else if $name == font or $name == code-font {
+		$msg: require-type($name, $value, "null" "string" "list");
+	} @else {
+		// fall back to checking that the type matches the default value's type
+		$msg: require-type($name, $value, type-of(map.get($-DEFAULTS, $name)));
+	}
+
+	@return $msg;
+}
+
+@function check-selectors($name, $map) {
+	@if type-of($map) != map {
+		@return "$#{$name} must be a map, got: #{-print-any($map)}";
+	}
+	@each $key in (default, option) {
+		@if not map.has-key($map, $key) {
+			@return "$#{$name} must have a '#{$key}' key, got: #{-print-any($map)}";
+		}
+	}
+	@each $key, $value in $map {
+		@if type-of($value) != string {
+			@return "$#{$name}.#{$key} must be a string, got: #{-print-any($value)}";
+		}
+		@if $value == "" and $key != default {
+			@return "$#{$name}.#{$key} cannot be an empty string";
+		}
+		@if $key == option {
+			@return require-substring("#{$name}.#{$key}", $value, "%s");
+		}
+	}
+	@return null;
+}
+
+@function check-options($name, $list) {
+	@each $item in $list {
+		@if not styles.is-style($item) {
+			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list(styles.all-styles())}";
+		}
+	}
+	@return null;
+}
+
+@function require-type($name, $value, $expected) {
+	$type: type-of($value);
+	@if not list.index($expected, $type) {
+		@return "$#{$name}'s type must be #{-print-list($expected)}, got: #{-print-any($type)}";
+	}
+	@return null;
+}
+
+@function require-enum($name, $value, $required) {
+	@if not list.index($required, $value) {
+		@return "$#{$name} must be #{-print-list($required)}, got: #{-print-any($value)}";
+	}
+	@return null;
+}
+
+@function require-substring($name, $value, $sub) {
+	@if not utils.str-contains($value, $sub) {
+		@return "$#{$name} must contain the substring #{-print-string($sub)}, got #{-print-string($value)}";
+	}
+	@return null;
+}
+
+@function -print-any($value) {
+	$type: type-of($value);
+	@if $type == string {
+		@return -print-string($value);
+	} @else if $type == list {
+		@return -print-list($value);
+	} @else {
+		@return inspect($value);
+	}
+}
+
+@function -print-list($list, $prefix: "one of ") {
+	$len: list.length($list);
+	@if $len == 0 {
+		@return "()";
+	} @else if $len == 1 {
+		@return -print-any(list.nth($list, 1));
+	}
+	$out: ();
+	@each $item in $list {
+		@if type-of($item) == string {
+			$item: string.quote($item);
+		}
+		$out: list.append($out, $item, $separator: comma);
+	}
+	@return string.unquote("#{$prefix}(#{inspect($out)})");
+}
+
+@function -print-string($str) {
+	@return inspect(string.quote($str));
+}

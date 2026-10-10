@@ -1,0 +1,33 @@
+// <a>
+// Options: a-bracket, a-showurl
+
+@use "../toolkit" as *;
+
+@mixin link {
+	@include option(a-bracket) {
+		// Avoid the selector `a` alone, because we don't want to style
+		// anchors like `<a name="foo"></a>`.
+		:any-link {
+			text-decoration-inset: 1ch;
+			&::before {
+				@include content("[");
+			}
+			&::after {
+				@include content("]");
+			}
+		}
+	}
+
+	@include option(a-showurl) {
+		:any-link {
+			text-decoration-inset: 0;
+			&::before {
+				@include content("[");
+			}
+			&::after {
+				@include content("](" attr(href) ")");
+				word-break: break-all;
+			}
+		}
+	}
+}

@@ -1,0 +1,63 @@
+@use "sass:list";
+@use "sass:meta" as *;
+
+/// Full list of styling options
+$-ALL-STYLES: (
+	a-bracket,
+	a-showurl,
+	base-text,
+	code-tick,
+	del-tilde,
+	em-reset,
+	em-star,
+	em-underscore,
+	h1-line,
+	h2-line,
+	hn-prefix,
+	hn-reset,
+	hr-center,
+	hr-dash,
+	hr-star,
+	ol-alpha,
+	ol-decimal,
+	ol-zero,
+	pre-indent,
+	pre-tick,
+	pre-tilde,
+	pre-tilde-full,
+	quote-mark,
+	strong-reset,
+	strong-star,
+	strong-underscore,
+	table-border,
+	table-border-full,
+	table-reset,
+	ul-dash,
+	ul-plus,
+	ul-star
+);
+
+/// Get the full list of styling options
+@function all-styles() {
+	@return $-ALL-STYLES;
+}
+
+/// Check that a style name is valid
+@function is-style($name) {
+	@return list.index($-ALL-STYLES, $name) != null;
+}
+
+@function filter($names, $include: null, $exclude: null) {
+	$acc: ();
+	@each $name in $names {
+		@if not is-style($name) {
+			@error "Unknown style name '#{$name}'";
+		}
+		$included: $include == null or list.index($include, $name) != null;
+		$excluded: $exclude != null and list.index($exclude, $name) != null;
+		@if $included and not $excluded {
+			$acc: list.append($acc, $name, $separator: comma);
+		}
+	}
+	@return $acc;
+}

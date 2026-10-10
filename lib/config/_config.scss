@@ -1,0 +1,112 @@
+/// Read and write Remarkdown configuration
+
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta" as *;
+
+@use "./defaults";
+@use "./styles";
+@use "./validate";
+@use "./zero";
+
+$-DEFAULTS: module-variables(defaults);
+$-ZERO: module-variables(zero);
+
+/// Holds the configuration state
+$-config: $-DEFAULTS;
+
+/// Write configuration values
+@mixin set($config, $initialize: false) {
+	@include -check-config($config);
+	@if $initialize {
+		$base: base(map.get($config, preset));
+		$-config: -merge-config($base, $config) !global;
+	} @else {
+		$-config: -merge-config($-config, $config) !global;
+	}
+}
+
+/// Return a copy of the default config for the "default" or "zero" preset
+@function base($preset: default) {
+	$err: validate.require-enum(preset, $preset, null "default" "zero");
+	@if $preset == null or $preset == default {
+		@return $-DEFAULTS;
+	} @else if $preset == zero {
+		@return map.merge($-DEFAULTS, $-ZERO);
+	} @else {
+		@error "$preset must be one of (null, \"default\", \"zero\"), got: #{inspect($preset)}";
+	}
+}
+
+/// Read from the current config
+@function get($path: null) {
+	// Return full config if no path is provided
+	@if $path == null {
+		@return map.merge((), $-config);
+	}
+	// Check that the config option exists, only checking the first element
+	$first: list.nth($path, 1);
+	@if type-of($first) != string {
+		@error "Invalid config path, expected a string or list of strings, got: #{inspect($path)}";
+	} @else if not map.has-key($-config, $first) {
+		@error "Unknown config option #{$first}";
+	}
+	@return map.get($-config, $path...);
+}
+
+/// Check if any style name in $names is a default style
+@function has-default($names) {
+	$in-defaults: in-defaults($names);
+	@return list.length($in-defaults) > 0;
+}
+
+/// Check if any style name in $names is an optional style
+@function has-option($names) {
+	$in-options: in-options($names);
+	@return list.length($in-options) > 0;
+}
+
+/// Return style names that are default styles
+@function in-defaults($names) {
+	$defaults: get(defaults);
+	@return styles.filter($names, $include: $defaults);
+}
+
+/// Return style names that are optional styles
+@function in-options($names) {
+	$defaults: get(defaults);
+	$options: get(options);
+	@if $options == false {
+		@return ();
+	} @else if $options == true {
+		@return styles.filter($names, $exclude: $defaults);
+	} @else {
+		@return styles.filter($names, $include: $options, $exclude: $defaults);
+	}
+}
+
+@mixin -check-config($config) {
+	@each $name, $value in $config {
+		$err: validate.check-config-entry($name, $value);
+		@if $err {
+			@error $err;
+		}
+	}
+}
+
+@function -merge-config($base, $conf) {
+	// merge $margins
+	@if map.has-key($base, margins) and map.has-key($conf, margins) {
+		$m1: map.get($base, margins);
+		$m2: map.get($conf, margins);
+		$conf: map.set($conf, margins, map.merge($m1, $m2));
+	}
+	// ensure defaults and options are lists
+	@each $key in (defaults, options) {
+		$value: map.get($conf, $key);
+		@if type-of($value) == string {
+			$conf: map.set($conf, $key, list.append((), $value, $separator: comma));
+		}
+	}
+	@return map.merge($base, $conf);
+}

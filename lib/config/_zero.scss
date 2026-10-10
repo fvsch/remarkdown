@@ -1,0 +1,36 @@
+/// Default options for Remarkdown-zero
+/// Used internally when using the `config` mixin with `$preset: "zero"`.
+
+// Keep "base-text" and reset styles in defaults for compatibility with
+// Remarkdown v3, which used `$set-font-styles: true` by default even in
+// the Remarkdown-zero variant.
+$defaults: (base-text, hn-reset, em-reset, strong-reset);
+
+// Include all other styles as options.
+$options: true;
+
+$margins: (
+	h1: (),
+	h2: (),
+	hn: (),
+	hr: (),
+	p: (),
+	pre: (
+		inline-start: 4,
+		inline-end: 0,
+	),
+	ol: (
+		inline-start: 3,
+		inline-end: 0,
+	),
+	ul: (
+		inline-start: 3,
+		inline-end: 0,
+	),
+	figure: (),
+	blockquote: (
+		inline-start: 2,
+		inline-end: 0,
+	),
+	table: (),
+);
