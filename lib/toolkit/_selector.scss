@@ -2,7 +2,7 @@
 @use "sass:meta" as *;
 @use "sass:selector";
 
-@use "../config";
+@use "../config/config";
 @use "./utils";
 
 /// Wrap content in the default selector

@@ -4,18 +4,15 @@
 @use "sass:string";
 
 @use "../toolkit/utils";
-@use "./defaults";
-@use "./styles";
-
-$-DEFAULTS: module-variables(defaults);
+@use "./data" as *;
 
 @function check-config-entry($name, $value) {
 	$name: string.unquote($name);
 	$msg: null;
 
 	// fail for unknown and invalid options
-	@if $name != preset and not map.has-key($-DEFAULTS, $name) {
-		$msg: "Unknown option $#{$name}, expected #{-print-list(map.keys($-DEFAULTS))}";
+	@if $name != preset and not map.has-key($DEFAULTS, $name) {
+		$msg: "Unknown option $#{$name}, expected #{-print-list(map.keys($DEFAULTS))}";
 	} @else if $name == preset {
 		$msg: require-enum($name, $value, null "default" "zero");
 	} @else if $name == selectors {
@@ -34,7 +31,7 @@ $-DEFAULTS: module-variables(defaults);
 		$msg: require-type($name, $value, "null" "string" "list");
 	} @else {
 		// fall back to checking that the type matches the default value's type
-		$msg: require-type($name, $value, type-of(map.get($-DEFAULTS, $name)));
+		$msg: require-type($name, $value, type-of(map.get($DEFAULTS, $name)));
 	}
 
 	@return $msg;
@@ -65,8 +62,8 @@ $-DEFAULTS: module-variables(defaults);
 
 @function check-options($name, $list) {
 	@each $item in $list {
-		@if not styles.is-style($item) {
-			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list(styles.all-styles())}";
+		@if not is-style($item) {
+			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list($ALL-STYLES)}";
 		}
 	}
 	@return null;

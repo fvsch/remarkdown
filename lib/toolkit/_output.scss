@@ -2,11 +2,14 @@
 @use "sass:meta" as *;
 @use "sass:string";
 
-@use "../config";
-@use "./utils" as *;
+@use "../config/config";
+@use "./utils";
 
 /// Define a CSS custom property
-@mixin define-var($name, $value) {
+@mixin define-var($name, $value: null, $path: null) {
+	@if $value == null and $path != null {
+		$value: config.get($path);
+	}
 	@if $value != null {
 		#{var-name($name)}: $value;
 	}
@@ -24,7 +27,7 @@
 /// CSS custom property name using the pattern in the $variables option
 @function var-name($name) {
 	$base: config.get(variables) or "--%s";
-	$prop: str-replace($base, "%s", $name);
+	$prop: utils.str-replace($base, "%s", $name);
 	@return string.unquote($prop);
 }
 

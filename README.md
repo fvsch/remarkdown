@@ -30,9 +30,8 @@ There are a few [alternate styles](https://fvsch.github.io/remarkdown/styles) yo
 
 The main `dist/remarkdown.css` stylesheet exists in a few variants, which tweak what CSS selectors look like and what styles are enabled by default:
 
-- [remarkdown.css](): normal defaults, `.remarkdown` class.
-- [remarkdown.scope.css](https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css): normal defaults, `.remarkdown` class using [CSS `@scope`][css-scope].
-- 
+- [remarkdown.css][]: normal defaults, `.remarkdown` class.
+- [remarkdown.scope.css][]: normal defaults, `.remarkdown` class using [CSS `@scope`][css-scope].
 
 ## Usage with npm
 
@@ -60,8 +59,7 @@ Beyond the pre-built stylesheets, Remarkdown is a [Sass][] library, and can be i
 @include rmd.styles();
 ```
 
-See the [`preset` directory](https://github.com/fvsch/remarkdown/tree/main/preset) for some examples that modify the Remarkdown selectors, and [`lib/config/_defaults.scss`](https://github.com/fvsch/remarkdown/tree/main/lib/config/_defaults.scss) for all available configuration options.
-
+See the [`preset` directory](https://github.com/fvsch/remarkdown/tree/main/preset) for some examples that modify the Remarkdown selectors, and [`lib/_defaults.scss`](https://github.com/fvsch/remarkdown/tree/main/lib/_defaults.scss) for all available configuration options.
 
 
 [Markdown]: https://daringfireball.net/projects/markdown/
@@ -70,8 +68,6 @@ See the [`preset` directory](https://github.com/fvsch/remarkdown/tree/main/prese
 [css-scope]: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@scope
 
 [remarkdown.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css
-[remarkdown.attr.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css
-[remarkdown.scope.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css
-[remarkdown.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css
-[remarkdown.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css
-[remarkdown.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css
+[remarkdown.attr.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.attr.css
+[remarkdown-zero.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.css
+[remarkdown-zero.attr.css]: https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.attr.css
