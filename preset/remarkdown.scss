@@ -1,7 +1,7 @@
 // Build of Remarkdown using default styles
 // and `.remarkdown` class selectors with @scope.
 
-@use "../lib/rmd";
+@use "../rmd";
 
 @include rmd.config(
 	$preset: default,

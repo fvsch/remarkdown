@@ -1,22 +1,14 @@
 /**
  * Styles for Remarkdown documentation pages.
- *
- * Includes two builds of Remarkdown:
- *
- * 1. `.remarkdown` class and `default` options preset;
- * 2. `[data-remarkdown]` attribute and `zero` options preset.
- *
- * We're using CSS scoping with `@scope (.remarkdown) to ([data-remarkdown])`
- * to ensure that we can switch from one build to the other in the same HTML page.
  */
 
-@use "../lib/rmd";
+@use "../../rmd";
 
 $breakpoint-small: 40em;
 $breakpoint-medium: 56em;
 
+/// Class-based build of Remarkdown using default styles
 @layer remarkdown {
-	/// Class-based build of Remarkdown using default styles
 	@include rmd.config(
 		$preset: default,
 		$selectors: (
@@ -33,21 +25,9 @@ $breakpoint-medium: 56em;
 		)
 	);
 	@include rmd.header("Remarkdown %v (MIT) %h");
-	@scope (.remarkdown) to (.no-remarkdown, [data-remarkdown]) {
+	@scope (.remarkdown) to ([data-remarkdown]) {
 		@include rmd.styles();
 	}
-
-	/// Attribute-based build of Remarkdown with no default styles
-	@include rmd.config(
-		$preset: zero,
-		$selectors: (
-			default: "[data-remarkdown]",
-			option: "[data-remarkdown~='%s']",
-			root: "[data-remarkdown]",
-		)
-	);
-	@include rmd.header("Remarkdown-zero %v [attr] (MIT) %u");
-	@include rmd.styles();
 }
 
 /* Demo layout and page styles */
@@ -100,7 +80,7 @@ main {
 	}
 }
 
-@scope (.remarkdown) to (.no-remarkdown, [data-remarkdown]) {
+@scope (.remarkdown) to ([data-remarkdown]) {
 	/* Make the Markdown-like markers look nice */
 	::before,
 	::after {

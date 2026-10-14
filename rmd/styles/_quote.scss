@@ -3,7 +3,8 @@
 
 @use "sass:math";
 
-@use "../toolkit" as *;
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
 
 @mixin quote {
 	@include default() {

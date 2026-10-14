@@ -8,13 +8,14 @@
 
 @use "./config";
 @use "./styles";
-@use "./toolkit/utils";
+@use "./toolkit/arglist";
+@use "./toolkit/str";
 
 $url: "https://fvsch.github.io/remarkdown/";
 $version: "4.0.0-beta.2";
 
 @mixin config($args...) {
-	$options: utils.merge-arglist($args);
+	$options: arglist.merge($args);
 	@include config.set($options, $initialize: true);
 }
 
@@ -45,8 +46,8 @@ $version: "4.0.0-beta.2";
 }
 
 @function -title-placeholders($title) {
-	$title: utils.str-replace($title, "%v", $version);
-	$title: utils.str-replace($title, "%u", $url);
+	$title: str.replace($title, "%v", $version);
+	$title: str.replace($title, "%u", $url);
 	@return $title;
 }
 

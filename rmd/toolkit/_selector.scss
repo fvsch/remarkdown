@@ -3,7 +3,7 @@
 @use "sass:selector";
 
 @use "../config/config";
-@use "./utils";
+@use "./str";
 
 /// Wrap content in the default selector
 /// (Or optionally the root selector)
@@ -51,7 +51,7 @@
 	$pattern: config.get(selectors option);
 	$selectors: ();
 	@each $name in $names {
-		$str: utils.str-replace($pattern, "%s", $name);
+		$str: str.replace($pattern, "%s", $name);
 		$next: selector.parse($str);
 		$selectors: list.join($selectors, $next, $separator: comma);
 	}

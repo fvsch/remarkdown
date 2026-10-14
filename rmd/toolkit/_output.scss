@@ -3,7 +3,7 @@
 @use "sass:string";
 
 @use "../config/config";
-@use "./utils";
+@use "./str";
 
 /// Define a CSS custom property
 @mixin define-var($name, $value: null, $path: null) {
@@ -27,7 +27,7 @@
 /// CSS custom property name using the pattern in the $variables option
 @function var-name($name) {
 	$base: config.get(variables) or "--%s";
-	$prop: utils.str-replace($base, "%s", $name);
+	$prop: str.replace($base, "%s", $name);
 	@return string.unquote($prop);
 }
 

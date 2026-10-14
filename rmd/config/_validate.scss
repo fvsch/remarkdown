@@ -3,7 +3,7 @@
 @use "sass:meta" as *;
 @use "sass:string";
 
-@use "../toolkit/utils";
+@use "../toolkit/str";
 @use "./data" as *;
 
 @function check-config-entry($name, $value) {
@@ -85,7 +85,7 @@
 }
 
 @function require-substring($name, $value, $sub) {
-	@if not utils.str-contains($value, $sub) {
+	@if not str.contains($value, $sub) {
 		@return "$#{$name} must contain the substring #{-print-string($sub)}, got #{-print-string($value)}";
 	}
 	@return null;

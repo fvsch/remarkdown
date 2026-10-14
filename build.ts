@@ -12,7 +12,8 @@ buildAll([
 	{ input: 'preset/remarkdown.attr.scss', dest: 'dist' },
 	{ input: 'preset/remarkdown-zero.scss', dest: 'dist' },
 	{ input: 'preset/remarkdown-zero.attr.scss', dest: 'dist' },
-	{ input: 'docs/docs.scss', dest: 'docs' },
+	{ input: 'docs/assets/docs.scss', dest: 'docs/assets' },
+	{ input: 'docs/assets/styles.scss', dest: 'docs/assets' },
 ]);
 
 async function buildAll(sources: { input: string; dest: string }[]) {
