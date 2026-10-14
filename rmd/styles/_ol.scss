@@ -1,9 +1,8 @@
 // <ol>
 // Options: ol-decimal, ol-zero, ol-alpha
 
-@use "sass:string";
-
-@use "../toolkit" as *;
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
 
 @mixin ol {
 	$mark: rmd-var(ol-mark);

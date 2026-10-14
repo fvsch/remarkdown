@@ -1,6 +1,7 @@
 // <p>
 
-@use "../toolkit" as *;
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
 
 @mixin p {
 	@include default() {
