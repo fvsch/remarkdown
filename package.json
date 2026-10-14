@@ -23,7 +23,7 @@
 	"type": "module",
 	"exports": {
 		".": {
-			"sass": "./lib/rmd.scss",
+			"sass": "./lib/_rmd.scss",
 			"style": "./dist/remarkdown.css",
 			"browser": "./dist/remarkdown.css"
 		},
