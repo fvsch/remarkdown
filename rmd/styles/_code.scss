@@ -1,7 +1,8 @@
 // <code>
 // Options: code-tick
 
-@use "../toolkit" as *;
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
 
 @mixin code {
 	@include option(code-tick) {

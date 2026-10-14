@@ -1,7 +1,8 @@
 // <a>
 // Options: a-bracket, a-showurl
 
-@use "../toolkit" as *;
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
 
 @mixin link {
 	@include option(a-bracket) {

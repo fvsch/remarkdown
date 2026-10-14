@@ -18,14 +18,7 @@ $ZERO: (
 		em-reset,
 		strong-reset,
 	),
-	// Include all other styles as options.
-	options: true,
 	margins: (
-		h1: (),
-		h2: (),
-		hn: (),
-		hr: (),
-		p: (),
 		pre: (
 			inline-start: 4,
 			inline-end: 0,
@@ -38,12 +31,10 @@ $ZERO: (
 			inline-start: 3,
 			inline-end: 0,
 		),
-		figure: (),
 		blockquote: (
 			inline-start: 2,
 			inline-end: 0,
 		),
-		table: (),
 	),
 );
 

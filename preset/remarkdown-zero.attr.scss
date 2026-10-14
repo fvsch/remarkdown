@@ -1,7 +1,7 @@
 // Build of Remarkdown using minimal default styles
 // and `data-remarkdown` attribute selectors.
 
-@use "../lib/rmd";
+@use "../rmd";
 
 @include rmd.config(
 	$preset: zero,

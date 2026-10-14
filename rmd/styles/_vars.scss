@@ -1,6 +1,7 @@
 // CSS variables
 
-@use "../toolkit" as *;
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
 
 @mixin vars {
 	$chars: (

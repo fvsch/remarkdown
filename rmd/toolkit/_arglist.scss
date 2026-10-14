@@ -1,0 +1,23 @@
+@use "sass:map";
+@use "sass:meta" as *;
+
+/// Merge positional arguments and named arguments passed to a function or mixin,
+/// provided the positional arguments are maps themselves.
+@function merge($args) {
+	@if type-of($args) != arglist {
+		@error "Expected $args to be type of arglist, got: #{type-of($args)}";
+	}
+	$map: -merge-list-of-maps($args);
+	$keywords: keywords($args);
+	@return map.merge($map, $keywords);
+}
+
+@function -merge-list-of-maps($maps) {
+	$acc: ();
+	@each $map in $maps {
+		@if type-of($map) == map {
+			$acc: map.merge($acc, $map);
+		}
+	}
+	@return $acc;
+}

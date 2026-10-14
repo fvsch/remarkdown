@@ -3,7 +3,8 @@
 
 @use "sass:list";
 
-@use "../toolkit" as *;
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
 
 @mixin heading {
 	@include option(hn-reset) {
