@@ -4,37 +4,26 @@
 @use "sass:map";
 @use "sass:meta" as *;
 
-@use "./defaults";
-@use "./styles";
+@use "./data" as *;
 @use "./validate";
-@use "./zero";
-
-$-DEFAULTS: module-variables(defaults);
-$-ZERO: module-variables(zero);
 
 /// Holds the configuration state
-$-config: $-DEFAULTS;
+$-state: $DEFAULTS;
 
 /// Write configuration values
-@mixin set($config, $initialize: false) {
-	@include -check-config($config);
-	@if $initialize {
-		$base: base(map.get($config, preset));
-		$-config: -merge-config($base, $config) !global;
-	} @else {
-		$-config: -merge-config($-config, $config) !global;
+@mixin set($map, $initialize: false) {
+	@each $name, $value in $map {
+		$err: validate.check-config-entry($name, $value);
+		@if $err {
+			@error $err;
+		}
 	}
-}
-
-/// Return a copy of the default config for the "default" or "zero" preset
-@function base($preset: default) {
-	$err: validate.require-enum(preset, $preset, null "default" "zero");
-	@if $preset == null or $preset == default {
-		@return $-DEFAULTS;
-	} @else if $preset == zero {
-		@return map.merge($-DEFAULTS, $-ZERO);
+	@if $initialize {
+		$preset: map.get($map, preset);
+		$base: base-config($preset);
+		$-state: -merge-config($base, $map) !global;
 	} @else {
-		@error "$preset must be one of (null, \"default\", \"zero\"), got: #{inspect($preset)}";
+		$-state: -merge-config($-state, $map) !global;
 	}
 }
 
@@ -42,16 +31,16 @@ $-config: $-DEFAULTS;
 @function get($path: null) {
 	// Return full config if no path is provided
 	@if $path == null {
-		@return map.merge((), $-config);
+		@return map.merge((), $-state);
 	}
 	// Check that the config option exists, only checking the first element
 	$first: list.nth($path, 1);
 	@if type-of($first) != string {
 		@error "Invalid config path, expected a string or list of strings, got: #{inspect($path)}";
-	} @else if not map.has-key($-config, $first) {
+	} @else if not map.has-key($-state, $first) {
 		@error "Unknown config option #{$first}";
 	}
-	@return map.get($-config, $path...);
+	@return map.get($-state, $path...);
 }
 
 /// Check if any style name in $names is a default style
@@ -69,7 +58,7 @@ $-config: $-DEFAULTS;
 /// Return style names that are default styles
 @function in-defaults($names) {
 	$defaults: get(defaults);
-	@return styles.filter($names, $include: $defaults);
+	@return -filter-styles($names, $include: $defaults);
 }
 
 /// Return style names that are optional styles
@@ -79,18 +68,9 @@ $-config: $-DEFAULTS;
 	@if $options == false {
 		@return ();
 	} @else if $options == true {
-		@return styles.filter($names, $exclude: $defaults);
+		@return -filter-styles($names, $exclude: $defaults);
 	} @else {
-		@return styles.filter($names, $include: $options, $exclude: $defaults);
-	}
-}
-
-@mixin -check-config($config) {
-	@each $name, $value in $config {
-		$err: validate.check-config-entry($name, $value);
-		@if $err {
-			@error $err;
-		}
+		@return -filter-styles($names, $include: $options, $exclude: $defaults);
 	}
 }
 
@@ -109,4 +89,20 @@ $-config: $-DEFAULTS;
 		}
 	}
 	@return map.merge($base, $conf);
+}
+
+/// Narrow down a list of style names
+@function -filter-styles($names, $include: null, $exclude: null) {
+	$acc: ();
+	@each $name in $names {
+		@if not is-style($name) {
+			@error "Unknown style name '#{$name}'";
+		}
+		$included: $include == null or list.index($include, $name) != null;
+		$excluded: $exclude != null and list.index($exclude, $name) != null;
+		@if $included and not $excluded {
+			$acc: list.append($acc, $name, $separator: comma);
+		}
+	}
+	@return $acc;
 }
