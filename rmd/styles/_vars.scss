@@ -1,0 +1,36 @@
+// CSS variables
+
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
+
+@mixin vars {
+	$chars: (
+		hn-prefix,
+		h1-line,
+		h2-line,
+		ul-dash,
+		ul-star,
+		ul-plus,
+		ol-mark,
+		pre-ticks,
+		pre-tilde,
+		pre-tilde-line,
+		quote-mark,
+		quote-rtl,
+		hr-stars,
+		hr-dashes,
+		table-vline,
+		table-hline
+	);
+
+	@include default($scope: root) {
+		@include define-var(font, $path: font);
+		@include define-var(code-font, $path: code-font);
+		@include define-var(line-height, $path: line-height);
+		@include define-var(ul-indent, $value: indent(ul, start));
+		@include define-var(ol-indent, $value: indent(ol, start));
+		@each $var in $chars {
+			@include define-var($var, $path: $var);
+		}
+	}
+}

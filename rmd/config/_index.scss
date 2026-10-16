@@ -1,0 +1,2 @@
+@forward "./config" show get, set, has-default, has-option;
+@forward "./data" show base-config, is-style;

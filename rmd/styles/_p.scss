@@ -1,0 +1,12 @@
+// <p>
+
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
+
+@mixin p {
+	@include default() {
+		p {
+			margin-block: margins(p);
+		}
+	}
+}
