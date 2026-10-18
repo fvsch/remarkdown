@@ -175,3 +175,18 @@ nav {
 		}
 	}
 }
+
+details {
+	border: solid 1px var(--bg-border-color);
+	padding-inline: 2ch;
+
+	summary {
+		position: relative;
+		margin-inline: -2ch;
+		padding: 0.5lh 2ch;
+		cursor: pointer;
+	}
+	summary + * {
+		margin-top: 0.5lh;
+	}
+}

@@ -554,3 +554,17 @@ nav > br {
 		display: none;
 	}
 }
+
+details {
+	border: solid 1px var(--bg-border-color);
+	padding-inline: 2ch;
+}
+details summary {
+	position: relative;
+	margin-inline: -2ch;
+	padding: 0.5lh 2ch;
+	cursor: pointer;
+}
+details summary + * {
+	margin-top: 0.5lh;
+}
