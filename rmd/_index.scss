@@ -19,11 +19,15 @@ $version: "4.0.0-beta.2";
 	@include config.set($options, $initialize: true);
 }
 
-@mixin header($title: "Remarkdown %v (MIT) %u") {
-	$title: -title-placeholders($title);
-	$defaults: -option-list(defaults);
-	/*! #{$title} */
-	/* defaults: #{$defaults} */
+@mixin header($title: "Remarkdown %v (MIT) %u", $show-defaults: true) {
+	@if $title and $title != "" {
+		$title: -title-placeholders($title);
+		/*! #{$title} */
+	}
+	@if $show-defaults {
+		$defaults: -option-list(defaults);
+		/* defaults: #{$defaults} */
+	}
 }
 
 @mixin styles {

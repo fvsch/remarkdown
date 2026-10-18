@@ -39,10 +39,10 @@ describe('rmd.config()', () => {
 
 	test('can set custom defaults', () => {
 		const { values } = scss`
-			@include rmd.config($defaults: (base-text, hn-reset, em-reset, strong-reset));
+			@include rmd.config($defaults: (font-reset, hn-reset, em-reset, strong-reset));
 			@debug capture(defaults, config.get(defaults));
 		`;
-		expect(values.defaults).toEqual(['base-text', 'hn-reset', 'em-reset', 'strong-reset']);
+		expect(values.defaults).toEqual(['font-reset', 'hn-reset', 'em-reset', 'strong-reset']);
 	});
 
 	test('can set custom options', () => {
@@ -55,11 +55,11 @@ describe('rmd.config()', () => {
 
 	test('$defaults and $options accept a single string', () => {
 		const { values } = scss`
-			@include rmd.config($defaults: base-text, $options: h1-line);
+			@include rmd.config($defaults: font-reset, $options: h1-line);
 			@debug capture(defaults, config.get(defaults));
 			@debug capture(options, config.get(options));
 		`;
-		expect(values.defaults).toEqual(['base-text']);
+		expect(values.defaults).toEqual(['font-reset']);
 		expect(values.options).toEqual(['h1-line']);
 	});
 
@@ -251,7 +251,7 @@ describe('rmd.config()', () => {
 		const { values } = scss`
 			@include rmd.config(
 				$preset: default,
-				$defaults: (base-text, hn-reset),
+				$defaults: (font-reset, hn-reset),
 				$options: true,
 			);
 			@debug capture(defaults, config.get(defaults));
@@ -259,7 +259,7 @@ describe('rmd.config()', () => {
 		`;
 
 		expect(values).toEqual({
-			defaults: ['base-text', 'hn-reset'],
+			defaults: ['font-reset', 'hn-reset'],
 			'has-hn-prefix': true,
 		});
 	});
