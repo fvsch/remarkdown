@@ -53,7 +53,7 @@
 &lt;/html></code></pre>
 
 <p>
-	There are a few <a href="./styles">alternate styles</a> you can pick from. For example, <code>class="remarkdown h1-line ul-star"</code> enables underlined <code>&lt;h1></code>s and asterisks for bullets.
+	There are a few <a href="./styles">optional styles</a> you can pick from. For example, <code>class="remarkdown h1-line ul-star"</code> enables underlined <code>&lt;h1></code>s and asterisks for bullets.
 </p>
 
 <h2>
@@ -70,12 +70,12 @@
 	Then in your JavaScript modules or CSS files, import one of the compiled stylesheets in the package’s <code>dist</code> folder:
 </p>
 
-<pre><code>// In a JS module processed by a bundler
-import "remarkdown.css/dist/remarkdown.css";</code></pre>
-
-<pre><code>/* Or in a CSS file processed by a bundler */
+<pre><code>/* In a CSS file processed by a bundler */
 @import "remarkdown.css/dist/remarkdown.css";
 </code></pre>
+
+<pre><code>// Or in a JS module processed by a bundler
+import "remarkdown.css/dist/remarkdown.css";</code></pre>
 
 <p>
 	The <code>remarkdown.css</code> package is also a Sass library, which can be used in Sass modules (<code>.scss</code> files):
