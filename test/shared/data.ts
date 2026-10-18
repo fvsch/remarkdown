@@ -55,12 +55,12 @@ export const RMD_CONFIG_KEYS = [
 export const RMD_ALL_STYLES = [
 	'a-bracket',
 	'a-showurl',
-	'base-text',
 	'code-tick',
 	'del-tilde',
 	'em-reset',
 	'em-star',
 	'em-underscore',
+	'font-reset',
 	'h1-line',
 	'h2-line',
 	'hn-prefix',
@@ -89,10 +89,10 @@ export const RMD_ALL_STYLES = [
 
 export const RMD_DEFAULTS = [
 	'a-bracket',
-	'base-text',
 	'code-tick',
 	'em-reset',
 	'em-star',
+	'font-reset',
 	'hn-prefix',
 	'hn-reset',
 	'hr-star',
@@ -104,7 +104,7 @@ export const RMD_DEFAULTS = [
 	'ul-dash',
 ];
 
-export const RMD_ZERO_DEFAULTS = ['base-text', 'em-reset', 'hn-reset', 'strong-reset'];
+export const RMD_ZERO_DEFAULTS = ['em-reset', 'font-reset', 'hn-reset', 'strong-reset'];
 
 type SassExportsKeys = {
 	functions: string[];

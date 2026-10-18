@@ -3,7 +3,7 @@
  */
 @layer remarkdown {
 	/*! Remarkdown 4.0.0-beta.2 (MIT) %h */
-	/* defaults: base-text, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
+	/* defaults: font-reset, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
 	@scope (.remarkdown) to ([data-remarkdown]) {
 		:scope {
 			--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
@@ -430,7 +430,7 @@
 	--bg-border-color: hsl(0 0% 82%);
 	--demo-text-color: hsl(180 70% 26%);
 	--demo-bg-color: hsl(200 60% 94%);
-	scroll-padding-top: 1lh;
+	scroll-padding-block: 1.75lh;
 	font-size: 112.5%;
 	color: var(--text-color);
 	background-color: var(--bg-color);

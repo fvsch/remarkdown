@@ -28,7 +28,7 @@ describe('rmd.header()', () => {
 	});
 
 	test('reflects changes to $defaults', () => {
-		const customDefaults = ['base-text', 'h1-line', 'hn-reset', 'pre-tick'];
+		const customDefaults = ['font-reset', 'h1-line', 'hn-reset', 'pre-tick'];
 		const { css } = scss`
 			@include rmd.config($defaults: (${customDefaults.join(', ')}));
 			@include rmd.header();

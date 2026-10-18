@@ -9,11 +9,10 @@ $DEFAULTS: meta.module-variables(defaults);
 /// Default options for Remarkdown-zero
 /// Used internally when using the `config` mixin with `$preset: "zero"`.
 $ZERO: (
-	// Keep "base-text" and reset styles in defaults for compatibility with
-	// Remarkdown v3, which used `$set-font-styles: true` by default even in
-	// the Remarkdown-zero variant.
+	// Keep reset styles in defaults for compatibility with Remarkdown v3,
+	// which used `$set-font-styles: true` even in the zero variant.
 	defaults: (
-		base-text,
+		font-reset,
 		hn-reset,
 		em-reset,
 		strong-reset,
@@ -42,12 +41,12 @@ $ZERO: (
 $ALL-STYLES: (
 	a-bracket,
 	a-showurl,
-	base-text,
 	code-tick,
 	del-tilde,
 	em-reset,
 	em-star,
 	em-underscore,
+	font-reset,
 	h1-line,
 	h2-line,
 	hn-prefix,
