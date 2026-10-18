@@ -25,10 +25,11 @@
 </h1>
 
 <p>
-	Here are all the styles provided by Remarkdown. The “default” ones are enabled in the <a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css">remarkdown.css</a> stylesheet. </p>
+	Here are all the styles provided by Remarkdown. “Default” styles are applied when you use the <code>remarkdown</code> class with the <a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css">remarkdown.css</a> stylesheet.
+</p>
 
 <p>
-	You can also use <a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.css">remarkdown-zero.css</a> which has no default styles, and enable styles with HTML classes. And for more control, you can use Sass to make a <a href="./config#sass">custom build</a> with your prefered default styles.
+	Enable optional styles with their class names (for example: <code>class="remarkdown pre-tick table-border"</code>). You can also use <a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.css">remarkdown-zero.css</a> which has only a few basic default styles (marked below with †).
 </p>
 
 <table id="styles-list">
@@ -41,13 +42,13 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><a href="#base-text">base-text</a></td>
-			<td>Yes</td>
+			<td><a href="#font-reset">font-reset</a></td>
+			<td>Yes&nbsp;†</td>
 			<td>Set a monospace font style</td>
 		</tr>
 		<tr>
 			<td><a href="#hn-reset">hn-reset</a></td>
-			<td>Yes</td>
+			<td>Yes&nbsp;†</td>
 			<td>Reset heading text styles</td>
 		</tr>
 		<tr>
@@ -112,7 +113,7 @@
 		</tr>
 		<tr>
 			<td><a href="#em-reset">em-reset</a></td>
-			<td>Yes</td>
+			<td>Yes&nbsp;†</td>
 			<td>Reset EM font style</td>
 		</tr>
 		<tr>
@@ -127,7 +128,7 @@
 		</tr>
 		<tr>
 			<td><a href="#strong-reset">strong-reset</a></td>
-			<td>Yes</td>
+			<td>Yes&nbsp;†</td>
 			<td>Reset STRONG font style</td>
 		</tr>
 		<tr>
@@ -204,16 +205,16 @@
 </table>
 
 <h2>
-	Base style
+	Base text style
 </h2>
 
-<h3 id="base-text">
-	Default: <code>base-text</code>
+<h3 id="font-reset">
+	Default: <code>font-reset</code>
 </h3>
 
 <figure data-remarkdown>
+	<p>Text should be rendered in a monospace font (unless specified otherwise with the <code>--rmd-font</code> CSS variable or the <code>$font</code> Sass option).</p>
 	<p>Paragraphs should be separated by a blank line.</p>
-	<p>Text should be rendered in a monospace font, unless defined otherwise (for example with <code>$base-font</code> in Sass).</p>
 </figure>
 
 <h2>

@@ -33,7 +33,7 @@ $selectors: (
 	// "%s" will be replaced with the style's name.
 	option: ".remarkdown.%s",
 	// Selector for the Remarkdown root container,
-	// used to declare CSS variables and `base-text` styles.
+	// used to declare CSS variables and `font-reset` styles.
 	// Typically identical to `$selectors.default`.
 	root: ".remarkdown",
 );
@@ -49,7 +49,7 @@ $variables: "--rmd-%s";
 // pattern in HTML: `<element class="remarkdown">…</element>`
 // or `<element data-remarkdown>…</element>`.
 $defaults: (
-	base-text,
+	font-reset,
 	hn-reset,
 	hn-prefix,
 	ul-dash,
