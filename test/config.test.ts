@@ -77,8 +77,9 @@ describe('rmd.config()', () => {
 	test('can set any valid config value', () => {
 		const expected: ScssResult['values'] = {
 			selectors: { default: '', option: '.%s', root: ':root' },
-			variables: `--%s`,
+			'css-var': `--%s`,
 			font: ['Comic Sans Mono', 'monospace'],
+			'code-font': ['Consolas', 'monospace'],
 			'line-height': 2,
 			'hn-prefix': `!`,
 			'h1-line': `~~~~~~`,
@@ -101,7 +102,7 @@ describe('rmd.config()', () => {
 		const { values } = scss`
 			@include rmd.config(
 				$selectors: (default: "", option: ".%s", root: ":root"),
-				$variables: "--%s",
+				$css-var: "--%s",
 				$font: ("Comic Sans Mono", monospace),
 				$code-font: (Consolas, monospace),
 				$line-height: 2,
