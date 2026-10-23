@@ -55,26 +55,33 @@
 }
 
 /// Return style names that are default styles
-@function in-defaults($names) {
-	$defaults: get(defaults);
-	@return -filter-styles($names, $include: $defaults);
+@function in-defaults($styles) {
+	$defaults: get(default-styles);
+	@return -filter-styles($styles, $include: $defaults);
 }
 
 /// Return style names that are optional styles
-@function in-options($names) {
-	$defaults: get(defaults);
-	$options: get(options);
-	@if $options == false {
+@function in-options($styles) {
+	$def: get(default-styles);
+	$opt: get(optional-styles);
+	@if $opt == false {
 		@return ();
-	} @else if $options == true {
-		@return -filter-styles($names, $exclude: $defaults);
+	} @else if $opt == true {
+		@return -filter-styles($styles, $exclude: $def);
 	} @else {
-		@return -filter-styles($names, $include: $options, $exclude: $defaults);
+		@return -filter-styles($styles, $include: $opt, $exclude: $def);
 	}
 }
 
 /// Write configuration values
 @mixin set($conf, $initialize: false) {
+	// ensure styles list options are list
+	@each $key in (default-styles, optional-styles) {
+		$value: map.get($conf, $key);
+		@if type-of($value) == string {
+			$conf: map.set($conf, $key, list.append((), $value, $separator: comma));
+		}
+	}
 	// validate all config options
 	@each $name, $value in $conf {
 		$err: validate.check-option($name, $value);
@@ -88,14 +95,7 @@
 		$margins: map.set($margins, default, data.$MARGINS-DEFAULT);
 		$conf: map.set($conf, margins, $margins);
 	}
-	// ensure defaults and options are lists
-	@each $key in (defaults, options) {
-		$value: map.get($conf, $key);
-		@if type-of($value) == string {
-			$conf: map.set($conf, $key, list.append((), $value, $separator: comma));
-		}
-	}
-	// Update state
+	// update state
 	@if $initialize {
 		$base: base-config(map.get($conf, preset));
 		@include state.set($conf, $base);

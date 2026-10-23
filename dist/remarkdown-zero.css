@@ -1,5 +1,5 @@
 /*! Remarkdown-zero 4.0.0-beta.2 (MIT) https://fvsch.github.io/remarkdown/ */
-/* defaults: font-reset, hn-reset, em-reset, strong-reset */
+/* default-styles: font-reset, hn-reset, em-reset, strong-reset */
 @scope (.remarkdown) to (.no-remarkdown) {
 	:scope {
 		--rmd-font: ui-monospace, monospace;

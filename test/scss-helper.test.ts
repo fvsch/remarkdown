@@ -53,9 +53,9 @@ describe(`scss() helper`, () => {
 
 	test('capture() custom function', () => {
 		const { logs, values } = scss`
-			$defaults: (font-reset, hn-prefix);
+			$default-styles: (font-reset, hn-prefix);
 			$margins: (h1: (top: 24px), p: (bottom: 0.5rem));
-			@debug capture(defaults, $defaults);
+			@debug capture(default-styles, $default-styles);
 			@debug capture(margins, $margins);
 		`;
 
@@ -67,7 +67,7 @@ describe(`scss() helper`, () => {
 
 		// capture() adds to values object, and converts Sass values into JS
 		expect(values).toEqual({
-			defaults: ['font-reset', 'hn-prefix'],
+			'default-styles': ['font-reset', 'hn-prefix'],
 			margins: { h1: { top: '24px' }, p: { bottom: '0.5rem' } },
 		});
 	});
