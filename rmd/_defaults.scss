@@ -4,7 +4,7 @@
 ///	@use "pkg:remarkdown.css" as rmd;
 ///	@include rmd.config(
 ///		$selectors: (default: ".rmd", option: ".rmd--%s", root: ".rmd"),
-///		$variables: "--rmd-%s",
+///		$css-var: "--rmd-%s",
 ///	);
 ///	@include rmd.header();
 ///	@include rmd.styles();
@@ -45,7 +45,7 @@ $selectors: (
 /// Type: string.
 ///
 /// "%s" will be replaced with the corresponding option's name.
-$variables: "--rmd-%s";
+$css-var: "--rmd-%s";
 
 /// Default styles.
 /// Type: a list of strings, where each string is a style name.

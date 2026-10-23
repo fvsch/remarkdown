@@ -27,7 +27,7 @@ export const DIST_STYLESHEETS = [
 
 export const RMD_CONFIG_KEYS = [
 	'selectors',
-	'variables',
+	'css-var',
 	'defaults',
 	'options',
 	'font',
