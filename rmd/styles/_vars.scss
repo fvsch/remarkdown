@@ -1,5 +1,6 @@
 // CSS variables
 
+@use "../config/config";
 @use "../toolkit/output" as *;
 @use "../toolkit/selector" as *;
 
@@ -24,13 +25,13 @@
 	);
 
 	@include default($scope: root) {
-		@include define-var(font, $path: font);
-		@include define-var(code-font, $path: code-font);
-		@include define-var(line-height, $path: line-height);
-		@include define-var(ul-indent, $value: indent(ul, start));
-		@include define-var(ol-indent, $value: indent(ol, start));
+		@include define-var(font, font-list(font));
+		@include define-var(code-font, font-list(code-font));
+		@include define-var(line-height, config.get(line-height));
+		@include define-var(ul-indent, indent(ul, start));
+		@include define-var(ol-indent, indent(ol, start));
 		@each $var in $chars {
-			@include define-var($var, $path: $var);
+			@include define-var($var, config.get($var));
 		}
 	}
 }

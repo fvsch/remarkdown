@@ -119,7 +119,7 @@ export const RMD_EXPORTS: SassExportsKeys = {
 };
 
 export const CONFIG_EXPORTS: SassExportsKeys = {
-	functions: ['base-config', 'get', 'has-default', 'has-option', 'is-style'],
+	functions: ['base-config', 'get', 'get-margins', 'has-default', 'has-option', 'is-style'],
 	mixins: ['set'],
 	variables: [],
 };

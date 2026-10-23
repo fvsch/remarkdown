@@ -53,22 +53,22 @@ describe(`scss() helper`, () => {
 
 	test('capture() custom function', () => {
 		const { logs, values } = scss`
-			$defaults: (text-base, hn-prefix);
-			$margins: (h1: (top: 2rem), p: (bottom: 0.5rem));
+			$defaults: (font-reset, hn-prefix);
+			$margins: (h1: (top: 24px), p: (bottom: 0.5rem));
 			@debug capture(defaults, $defaults);
 			@debug capture(margins, $margins);
 		`;
 
 		// @debug adds to logs as simple strings
 		expect(logs).toEqual([
-			{ type: 'debug', message: 'text-base, hn-prefix' },
-			{ type: 'debug', message: '(h1: (top: 2rem), p: (bottom: 0.5rem))' },
+			{ type: 'debug', message: 'font-reset, hn-prefix' },
+			{ type: 'debug', message: '(h1: (top: 24px), p: (bottom: 0.5rem))' },
 		]);
 
 		// capture() adds to values object, and converts Sass values into JS
 		expect(values).toEqual({
-			defaults: ['text-base', 'hn-prefix'],
-			margins: { h1: { top: 2 }, p: { bottom: 0.5 } },
+			defaults: ['font-reset', 'hn-prefix'],
+			margins: { h1: { top: '24px' }, p: { bottom: '0.5rem' } },
 		});
 	});
 });
