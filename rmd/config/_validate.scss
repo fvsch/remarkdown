@@ -6,7 +6,7 @@
 @use "../toolkit/str";
 @use "./data" as *;
 
-@function check-config-entry($name, $value) {
+@function check-option($name, $value) {
 	$name: string.unquote($name);
 	$msg: null;
 
@@ -21,11 +21,11 @@
 		$msg: require-type($name, $value, "string") or require-substring($name, $value, "--") or
 			require-substring($name, $value, "%s");
 	} @else if $name == defaults {
-		$msg: require-type($name, $value, "string" "list") or check-options($name, $value);
+		$msg: require-type($name, $value, "string" "list") or check-style-list($name, $value);
 	} @else if $name == options {
 		$msg: require-type($name, $value, "bool" "string" "list");
 		@if type-of($value) != bool {
-			$msg: $msg or check-options($name, $value);
+			$msg: $msg or check-style-list($name, $value);
 		}
 	} @else if $name == font or $name == code-font {
 		$msg: require-type($name, $value, "null" "string" "list");
@@ -60,7 +60,7 @@
 	@return null;
 }
 
-@function check-options($name, $list) {
+@function check-style-list($name, $list) {
 	@each $item in $list {
 		@if not is-style($item) {
 			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list($ALL-STYLES)}";

@@ -1,4 +1,6 @@
 @use "sass:list";
+@use "sass:map";
+@use "sass:math";
 @use "sass:meta" as *;
 @use "sass:string";
 
@@ -6,10 +8,7 @@
 @use "./str";
 
 /// Define a CSS custom property
-@mixin define-var($name, $value: null, $path: null) {
-	@if $value == null and $path != null {
-		$value: config.get($path);
-	}
+@mixin define-var($name, $value: null) {
 	@if $value != null {
 		#{var-name($name)}: $value;
 	}
@@ -29,6 +28,18 @@
 	$base: config.get(variables) or "--%s";
 	$prop: str.replace($base, "%s", $name);
 	@return string.unquote($prop);
+}
+
+/// Retrieve font-family values from config
+@function font-list($path) {
+	$value: config.get($path);
+	// Avoid outputing `font-family: monospace;` because that triggers
+	// some old backwards-compatible browser styles that make the text small.
+	// Common workaround is `font-family: monospace, monospace;`.
+	@if list.length($value) == 1 and list.nth($value, 1) == monospace {
+		@return (monospace, monospace);
+	}
+	@return $value;
 }
 
 /// Helper for generating pseudo-element content
@@ -58,8 +69,9 @@
 	@if not list.index(top bottom, $direction) {
 		@error "Unknown direction #{$direction}";
 	}
-	$num: config.get(margins $element $direction) or 1;
-	@return row($num);
+	$margins: config.get-margins($element);
+	$size: map.get($margins, $direction) or 0;
+	@return row($size);
 }
 
 /// Get both vertical margin values for an element.
@@ -73,12 +85,13 @@
 
 /// Get a horizontal margin (indent) value for an element.
 /// If not set, returns a value of 0.
-@function indent($element, $direction) {
-	@if not list.index(start end, $direction) {
-		@error "Unknown direction #{$direction}";
+@function indent($element, $dir) {
+	@if not list.index(start end, $dir) {
+		@error "Unknown direction #{$dir}";
 	}
-	$num: config.get(margins $element "inline-#{$direction}") or 0;
-	@return col($num);
+	$margins: config.get-margins($element);
+	$size: map.get($margins, "inline-#{$dir}") or 0;
+	@return col($size);
 }
 
 /// Get both horizontal margin (indent) values for an element.
@@ -91,19 +104,19 @@
 }
 
 /// Compute the size of a text line
-@function row($count: 1) {
-	@if $count != 0 {
-		@return $count * 1lh;
+@function row($size: 1, $step: 1lh) {
+	@if math.is-unitless($size) and $size != 0 {
+		@return $size * $step;
 	}
-	@return 0;
+	@return $size;
 }
 
 /// Compute the size of a text column
-@function col($count: 1) {
-	@if $count != 0 {
-		@return $count * 1ch;
+@function col($size: 1, $step: 1ch) {
+	@if math.is-unitless($size) and $size != 0 {
+		@return $size * $step;
 	}
-	@return 0;
+	@return $size;
 }
 
 @function -short-pair($a, $b) {

@@ -107,7 +107,7 @@ function sassValueToJS(value: Value): JSValue {
 	} else if (value instanceof SassBoolean) {
 		return value.value;
 	} else if (value instanceof SassNumber) {
-		return value.value;
+		return value.hasUnits ? value.toString() : value.value;
 	} else if (value instanceof SassString) {
 		return value.text;
 	} else if (value instanceof SassList) {

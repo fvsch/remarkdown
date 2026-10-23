@@ -4,26 +4,18 @@
 @use "sass:map";
 @use "sass:meta" as *;
 
-@use "./data" as *;
+@use "./data";
+@use "./state";
 @use "./validate";
 
-/// Holds the configuration state
-$-state: $DEFAULTS;
-
-/// Write configuration values
-@mixin set($map, $initialize: false) {
-	@each $name, $value in $map {
-		$err: validate.check-config-entry($name, $value);
-		@if $err {
-			@error $err;
-		}
-	}
-	@if $initialize {
-		$preset: map.get($map, preset);
-		$base: base-config($preset);
-		$-state: -merge-config($base, $map) !global;
+/// Return a copy of the default config for the "default" or "zero" preset
+@function base-config($preset: default) {
+	@if $preset == null or $preset == default {
+		@return data.$DEFAULTS;
+	} @else if $preset == zero {
+		@return map.merge(data.$DEFAULTS, data.$DEFAULTS-ZERO);
 	} @else {
-		$-state: -merge-config($-state, $map) !global;
+		@error "$preset must be one of (null, \"default\", \"zero\"), got: #{inspect($preset)}";
 	}
 }
 
@@ -31,16 +23,23 @@ $-state: $DEFAULTS;
 @function get($path: null) {
 	// Return full config if no path is provided
 	@if $path == null {
-		@return map.merge((), $-state);
+		@return state.all();
 	}
 	// Check that the config option exists, only checking the first element
 	$first: list.nth($path, 1);
 	@if type-of($first) != string {
 		@error "Invalid config path, expected a string or list of strings, got: #{inspect($path)}";
-	} @else if not map.has-key($-state, $first) {
+	} @else if not state.has-key($first) {
 		@error "Unknown config option #{$first}";
 	}
-	@return map.get($-state, $path...);
+	@return state.get($path);
+}
+
+/// Retrieve margins for an element
+@function get-margins($element) {
+	$default: get(margins default) or data.$MARGINS-DEFAULT;
+	$margins: get(margins $element) or ();
+	@return map.merge($default, $margins);
 }
 
 /// Check if any style name in $names is a default style
@@ -74,12 +73,20 @@ $-state: $DEFAULTS;
 	}
 }
 
-@function -merge-config($base, $conf) {
-	// merge $margins
-	@if map.has-key($base, margins) and map.has-key($conf, margins) {
-		$m1: map.get($base, margins);
-		$m2: map.get($conf, margins);
-		$conf: map.set($conf, margins, map.merge($m1, $m2));
+/// Write configuration values
+@mixin set($conf, $initialize: false) {
+	// validate all config options
+	@each $name, $value in $conf {
+		$err: validate.check-option($name, $value);
+		@if $err {
+			@error $err;
+		}
+	}
+	// ensure margins have a default key
+	@if map.has-key($conf, margins) and not map.get($conf, margins, default) {
+		$margins: map.get($conf, margins);
+		$margins: map.set($margins, default, data.$MARGINS-DEFAULT);
+		$conf: map.set($conf, margins, $margins);
 	}
 	// ensure defaults and options are lists
 	@each $key in (defaults, options) {
@@ -88,14 +95,20 @@ $-state: $DEFAULTS;
 			$conf: map.set($conf, $key, list.append((), $value, $separator: comma));
 		}
 	}
-	@return map.merge($base, $conf);
+	// Update state
+	@if $initialize {
+		$base: base-config(map.get($conf, preset));
+		@include state.set($conf, $base);
+	} @else {
+		@include state.set($conf);
+	}
 }
 
 /// Narrow down a list of style names
 @function -filter-styles($names, $include: null, $exclude: null) {
 	$acc: ();
 	@each $name in $names {
-		@if not is-style($name) {
+		@if not data.is-style($name) {
 			@error "Unknown style name '#{$name}'";
 		}
 		$included: $include == null or list.index($include, $name) != null;
