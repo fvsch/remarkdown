@@ -3,7 +3,7 @@
  */
 @layer remarkdown {
 	/*! Remarkdown 4.0.0-beta.2 (MIT) %h */
-	/* defaults: font-reset, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
+	/* default-styles: font-reset, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
 	@scope (.remarkdown) to ([data-remarkdown]) {
 		:scope {
 			--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
