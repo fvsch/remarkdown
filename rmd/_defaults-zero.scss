@@ -5,7 +5,7 @@
 /// Default styles.
 /// Keep reset styles in defaults for compatibility with Remarkdown v3,
 /// which used `$set-font-styles: true` even in the zero variant.
-$defaults: (
+$default-styles: (
 	font-reset,
 	hn-reset,
 	em-reset,

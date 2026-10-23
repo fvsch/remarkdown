@@ -19,11 +19,11 @@
 }
 
 /// Wrap content in a selector including the option name(s).
-/// - Uses the default selector if at least one option name is in `$defaults`.
+/// - Uses the default selector if at least one option name is in `$default-styles`.
 /// - Otherwise, uses an option selector (or a list of option selectors)
-///   for names present in `$options`.
+///   for names present in `$optional-styles`.
 /// - Outputs nothing if none of the provided names are present in
-///   `$defaults` or `$options`.
+///   `$default-styles` or `$optional-styles`.
 @mixin option($names, $default-scope: default) {
 	@if config.has-default($names) {
 		@include default($default-scope) {

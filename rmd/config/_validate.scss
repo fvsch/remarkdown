@@ -4,15 +4,15 @@
 @use "sass:string";
 
 @use "../toolkit/str";
-@use "./data" as *;
+@use "./data";
 
 @function check-option($name, $value) {
 	$name: string.unquote($name);
 	$msg: null;
 
 	// fail for unknown and invalid options
-	@if $name != preset and not map.has-key($DEFAULTS, $name) {
-		$msg: "Unknown option $#{$name}, expected #{-print-list(map.keys($DEFAULTS))}";
+	@if $name != preset and not map.has-key(data.$DEFAULTS, $name) {
+		$msg: "Unknown option $#{$name}, expected #{-print-list(map.keys(data.$DEFAULTS))}";
 	} @else if $name == preset {
 		$msg: require-enum($name, $value, null "default" "zero");
 	} @else if $name == selectors {
@@ -20,9 +20,9 @@
 	} @else if $name == css-var {
 		$msg: require-type($name, $value, "string") or require-substring($name, $value, "--") or
 			require-substring($name, $value, "%s");
-	} @else if $name == defaults {
+	} @else if $name == default-styles {
 		$msg: require-type($name, $value, "string" "list") or check-style-list($name, $value);
-	} @else if $name == options {
+	} @else if $name == optional-styles {
 		$msg: require-type($name, $value, "bool" "string" "list");
 		@if type-of($value) != bool {
 			$msg: $msg or check-style-list($name, $value);
@@ -31,7 +31,7 @@
 		$msg: require-type($name, $value, "null" "string" "list");
 	} @else {
 		// fall back to checking that the type matches the default value's type
-		$msg: require-type($name, $value, type-of(map.get($DEFAULTS, $name)));
+		$msg: require-type($name, $value, type-of(map.get(data.$DEFAULTS, $name)));
 	}
 
 	@return $msg;
@@ -62,8 +62,8 @@
 
 @function check-style-list($name, $list) {
 	@each $item in $list {
-		@if not is-style($item) {
-			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list($ALL-STYLES)}";
+		@if not data.is-style($item) {
+			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list(data.$ALL-STYLES)}";
 		}
 	}
 	@return null;

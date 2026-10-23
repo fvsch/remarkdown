@@ -58,7 +58,7 @@ $css-var: "--rmd-%s";
 ///	<!-- or -->
 ///	<div data-remarkdown>…</div>
 ///
-$defaults: (
+$default-styles: (
 	font-reset,
 	hn-reset,
 	hn-prefix,
@@ -89,13 +89,13 @@ $defaults: (
 ///
 /// Options can be set in two ways:
 ///
-/// 1. With a boolean value: all styles not in `$defaults` are treated as
-///    optional (for `true`) or excluded from the final output (for `false`).
+/// 1. With a boolean value: all styles not in `$default-styles` are treated
+///    as optional (`true`) or excluded from the final output (`false`).
 /// 2. With a list of strings: all listed styles are treated as optional,
-///    and styles not listed in either `$defaults` or `$options` are omitted
-///    in the final output.
+///    and styles not listed in either `$default-styles` or `$optional-styles`
+///    are omitted in the final output.
 ///
-$options: true;
+$optional-styles: true;
 
 /// Primary font stack.
 /// Type: a list of strings, or null.
