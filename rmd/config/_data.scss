@@ -2,39 +2,15 @@
 @use "sass:map";
 @use "sass:meta";
 
-@use "../defaults";
+@use "../defaults" as defaults;
+@use "../defaults-zero" as defaults-zero;
 
 $DEFAULTS: meta.module-variables(defaults);
+$DEFAULTS-ZERO: meta.module-variables(defaults-zero);
 
-/// Default options for Remarkdown-zero
-/// Used internally when using the `config` mixin with `$preset: "zero"`.
-$ZERO: (
-	// Keep reset styles in defaults for compatibility with Remarkdown v3,
-	// which used `$set-font-styles: true` even in the zero variant.
-	defaults: (
-		font-reset,
-		hn-reset,
-		em-reset,
-		strong-reset,
-	),
-	margins: (
-		pre: (
-			inline-start: 4,
-			inline-end: 0,
-		),
-		ol: (
-			inline-start: 3,
-			inline-end: 0,
-		),
-		ul: (
-			inline-start: 3,
-			inline-end: 0,
-		),
-		blockquote: (
-			inline-start: 2,
-			inline-end: 0,
-		),
-	),
+$MARGINS-DEFAULT: (
+	top: 1lh,
+	bottom: 1lh,
 );
 
 /// Full list of styling options
@@ -72,17 +48,6 @@ $ALL-STYLES: (
 	ul-plus,
 	ul-star
 );
-
-/// Return a copy of the default config for the "default" or "zero" preset
-@function base-config($preset: default) {
-	@if $preset == null or $preset == default {
-		@return $DEFAULTS;
-	} @else if $preset == zero {
-		@return map.merge($DEFAULTS, $ZERO);
-	} @else {
-		@error "$preset must be one of (null, \"default\", \"zero\"), got: #{inspect($preset)}";
-	}
-}
 
 /// Check that a style name is valid
 @function is-style($name) {
