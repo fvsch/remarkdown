@@ -39,10 +39,10 @@ describe('rmd.config()', () => {
 
 	test('can set custom default-styles', () => {
 		const { values } = scss`
-			@include rmd.config($default-styles: (font-reset, hn-reset, em-reset, strong-reset));
+			@include rmd.config($default-styles: (base-reset, hn-reset, em-reset, strong-reset));
 			@debug capture(default, config.get(default-styles));
 		`;
-		expect(values.default).toEqual(['font-reset', 'hn-reset', 'em-reset', 'strong-reset']);
+		expect(values.default).toEqual(['base-reset', 'hn-reset', 'em-reset', 'strong-reset']);
 	});
 
 	test('can set custom options', () => {
@@ -55,30 +55,30 @@ describe('rmd.config()', () => {
 
 	test('$default-styles and $optional-styles accept a single string', () => {
 		const { values } = scss`
-			@include rmd.config($default-styles: font-reset, $optional-styles: h1-line);
+			@include rmd.config($default-styles: base-reset, $optional-styles: h1-line);
 			@debug capture(default, config.get(default-styles));
 			@debug capture(optional, config.get(optional-styles));
 		`;
-		expect(values.default).toEqual(['font-reset']);
+		expect(values.default).toEqual(['base-reset']);
 		expect(values.optional).toEqual(['h1-line']);
 	});
 
 	test('accepts a config map instead of named params', () => {
 		const { values } = scss`
-			$config: (font: ("Consolas", monospace), line-height: 1.42);
+			$config: (base-font: ("Consolas", monospace), line-height: 1.42);
 			@include rmd.config($config);
-			@debug capture(font, config.get(font));
-			@debug capture(lh, config.get(line-height));
+			@debug capture(baseFont, config.get(base-font));
+			@debug capture(lineHeight, config.get(line-height));
 		`;
-		expect(values.font).toEqual(['Consolas', 'monospace']);
-		expect(values.lh).toEqual(1.42);
+		expect(values.baseFont).toEqual(['Consolas', 'monospace']);
+		expect(values.lineHeight).toEqual(1.42);
 	});
 
 	test('can set any valid config value', () => {
 		const expected: ScssResult['values'] = {
 			selectors: { default: '', option: '.%s', root: ':root' },
 			'css-var': `--%s`,
-			font: ['Comic Sans Mono', 'monospace'],
+			'base-font': ['Comic Sans Mono', 'monospace'],
 			'code-font': ['Consolas', 'monospace'],
 			'line-height': 2,
 			'hn-prefix': `!`,
@@ -103,7 +103,7 @@ describe('rmd.config()', () => {
 			@include rmd.config(
 				$selectors: (default: "", option: ".%s", root: ":root"),
 				$css-var: "--%s",
-				$font: ("Comic Sans Mono", monospace),
+				$base-font: ("Comic Sans Mono", monospace),
 				$code-font: (Consolas, monospace),
 				$line-height: 2,
 				$hn-prefix: "!",
@@ -206,8 +206,8 @@ describe('rmd.config()', () => {
 			`$line-height's type must be "number", got: "string"`,
 		);
 		expectSassError(
-			`@include rmd.config($font: false)`,
-			`$font's type must be one of ("null", "string", "list"), got: "bool"`,
+			`@include rmd.config($base-font: false)`,
+			`$base-font's type must be one of ("null", "string", "list"), got: "bool"`,
 		);
 	});
 
@@ -215,9 +215,9 @@ describe('rmd.config()', () => {
 		const suffix = 'expected one of ' + formatList(RMD_ALL_STYLES);
 		expectSassError(
 			`@include rmd.config(
-				$default-styles: (base, cool-style, lolwhat)
+				$default-styles: (based, cool-cat, lolwhat)
 			);`,
-			`$default-styles has unknown style name "base", ${suffix}`,
+			`$default-styles has unknown style name "based", ${suffix}`,
 		);
 		expectSassError(
 			`@include rmd.config(
@@ -274,7 +274,7 @@ describe('rmd.config()', () => {
 		const { values } = scss`
 			@include rmd.config(
 				$preset: default,
-				$default-styles: (font-reset, hn-reset),
+				$default-styles: (base-reset, hn-reset),
 				$optional-styles: true,
 			);
 			@debug capture(default, config.get(default-styles));
@@ -282,7 +282,7 @@ describe('rmd.config()', () => {
 		`;
 
 		expect(values).toEqual({
-			default: ['font-reset', 'hn-reset'],
+			default: ['base-reset', 'hn-reset'],
 			'has-hn-prefix': true,
 		});
 	});
