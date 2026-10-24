@@ -6,7 +6,7 @@
 	/* default-styles: font-reset, hn-reset, hn-prefix, ul-dash, ol-decimal, quote-mark, em-reset, em-star, strong-reset, strong-star, a-bracket, code-tick, pre-indent, hr-star */
 	@scope (.remarkdown) to ([data-remarkdown]) {
 		:scope {
-			--rmd-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
+			--rmd-base-font: Menlo, Consolas, DejaVu Sans Mono, ui-monospace, monospace;
 			--rmd-code-font: inherit;
 			--rmd-line-height: 1.5;
 			--rmd-ul-indent: 3ch;
@@ -27,7 +27,7 @@
 			--rmd-hr-dashes: "-------";
 			--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 			--rmd-table-hline: "----------------------------------------";
-			font-family: var(--rmd-font);
+			font-family: var(--rmd-base-font);
 			line-height: var(--rmd-line-height);
 		}
 		:is(pre, code, kbd, samp) {
