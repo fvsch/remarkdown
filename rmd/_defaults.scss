@@ -81,8 +81,8 @@ $defaults: (
 /// An optional style is a style that is defined using the `$selectors.option`
 /// selector pattern, which means it needs to be explicitly enabled in HTML.
 ///
-/// For example, with the configuration used in `preset/remarkdown.scss` and
-/// `preset/remarkdown.attr.scss` respectively:
+/// For example, with the configuration used in `build/remarkdown.scss` and
+/// `build/remarkdown.attr.scss` respectively:
 ///
 ///	<div class="remarkdown option-name">…</div>
 ///	<div data-remarkdown="option-name">…</div>

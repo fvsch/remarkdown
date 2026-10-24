@@ -17,7 +17,6 @@
 	"files": [
 		"README.md",
 		"dist",
-		"preset",
 		"rmd"
 	],
 	"type": "module",
@@ -38,7 +37,7 @@
 	},
 	"browser": "./dist/remarkdown.css",
 	"scripts": {
-		"build": "node build.ts",
+		"build": "node build/build.ts",
 		"format": "oxfmt --write '**/*.scss' '**/*.{js,ts}'",
 		"prepack": "pnpm run build",
 		"start": "servitsy docs",
