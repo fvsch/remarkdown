@@ -27,7 +27,7 @@
 		@if type-of($value) != bool {
 			$msg: $msg or check-style-list($name, $value);
 		}
-	} @else if $name == font or $name == code-font {
+	} @else if $name == base-font or $name == code-font {
 		$msg: require-type($name, $value, "null" "string" "list");
 	} @else {
 		// fall back to checking that the type matches the default value's type
