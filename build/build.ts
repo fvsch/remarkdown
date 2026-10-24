@@ -5,13 +5,15 @@ import postcss from 'postcss';
 import dupSelectors from 'postcss-combine-duplicated-selectors';
 import { compileAsync } from 'sass';
 
-import oxfmtConfig from './.oxfmtrc.json' with { type: 'json' };
+import oxfmtConfig from '../.oxfmtrc.json' with { type: 'json' };
+
+const rootDir = join(import.meta.dirname, '..');
 
 buildAll([
-	{ input: 'preset/remarkdown.scss', dest: 'dist' },
-	{ input: 'preset/remarkdown.attr.scss', dest: 'dist' },
-	{ input: 'preset/remarkdown-zero.scss', dest: 'dist' },
-	{ input: 'preset/remarkdown-zero.attr.scss', dest: 'dist' },
+	{ input: 'build/remarkdown.scss', dest: 'dist' },
+	{ input: 'build/remarkdown.attr.scss', dest: 'dist' },
+	{ input: 'build/remarkdown-zero.scss', dest: 'dist' },
+	{ input: 'build/remarkdown-zero.attr.scss', dest: 'dist' },
 	{ input: 'docs/assets/docs.scss', dest: 'docs/assets' },
 	{ input: 'docs/assets/styles.scss', dest: 'docs/assets' },
 ]);
@@ -27,8 +29,8 @@ async function buildAll(sources: { input: string; dest: string }[]) {
 }
 
 async function buildStylesheet(inputFilename: string, outFilename: string) {
-	const inputFile = join(import.meta.dirname, inputFilename);
-	const outFile = join(import.meta.dirname, outFilename);
+	const inputFile = join(rootDir, inputFilename);
+	const outFile = join(rootDir, outFilename);
 
 	try {
 		await access(inputFile, constants.R_OK);
