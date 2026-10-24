@@ -3,8 +3,8 @@ import { describe, expect, test } from 'vitest';
 import {
 	RMD_ALL_STYLES,
 	RMD_CONFIG_KEYS,
-	RMD_DEFAULTS,
-	RMD_ZERO_DEFAULTS,
+	RMD_DEFAULT_STYLES,
+	RMD_ZERO_DEFAULT_STYLES,
 	scss,
 	sortedKeys,
 	type ScssResult,
@@ -14,71 +14,72 @@ describe('rmd.config()', () => {
 	test('calling with no value keeps defaults', () => {
 		const { values } = scss`
 			@include rmd.config();
-			@debug capture(defaults, config.get(defaults));
+			@debug capture(default, config.get(default-styles));
 		`;
-		expect(sortedKeys(values.defaults)).toEqual(RMD_DEFAULTS);
+		expect(sortedKeys(values.default)).toEqual(RMD_DEFAULT_STYLES);
 	});
 
 	test('using default preset keeps defaults', () => {
 		const { values } = scss`
 			@include rmd.config($preset: default);
-			@debug capture(defaults, config.get(defaults));
+			@debug capture(default, config.get(default-styles));
 		`;
-		expect(sortedKeys(values.defaults)).toEqual(RMD_DEFAULTS);
+		expect(sortedKeys(values.default)).toEqual(RMD_DEFAULT_STYLES);
 	});
 
 	test('can set Remarkdown-zero defaults', () => {
 		const { values } = scss`
 			@include rmd.config($preset: zero);
-			@debug capture(defaults, config.get(defaults));
-			@debug capture(options, config.get(options));
+			@debug capture(default, config.get(default-styles));
+			@debug capture(optional, config.get(optional-styles));
 		`;
-		expect(sortedKeys(values.defaults)).toEqual(RMD_ZERO_DEFAULTS);
-		expect(values.options).toBe(true);
+		expect(sortedKeys(values.default)).toEqual(RMD_ZERO_DEFAULT_STYLES);
+		expect(values.optional).toBe(true);
 	});
 
-	test('can set custom defaults', () => {
+	test('can set custom default-styles', () => {
 		const { values } = scss`
-			@include rmd.config($defaults: (font-reset, hn-reset, em-reset, strong-reset));
-			@debug capture(defaults, config.get(defaults));
+			@include rmd.config($default-styles: (base-reset, hn-reset, em-reset, strong-reset));
+			@debug capture(default, config.get(default-styles));
 		`;
-		expect(values.defaults).toEqual(['font-reset', 'hn-reset', 'em-reset', 'strong-reset']);
+		expect(values.default).toEqual(['base-reset', 'hn-reset', 'em-reset', 'strong-reset']);
 	});
 
 	test('can set custom options', () => {
 		const { values } = scss`
-			@include rmd.config($options: (ul-dash, hn-prefix));
-			@debug capture(options, config.get(options));
+			@include rmd.config($optional-styles: (ul-dash, hn-prefix));
+			@debug capture(optional, config.get(optional-styles));
 		`;
-		expect(values.options).toEqual(['ul-dash', 'hn-prefix']);
+		expect(values.optional).toEqual(['ul-dash', 'hn-prefix']);
 	});
 
-	test('$defaults and $options accept a single string', () => {
+	test('$default-styles and $optional-styles accept a single string', () => {
 		const { values } = scss`
-			@include rmd.config($defaults: font-reset, $options: h1-line);
-			@debug capture(defaults, config.get(defaults));
-			@debug capture(options, config.get(options));
+			@include rmd.config($default-styles: base-reset, $optional-styles: h1-line);
+			@debug capture(default, config.get(default-styles));
+			@debug capture(optional, config.get(optional-styles));
 		`;
-		expect(values.defaults).toEqual(['font-reset']);
-		expect(values.options).toEqual(['h1-line']);
+		expect(values.default).toEqual(['base-reset']);
+		expect(values.optional).toEqual(['h1-line']);
 	});
 
 	test('accepts a config map instead of named params', () => {
 		const { values } = scss`
-			$config: (font: ("Consolas", monospace), line-height: 1.42);
+			$config: (base-font: ("Consolas", monospace), line-height: 1.42);
 			@include rmd.config($config);
-			@debug capture(font, config.get(font));
+			@debug capture(baseFont, config.get(base-font));
 			@debug capture(lineHeight, config.get(line-height));
 		`;
-		expect(values.font).toEqual(['Consolas', 'monospace']);
+		expect(values.baseFont).toEqual(['Consolas', 'monospace']);
 		expect(values.lineHeight).toEqual(1.42);
 	});
 
 	test('can set any valid config value', () => {
 		const expected: ScssResult['values'] = {
 			selectors: { default: '', option: '.%s', root: ':root' },
-			variables: `--%s`,
-			font: ['Comic Sans Mono', 'monospace'],
+			'css-var': `--%s`,
+			'base-font': ['Comic Sans Mono', 'monospace'],
+			'code-font': ['Consolas', 'monospace'],
 			'line-height': 2,
 			'hn-prefix': `!`,
 			'h1-line': `~~~~~~`,
@@ -101,8 +102,8 @@ describe('rmd.config()', () => {
 		const { values } = scss`
 			@include rmd.config(
 				$selectors: (default: "", option: ".%s", root: ":root"),
-				$variables: "--%s",
-				$font: ("Comic Sans Mono", monospace),
+				$css-var: "--%s",
+				$base-font: ("Comic Sans Mono", monospace),
 				$code-font: (Consolas, monospace),
 				$line-height: 2,
 				$hn-prefix: "!",
@@ -205,20 +206,24 @@ describe('rmd.config()', () => {
 			`$line-height's type must be "number", got: "string"`,
 		);
 		expectSassError(
-			`@include rmd.config($font: false)`,
-			`$font's type must be one of ("null", "string", "list"), got: "bool"`,
+			`@include rmd.config($base-font: false)`,
+			`$base-font's type must be one of ("null", "string", "list"), got: "bool"`,
 		);
 	});
 
-	test('rejects invalid defaults/options', () => {
+	test('rejects invalid default-styles/optional-styles', () => {
 		const suffix = 'expected one of ' + formatList(RMD_ALL_STYLES);
 		expectSassError(
-			`@include rmd.config($defaults: (base cool-style))`,
-			`$defaults has unknown style name "base", ${suffix}`,
+			`@include rmd.config(
+				$default-styles: (based, cool-cat, lolwhat)
+			);`,
+			`$default-styles has unknown style name "based", ${suffix}`,
 		);
 		expectSassError(
-			`@include rmd.config($options: (h1-line "Hello!"))`,
-			`$options has unknown style name "Hello!", ${suffix}`,
+			`@include rmd.config(
+				$optional-styles: (h1-line, "Hello!")
+			);`,
+			`$optional-styles has unknown style name "Hello!", ${suffix}`,
 		);
 	});
 
@@ -265,19 +270,19 @@ describe('rmd.config()', () => {
 		);
 	});
 
-	test('setting $defaults updates $options', () => {
+	test('setting $default-styles impacts optional styles', () => {
 		const { values } = scss`
 			@include rmd.config(
 				$preset: default,
-				$defaults: (font-reset, hn-reset),
-				$options: true,
+				$default-styles: (base-reset, hn-reset),
+				$optional-styles: true,
 			);
-			@debug capture(defaults, config.get(defaults));
+			@debug capture(default, config.get(default-styles));
 			@debug capture(has-hn-prefix, config.has-option(hn-prefix));
 		`;
 
 		expect(values).toEqual({
-			defaults: ['font-reset', 'hn-reset'],
+			default: ['base-reset', 'hn-reset'],
 			'has-hn-prefix': true,
 		});
 	});

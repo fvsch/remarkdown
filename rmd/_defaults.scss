@@ -4,7 +4,7 @@
 ///	@use "pkg:remarkdown.css" as rmd;
 ///	@include rmd.config(
 ///		$selectors: (default: ".rmd", option: ".rmd--%s", root: ".rmd"),
-///		$variables: "--rmd-%s",
+///		$css-var: "--rmd-%s",
 ///	);
 ///	@include rmd.header();
 ///	@include rmd.styles();
@@ -36,7 +36,7 @@ $selectors: (
 	// "%s" will be replaced with the style's name.
 	option: ".remarkdown.%s",
 	// Selector for the Remarkdown root container,
-	// used to declare CSS variables and `font-reset` styles.
+	// used to declare CSS variables and `base-reset` styles.
 	// Typically identical to `$selectors.default`.
 	root: ".remarkdown",
 );
@@ -45,7 +45,7 @@ $selectors: (
 /// Type: string.
 ///
 /// "%s" will be replaced with the corresponding option's name.
-$variables: "--rmd-%s";
+$css-var: "--rmd-%s";
 
 /// Default styles.
 /// Type: a list of strings, where each string is a style name.
@@ -58,8 +58,8 @@ $variables: "--rmd-%s";
 ///	<!-- or -->
 ///	<div data-remarkdown>…</div>
 ///
-$defaults: (
-	font-reset,
+$default-styles: (
+	base-reset,
 	hn-reset,
 	hn-prefix,
 	ul-dash,
@@ -89,25 +89,39 @@ $defaults: (
 ///
 /// Options can be set in two ways:
 ///
-/// 1. With a boolean value: all styles not in `$defaults` are treated as
-///    optional (for `true`) or excluded from the final output (for `false`).
+/// 1. With a boolean value: all styles not in `$default-styles` are treated
+///    as optional (`true`) or excluded from the final output (`false`).
 /// 2. With a list of strings: all listed styles are treated as optional,
-///    and styles not listed in either `$defaults` or `$options` are omitted
-///    in the final output.
+///    and styles not listed in either `$default-styles` or `$optional-styles`
+///    are omitted in the final output.
 ///
-$options: true;
+$optional-styles: true;
 
 /// Primary font stack.
-/// Type: a list of strings, or null.
-/// Recommended: lists of typefaces should end with the generic 'monospace'.
-$font: ui-monospace, monospace;
+/// Type: a list of strings, a string, or null.
+/// Recommended: lists should end with the generic 'monospace'.
+///
+/// A custom font stack with multiples fonts should be written as a list,
+/// not as a string with comma-separated values:
+///
+///	// Do:
+///	$base-font: ("DejaVu Mono", Consolas, monospace);
+///	// Don’t:
+///	$base-font: "DejaVu Mono, Consolas, monospace";
+///
+$base-font: (ui-monospace, monospace);
 
-/// Font stack for code elements.
-/// Type: a list of strings, or null.
-/// For elements that are traditionnaly monospace, use a different font?
+/// Font stack for traditionally monospace elements (code, pre, etc.).
+/// Type: a list of strings, a string, or null.
+/// Defaults to "inherit" in order to use the `$base-font`.
+///
+/// Set to something different if you want to visually distinguish those
+/// elements, for instance use a sans-serif monospace font stack for the
+/// base font, and a serif monospace font (like Courier) here, or the other
+/// way around.
 $code-font: inherit;
 
-/// Root line-height.
+/// Base line-height.
 /// Type: number. Prefer a unitless number.
 $line-height: 1.5;
 

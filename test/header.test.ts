@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { RMD_DEFAULTS, findHeader, pkg, scss } from './shared';
+import { RMD_DEFAULT_STYLES, findHeader, pkg, scss } from './shared';
 
 describe('rmd.header()', () => {
 	test('outputs correct package version', () => {
@@ -24,13 +24,13 @@ describe('rmd.header()', () => {
 			@include rmd.header();
 		`;
 		const { defaults } = findHeader(css);
-		expect(defaults).toEqual(RMD_DEFAULTS);
+		expect(defaults).toEqual(RMD_DEFAULT_STYLES);
 	});
 
-	test('reflects changes to $defaults', () => {
-		const customDefaults = ['font-reset', 'h1-line', 'hn-reset', 'pre-tick'];
+	test('reflects changes to $default-styles', () => {
+		const customDefaults = ['base-reset', 'h1-line', 'hn-reset', 'pre-tick'];
 		const { css } = scss`
-			@include rmd.config($defaults: (${customDefaults.join(', ')}));
+			@include rmd.config($default-styles: (${customDefaults.join(', ')}));
 			@include rmd.header();
 		`;
 		const { defaults } = findHeader(css);

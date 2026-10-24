@@ -83,7 +83,7 @@
 	Remarkdown defines a few CSS variables for basic typography and spacing:
 </p>
 
-<pre><code>--rmd-font: ui-monospace, monospace;
+<pre><code>--rmd-base-font: ui-monospace, monospace;
 --rmd-code-font: inherit;
 --rmd-line-height: 1.5;
 --rmd-ul-indent: 3ch;
@@ -117,7 +117,7 @@
 </p>
 
 <pre><code>.remarkdown {
-	--rmd-font: Consolas, Menlo, ui-monospace, monospace;
+	--rmd-base-font: Consolas, Menlo, ui-monospace, monospace;
 	--rmd-ul-indent: 4ch;
 	--rmd-ol-indent: 4ch;
 	--rmd-h2-line: "////////////////////";
@@ -160,7 +160,7 @@
 }</code></pre>
 
 <p>
-	(Alternatively, if you’re <a href="sass">compiling your own build</a>, you can remove the <code>hn-reset</code> style from <code>$defaults</code>.)
+	(Alternatively, if you’re <a href="sass">compiling your own build</a>, you can remove the <code>hn-reset</code> style from <code>$default-styles</code>.)
 </p>
 
 <h3>
@@ -257,7 +257,7 @@
 // and `rmd.styles` will use the default config
 @include rmd.config(
 	$preset: "zero",
-	$variables: "--%s",
+	$css-var: "--%s",
 	$font: ("Comic Sans Mono", "monospace"),
 	$ol-mark: ")",
 );
@@ -283,18 +283,18 @@
 </code></pre>
 
 <p>
-	Behind the scenes, this sets the value of the <code>$defaults</code> and <code>$margins</code> options.
+	Behind the scenes, this sets the value of the <code>$default-styles</code> and <code>$margins</code> options.
 </p>
 
 <pre><code>@include rmd.config(
-	// this will be overridden by '$defaults':
+	// this will be overridden by '$default-styles':
 	$preset: "zero",
-	$defaults: (font-reset, hn-reset, /* … */),
+	$default-styles: (base-reset, hn-reset, /* … */),
 );
 </code></pre>
 
-<h3 id="option-defaults">
-	Option: <code>$defaults</code>
+<h3 id="sass-default-styles">
+	Option: <code>$default-styles</code>
 </h3>
 
 <p>
@@ -302,12 +302,12 @@
 </p>
 
 <p>
-	What happens to styles not listed in <code>$defaults</code> depends on the value of <a href="#option-options">the <code>$options</code> option</a>.
+	What happens to styles not listed in <code>$default-styles</code> depends on the value of <a href="#sass-optional-styles">the <code>$optional-styles</code> option</a>.
 </p>
 
 <pre><code>// Example 1: custom default styles:
 @include rmd.config(
-	$defaults: (
+	$default-styles: (
 		hn-reset, hn-prefix, h1-line, h2-line,
 		ul-star, ol-alpha,
 		strong-reset, strong-underscore,
@@ -317,7 +317,7 @@
 
 // Example 2: no defaults at all!
 @include rmd.config(
-	$defaults: ()
+	$default-styles: ()
 );
 </code></pre>
 
@@ -326,7 +326,7 @@
 </p>
 
 <p>
-	All styles not listed in <code>$defaults</code> will still be part of the CSS output, but they will use an optional style selector, and so will need enabling in HTML:
+	All styles not listed in <code>$default-styles</code> will still be part of the CSS output, but they will use an optional style selector, and so will need enabling in HTML:
 </p>
 
 <pre><code>&lt;div class="remarkdown <mark>em-reset em-star</mark>"&gt;
@@ -338,7 +338,7 @@
 </h3>
 
 <p>
-	If you customize the default Remarkdown styles with <code>$defaults</code>, you may not need the remaining styles in the CSS output at all. This is where the <code>$options</code> variable comes in.
+	If you customize the default Remarkdown styles with <code>$default-styles</code>, you may not need the remaining styles in the CSS output at all. This is where the <code>$optional-styles</code> option comes in.
 </p>
 
 <p>

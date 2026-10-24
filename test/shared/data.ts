@@ -27,10 +27,10 @@ export const DIST_STYLESHEETS = [
 
 export const RMD_CONFIG_KEYS = [
 	'selectors',
-	'variables',
-	'defaults',
-	'options',
-	'font',
+	'css-var',
+	'default-styles',
+	'optional-styles',
+	'base-font',
 	'code-font',
 	'line-height',
 	'margins',
@@ -55,12 +55,12 @@ export const RMD_CONFIG_KEYS = [
 export const RMD_ALL_STYLES = [
 	'a-bracket',
 	'a-showurl',
+	'base-reset',
 	'code-tick',
 	'del-tilde',
 	'em-reset',
 	'em-star',
 	'em-underscore',
-	'font-reset',
 	'h1-line',
 	'h2-line',
 	'hn-prefix',
@@ -87,12 +87,12 @@ export const RMD_ALL_STYLES = [
 	'ul-star',
 ];
 
-export const RMD_DEFAULTS = [
+export const RMD_DEFAULT_STYLES = [
 	'a-bracket',
+	'base-reset',
 	'code-tick',
 	'em-reset',
 	'em-star',
-	'font-reset',
 	'hn-prefix',
 	'hn-reset',
 	'hr-star',
@@ -104,7 +104,7 @@ export const RMD_DEFAULTS = [
 	'ul-dash',
 ];
 
-export const RMD_ZERO_DEFAULTS = ['em-reset', 'font-reset', 'hn-reset', 'strong-reset'];
+export const RMD_ZERO_DEFAULT_STYLES = ['base-reset', 'em-reset', 'hn-reset', 'strong-reset'];
 
 type SassExportsKeys = {
 	functions: string[];
@@ -142,7 +142,6 @@ export const STYLES_EXPORTS: SassExportsKeys = {
 		'strong',
 		'table',
 		'ul',
-		'vars',
 	],
 	variables: [],
 };
