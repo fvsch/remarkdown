@@ -4,10 +4,16 @@
 ///	@use "pkg:remarkdown.css" as rmd;
 ///	@include rmd.config(
 ///		$selectors: (default: ".rmd", option: ".rmd--%s", root: ".rmd"),
-///		$css-var: "--rmd-%s",
+///		$css-vars: "--rmd-%s",
 ///	);
 ///	@include rmd.header();
 ///	@include rmd.styles();
+
+// TODO: split $selectors into:
+// - $base-selector (was $selectors.root)
+// - $default-selector (was $selectors.default)
+// - $option-selector (was $selectors.option)
+// Note: moving away from using 'root' because it can be confused with `:root`.
 
 /// Selector patterns.
 /// Type: map with keys 'default', 'option' and 'root', and string values.
@@ -45,7 +51,7 @@ $selectors: (
 /// Type: string.
 ///
 /// "%s" will be replaced with the corresponding option's name.
-$css-var: "--rmd-%s";
+$css-vars: "--rmd-%s";
 
 /// Default styles.
 /// Type: a list of strings, where each string is a style name.
