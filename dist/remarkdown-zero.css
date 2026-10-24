@@ -2,7 +2,7 @@
 /* default-styles: font-reset, hn-reset, em-reset, strong-reset */
 @scope (.remarkdown) to (.no-remarkdown) {
 	:scope {
-		--rmd-font: ui-monospace, monospace;
+		--rmd-base-font: ui-monospace, monospace;
 		--rmd-code-font: inherit;
 		--rmd-line-height: 1.5;
 		--rmd-ul-indent: 3ch;
@@ -23,7 +23,7 @@
 		--rmd-hr-dashes: "-------";
 		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 		--rmd-table-hline: "----------------------------------------";
-		font-family: var(--rmd-font);
+		font-family: var(--rmd-base-font);
 		line-height: var(--rmd-line-height);
 	}
 	:is(pre, code, kbd, samp) {
