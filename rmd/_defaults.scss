@@ -1,0 +1,201 @@
+/// Default options for Remarkdown.
+/// To change these options, use the `config` mixin:
+///
+///	@use "pkg:remarkdown.css" as rmd;
+///	@include rmd.config(
+///		$selectors: (default: ".rmd", option: ".rmd--%s", root: ".rmd"),
+///		$variables: "--rmd-%s",
+///	);
+///	@include rmd.header();
+///	@include rmd.styles();
+
+/// Selector patterns.
+/// Type: map with keys 'default', 'option' and 'root', and string values.
+/// The 'default' and 'option' keys are mandatory.
+///
+/// Some advanced configurations may require using `&` or an empty string
+/// for some selectors, for example with CSS `@scope`:
+///
+///	@include rmd.config(
+///		$selectors: (
+///			default: "",
+///			option: "&.%s",
+///			root: "&",
+///		),
+///	);
+///	@scope (.remarkdown) to (.no-remarkdown) {
+///		@include rmd.styles();
+///	}
+///
+$selectors: (
+	// Selector used for scoping default styles.
+	// Can be an empty string for no scoping (styles apply to whole page),
+	// or if scoping is already handled by CSS `@scope`.
+	default: ".remarkdown",
+	// Selector pattern for optional styles.
+	// "%s" will be replaced with the style's name.
+	option: ".remarkdown.%s",
+	// Selector for the Remarkdown root container,
+	// used to declare CSS variables and `font-reset` styles.
+	// Typically identical to `$selectors.default`.
+	root: ".remarkdown",
+);
+
+/// Naming pattern for Remarkdown CSS custom properties.
+/// Type: string.
+///
+/// "%s" will be replaced with the corresponding option's name.
+$variables: "--rmd-%s";
+
+/// Default styles.
+/// Type: a list of strings, where each string is a style name.
+///
+/// These will be defined using the `$selectors.root` selector, which means
+/// that they will be enabled when using the main Remarkdown activation
+/// pattern in HTML:
+///
+///	<div class="remarkdown">…</div>
+///	<!-- or -->
+///	<div data-remarkdown>…</div>
+///
+$defaults: (
+	font-reset,
+	hn-reset,
+	hn-prefix,
+	ul-dash,
+	ol-decimal,
+	quote-mark,
+	em-reset,
+	em-star,
+	strong-reset,
+	strong-star,
+	a-bracket,
+	code-tick,
+	pre-indent,
+	hr-star
+);
+
+/// Optional styles.
+/// Type: a list of strings, or a boolean (true or false) value.
+///
+/// An optional style is a style that is defined using the `$selectors.option`
+/// selector pattern, which means it needs to be explicitly enabled in HTML.
+///
+/// For example, with the configuration used in `build/remarkdown.scss` and
+/// `build/remarkdown.attr.scss` respectively:
+///
+///	<div class="remarkdown option-name">…</div>
+///	<div data-remarkdown="option-name">…</div>
+///
+/// Options can be set in two ways:
+///
+/// 1. With a boolean value: all styles not in `$defaults` are treated as
+///    optional (for `true`) or excluded from the final output (for `false`).
+/// 2. With a list of strings: all listed styles are treated as optional,
+///    and styles not listed in either `$defaults` or `$options` are omitted
+///    in the final output.
+///
+$options: true;
+
+/// Primary font stack.
+/// Type: a list of strings, or null.
+/// Recommended: lists of typefaces should end with the generic 'monospace'.
+$font: ui-monospace, monospace;
+
+/// Font stack for code elements.
+/// Type: a list of strings, or null.
+/// For elements that are traditionnaly monospace, use a different font?
+$code-font: inherit;
+
+/// Root line-height.
+/// Type: number. Prefer a unitless number.
+$line-height: 1.5;
+
+/// Margins for block elements.
+/// Type: map where each key is an HTML element name, and values are maps.
+///
+/// - Vertical margins (`top` and `bottom`) are expressed as multiples of the
+///   base line-height, using the `lh` unit.
+/// - Horizontal margins (`inline-start` and `inline-end`) are expressed as
+///   numbers of characters, using the `ch` unit. They may be used as padding
+///   rather than margins.
+/// - The `default` key is used to define fallback values.
+///
+$margins: (
+	default: (
+		top: 1lh,
+		bottom: 1lh,
+	),
+	h1: (
+		top: 1.5lh,
+		bottom: 1lh,
+	),
+	h2: (
+		top: 1.5lh,
+		bottom: 1lh,
+	),
+	pre: (
+		inline-start: 4ch,
+		inline-end: 0,
+	),
+	ol: (
+		inline-start: 3ch,
+		inline-end: 0,
+	),
+	ul: (
+		inline-start: 3ch,
+		inline-end: 0,
+	),
+	figure: (
+		inline-start: 0,
+		inline-end: 0,
+	),
+	blockquote: (
+		inline-start: 2ch,
+		inline-end: 2ch,
+	),
+);
+
+/// Character used as heading prefix (ATX-style headings).
+/// Type: string.
+$hn-prefix: "#";
+
+/// Characters used for underlined headings (setext-style).
+/// Type: string.
+/// Recommended: use a string of ~40 characters or so.
+/// These will be tripled to fill the container's width.
+$h1-line: "========================================";
+$h2-line: "----------------------------------------";
+
+/// List bullets.
+/// Type: string.
+/// Recommended: use a single character.
+$ul-dash: "-";
+$ul-star: "*";
+$ul-plus: "+";
+
+/// Punctuation mark used after list counters.
+/// Type: string.
+/// Recommended: use a single character.
+$ol-mark: ".";
+
+/// Pre decorations.
+/// Type: string.
+$pre-ticks: "```";
+$pre-tilde: "~~~";
+$pre-tilde-line: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+
+/// Block quotes.
+/// Type: string.
+$quote-mark: ">\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a>\a";
+$quote-rtl: "<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a<\a";
+
+/// Horizontal rules.
+/// Type: string.
+$hr-stars: "* * * *";
+$hr-dashes: "-------";
+
+/// Table decorations.
+/// Type: string.
+$table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
+$table-hline: "----------------------------------------";

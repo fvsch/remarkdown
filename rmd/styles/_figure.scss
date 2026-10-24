@@ -1,0 +1,13 @@
+// <figure>
+
+@use "../toolkit/output" as *;
+@use "../toolkit/selector" as *;
+
+@mixin figure {
+	@include default() {
+		figure {
+			margin-block: margins(figure);
+			margin-inline: indents(figure);
+		}
+	}
+}

@@ -1,4 +1,3 @@
+.vitest/
 node_modules
-package-lock.json
-dist/remarkdown-custom.css
 *.tgz

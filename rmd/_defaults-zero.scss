@@ -1,0 +1,37 @@
+/// Default options for Remarkdown-zero
+/// Overrides only. Using `config($preset: "zero")` will combine config
+/// values from `./_defaults.scss` and this stylesheet.
+
+/// Default styles.
+/// Keep reset styles in defaults for compatibility with Remarkdown v3,
+/// which used `$set-font-styles: true` even in the zero variant.
+$defaults: (
+	font-reset,
+	hn-reset,
+	em-reset,
+	strong-reset,
+);
+
+/// Margins for block elements.
+$margins: (
+	default: (
+		top: 1lh,
+		bottom: 1lh,
+	),
+	pre: (
+		inline-start: 4ch,
+		inline-end: 0,
+	),
+	ol: (
+		inline-start: 3ch,
+		inline-end: 0,
+	),
+	ul: (
+		inline-start: 3ch,
+		inline-end: 0,
+	),
+	blockquote: (
+		inline-start: 2ch,
+		inline-end: 0,
+	),
+);
