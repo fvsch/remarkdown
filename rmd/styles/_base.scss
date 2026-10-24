@@ -1,12 +1,17 @@
-// Base
+// Base styles, including CSS variables
 // Options: font-reset
 
+@use "../config/config";
 @use "../toolkit/output" as *;
 @use "../toolkit/selector" as *;
 
 @mixin base {
+	@include default($scope: root) {
+		@include css-vars();
+	}
+
 	@include option(font-reset, $default-scope: root) {
-		font-family: rmd-var(font);
+		font-family: rmd-var(base-font);
 		line-height: rmd-var(line-height);
 	}
 
@@ -14,5 +19,41 @@
 		:is(pre, code, kbd, samp) {
 			font-family: rmd-var(code-font);
 		}
+	}
+}
+
+@mixin css-vars {
+	$main: (
+		base-font: font-list(base-font),
+		code-font: font-list(code-font),
+		line-height: config.get(line-height),
+		ul-indent: indent(ul, start),
+		ol-indent: indent(ol, start),
+	);
+	$chars: (
+		hn-prefix,
+		h1-line,
+		h2-line,
+		ul-dash,
+		ul-star,
+		ul-plus,
+		ol-mark,
+		pre-ticks,
+		pre-tilde,
+		pre-tilde-line,
+		quote-mark,
+		quote-rtl,
+		hr-stars,
+		hr-dashes,
+		table-vline,
+		table-hline
+	);
+
+	@each $var, $value in $main {
+		@include define-var($var, $value);
+	}
+	@each $var in $chars {
+		$value: config.get($var);
+		@include define-var($var, $value);
 	}
 }

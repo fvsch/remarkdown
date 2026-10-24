@@ -6,7 +6,7 @@
 	/*! Remarkdown-zero 4.0.0-beta.2 [attr] (MIT) https://fvsch.github.io/remarkdown/ */
 	/* default-styles: font-reset, hn-reset, em-reset, strong-reset */
 	[data-remarkdown] {
-		--rmd-font: ui-monospace, monospace;
+		--rmd-base-font: ui-monospace, monospace;
 		--rmd-code-font: inherit;
 		--rmd-line-height: 1.5;
 		--rmd-ul-indent: 3ch;
@@ -27,7 +27,7 @@
 		--rmd-hr-dashes: "-------";
 		--rmd-table-vline: "|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a|\a";
 		--rmd-table-hline: "----------------------------------------";
-		font-family: var(--rmd-font);
+		font-family: var(--rmd-base-font);
 		line-height: var(--rmd-line-height);
 	}
 	[data-remarkdown] :is(pre, code, kbd, samp) {
