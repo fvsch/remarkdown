@@ -5,11 +5,9 @@
 
 @include rmd.config(
 	$preset: zero,
-	$selectors: (
-		default: "",
-		option: ":scope.%s",
-		root: ":scope",
-	)
+	$base-selector: ":scope",
+	$default-selector: "",
+	$option-selector: ":scope.%s"
 );
 
 @include rmd.header("Remarkdown-zero %v (MIT) %u");

@@ -8,6 +8,9 @@
 /// Wrap content in the default selector
 /// (Or optionally the root selector)
 @mixin default($scope: default) {
+	@if $scope != default and $scope != base {
+		@error "Invalid $scope value #{inspect($scope)}";
+	}
 	$selector: default-selector($scope);
 	@if $selector {
 		#{$selector} {
@@ -40,7 +43,11 @@
 }
 
 @function default-selector($scope: default) {
-	$value: config.get(selectors $scope);
+	$config-key: default-selector;
+	@if $scope == base {
+		$config-key: base-selector;
+	}
+	$value: config.get($config-key);
 	@if $value == null or $value == "" {
 		@return null;
 	}
@@ -48,7 +55,7 @@
 }
 
 @function option-selector($names) {
-	$pattern: config.get(selectors option);
+	$pattern: config.get(option-selector);
 	$selectors: ();
 	@each $name in $names {
 		$str: str.replace($pattern, "%s", $name);

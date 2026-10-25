@@ -15,8 +15,8 @@
 		$msg: "Unknown option $#{$name}, expected #{-print-list(map.keys(data.$DEFAULTS))}";
 	} @else if $name == preset {
 		$msg: require-enum($name, $value, null "default" "zero");
-	} @else if $name == selectors {
-		$msg: check-selectors($name, $value);
+	} @else if $name == base-selector or $name == default-selector or $name == option-selector {
+		$msg: check-selector($name, $value);
 	} @else if $name == css-vars {
 		$msg: require-type($name, $value, "string") or require-substring($name, $value, "--") or
 			require-substring($name, $value, "%s");
@@ -37,25 +37,15 @@
 	@return $msg;
 }
 
-@function check-selectors($name, $map) {
-	@if type-of($map) != map {
-		@return "$#{$name} must be a map, got: #{-print-any($map)}";
+@function check-selector($name, $value) {
+	@if type-of($value) != string {
+		@return "$#{$name} must be a string, got: #{-print-any($value)}";
 	}
-	@each $key in (default, option) {
-		@if not map.has-key($map, $key) {
-			@return "$#{$name} must have a '#{$key}' key, got: #{-print-any($map)}";
-		}
+	@if $value == "" and $name != default-selector {
+		@return "$#{$name} cannot be an empty string";
 	}
-	@each $key, $value in $map {
-		@if type-of($value) != string {
-			@return "$#{$name}.#{$key} must be a string, got: #{-print-any($value)}";
-		}
-		@if $value == "" and $key != default {
-			@return "$#{$name}.#{$key} cannot be an empty string";
-		}
-		@if $key == option {
-			@return require-substring("#{$name}.#{$key}", $value, "%s");
-		}
+	@if $name == option-selector {
+		@return require-substring($name, $value, "%s");
 	}
 	@return null;
 }

@@ -5,11 +5,9 @@
 
 @include rmd.config(
 	$preset: default,
-	$selectors: (
-		default: "[data-remarkdown]",
-		option: "[data-remarkdown~='%s']",
-		root: "[data-remarkdown]",
-	)
+	$base-selector: "[data-remarkdown]",
+	$default-selector: "[data-remarkdown]",
+	$option-selector: "[data-remarkdown~='%s']"
 );
 
 @include rmd.header("Remarkdown %v [attr] (MIT) %u");
