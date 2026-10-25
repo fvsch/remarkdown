@@ -354,21 +354,19 @@
 </p>
 
 <h3>
-	Example 1: custom selectors
+	Example: custom selectors
 </h3>
 
 <p>
-	Remarkdown selectors can be configured with the <code>rmd.config()</code> mixin and the <code>$selectors</code> variable, which should be a Sass map with <code>default</code>, <code>option</code> and <code>root</code> keys. The default configuration for Remarkdown is equivalent to this:
+	Remarkdown selectors can be configured with the <code>rmd.config()</code> mixin and the following Sass options: <code>$base-selector</code>, <code>$default-selector</code> and <code>$option-selector</code>. The default configuration for Remarkdown is equivalent to this:
 </p>
 
 <pre><code>@import "pkg:remarkdown.css" as rmd;
 
 @include rmd.config(
-	$selectors: (
-		default: ".remarkdown",
-		option: ".remarkdown.%s",
-		root: ".remarkdown",
-	)
+	$base-selector: ".remarkdown",
+	$default-selector: ".remarkdown",
+	$option-selector: ".remarkdown.%s",
 );
 
 @include rmd.header();
@@ -376,36 +374,39 @@
 </code></pre>
 
 <p>
-	Note that in <code>$selectors.option</code>, the substring <code>%s</code> will be replaced by the optional style’s name, so that <code>.remarkdown.%s</code> becomes, for example, <code>.remarkdown.h1-line</code>.
+	Note that in <code>$option-selector</code>, the substring <code>%s</code> will be replaced by the optional style’s name, so that <code>.remarkdown.%s</code> becomes, for example, <code>.remarkdown.h1-line</code>.
 </p>
 
 <p>
 	If we wanted to use selectors that follow the BEM convention, where the “block” name is <code>rmd</code> and optional styles are classes looking like <code>rmd--option-name</code>, this config would work:
 </p>
 
-<pre><code>@import "pkg:remarkdown.css" as rmd;
-
-@include rmd.config(
-	$selectors: (
-		default: ".rmd",
-		option: ".rmd--%s",
-		root: ".rmd",
-	)
+<pre><code>@include rmd.config(
+	$base-selector: ".rmd",
+	$default-selector: ".rmd",
+	$option-selector: ".rmd--%s",
 );
-
-@include rmd.header();
-@include rmd.styles();
 </code></pre>
 
 <p>
-	For more information about the <code>$selectors</code> map and examples, check out the source code:
+	It’s also possible to set the <code>$default-selector</code> to an empty string, to apply default Remarkdown styles to all elements in a page. This could be useful if you want Remarkdown to style an entire document. Here’s what this config could look like:
+</p>
+
+<pre><code>@include rmd.config(
+	$base-selector: ":root",
+	$default-selector: "",
+	$option-selector: ".%s",
+);
+</code></pre>
+
+<p>
+	For more information about the selector options, check out the source code:
 </p>
 
 <ul>
 	<li><a href="https://github.com/fvsch/remarkdown/tree/main/rmd/_defaults.scss">rmd/_defaults.scss</a> shows all options and their default values;</li>
 	<li><a href="https://github.com/fvsch/remarkdown/tree/main/build/">build/*.scss</a> shows how the pre-built stylesheets are configured.</li>
 </ul>
-
 
 </main>
 

@@ -76,7 +76,9 @@ describe('rmd.config()', () => {
 
 	test('can set any valid config value', () => {
 		const expected: ScssResult['values'] = {
-			selectors: { default: '', option: '.%s', root: ':root' },
+			'base-selector': ':root',
+			'default-selector': '',
+			'option-selector': '.%s',
 			'css-vars': `--%s`,
 			'base-font': ['Comic Sans Mono', 'monospace'],
 			'code-font': ['Consolas', 'monospace'],
@@ -99,9 +101,11 @@ describe('rmd.config()', () => {
 			'table-hline': `-_-_-_-_-_-_`,
 		};
 
-		const { values } = scss`
+		const { values, logs } = scss`
 			@include rmd.config(
-				$selectors: (default: "", option: ".%s", root: ":root"),
+				$base-selector: ":root",
+				$default-selector: "",
+				$option-selector: ".%s",
 				$css-vars: "--%s",
 				$base-font: ("Comic Sans Mono", monospace),
 				$code-font: (Consolas, monospace),
@@ -229,44 +233,39 @@ describe('rmd.config()', () => {
 
 	test('accepts valid selectors', () => {
 		const valid = [
-			{ default: '.rmd', option: '.rmd--%s' },
-			{ default: '.rmd', option: '.rmd--%s', root: '.rmd' },
-			{ default: '', option: '.%s', root: ':root' },
+			{ base: '.rmd', default: '.rmd', option: '.rmd--%s' },
+			{ base: '.rmd', default: '.rmd', option: '.rmd--%s' },
+			{ base: ':root', default: '', option: '.%s' },
 			// invalid CSS selectors not caught by basic type/string validation
-			{ default: '{}', option: '!!%s', root: '...' },
+			{ base: '...', default: '{}', option: '!!%s' },
 		];
 		for (const selectors of valid) {
-			const sassMap = JSON.stringify(selectors)
-				.replace(/^\s*\{/, '(')
-				.replace(/\}\s*$/, ')');
 			const { values } = scss`
-				@include rmd.config($selectors: ${sassMap});
-				@debug capture(selectors, config.get(selectors));
+				@include rmd.config(
+					$base-selector: "${selectors.base}",
+					$default-selector: "${selectors.default}",
+					$option-selector: "${selectors.option}"
+				);
+				@debug capture(base, config.get(base-selector));
+				@debug capture(default, config.get(default-selector));
+				@debug capture(option, config.get(option-selector));
 			`;
-			expect(values.selectors).toEqual(selectors);
+			expect(values).toEqual(selectors);
 		}
 	});
 
 	test('rejects invalid selectors', () => {
 		expectSassError(
-			`@include rmd.config($selectors: ".rmd")`,
-			`$selectors must be a map, got: ".rmd"`,
+			`@include rmd.config($base-selector: "")`,
+			`$base-selector cannot be an empty string`,
 		);
 		expectSassError(
-			`@include rmd.config($selectors: (option: ""))`,
-			`$selectors must have a 'default' key, got: (option: "")`,
+			`@include rmd.config($option-selector: "")`,
+			`$option-selector cannot be an empty string`,
 		);
 		expectSassError(
-			`@include rmd.config($selectors: (default: ""))`,
-			`$selectors must have a 'option' key, got: (default: "")`,
-		);
-		expectSassError(
-			`@include rmd.config($selectors: (default: "", option: ""))`,
-			`$selectors.option cannot be an empty string`,
-		);
-		expectSassError(
-			`@include rmd.config($selectors: (default: "", option: ".rmd"))`,
-			`$selectors.option must contain the substring "%s", got ".rmd"`,
+			`@include rmd.config($option-selector: ".rmd")`,
+			`$option-selector must contain the substring "%s", got ".rmd"`,
 		);
 	});
 

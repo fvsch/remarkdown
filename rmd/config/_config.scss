@@ -30,7 +30,7 @@
 	@if type-of($first) != string {
 		@error "Invalid config path, expected a string or list of strings, got: #{inspect($path)}";
 	} @else if not state.has-key($first) {
-		@error "Unknown config option #{$first}";
+		@error "Unknown config option $#{$first}";
 	}
 	@return state.get($path);
 }
