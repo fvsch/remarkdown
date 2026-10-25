@@ -8,11 +8,9 @@
 @layer remarkdown {
 	@include rmd.config(
 		$preset: zero,
-		$selectors: (
-			default: "[data-remarkdown]",
-			option: "[data-remarkdown~='%s']",
-			root: "[data-remarkdown]",
-		)
+		$base-selector: "[data-remarkdown]",
+		$default-selector: "[data-remarkdown]",
+		$option-selector: "[data-remarkdown~='%s']"
 	);
 	@include rmd.header("Remarkdown-zero %v [attr] (MIT) %u");
 	@include rmd.styles();

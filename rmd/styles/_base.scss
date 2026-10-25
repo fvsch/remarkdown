@@ -6,11 +6,11 @@
 @use "../toolkit/selector" as *;
 
 @mixin base {
-	@include default($scope: root) {
+	@include default($scope: base) {
 		@include css-vars();
 	}
 
-	@include option(base-reset, $default-scope: root) {
+	@include option(base-reset, $default-scope: base) {
 		font-family: rmd-var(base-font);
 		line-height: rmd-var(line-height);
 	}

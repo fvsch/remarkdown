@@ -34,8 +34,8 @@ export type ScssResult = {
 
 type TemplateStringFn<T = string> = (str: string | TemplateStringsArray, ...values: any[]) => T;
 
-export const scss: TemplateStringFn<ScssResult> = (strings, tplValues) => {
-	const input = templateString(strings, tplValues).trim();
+export const scss: TemplateStringFn<ScssResult> = (strings, ...tplValues) => {
+	const input = templateString(strings, ...tplValues).trim();
 	const logs: ScssResult['logs'] = [];
 	const values: ScssResult['values'] = {};
 

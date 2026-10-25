@@ -3,49 +3,34 @@
 ///
 ///	@use "pkg:remarkdown.css" as rmd;
 ///	@include rmd.config(
-///		$selectors: (default: ".rmd", option: ".rmd--%s", root: ".rmd"),
+///		$base-selector: ".rmd",
+///		$default-selector: ".rmd",
+///		$option-selector: ".rmd--%s",
 ///		$css-vars: "--rmd-%s",
 ///	);
 ///	@include rmd.header();
 ///	@include rmd.styles();
 
-// TODO: split $selectors into:
-// - $base-selector (was $selectors.root)
-// - $default-selector (was $selectors.default)
-// - $option-selector (was $selectors.option)
-// Note: moving away from using 'root' because it can be confused with `:root`.
+/// Selector for the Remarkdown root container,
+/// Type: string or null.
+///
+/// Used to declare CSS variables and `base-reset` styles.
+/// If null, defaults to `:root`.
+$base-selector: ".remarkdown";
 
-/// Selector patterns.
-/// Type: map with keys 'default', 'option' and 'root', and string values.
-/// The 'default' and 'option' keys are mandatory.
+/// Selector used for scoping default styles.
+/// Type: string.
 ///
-/// Some advanced configurations may require using `&` or an empty string
-/// for some selectors, for example with CSS `@scope`:
+/// Typically, this will be identical to `$base-selector`.
+/// Can be an empty string for no scoping (styles apply to whole page),
+/// or if scoping is already handled by CSS `@scope`.
+$default-selector: ".remarkdown";
+
+/// Selector pattern for optional styles.
+/// Type: string.
 ///
-///	@include rmd.config(
-///		$selectors: (
-///			default: "",
-///			option: "&.%s",
-///			root: "&",
-///		),
-///	);
-///	@scope (.remarkdown) to (.no-remarkdown) {
-///		@include rmd.styles();
-///	}
-///
-$selectors: (
-	// Selector used for scoping default styles.
-	// Can be an empty string for no scoping (styles apply to whole page),
-	// or if scoping is already handled by CSS `@scope`.
-	default: ".remarkdown",
-	// Selector pattern for optional styles.
-	// "%s" will be replaced with the style's name.
-	option: ".remarkdown.%s",
-	// Selector for the Remarkdown root container,
-	// used to declare CSS variables and `base-reset` styles.
-	// Typically identical to `$selectors.default`.
-	root: ".remarkdown",
-);
+/// "%s" will be replaced with the style's name.
+$option-selector: ".remarkdown.%s";
 
 /// Naming pattern for Remarkdown CSS custom properties.
 /// Type: string.
@@ -56,8 +41,8 @@ $css-vars: "--rmd-%s";
 /// Default styles.
 /// Type: a list of strings, where each string is a style name.
 ///
-/// These will be defined using the `$selectors.root` selector, which means
-/// that they will be enabled when using the main Remarkdown activation
+/// These will be defined using the `$base-selector`, which means that
+/// they will be enabled when using the main Remarkdown activation
 /// pattern in HTML:
 ///
 ///	<div class="remarkdown">…</div>
@@ -84,8 +69,8 @@ $default-styles: (
 /// Optional styles.
 /// Type: a list of strings, or a boolean (true or false) value.
 ///
-/// An optional style is a style that is defined using the `$selectors.option`
-/// selector pattern, which means it needs to be explicitly enabled in HTML.
+/// An optional style is a style that is defined using the pattern in
+/// `$option-selector`, and which needs to be explicitly enabled in HTML.
 ///
 /// For example, with the configuration used in `build/remarkdown.scss` and
 /// `build/remarkdown.attr.scss` respectively:
