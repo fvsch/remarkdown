@@ -18,9 +18,9 @@ const SASS_CONTEXT = `
 @use "sass:map";
 @use "sass:meta";
 
-@use "./rmd" as rmd;
-@use "./rmd/config" as config;
-@use "./rmd/styles" as styles;
+@use "./lib" as rmd;
+@use "./lib/config" as config;
+@use "./lib/styles" as styles;
 `.trim();
 
 type JSValue = null | boolean | number | string | any[] | Record<string, any>;
