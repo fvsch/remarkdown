@@ -5,12 +5,7 @@
 /// Default styles.
 /// Keep reset styles in defaults for compatibility with Remarkdown v3,
 /// which used `$set-font-styles: true` even in the zero variant.
-$default-styles: (
-	base-reset,
-	hn-reset,
-	em-reset,
-	strong-reset,
-);
+$default-styles: (base-reset, hn-reset, em-reset, strong-reset);
 
 /// Margins for block elements.
 $margins: (
