@@ -26,12 +26,12 @@ export const DIST_STYLESHEETS = [
 ];
 
 export const RMD_CONFIG_KEYS = [
+	'default-styles',
+	'optional-styles',
 	'base-selector',
 	'default-selector',
 	'option-selector',
 	'css-vars',
-	'default-styles',
-	'optional-styles',
 	'base-font',
 	'code-font',
 	'line-height',

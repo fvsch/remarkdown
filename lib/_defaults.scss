@@ -11,33 +11,6 @@
 ///	@include rmd.header();
 ///	@include rmd.styles();
 
-/// Selector for the Remarkdown root container,
-/// Type: string or null.
-///
-/// Used to declare CSS variables and `base-reset` styles.
-/// If null, defaults to `:root`.
-$base-selector: ".remarkdown";
-
-/// Selector used for scoping default styles.
-/// Type: string.
-///
-/// Typically, this will be identical to `$base-selector`.
-/// Can be an empty string for no scoping (styles apply to whole page),
-/// or if scoping is already handled by CSS `@scope`.
-$default-selector: ".remarkdown";
-
-/// Selector pattern for optional styles.
-/// Type: string.
-///
-/// "%s" will be replaced with the style's name.
-$option-selector: ".remarkdown.%s";
-
-/// Naming pattern for Remarkdown CSS custom properties.
-/// Type: string.
-///
-/// "%s" will be replaced with the corresponding option's name.
-$css-vars: "--rmd-%s";
-
 /// Default styles.
 /// Type: a list of strings, where each string is a style name.
 ///
@@ -87,6 +60,33 @@ $default-styles: (
 ///    are omitted in the final output.
 ///
 $optional-styles: true;
+
+/// Selector for the Remarkdown root container,
+/// Type: string or null.
+///
+/// Used to declare CSS variables and `base-reset` styles.
+/// If null, defaults to `:root`.
+$base-selector: ".remarkdown";
+
+/// Selector used for scoping default styles.
+/// Type: string.
+///
+/// Typically, this will be identical to `$base-selector`.
+/// Can be an empty string for no scoping (styles apply to whole page),
+/// or if scoping is already handled by CSS `@scope`.
+$default-selector: ".remarkdown";
+
+/// Selector pattern for optional styles.
+/// Type: string.
+///
+/// "%s" will be replaced with the style's name.
+$option-selector: ".remarkdown.%s";
+
+/// Naming pattern for Remarkdown CSS custom properties.
+/// Type: string.
+///
+/// "%s" will be replaced with the corresponding option's name.
+$css-vars: "--rmd-%s";
 
 /// Primary font stack.
 /// Type: a list of strings, a string, or null.
