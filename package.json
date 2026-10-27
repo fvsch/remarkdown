@@ -17,22 +17,22 @@
 	"files": [
 		"README.md",
 		"dist",
-		"rmd"
+		"lib"
 	],
 	"type": "module",
 	"exports": {
 		".": {
 			"style": "./dist/remarkdown.css",
-			"sass": "./rmd/_index.scss"
+			"sass": "./lib/_index.scss"
 		},
-		"./rmd": {
-			"sass": "./rmd/_index.scss"
+		"./lib": {
+			"sass": "./lib/_index.scss"
 		},
-		"./rmd/config": {
-			"sass": "./rmd/config/_index.scss"
+		"./lig/config": {
+			"sass": "./lib/config/_index.scss"
 		},
-		"./rmd/styles": {
-			"sass": "./rmd/styles/_index.scss"
+		"./lib/styles": {
+			"sass": "./lib/styles/_index.scss"
 		}
 	},
 	"browser": "./dist/remarkdown.css",
