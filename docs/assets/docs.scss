@@ -2,7 +2,7 @@
  * Styles for Remarkdown documentation pages.
  */
 
-@use "../../rmd";
+@use "../../lib" as rmd;
 
 $breakpoint-small: 40em;
 $breakpoint-medium: 56em;

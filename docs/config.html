@@ -243,8 +243,8 @@
 // 2. relative path to package dir in node_modules
 @use "../node_modules/remarkdown.css" as rmd;
 
-// 3. relative path to the package’s `rmd/_index.scss` entrypoint:
-@use "../node_modules/remarkdown.css/rmd" as rmd;</code></pre>
+// 3. relative path to the package’s `lib/_index.scss` entrypoint:
+@use "../node_modules/remarkdown.css/lib" as rmd;</code></pre>
 </details>
 
 <p>
@@ -266,7 +266,7 @@
 @include rmd.styles();</code></pre>
 
 <p>
-	Next we’ll discuss a few options that can be set with the <code>rmd.config()</code> mixin. For a full list, refer to the source code in <a href="https://github.com/fvsch/remarkdown/tree/main/rmd/_defaults.scss">rmd/_defaults.scss</a>.
+	Next we’ll discuss a few options that can be set with the <code>rmd.config()</code> mixin. For a full list, refer to the source code in <a href="https://github.com/fvsch/remarkdown/tree/main/lib/_defaults.scss">lib/_defaults.scss</a>.
 </p>
 
 <h3>
@@ -404,7 +404,7 @@
 </p>
 
 <ul>
-	<li><a href="https://github.com/fvsch/remarkdown/tree/main/rmd/_defaults.scss">rmd/_defaults.scss</a> shows all options and their default values;</li>
+	<li><a href="https://github.com/fvsch/remarkdown/tree/main/lib/_defaults.scss">lib/_defaults.scss</a> shows all options and their default values;</li>
 	<li><a href="https://github.com/fvsch/remarkdown/tree/main/build/">build/*.scss</a> shows how the pre-built stylesheets are configured.</li>
 </ul>
 

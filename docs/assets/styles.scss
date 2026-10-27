@@ -3,7 +3,7 @@
  * options preset, used in the `styles.html` demo page.
  */
 
-@use "../../rmd";
+@use "../../lib" as rmd;
 
 @layer remarkdown {
 	@include rmd.config(
