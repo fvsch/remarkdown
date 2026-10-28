@@ -147,11 +147,6 @@
 		white-space: nowrap;
 		pointer-events: none;
 	}
-	@supports (width: round(down, 100%, 1ch)) {
-		[data-remarkdown~="h1-line"] h1::after {
-			width: round(down, 100%, 1ch);
-		}
-	}
 	[data-remarkdown~="h2-line"] h2 {
 		position: relative;
 		width: fit-content;
@@ -170,11 +165,6 @@
 		overflow: hidden;
 		white-space: nowrap;
 		pointer-events: none;
-	}
-	@supports (width: round(down, 100%, 1ch)) {
-		[data-remarkdown~="h2-line"] h2::after {
-			width: round(down, 100%, 1ch);
-		}
 	}
 	[data-remarkdown] p {
 		margin-block: 1lh;
@@ -396,12 +386,6 @@
 		overflow: hidden;
 		white-space: nowrap;
 		pointer-events: none;
-	}
-	@supports (width: round(down, 100%, 1ch)) {
-		[data-remarkdown~="table-border"] :is(thead th, thead td, th[scope="col"])::after,
-		[data-remarkdown~="table-border-full"] :is(thead th, thead td, th[scope="col"])::after {
-			width: round(down, 100% - var(--inset-total), 1ch);
-		}
 	}
 	[data-remarkdown~="table-border"] tr > *::before,
 	[data-remarkdown~="table-border-full"] tr > *::before {
