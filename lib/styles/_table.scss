@@ -71,10 +71,6 @@
 				overflow: hidden;
 				white-space: nowrap;
 				pointer-events: none;
-
-				@supports (width: round(down, 100%, 1ch)) {
-					width: round(down, 100% - var(--inset-total), 1ch);
-				}
 			}
 		}
 

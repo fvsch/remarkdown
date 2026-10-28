@@ -143,11 +143,6 @@
 		white-space: nowrap;
 		pointer-events: none;
 	}
-	@supports (width: round(down, 100%, 1ch)) {
-		:scope.h1-line h1::after {
-			width: round(down, 100%, 1ch);
-		}
-	}
 	:scope.h2-line h2 {
 		position: relative;
 		width: fit-content;
@@ -166,11 +161,6 @@
 		overflow: hidden;
 		white-space: nowrap;
 		pointer-events: none;
-	}
-	@supports (width: round(down, 100%, 1ch)) {
-		:scope.h2-line h2::after {
-			width: round(down, 100%, 1ch);
-		}
 	}
 	p {
 		margin-block: 1lh;
@@ -369,12 +359,6 @@
 		overflow: hidden;
 		white-space: nowrap;
 		pointer-events: none;
-	}
-	@supports (width: round(down, 100%, 1ch)) {
-		:scope.table-border :is(thead th, thead td, th[scope="col"])::after,
-		:scope.table-border-full :is(thead th, thead td, th[scope="col"])::after {
-			width: round(down, 100% - var(--inset-total), 1ch);
-		}
 	}
 	:scope.table-border tr > *::before,
 	:scope.table-border-full tr > *::before {
