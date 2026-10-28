@@ -44,7 +44,7 @@
 &lt;html lang="en">
 &lt;head>
 	&lt;title>Using Remarkdown&lt;/title>
-	&lt;link rel="stylesheet" <mark>href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css"</mark>>
+	<mark>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css"></mark>
 &lt;/head>
 &lt;body <mark>class="remarkdown"</mark>>
 	&lt;h1>Hello World&lt;/h1>
@@ -53,7 +53,7 @@
 &lt;/html></code></pre>
 
 <p>
-	There are a few <a href="./styles">optional styles</a> you can pick from. For example, <code>class="remarkdown h1-line ul-star"</code> enables underlined <code>&lt;h1></code>s and asterisks for bullets.
+	You can choose <a href="./styles">optional styles</a> if you don’t love the defaults. For example, <code>class="remarkdown h1-line ul-star"</code> enables underlined <code>&lt;h1></code>s and asterisks for bullets.
 </p>
 
 <h2>
@@ -96,7 +96,8 @@ import "remarkdown.css/dist/remarkdown.css";</code></pre>
 
 <p>
 	The pre-built Remarkdown stylesheet comes in a few variants, which change:
-	what default styles are enabled; how optional styles are declared in HTML.
+	what <a href="./styles">default styles</a> are enabled;
+	how optional styles are <a href="./config#html">declared in HTML</a>.
 </p>
 
 <table>
@@ -104,29 +105,29 @@ import "remarkdown.css/dist/remarkdown.css";</code></pre>
 		<tr>
 			<th scope="col">Stylesheet</th>
 			<th scope="col">Defaults</th>
-			<th scope="col">Selector style</th>
+			<th scope="col">HTML config</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.css">remarkdown.css</a></td>
 			<td>normal</td>
-			<td><code>@scope (.remarkdown)</code></td>
-		</tr>
-		<tr>
-			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.css">remarkdown-zero.css</a></td>
-			<td>resets only</td>
-			<td><code>@scope (.remarkdown)</code></td>
+			<td><code>class="remarkdown (…)"</code></td>
 		</tr>
 		<tr>
 			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown.attr.css">remarkdown.attr.css</a></td>
 			<td>normal</td>
-			<td><code>data-remarkdown="…"</code></td>
+			<td><code>data-remarkdown="(…)"</code></td>
+		</tr>
+		<tr>
+			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.css">remarkdown-zero.css</a></td>
+			<td>resets only</td>
+			<td><code>class="remarkdown (…)"</code></td>
 		</tr>
 		<tr>
 			<td><a href="https://cdn.jsdelivr.net/npm/remarkdown.css@4/dist/remarkdown-zero.attr.css">remarkdown-zero.attr.css</a></td>
 			<td>resets only</td>
-			<td><code>data-remarkdown="…"</code></td>
+			<td><code>data-remarkdown="(…)"</code></td>
 		</tr>
 	</tbody>
 </table>
@@ -141,19 +142,19 @@ import "remarkdown.css/dist/remarkdown.css";</code></pre>
 
 <ul>
 	<li>
+		Author: <a href="https://fvsch.com/">Florens Verschelde</a>
+	</li>
+	<li>
+		License: <a href="https://github.com/fvsch/remarkdown/blob/main/LICENSE">MIT License</a>
+	</li>
+	<li>
 		Package: <a href="https://www.npmjs.com/package/remarkdown.css">remarkdown.css</a>
 	</li>
 	<li>
 		Repository: <a href="https://github.com/fvsch/remarkdown">fvsch/remarkdown</a>
 	</li>
 	<li>
-		License: <a href="https://github.com/fvsch/remarkdown/blob/main/LICENSE">MIT License</a>
-	</li>
-	<li>
-		Author: <a href="https://fvsch.com/">Florens Verschelde</a>
-	</li>
-	<li>
-		Browser support: targetting <a href="https://web-platform-dx.github.io/baseline/">Baseline Widely Available</a>
+		Browser support: <a href="https://web-platform-dx.github.io/baseline/">Baseline Widely Available</a>
 	</li>
 </ul>
 
@@ -166,7 +167,7 @@ import "remarkdown.css/dist/remarkdown.css";</code></pre>
 </p>
 
 <p>
-	Other implementations include <a href="https://mrcoles.com/demo/markdown-css/">Peter Coles’ Markdown.css</a>, and many developer homepages which do some Markdown-ish styling of headings and a few other elements.
+	Other implementations include <a href="https://mrcoles.com/demo/markdown-css/">Peter Coles’ Markdown.css</a>; I’ve also seen a bunch of developer-centric web pages use some hand-rolled Markdown-ish styling for headings.
 </p>
 
 </main>
