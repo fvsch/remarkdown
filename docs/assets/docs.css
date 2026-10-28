@@ -117,16 +117,16 @@
 			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 		}
 		h4::before {
-			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
-				" "/"";
-		}
-		h5::before {
-			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
 				var(--rmd-hn-prefix) " "/"";
 		}
-		h6::before {
-			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+		h5::before {
+			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
 				var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
+		}
+		h6::before {
+			content: var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix)
+				var(--rmd-hn-prefix) var(--rmd-hn-prefix) var(--rmd-hn-prefix) " "/"";
 		}
 		:scope.h1-line h1 {
 			position: relative;

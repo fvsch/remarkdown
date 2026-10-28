@@ -116,14 +116,17 @@
 	You can override any of these to tweak Remarkdown’s appeareance. For example:
 </p>
 
-<pre><code>.remarkdown {
+<pre><code>&lt;section class="remarkdown" style="
 	--rmd-base-font: Consolas, Menlo, ui-monospace, monospace;
 	--rmd-ul-indent: 4ch;
 	--rmd-ol-indent: 4ch;
-	--rmd-h2-line: "////////////////////";
-	--rmd-ul-dash: "➡️";
-	--rmd-hr-stars: "🌟 🌟 🌟";
-}</code></pre>
+	--rmd-h2-line: '////////////////////';
+	--rmd-ul-dash: '➡️';
+	--rmd-hr-stars: '🌟 🌟 🌟';
+">
+	&lt;!-- Your content here -->
+&lt;/section>
+</code></pre>
 
 <p>
 	Note that vertical margins, colors and other cosmetic styles are not handled by these variables. If you want to tweak colors and more, you will need to write your own style overrides. Here are a few examples:
