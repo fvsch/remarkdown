@@ -6,22 +6,22 @@
 /// Holds the configuration state
 $-state: data.$DEFAULTS;
 
-@function all() {
-	@return map.merge((), $-state);
-}
-
 @function get($path) {
 	@return map.get($-state, $path...);
 }
 
-@mixin set($conf, $base: null) {
-	@if meta.type-of($base) == map {
-		$-state: map.merge($base, $conf) !global;
-	} @else {
-		$-state: map.merge($-state, $conf) !global;
-	}
+@function get-all() {
+	@return map.merge((), $-state);
 }
 
 @function has-key($key) {
 	@return map.has-key($-state, $key);
+}
+
+@mixin set($map) {
+	$-state: map.merge($-state, $map) !global;
+}
+
+@mixin set-all($map) {
+	$-state: $map !global;
 }

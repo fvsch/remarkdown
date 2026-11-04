@@ -11,10 +11,8 @@
 	$msg: null;
 
 	// fail for unknown and invalid options
-	@if $name != preset and not map.has-key(data.$DEFAULTS, $name) {
+	@if not map.has-key(data.$DEFAULTS, $name) {
 		$msg: "Unknown option $#{$name}, expected #{-print-list(map.keys(data.$DEFAULTS))}";
-	} @else if $name == preset {
-		$msg: require-enum($name, $value, null "default" "zero");
 	} @else if $name == base-selector or $name == default-selector or $name == option-selector {
 		$msg: check-selector($name, $value);
 	} @else if $name == css-vars {
@@ -37,6 +35,10 @@
 	@return $msg;
 }
 
+@function check-preset($value) {
+	@return require-enum(preset, $value, null "default" "zero");
+}
+
 @function check-selector($name, $value) {
 	@if type-of($value) != string {
 		@return "$#{$name} must be a string, got: #{-print-any($value)}";
@@ -53,7 +55,7 @@
 @function check-style-list($name, $list) {
 	@each $item in $list {
 		@if not data.is-style($item) {
-			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list(data.$ALL-STYLES)}";
+			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list(data.styles())}";
 		}
 	}
 	@return null;

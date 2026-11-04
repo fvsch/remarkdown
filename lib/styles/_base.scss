@@ -1,7 +1,7 @@
 // Base styles, including CSS variables
 // Options: base-reset
 
-@use "../config/config";
+@use "../config/read" as config;
 @use "../toolkit/output" as *;
 @use "../toolkit/selector" as *;
 

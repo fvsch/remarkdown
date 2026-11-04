@@ -1,30 +1,13 @@
-/// Read and write Remarkdown configuration
+/// Read Remarkdown configuration
 
 @use "sass:list";
-@use "sass:map";
 @use "sass:meta" as *;
 
 @use "./data";
 @use "./state";
-@use "./validate";
 
-/// Return a copy of the default config for the "default" or "zero" preset
-@function base-config($preset: default) {
-	@if $preset == null or $preset == default {
-		@return data.$DEFAULTS;
-	} @else if $preset == zero {
-		@return map.merge(data.$DEFAULTS, data.$DEFAULTS-ZERO);
-	} @else {
-		@error "$preset must be one of (null, \"default\", \"zero\"), got: #{inspect($preset)}";
-	}
-}
-
-/// Read from the current config
-@function get($path: null) {
-	// Return full config if no path is provided
-	@if $path == null {
-		@return state.all();
-	}
+/// Read a config value for a specific key or path
+@function get($path) {
 	// Check that the config option exists, only checking the first element
 	$first: list.nth($path, 1);
 	@if type-of($first) != string {
@@ -35,11 +18,9 @@
 	@return state.get($path);
 }
 
-/// Retrieve margins for an element
-@function get-margins($element) {
-	$default: get(margins default) or data.$MARGINS-DEFAULT;
-	$margins: get(margins $element) or ();
-	@return map.merge($default, $margins);
+/// Get the current config as a map
+@function get-all() {
+	@return state.get-all();
 }
 
 /// Check if any style name in $names is a default style
@@ -70,37 +51,6 @@
 		@return -filter-styles($styles, $exclude: $def);
 	} @else {
 		@return -filter-styles($styles, $include: $opt, $exclude: $def);
-	}
-}
-
-/// Write configuration values
-@mixin set($conf, $initialize: false) {
-	// ensure styles list options are list
-	@each $key in (default-styles, optional-styles) {
-		$value: map.get($conf, $key);
-		@if type-of($value) == string {
-			$conf: map.set($conf, $key, list.append((), $value, $separator: comma));
-		}
-	}
-	// validate all config options
-	@each $name, $value in $conf {
-		$err: validate.check-option($name, $value);
-		@if $err {
-			@error $err;
-		}
-	}
-	// ensure margins have a default key
-	@if map.has-key($conf, margins) and not map.get($conf, margins, default) {
-		$margins: map.get($conf, margins);
-		$margins: map.set($margins, default, data.$MARGINS-DEFAULT);
-		$conf: map.set($conf, margins, $margins);
-	}
-	// update state
-	@if $initialize {
-		$base: base-config(map.get($conf, preset));
-		@include state.set($conf, $base);
-	} @else {
-		@include state.set($conf);
 	}
 }
 

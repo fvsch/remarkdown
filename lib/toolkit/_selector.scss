@@ -2,7 +2,7 @@
 @use "sass:meta" as *;
 @use "sass:selector";
 
-@use "../config/config";
+@use "../config/read" as config;
 @use "./str";
 
 /// Wrap content in the default selector
