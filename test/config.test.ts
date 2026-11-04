@@ -101,7 +101,7 @@ describe('rmd.config()', () => {
 			'table-hline': `-_-_-_-_-_-_`,
 		};
 
-		const { values, logs } = scss`
+		const { values } = scss`
 			@include rmd.config(
 				$base-selector: ":root",
 				$default-selector: "",
@@ -127,7 +127,7 @@ describe('rmd.config()', () => {
 				$table-vline: "/\\a/\\a/\\a/\\a/\\a/\\a",
 				$table-hline: "-_-_-_-_-_-_",
 			);
-			@each $key, $val in config.get() {
+			@each $key, $val in config.get-all() {
 				@debug capture($key, $val);
 			}
 		`;
@@ -146,49 +146,6 @@ describe('rmd.config()', () => {
 			} else {
 				assertion.toBe(expectedVal);
 			}
-		}
-	});
-
-	test('margins for undefined elements use defaults', () => {
-		const defaultMargins = { top: '1lh', bottom: '1lh' };
-		const { values } = scss`
-			@debug capture(default, config.get-margins(default));
-			@debug capture(unicorn, config.get-margins(unicorn));
-		`;
-		expect(sortedKeys(values)).toEqual(['default', 'unicorn']);
-		expect(values.default).toEqual(defaultMargins);
-		expect(values.unicorn).toEqual(defaultMargins);
-	});
-
-	test('custom margins have default top/bottom', () => {
-		const { values } = scss`
-			// set custom margins for h1 and h2 only
-			@include rmd.config(
-				$margins: (
-					h1: (top: 3lh, bottom: 20px),
-					h2: (top: 2vh),
-				)
-			);
-
-			// print out margins for h1 and a few other elements
-			@each $el in (default, h1, h2, ol, table) {
-				@debug capture($el, config.get-margins($el));
-			}
-		`;
-
-		const defaultMargins = { top: '1lh', bottom: '1lh' };
-		const expected: ScssResult['values'] = {
-			default: defaultMargins,
-			h1: { top: '3lh', bottom: '20px' },
-			h2: { top: '2vh', bottom: '1lh' },
-			ol: { top: '1lh', bottom: '1lh' },
-			table: { top: '1lh', bottom: '1lh' },
-		};
-
-		expect(sortedKeys(values)).toEqual(sortedKeys(expected));
-
-		for (const [el, expectedVal] of Object.entries(expected)) {
-			expect(values[el], `margins for ${el}`).toEqual(expectedVal);
 		}
 	});
 

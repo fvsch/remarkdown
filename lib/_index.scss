@@ -5,6 +5,7 @@
 /// - `styles`: generates the actual styles.
 
 @use "sass:list";
+@use "sass:map";
 
 @use "./config";
 @use "./styles";
@@ -16,16 +17,21 @@ $version: "4.0.0-beta.2";
 
 @mixin config($args...) {
 	$options: arglist.merge($args);
-	@include config.set($options, $initialize: true);
+	$preset: map.get($options, preset);
+	@include config.set-all($preset, map.remove($options, preset));
 }
 
 @mixin header($title: "Remarkdown %v (MIT) %u", $show-defaults: true) {
-	@if $title and $title != "" {
-		$title: -title-placeholders($title);
-		/*! #{$title} */
-	}
+	$title: str.replace($title, "%v", $version);
+	$title: str.replace($title, "%u", $url);
+	/*! #{$title} */
 	@if $show-defaults {
-		$list: -option-list(default-styles);
+		$list: config.get(default-styles);
+		@if list.length($list) > 0 {
+			$list: list.join((), $list, $separator: comma);
+		} @else {
+			$list: "none";
+		}
 		/* default-styles: #{$list} */
 	}
 }
@@ -46,18 +52,4 @@ $version: "4.0.0-beta.2";
 	@include styles.quote;
 	@include styles.hr;
 	@include styles.table;
-}
-
-@function -title-placeholders($title) {
-	$title: str.replace($title, "%v", $version);
-	$title: str.replace($title, "%u", $url);
-	@return $title;
-}
-
-@function -option-list($key) {
-	$list: config.get($key);
-	@if list.length($list) > 0 {
-		@return list.join((), $list, $separator: comma);
-	}
-	@return "none";
 }

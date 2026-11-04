@@ -1,0 +1,51 @@
+/// Write Remarkdown configuration
+
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta" as *;
+
+@use "./data";
+@use "./state";
+@use "./validate";
+
+/// Get a full configuration map with optional overrides
+@function new($preset: default, $options: null) {
+	$err: validate.check-preset($preset);
+	@if $err {
+		@error $err;
+	}
+
+	$config: data.defaults($preset);
+	// validate and merge user config
+	@each $name, $value in $options {
+		$err: validate.check-option($name, $value);
+		@if $err {
+			@error $err;
+		} @else {
+			$config: map.set($config, $name, $value);
+		}
+	}
+
+	// ensure styles list options are list
+	@each $key in (default-styles, optional-styles) {
+		$value: map.get($config, $key);
+		@if type-of($value) == string {
+			$config: map.set($config, $key, list.append((), $value, $separator: comma));
+		}
+	}
+
+	// ensure margins have a default key
+	@if map.has-key($config, margins) and not map.get($config, margins, default) {
+		$margins: map.get($config, margins);
+		$margins: map.set($margins, default, data.default-margins());
+		$config: map.set($config, margins, $margins);
+	}
+
+	@return $config;
+}
+
+/// Write configuration values
+@mixin set-all($preset: default, $options: null) {
+	$config: new($preset, $options);
+	@include state.set-all($config);
+}

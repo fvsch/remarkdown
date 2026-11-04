@@ -4,7 +4,8 @@
 @use "sass:meta" as *;
 @use "sass:string";
 
-@use "../config/config";
+@use "../config/read" as config;
+@use "../config/data" as data;
 @use "./str";
 
 /// Define a CSS custom property
@@ -69,7 +70,7 @@
 	@if not list.index(top bottom, $direction) {
 		@error "Unknown direction #{$direction}";
 	}
-	$margins: config.get-margins($element);
+	$margins: -get-margins($element);
 	$size: map.get($margins, $direction) or 0;
 	@return row($size);
 }
@@ -89,7 +90,7 @@
 	@if not list.index(start end, $dir) {
 		@error "Unknown direction #{$dir}";
 	}
-	$margins: config.get-margins($element);
+	$margins: -get-margins($element);
 	$size: map.get($margins, "inline-#{$dir}") or 0;
 	@return col($size);
 }
@@ -117,6 +118,12 @@
 		@return $size * $step;
 	}
 	@return $size;
+}
+
+@function -get-margins($element) {
+	$default: config.get(margins default) or data.default-margins();
+	$margins: config.get(margins $element) or ();
+	@return map.merge($default, $margins);
 }
 
 @function -short-pair($a, $b) {

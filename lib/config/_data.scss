@@ -8,11 +8,6 @@
 $DEFAULTS: meta.module-variables(defaults);
 $DEFAULTS-ZERO: meta.module-variables(defaults-zero);
 
-$MARGINS-DEFAULT: (
-	top: 1lh,
-	bottom: 1lh,
-);
-
 /// Full list of styling options
 $ALL-STYLES: (
 	a-bracket,
@@ -48,6 +43,25 @@ $ALL-STYLES: (
 	ul-plus,
 	ul-star
 );
+
+/// Return a copy of the default config for the "default" or "zero" preset
+@function defaults($preset: default) {
+	@if $preset == null or $preset == default {
+		@return $DEFAULTS;
+	} @else if $preset == zero {
+		@return map.merge($DEFAULTS, $DEFAULTS-ZERO);
+	} @else {
+		@error "Unknown preset";
+	}
+}
+
+@function default-margins() {
+	@return map.get($DEFAULTS, margins, default);
+}
+
+@function styles() {
+	@return $ALL-STYLES;
+}
 
 /// Check that a style name is valid
 @function is-style($name) {
