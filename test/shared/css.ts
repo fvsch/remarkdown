@@ -1,4 +1,4 @@
-import { parse } from 'postcss';
+import { type ChildNode, parse, Rule } from 'postcss';
 import { expect } from 'vitest';
 
 export function findHeader(css: string | undefined) {
@@ -32,4 +32,39 @@ function findComment(css: string | undefined, prefix: string) {
 			}
 		}
 	} catch {}
+}
+
+export function getCssVars(css: string): string[] {
+	const nodes = getNodes(css);
+	const rules = getRules(nodes);
+	return rules.flatMap((rule) => {
+		return rule.nodes
+			.filter((node) => node.type === 'decl' && node.prop.startsWith('--'))
+			.map((node) => node.toString());
+	});
+}
+
+export function getSelectors(css: string): string[] {
+	const nodes = getNodes(css);
+	const rules = getRules(nodes);
+	return rules.map((node) => node.selector);
+}
+
+function getNodes(css: string): ChildNode[] {
+	try {
+		return parse(css).nodes;
+	} catch {
+		return [];
+	}
+}
+
+function getRules(nodes: ChildNode[]): Rule[] {
+	return nodes.flatMap((node) => {
+		if (node.type === 'rule') {
+			return node;
+		} else if (node.type === 'atrule' && node.nodes) {
+			return node.nodes.filter((n) => n.type === 'rule');
+		}
+		return [];
+	});
 }
