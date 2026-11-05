@@ -3,25 +3,25 @@ export const DIST_STYLESHEETS = [
 		path: 'dist/remarkdown.css',
 		brand: 'Remarkdown',
 		selector: '.remarkdown',
-		size: [8_000, 12_000],
+		size: [9_000, 11_000],
 	},
 	{
 		path: 'dist/remarkdown.attr.css',
 		brand: 'Remarkdown',
 		selector: '[data-remarkdown]',
-		size: [10_000, 14_000],
+		size: [10_000, 12_000],
 	},
 	{
 		path: 'dist/remarkdown-zero.css',
 		brand: 'Remarkdown-zero',
 		selector: '.remarkdown',
-		size: [8_000, 12_000],
+		size: [9_000, 11_000],
 	},
 	{
 		path: 'dist/remarkdown-zero.attr.css',
 		brand: 'Remarkdown-zero',
 		selector: '[data-remarkdown]',
-		size: [10_000, 14_000],
+		size: [10_000, 12_000],
 	},
 ];
 
