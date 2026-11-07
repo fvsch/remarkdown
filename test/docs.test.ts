@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import { Window } from 'happy-dom';
 import { describe, expect, test } from 'vitest';
 
-import { localPath, RMD_ALL_STYLES } from './shared';
+import { RMD_ALL_STYLES } from './data';
+import { localPath } from './shared';
 
 describe('docs', () => {
 	test('styles page lists all styles', () => {

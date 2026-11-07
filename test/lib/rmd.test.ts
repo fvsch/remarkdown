@@ -4,72 +4,93 @@ import {
 	RMD_ALL_STYLES,
 	RMD_CONFIG_KEYS,
 	RMD_DEFAULT_STYLES,
+	RMD_EXPORTS,
 	RMD_ZERO_DEFAULT_STYLES,
+} from '../data';
+import {
+	formatStringList,
+	getHeader,
+	getCssVars,
+	getSelectors,
+	expectSassError,
+	pkg,
 	scss,
+	scssExportsTest,
 	sortedKeys,
 	type ScssResult,
-} from './shared';
+} from '../shared';
+
+describe('rmd namespace', () => {
+	test('check exports', scssExportsTest('rmd', RMD_EXPORTS));
+});
 
 describe('rmd.config()', () => {
 	test('calling with no value keeps defaults', () => {
-		const { values } = scss`
+		const { error, values } = scss`
 			@include rmd.config();
 			@debug capture(default, config.get(default-styles));
 		`;
+		expect(error).toBeUndefined();
 		expect(sortedKeys(values.default)).toEqual(RMD_DEFAULT_STYLES);
 	});
 
 	test('using default preset keeps defaults', () => {
-		const { values } = scss`
+		const { error, values } = scss`
 			@include rmd.config($preset: default);
 			@debug capture(default, config.get(default-styles));
 		`;
+		expect(error).toBeUndefined();
 		expect(sortedKeys(values.default)).toEqual(RMD_DEFAULT_STYLES);
 	});
 
 	test('can set Remarkdown-zero defaults', () => {
-		const { values } = scss`
+		const { error, values } = scss`
 			@include rmd.config($preset: zero);
 			@debug capture(default, config.get(default-styles));
 			@debug capture(optional, config.get(optional-styles));
 		`;
+		expect(error).toBeUndefined();
 		expect(sortedKeys(values.default)).toEqual(RMD_ZERO_DEFAULT_STYLES);
 		expect(values.optional).toBe(true);
 	});
 
 	test('can set custom default-styles', () => {
-		const { values } = scss`
+		const { error, values } = scss`
 			@include rmd.config($default-styles: (base-reset, hn-reset, em-reset, strong-reset));
 			@debug capture(default, config.get(default-styles));
 		`;
+		expect(error).toBeUndefined();
 		expect(values.default).toEqual(['base-reset', 'hn-reset', 'em-reset', 'strong-reset']);
 	});
 
 	test('can set custom options', () => {
-		const { values } = scss`
+		const { error, values } = scss`
 			@include rmd.config($optional-styles: (ul-dash, hn-prefix));
 			@debug capture(optional, config.get(optional-styles));
 		`;
+		expect(error).toBeUndefined();
 		expect(values.optional).toEqual(['ul-dash', 'hn-prefix']);
 	});
 
 	test('$default-styles and $optional-styles accept a single string', () => {
-		const { values } = scss`
+		const { error, values } = scss`
 			@include rmd.config($default-styles: base-reset, $optional-styles: h1-line);
 			@debug capture(default, config.get(default-styles));
 			@debug capture(optional, config.get(optional-styles));
 		`;
+		expect(error).toBeUndefined();
 		expect(values.default).toEqual(['base-reset']);
 		expect(values.optional).toEqual(['h1-line']);
 	});
 
 	test('accepts a config map instead of named params', () => {
-		const { values } = scss`
+		const { error, values } = scss`
 			$config: (base-font: ("Consolas", monospace), line-height: 1.42);
 			@include rmd.config($config);
 			@debug capture(baseFont, config.get(base-font));
 			@debug capture(lineHeight, config.get(line-height));
 		`;
+		expect(error).toBeUndefined();
 		expect(values.baseFont).toEqual(['Consolas', 'monospace']);
 		expect(values.lineHeight).toEqual(1.42);
 	});
@@ -101,7 +122,7 @@ describe('rmd.config()', () => {
 			'table-hline': `-_-_-_-_-_-_`,
 		};
 
-		const { values } = scss`
+		const { error, values } = scss`
 			@include rmd.config(
 				$base-selector: ":root",
 				$default-selector: "",
@@ -132,6 +153,7 @@ describe('rmd.config()', () => {
 			}
 		`;
 
+		expect(error).toBeUndefined();
 		const counts = {
 			values: Object.keys(values).length,
 			expected: Object.keys(expected).length,
@@ -150,38 +172,38 @@ describe('rmd.config()', () => {
 	});
 
 	test('unknown config keys are rejected', () => {
-		const suffix = 'expected one of ' + formatList(RMD_CONFIG_KEYS);
+		const suffix = 'expected one of ' + formatStringList(RMD_CONFIG_KEYS);
 		expectSassError(
-			`@include rmd.config($font-family: "Comic Sans MS")`,
+			scss`@include rmd.config($font-family: "Comic Sans MS")`,
 			`Unknown option $font-family, ${suffix}`,
 		);
 		expectSassError(
-			`@include rmd.config((doesnt-exist: whoops))`,
+			scss`@include rmd.config((doesnt-exist: whoops))`,
 			`Unknown option $doesnt-exist, ${suffix}`,
 		);
 	});
 
 	test('rejects incorrect types', () => {
 		expectSassError(
-			`@include rmd.config($line-height: "150%")`,
+			scss`@include rmd.config($line-height: "150%")`,
 			`$line-height's type must be "number", got: "string"`,
 		);
 		expectSassError(
-			`@include rmd.config($base-font: false)`,
+			scss`@include rmd.config($base-font: false)`,
 			`$base-font's type must be one of ("null", "string", "list"), got: "bool"`,
 		);
 	});
 
 	test('rejects invalid default-styles/optional-styles', () => {
-		const suffix = 'expected one of ' + formatList(RMD_ALL_STYLES);
+		const suffix = 'expected one of ' + formatStringList(RMD_ALL_STYLES);
 		expectSassError(
-			`@include rmd.config(
+			scss`@include rmd.config(
 				$default-styles: (based, cool-cat, lolwhat)
 			);`,
 			`$default-styles has unknown style name "based", ${suffix}`,
 		);
 		expectSassError(
-			`@include rmd.config(
+			scss`@include rmd.config(
 				$optional-styles: (h1-line, "Hello!")
 			);`,
 			`$optional-styles has unknown style name "Hello!", ${suffix}`,
@@ -197,7 +219,7 @@ describe('rmd.config()', () => {
 			{ base: '...', default: '{}', option: '!!%s' },
 		];
 		for (const selectors of valid) {
-			const { values } = scss`
+			const { values, error } = scss`
 				@include rmd.config(
 					$base-selector: "${selectors.base}",
 					$default-selector: "${selectors.default}",
@@ -207,27 +229,28 @@ describe('rmd.config()', () => {
 				@debug capture(default, config.get(default-selector));
 				@debug capture(option, config.get(option-selector));
 			`;
+			expect(error).toBeUndefined();
 			expect(values).toEqual(selectors);
 		}
 	});
 
 	test('rejects invalid selectors', () => {
 		expectSassError(
-			`@include rmd.config($base-selector: "")`,
+			scss`@include rmd.config($base-selector: "")`,
 			`$base-selector cannot be an empty string`,
 		);
 		expectSassError(
-			`@include rmd.config($option-selector: "")`,
+			scss`@include rmd.config($option-selector: "")`,
 			`$option-selector cannot be an empty string`,
 		);
 		expectSassError(
-			`@include rmd.config($option-selector: ".rmd")`,
+			scss`@include rmd.config($option-selector: ".rmd")`,
 			`$option-selector must contain the substring "%s", got ".rmd"`,
 		);
 	});
 
 	test('setting $default-styles impacts optional styles', () => {
-		const { values } = scss`
+		const { values, error } = scss`
 			@include rmd.config(
 				$preset: default,
 				$default-styles: (base-reset, hn-reset),
@@ -237,6 +260,7 @@ describe('rmd.config()', () => {
 			@debug capture(has-hn-prefix, config.has-option(hn-prefix));
 		`;
 
+		expect(error).toBeUndefined();
 		expect(values).toEqual({
 			default: ['base-reset', 'hn-reset'],
 			'has-hn-prefix': true,
@@ -244,12 +268,125 @@ describe('rmd.config()', () => {
 	});
 });
 
-function expectSassError(source: string, message: string) {
-	const { logs } = scss(source);
-	expect(logs).toContainEqual({ type: 'error', message });
-}
+describe('rmd.header()', () => {
+	test('outputs correct package version', () => {
+		const { css, error } = scss`
+			@include rmd.header();
+		`;
+		expect(error).toBeUndefined();
+		expect(getHeader(css).title).toMatch(`Remarkdown ${pkg.version}`);
+	});
 
-function formatList(list: string[]): string {
-	const quoted = list.map((str) => JSON.stringify(str));
-	return `(${quoted.join(', ')})`;
-}
+	test('custom $title', () => {
+		const { css, error } = scss`
+			@include rmd.header($title: "[Remarkdown](%u)");
+		`;
+		expect(error).toBeUndefined();
+		expect(getHeader(css).title).toBe(`[Remarkdown](${pkg.homepage})`);
+	});
+
+	test('outputs list of default styles', () => {
+		const { css, error } = scss`
+			@include rmd.header();
+		`;
+		expect(error).toBeUndefined();
+		expect(getHeader(css).defaults).toEqual(RMD_DEFAULT_STYLES);
+	});
+
+	test('reflects changes to $default-styles', () => {
+		const customDefaults = ['base-reset', 'h1-line', 'hn-reset', 'pre-tick'];
+		const { css, error } = scss`
+			@include rmd.config($default-styles: (${customDefaults.join(', ')}));
+			@include rmd.header();
+		`;
+		expect(error).toBeUndefined();
+		expect(getHeader(css).defaults).toEqual(customDefaults);
+	});
+});
+
+describe('rmd.styles()', () => {
+	test('outputs default stylesheet', () => {
+		const { css, error } = scss`
+			@include rmd.styles();
+		`;
+		expect(error).toBeUndefined();
+
+		// Check output
+		expect(css.length).toBeGreaterThan(8_000);
+		expect(css.length).toBeLessThan(12_000);
+		expect(css).toMatch(`--rmd-base-font: ui-monospace, monospace;`);
+
+		// Check a few selectors are present
+		const selectors = getSelectors(css);
+		expect(selectors.length).toBeGreaterThan(70);
+		expect(selectors).toContain('.remarkdown');
+		expect(selectors).toContain('.remarkdown p');
+		expect(selectors).toContain('.remarkdown.h1-line h1');
+	});
+
+	test('config can customize output', () => {
+		const { css, error } = scss`
+			@include rmd.config(
+				$base-selector: ":root",
+				$default-selector: "",
+				$option-selector: ".%s",
+				$css-vars: "--%s",
+				$hn-prefix: "!",
+				$base-font: (Iosevka, monospace)
+			);
+			@include rmd.styles();
+		`;
+		expect(error).toBeUndefined();
+
+		// Check output length
+		expect(css.length).toBeGreaterThan(8_000);
+		expect(css.length).toBeLessThan(12_000);
+
+		// Check that configured CSS variable syntax/values are present
+		const vars = getCssVars(css);
+		expect(vars).toContain(`--hn-prefix: "!"`);
+		expect(vars).toContain(`--base-font: Iosevka, monospace`);
+
+		// Check a few selectors are present
+		const selectors = getSelectors(css);
+		expect(selectors.length).toBeGreaterThan(70);
+		expect(selectors).toContain(':root');
+		expect(selectors).toContain('p');
+		expect(selectors).toContain('.h1-line h1');
+	});
+
+	test('disable all styles', () => {
+		const { css, error } = scss`
+			@include rmd.config(
+				$default-styles: (),
+				$optional-styles: (),
+			);
+			@include rmd.styles();
+		`;
+		expect(error).toBeUndefined();
+
+		// Check output length
+		// We currently output a dozen rules, maybe it should be lower…
+		expect(css.length).toBeGreaterThan(1_000);
+		expect(css.length).toBeLessThan(2_000);
+
+		// Check against a snapshot of expected selectors
+		// This could change if some of the style implementations are fixed,
+		// for example to not reset UL/OL margins and list-style-type if
+		// all `ul-*` and/or `ol-*` styles are disabled
+		const selectors = getSelectors(css);
+		expect(selectors).toStrictEqual([
+			'.remarkdown',
+			'.remarkdown p',
+			'.remarkdown figure',
+			'.remarkdown ul',
+			'.remarkdown li ul',
+			'.remarkdown ol',
+			'.remarkdown li ol',
+			'.remarkdown ol > li',
+			'.remarkdown pre',
+			'.remarkdown blockquote',
+			'.remarkdown hr',
+		]);
+	});
+});
