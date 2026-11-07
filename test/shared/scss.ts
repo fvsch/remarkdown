@@ -10,8 +10,20 @@ import {
 	type StringOptions,
 	type Value,
 } from 'sass';
+import { expect } from 'vitest';
 
 import { localPath } from './meta';
+
+type TemplateStringFn<T> = (str: string | TemplateStringsArray, ...values: any[]) => T;
+
+type JSValue = null | boolean | number | string | any[] | Record<string, any>;
+
+export type ScssResult = {
+	css: string;
+	error?: Exception;
+	logs: Array<{ type: 'debug' | 'warn' | 'error'; message: string }>;
+	values: Record<string, JSValue>;
+};
 
 const SASS_CONTEXT = `
 @use "sass:list";
@@ -23,19 +35,13 @@ const SASS_CONTEXT = `
 @use "./lib/styles" as styles;
 `.trim();
 
-type JSValue = null | boolean | number | string | any[] | Record<string, any>;
-
-export type ScssResult = {
-	css: string;
-	error?: Exception;
-	logs: Array<{ type: 'debug' | 'warn' | 'error'; message: string }>;
-	values: Record<string, JSValue>;
+const tplToString: TemplateStringFn<string> = (str, ...values) => {
+	const raw = typeof str === 'string' ? [str] : str;
+	return String.raw({ raw }, ...values);
 };
 
-type TemplateStringFn<T = string> = (str: string | TemplateStringsArray, ...values: any[]) => T;
-
 export const scss: TemplateStringFn<ScssResult> = (strings, ...tplValues) => {
-	const input = templateString(strings, ...tplValues).trim();
+	const input = tplToString(strings, ...tplValues).trim();
 	const logs: ScssResult['logs'] = [];
 	const values: ScssResult['values'] = {};
 
@@ -76,19 +82,24 @@ export const scss: TemplateStringFn<ScssResult> = (strings, ...tplValues) => {
 	}
 };
 
-const templateString: TemplateStringFn = (str, ...values) => {
-	const raw = typeof str === 'string' ? [str] : str;
-	return String.raw({ raw }, ...values);
-};
-
-function trimQuotes(input: string) {
-	if (
-		(input.startsWith(`"`) && input.endsWith(`"`)) ||
-		(input.startsWith(`'`) && input.endsWith(`'`))
-	) {
-		return input.slice(1, -1).replace(/\\(["'])/g, '$1');
-	}
-	return input;
+export function scssExportsTest(
+	module: 'rmd' | 'config' | 'styles',
+	keys: { functions: string[]; mixins: string[]; variables: string[] },
+) {
+	return () => {
+		const { values, error } = scss`
+		$functions: meta.module-functions("${module}");
+		$mixins: meta.module-mixins("${module}");
+		$variables: meta.module-variables("${module}");
+		@debug capture(functions, map.keys($functions));
+		@debug capture(mixins, map.keys($mixins));
+		@debug capture(variables, map.keys($variables));
+	`;
+		expect(error).toBeUndefined();
+		expect(sortedKeys(values.functions)).toEqual(keys.functions);
+		expect(sortedKeys(values.mixins)).toEqual(keys.mixins);
+		expect(sortedKeys(values.variables)).toEqual(keys.variables);
+	};
 }
 
 export function sortedKeys(input: JSValue): string[] {
@@ -99,6 +110,29 @@ export function sortedKeys(input: JSValue): string[] {
 	} else {
 		return Object.keys(input).toSorted();
 	}
+}
+
+export function formatStringList(list: string[]): string {
+	const quoted = list.map((str) => JSON.stringify(str));
+	return `(${quoted.join(', ')})`;
+}
+
+export function expectSassError(result: ScssResult, message: string) {
+	expect(result.error).toBeDefined();
+	expect(result.logs).toContainEqual({
+		type: 'error',
+		message,
+	});
+}
+
+function trimQuotes(input: string) {
+	if (
+		(input.startsWith(`"`) && input.endsWith(`"`)) ||
+		(input.startsWith(`'`) && input.endsWith(`'`))
+	) {
+		return input.slice(1, -1).replace(/\\(["'])/g, '$1');
+	}
+	return input;
 }
 
 function sassValueToJS(value: Value): JSValue {

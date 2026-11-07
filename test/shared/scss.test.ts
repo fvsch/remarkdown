@@ -1,22 +1,24 @@
 import { describe, expect, test } from 'vitest';
 
-import { scss } from './shared';
+import { scss } from './scss';
 
 describe(`scss() helper`, () => {
 	test('compiles basic sass', () => {
-		const { css } = scss`
+		const { css, error } = scss`
 			$test: "world";
 			.test { content: "hello " + $test }
 		`;
+		expect(error).toBeUndefined();
 		expect(css).toBe(`.test {\n  content: "hello world";\n}`);
 	});
 
 	test('captures @debug and @warn', () => {
-		const { logs } = scss`
+		const { logs, error } = scss`
 			@debug "A debug message";
 			@debug "Another debug message";
 			@warn "A warning";
 		`;
+		expect(error).toBeUndefined();
 		expect(logs).toEqual([
 			{ type: 'debug', message: 'A debug message' },
 			{ type: 'debug', message: 'Another debug message' },
@@ -25,25 +27,31 @@ describe(`scss() helper`, () => {
 	});
 
 	test('captures first @error', () => {
-		const { logs } = scss`
+		const { error, logs } = scss`
 			@debug "A debug message";
-			@error "An error message";
-			// compilation should stop after first error
+			@error "First error message";
 			@debug "Then a debug one";
 			@error "A second error";
 		`;
+
+		// First error is captured
+		expect(error).toBeDefined();
+		expect(error?.sassMessage).toMatch('First error message');
+
+		// compilation and logs should stop after first error
 		expect(logs).toEqual([
 			{ type: 'debug', message: 'A debug message' },
-			{ type: 'error', message: 'An error message' },
+			{ type: 'error', message: 'First error message' },
 		]);
 	});
 
 	test('captures @debug and @warn', () => {
-		const { logs } = scss`
+		const { logs, error } = scss`
 			@debug "A debug message";
 			@debug "Another debug message";
 			@warn "A warning";
 		`;
+		expect(error).toBeUndefined();
 		expect(logs).toEqual([
 			{ type: 'debug', message: 'A debug message' },
 			{ type: 'debug', message: 'Another debug message' },
@@ -52,12 +60,13 @@ describe(`scss() helper`, () => {
 	});
 
 	test('capture() custom function', () => {
-		const { logs, values } = scss`
+		const { error, logs, values } = scss`
 			$default-styles: (base-reset, hn-prefix);
 			$margins: (h1: (top: 24px), p: (bottom: 0.5rem));
 			@debug capture(default-styles, $default-styles);
 			@debug capture(margins, $margins);
 		`;
+		expect(error).toBeUndefined();
 
 		// @debug adds to logs as simple strings
 		expect(logs).toEqual([

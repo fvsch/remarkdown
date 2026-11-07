@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import { describe, expect, test } from 'vitest';
 
-import { DIST_STYLESHEETS, pkg, localPath, findHeader } from './shared';
+import { DIST_STYLESHEETS } from './data';
+import { pkg, localPath, getHeader } from './shared';
 
 describe('dist/*css', () => {
 	test('only expected stylesheets are present', () => {
@@ -17,7 +18,7 @@ describe('dist/*css', () => {
 			expect(css.length).toBeGreaterThan(Math.min(...size));
 			expect(css.length).toBeLessThan(Math.max(...size));
 
-			const { title } = findHeader(css);
+			const { title } = getHeader(css);
 			expect(title).toMatch(`${brand} ${pkg.version}`);
 			expect(title).toMatch(pkg.license);
 			expect(title).toMatch(pkg.homepage);

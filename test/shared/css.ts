@@ -1,7 +1,7 @@
 import { type ChildNode, parse, Rule } from 'postcss';
 import { expect } from 'vitest';
 
-export function findHeader(css: string | undefined) {
+export function getHeader(css: string | undefined) {
 	const title = findComment(css, '! ');
 	expect(title, 'header title not found').toBeTypeOf('string');
 	const defaults = findComment(css, 'default-styles: ');
@@ -47,7 +47,11 @@ export function getCssVars(css: string): string[] {
 export function getSelectors(css: string): string[] {
 	const nodes = getNodes(css);
 	const rules = getRules(nodes);
-	return rules.map((node) => node.selector);
+	return rules.map((node) => formatSelector(node.selector));
+}
+
+function formatSelector(selector: string) {
+	return selector.replace(/\s+/g, ' ').trim();
 }
 
 function getNodes(css: string): ChildNode[] {
@@ -67,4 +71,14 @@ function getRules(nodes: ChildNode[]): Rule[] {
 		}
 		return [];
 	});
+}
+
+export function expectLineCount(css: string, expectedCount: number, tolerance = 1.15) {
+	const count = css.split('\n').length;
+	const delta = Math.min(tolerance, 2);
+	const min = Math.floor(expectedCount / delta);
+	const max = Math.ceil(expectedCount * delta);
+	const msg = `line count of ${count} is not close to ${expectedCount}`;
+	expect(count, msg).toBeGreaterThanOrEqual(min);
+	expect(count, msg).toBeLessThanOrEqual(max);
 }
