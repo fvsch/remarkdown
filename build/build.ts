@@ -5,18 +5,33 @@ import postcss from 'postcss';
 import dupSelectors from 'postcss-combine-duplicated-selectors';
 import { compileAsync } from 'sass';
 
+import pkgJson from '../package.json' with { type: 'json' };
 import oxfmtConfig from '../.oxfmtrc.json' with { type: 'json' };
 
 const rootDir = join(import.meta.dirname, '..');
 
-buildAll([
-	{ input: 'build/remarkdown.scss', dest: 'dist' },
-	{ input: 'build/remarkdown.attr.scss', dest: 'dist' },
-	{ input: 'build/remarkdown-zero.scss', dest: 'dist' },
-	{ input: 'build/remarkdown-zero.attr.scss', dest: 'dist' },
-	{ input: 'docs/assets/docs.scss', dest: 'docs/assets' },
-	{ input: 'docs/assets/styles.scss', dest: 'docs/assets' },
-]);
+main();
+
+async function main() {
+	await writePkgInfo('lib/_info.scss');
+	await buildAll([
+		{ input: 'build/remarkdown.scss', dest: 'dist' },
+		{ input: 'build/remarkdown.attr.scss', dest: 'dist' },
+		{ input: 'build/remarkdown-zero.scss', dest: 'dist' },
+		{ input: 'build/remarkdown-zero.attr.scss', dest: 'dist' },
+		{ input: 'docs/assets/docs.scss', dest: 'docs/assets' },
+		{ input: 'docs/assets/styles.scss', dest: 'docs/assets' },
+	]);
+}
+
+async function writePkgInfo(filePath: string) {
+	const { version, license, homepage } = pkgJson;
+	const vars =
+		Object.entries({ version, license, homepage })
+			.map(([key, value]) => `$${key}: "${value}";`)
+			.join('\n') + '\n';
+	await writeFile(join(rootDir, filePath), vars, { encoding: 'utf8' });
+}
 
 async function buildAll(sources: { input: string; dest: string }[]) {
 	const results = await Promise.all(

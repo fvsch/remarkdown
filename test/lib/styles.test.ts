@@ -1,10 +1,17 @@
 import { describe, expect, test } from 'vitest';
 
-import { STYLES_EXPORTS } from '../data';
-import { expectLineCount, getCssVars, getSelectors, scss, scssExportsTest } from '../shared';
+import { expectLineCount, expectScssExports, getCssVars, getSelectors, scss } from '../shared';
 
 describe('styles namespace', () => {
-	test('check exports', scssExportsTest('styles', STYLES_EXPORTS));
+	test('check exports', () => {
+		expectScssExports('styles', {
+			functions: [],
+			mixins: 'base code del em figure heading hr link ol p pre quote strong table ul'.split(
+				' ',
+			),
+			variables: [],
+		});
+	});
 
 	test('output base styles', () => {
 		const { css, error } = scss`

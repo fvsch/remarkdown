@@ -1,8 +1,13 @@
 import { describe, test } from 'vitest';
 
-import { CONFIG_EXPORTS } from '../data';
-import { scssExportsTest } from '../shared';
+import { expectScssExports } from '../shared';
 
 describe('config namespace', () => {
-	test('check exports', scssExportsTest('config', CONFIG_EXPORTS));
+	test('check exports', () => {
+		expectScssExports('config', {
+			functions: ['get', 'get-all', 'has-default', 'has-option', 'new'],
+			mixins: ['set-all'],
+			variables: [],
+		});
+	});
 });

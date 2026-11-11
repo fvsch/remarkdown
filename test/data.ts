@@ -1,27 +1,27 @@
 export const DIST_STYLESHEETS = [
 	{
 		path: 'dist/remarkdown.css',
+		lines: 400,
 		brand: 'Remarkdown',
-		selector: '.remarkdown',
-		size: [9_000, 11_000],
+		h1Selector: 'h1::before',
 	},
 	{
 		path: 'dist/remarkdown.attr.css',
+		lines: 440,
 		brand: 'Remarkdown',
-		selector: '[data-remarkdown]',
-		size: [10_000, 12_000],
+		h1Selector: '[data-remarkdown] h1::before',
 	},
 	{
 		path: 'dist/remarkdown-zero.css',
+		lines: 420,
 		brand: 'Remarkdown-zero',
-		selector: '.remarkdown',
-		size: [9_000, 11_000],
+		h1Selector: ':scope.hn-prefix h1::before',
 	},
 	{
 		path: 'dist/remarkdown-zero.attr.css',
+		lines: 460,
 		brand: 'Remarkdown-zero',
-		selector: '[data-remarkdown]',
-		size: [10_000, 12_000],
+		h1Selector: '[data-remarkdown~="hn-prefix"] h1::before',
 	},
 ];
 
@@ -107,43 +107,3 @@ export const RMD_DEFAULT_STYLES = [
 ];
 
 export const RMD_ZERO_DEFAULT_STYLES = ['base-reset', 'em-reset', 'hn-reset', 'strong-reset'];
-
-type SassExportsKeys = {
-	functions: string[];
-	mixins: string[];
-	variables: string[];
-};
-
-export const RMD_EXPORTS: SassExportsKeys = {
-	functions: [],
-	mixins: ['config', 'header', 'styles'],
-	variables: ['url', 'version'],
-};
-
-export const CONFIG_EXPORTS: SassExportsKeys = {
-	functions: ['get', 'get-all', 'has-default', 'has-option', 'new'],
-	mixins: ['set-all'],
-	variables: [],
-};
-
-export const STYLES_EXPORTS: SassExportsKeys = {
-	functions: [],
-	mixins: [
-		'base',
-		'code',
-		'del',
-		'em',
-		'figure',
-		'heading',
-		'hr',
-		'link',
-		'ol',
-		'p',
-		'pre',
-		'quote',
-		'strong',
-		'table',
-		'ul',
-	],
-	variables: [],
-};

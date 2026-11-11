@@ -4,7 +4,7 @@ import { expect } from 'vitest';
 export function getHeader(css: string | undefined) {
 	const title = findComment(css, '! ');
 	expect(title, 'header title not found').toBeTypeOf('string');
-	const defaults = findComment(css, 'default-styles: ');
+	const defaults = findComment(css, '$default-styles: ');
 	expect(defaults, 'default-styles list not found').toBeTypeOf('string');
 
 	return {
