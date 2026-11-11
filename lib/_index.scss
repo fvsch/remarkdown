@@ -1,30 +1,54 @@
 /// The remarkdown.css Sass library
 /// Exposes three mixins:
-/// - `config`: can be used to override defaults;
-/// - `header`: outputs a CSS comment describing the library;
-/// - `styles`: generates the actual styles.
+/// - `config()`: can be used to override defaults;
+/// - `header()`: outputs a CSS comment describing the library;
+/// - `styles()`: generates the actual styles.
 
 @use "sass:list";
 @use "sass:map";
 
 @use "./config";
+@use "./info";
 @use "./styles";
 @use "./toolkit/arglist";
 @use "./toolkit/str";
 
-$url: "https://fvsch.github.io/remarkdown/";
-$version: "4.0.0-beta.2";
-
+/// Configures Remarkdown options.
+/// For a list of available options, see `lib/_defaults.scss`.
+/// This mixin can be called with keyword arguments:
+///
+///	@include rmd.config(
+///		$default-styles: (base-reset, hn-reset),
+///		$optional-styles: true
+///	);
+///
+/// Or with a map of options:
+///
+///	@include rmd.config((
+///		"default-styles": (base-reset, hn-reset),
+///		"optional-styles": true
+///	));
+///
 @mixin config($args...) {
 	$options: arglist.merge($args);
 	$preset: map.get($options, preset);
 	@include config.set-all($preset, map.remove($options, preset));
 }
 
-@mixin header($title: "Remarkdown %v (MIT) %u", $show-defaults: true) {
-	$title: str.replace($title, "%v", $version);
-	$title: str.replace($title, "%u", $url);
-	/*! #{$title} */
+/// Generate a stylesheet header (i.e. a CSS comment)
+/// with the library's name, version, license and homepage URL,
+/// as well as a list of configured `$default-styles`.
+/// $title placeholders:
+/// - %u: homepage url
+/// - %l: license
+/// - %v: version
+@mixin header($title: "Remarkdown %v (%l) %u", $show-defaults: true) {
+	@if $title {
+		$title: str.replace($title, "%l", info.$license);
+		$title: str.replace($title, "%u", info.$homepage);
+		$title: str.replace($title, "%v", info.$version);
+		/*! #{$title} */
+	}
 	@if $show-defaults {
 		$list: config.get(default-styles);
 		@if list.length($list) > 0 {
@@ -32,10 +56,20 @@ $version: "4.0.0-beta.2";
 		} @else {
 			$list: "none";
 		}
-		/* default-styles: #{$list} */
+		/* $default-styles: #{$list} */
 	}
 }
 
+/// Output all Remarkdown styles using the current config
+/// For more control over ordering or output, use the `lib/styles` module:
+///
+///	@use "pkg:remarkdown.css" as rmd;
+///	@use "pkg:remarkdown.css/lib/styles" as styles;
+///	@include rmd.config(/* … */);
+///	@include styles.base;
+///	@include styles.heading;
+///	/* etc. */
+///
 @mixin styles {
 	@include styles.base;
 	@include styles.link;

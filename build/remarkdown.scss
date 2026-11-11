@@ -12,7 +12,7 @@
 	$option-selector: ":scope.%s"
 );
 
-@include rmd.header("Remarkdown %v (MIT) %u");
+@include rmd.header("Remarkdown %v (%l) %u");
 
 @scope (.remarkdown) to (.no-remarkdown) {
 	@include rmd.styles();

@@ -10,6 +10,6 @@
 	$option-selector: "[data-remarkdown~='%s']"
 );
 
-@include rmd.header("Remarkdown %v [attr] (MIT) %u");
+@include rmd.header("Remarkdown %v [attr] (%l) %u");
 
 @include rmd.styles();

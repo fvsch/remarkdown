@@ -4,10 +4,10 @@ import {
 	RMD_ALL_STYLES,
 	RMD_CONFIG_KEYS,
 	RMD_DEFAULT_STYLES,
-	RMD_EXPORTS,
 	RMD_ZERO_DEFAULT_STYLES,
 } from '../data';
 import {
+	expectScssExports,
 	formatStringList,
 	getHeader,
 	getCssVars,
@@ -15,13 +15,18 @@ import {
 	expectSassError,
 	pkg,
 	scss,
-	scssExportsTest,
 	sortedKeys,
 	type ScssResult,
 } from '../shared';
 
 describe('rmd namespace', () => {
-	test('check exports', scssExportsTest('rmd', RMD_EXPORTS));
+	test('check exports', () => {
+		expectScssExports('rmd', {
+			functions: [],
+			mixins: ['config', 'header', 'styles'],
+			variables: [],
+		});
+	});
 });
 
 describe('rmd.config()', () => {
