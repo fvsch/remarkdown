@@ -51,7 +51,7 @@ $ALL-STYLES: (
 	} @else if $preset == zero {
 		@return map.merge($DEFAULTS, $DEFAULTS-ZERO);
 	} @else {
-		@error "Unknown preset";
+		@error "Unknown preset #{$preset}";
 	}
 }
 

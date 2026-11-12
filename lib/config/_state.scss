@@ -18,8 +18,8 @@ $-state: data.$DEFAULTS;
 	@return map.has-key($-state, $key);
 }
 
-@mixin set($map) {
-	$-state: map.merge($-state, $map) !global;
+@mixin set($key, $value) {
+	$-state: map.set($-state, $key, $value) !global;
 }
 
 @mixin set-all($map) {
