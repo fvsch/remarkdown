@@ -75,7 +75,7 @@ describe('styles namespace', () => {
 	});
 
 	test('can output the same style many times', () => {
-		const { css, error, logs } = scss`
+		const { css, error } = scss`
 			@each $n in (1 2 3) {
 				@include styles.em();
 				@include styles.strong();
@@ -97,5 +97,39 @@ describe('styles namespace', () => {
 			'.remarkdown strong::before, .remarkdown strong::after',
 			'.remarkdown.strong-underscore strong::before, .remarkdown.strong-underscore strong::after',
 		]);
+	});
+
+	test('config affects output of styles.* mixins', () => {
+		const expectedSelectors = [
+			// default config
+			'.remarkdown em',
+			'.remarkdown em::before, .remarkdown em::after',
+			'.remarkdown.em-underscore em::before, .remarkdown.em-underscore em::after',
+			// custom config
+			'.rmd--em-reset em',
+			'.rmd--em-star em::before, .rmd--em-star em::after',
+			'.rmd--em-underscore em::before, .rmd--em-underscore em::after',
+		];
+
+		const { css, error } = scss`
+			@include rmd.config(
+				$preset: default,
+			);
+			@include styles.em();
+
+			@include rmd.config(
+				$preset: zero,
+				$default-styles: (),
+				$base-selector: ".rmd",
+				$default-selector: ".rmd",
+				$option-selector: ".rmd--%s"
+			);
+			@include styles.em();
+		`;
+		expect(error).toBeUndefined();
+		expectLineCount(css, 30);
+
+		// Check selectors
+		expect(getSelectors(css)).toEqual(expectedSelectors);
 	});
 });

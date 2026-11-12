@@ -5,7 +5,6 @@
 /// - `styles()`: generates the actual styles.
 
 @use "sass:list";
-@use "sass:map";
 
 @use "./config";
 @use "./info";
@@ -31,8 +30,7 @@
 ///
 @mixin config($args...) {
 	$options: arglist.merge($args);
-	$preset: map.get($options, preset);
-	@include config.set-all($preset, map.remove($options, preset));
+	@include config.set-all($options);
 }
 
 /// Generate a stylesheet header (i.e. a CSS comment)

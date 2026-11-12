@@ -1,14 +1,10 @@
 import { describe, expect, test } from 'vitest';
 
 import {
-	RMD_ALL_STYLES,
-	RMD_CONFIG_KEYS,
-	RMD_DEFAULT_STYLES,
-	RMD_ZERO_DEFAULT_STYLES,
-} from '../data';
-import {
+	type ScssResult,
+	DEFAULTS,
+	DEFAULTS_ZERO,
 	expectScssExports,
-	formatStringList,
 	getHeader,
 	getCssVars,
 	getSelectors,
@@ -16,7 +12,9 @@ import {
 	pkg,
 	scss,
 	sortedKeys,
-	type ScssResult,
+	expectLineCount,
+	unknownOption,
+	unknownStyle,
 } from '../shared';
 
 describe('rmd namespace', () => {
@@ -31,31 +29,34 @@ describe('rmd namespace', () => {
 
 describe('rmd.config()', () => {
 	test('calling with no value keeps defaults', () => {
+		const expected = sortedKeys(DEFAULTS['default-styles']);
 		const { error, values } = scss`
 			@include rmd.config();
 			@debug capture(default, config.get(default-styles));
 		`;
 		expect(error).toBeUndefined();
-		expect(sortedKeys(values.default)).toEqual(RMD_DEFAULT_STYLES);
+		expect(sortedKeys(values.default)).toEqual(expected);
 	});
 
 	test('using default preset keeps defaults', () => {
+		const expected = sortedKeys(DEFAULTS['default-styles']);
 		const { error, values } = scss`
 			@include rmd.config($preset: default);
 			@debug capture(default, config.get(default-styles));
 		`;
 		expect(error).toBeUndefined();
-		expect(sortedKeys(values.default)).toEqual(RMD_DEFAULT_STYLES);
+		expect(sortedKeys(values.default)).toEqual(expected);
 	});
 
 	test('can set Remarkdown-zero defaults', () => {
+		const expected = sortedKeys(DEFAULTS_ZERO['default-styles']);
 		const { error, values } = scss`
 			@include rmd.config($preset: zero);
 			@debug capture(default, config.get(default-styles));
 			@debug capture(optional, config.get(optional-styles));
 		`;
 		expect(error).toBeUndefined();
-		expect(sortedKeys(values.default)).toEqual(RMD_ZERO_DEFAULT_STYLES);
+		expect(sortedKeys(values.default)).toEqual(expected);
 		expect(values.optional).toBe(true);
 	});
 
@@ -177,14 +178,13 @@ describe('rmd.config()', () => {
 	});
 
 	test('unknown config keys are rejected', () => {
-		const suffix = 'expected one of ' + formatStringList(RMD_CONFIG_KEYS);
 		expectSassError(
 			scss`@include rmd.config($font-family: "Comic Sans MS")`,
-			`Unknown option $font-family, ${suffix}`,
+			unknownOption('font-family'),
 		);
 		expectSassError(
 			scss`@include rmd.config((doesnt-exist: whoops))`,
-			`Unknown option $doesnt-exist, ${suffix}`,
+			unknownOption('doesnt-exist'),
 		);
 	});
 
@@ -200,18 +200,13 @@ describe('rmd.config()', () => {
 	});
 
 	test('rejects invalid default-styles/optional-styles', () => {
-		const suffix = 'expected one of ' + formatStringList(RMD_ALL_STYLES);
 		expectSassError(
-			scss`@include rmd.config(
-				$default-styles: (based, cool-cat, lolwhat)
-			);`,
-			`$default-styles has unknown style name "based", ${suffix}`,
+			scss`@include rmd.config($default-styles: (based, cool-cat, lolwhat));`,
+			unknownStyle('default-styles', 'based'),
 		);
 		expectSassError(
-			scss`@include rmd.config(
-				$optional-styles: (h1-line, "Hello!")
-			);`,
-			`$optional-styles has unknown style name "Hello!", ${suffix}`,
+			scss`@include rmd.config($optional-styles: (h1-line, "Hello!"));`,
+			unknownStyle('optional-styles', 'Hello!'),
 		);
 	});
 
@@ -291,11 +286,12 @@ describe('rmd.header()', () => {
 	});
 
 	test('outputs list of default styles', () => {
+		const expected = sortedKeys(DEFAULTS['default-styles']);
 		const { css, error } = scss`
 			@include rmd.header();
 		`;
 		expect(error).toBeUndefined();
-		expect(getHeader(css).defaults).toEqual(RMD_DEFAULT_STYLES);
+		expect(getHeader(css).defaults).toEqual(expected);
 	});
 
 	test('reflects changes to $default-styles', () => {
@@ -317,8 +313,7 @@ describe('rmd.styles()', () => {
 		expect(error).toBeUndefined();
 
 		// Check output
-		expect(css.length).toBeGreaterThan(8_000);
-		expect(css.length).toBeLessThan(12_000);
+		expectLineCount(css, 450);
 		expect(css).toMatch(`--rmd-base-font: ui-monospace, monospace;`);
 
 		// Check a few selectors are present
@@ -344,8 +339,7 @@ describe('rmd.styles()', () => {
 		expect(error).toBeUndefined();
 
 		// Check output length
-		expect(css.length).toBeGreaterThan(8_000);
-		expect(css.length).toBeLessThan(12_000);
+		expectLineCount(css, 450);
 
 		// Check that configured CSS variable syntax/values are present
 		const vars = getCssVars(css);
@@ -372,8 +366,7 @@ describe('rmd.styles()', () => {
 
 		// Check output length
 		// We currently output a dozen rules, maybe it should be lower…
-		expect(css.length).toBeGreaterThan(1_000);
-		expect(css.length).toBeLessThan(2_000);
+		expectLineCount(css, 75);
 
 		// Check against a snapshot of expected selectors
 		// This could change if some of the style implementations are fixed,

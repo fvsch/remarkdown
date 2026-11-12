@@ -8,11 +8,12 @@
 @use "./state";
 @use "./validate";
 
-/// Get a full configuration map with optional overrides
-@function new($preset: default, $options: null) {
+/// Get a full configuration map with optional overrides.
+/// Returns (error: "[error message]") if any option is invalid.
+@function new($preset: default, $options: ()) {
 	$err: validate.check-preset($preset);
 	@if $err {
-		@error $err;
+		@return (error: $err);
 	}
 
 	$config: data.defaults($preset);
@@ -20,7 +21,7 @@
 	@each $name, $value in $options {
 		$err: validate.check-option($name, $value);
 		@if $err {
-			@error $err;
+			@return (error: $err);
 		} @else {
 			$config: map.set($config, $name, $value);
 		}
@@ -44,8 +45,23 @@
 	@return $config;
 }
 
+/// Write a single configuration value
+@mixin set($name, $value) {
+	$err: validate.check-option($name, $value);
+	@if $err {
+		@error $err;
+	} @else {
+		@include state.set($name, $value);
+	}
+}
+
 /// Write configuration values
-@mixin set-all($preset: default, $options: null) {
-	$config: new($preset, $options);
-	@include state.set-all($config);
+@mixin set-all($options: ()) {
+	$preset: map.get($options, preset);
+	$config: new($preset, map.remove($options, preset));
+	@if map.has-key($config, error) {
+		@error map.get($config, error);
+	} @else {
+		@include state.set-all($config);
+	}
 }
