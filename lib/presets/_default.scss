@@ -1,5 +1,5 @@
 /// Default options for Remarkdown.
-/// To change these options, use the `config` mixin:
+/// To change these, use the `config` mixin:
 ///
 ///	@use "pkg:remarkdown.css" as rmd;
 ///	@include rmd.config(
@@ -12,7 +12,8 @@
 ///	@include rmd.styles();
 
 /// Default styles.
-/// Type: a list of strings, where each string is a style name.
+/// Type: a list of strings, where each string is a style name
+/// (full list at https://fvsch.github.io/remarkdown/styles).
 ///
 /// These will be defined using the `$base-selector`, which means that
 /// they will be enabled when using the main Remarkdown activation
@@ -89,7 +90,7 @@ $option-selector: ".remarkdown.%s";
 $css-vars: "--rmd-%s";
 
 /// Primary font stack.
-/// Type: a list of strings, a string, or null.
+/// Type: a list of strings.
 /// Recommended: lists should end with the generic 'monospace'.
 ///
 /// A custom font stack with multiples fonts should be written as a list,
@@ -103,7 +104,7 @@ $css-vars: "--rmd-%s";
 $base-font: (ui-monospace, monospace);
 
 /// Font stack for traditionally monospace elements (code, pre, etc.).
-/// Type: a list of strings, a string, or null.
+/// Type: a list of strings.
 /// Defaults to "inherit" in order to use the `$base-font`.
 ///
 /// Set to something different if you want to visually distinguish those

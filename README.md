@@ -61,7 +61,7 @@ Beyond the pre-built stylesheets, Remarkdown is a [Sass][] library, and can be i
 @include rmd.styles();
 ```
 
-See the [`build` directory](https://github.com/fvsch/remarkdown/tree/main/build) for some examples that modify the Remarkdown selectors, and [`lib/_defaults.scss`](https://github.com/fvsch/remarkdown/tree/main/lib/_defaults.scss) for all available configuration options.
+See the [`build` directory](https://github.com/fvsch/remarkdown/tree/main/build) for some examples that modify the Remarkdown selectors, and [`lib/presets/_default.scss`](https://github.com/fvsch/remarkdown/tree/main/lib/presets/_default.scss) for all available configuration options.
 
 
 [Markdown]: https://daringfireball.net/projects/markdown/

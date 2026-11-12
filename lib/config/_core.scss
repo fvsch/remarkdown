@@ -1,0 +1,133 @@
+/// Manipulate Remarkdown config maps
+
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta" as *;
+
+@use "./check" as *;
+@use "./data";
+
+/// Get a full configuration map with optional overrides.
+@function new($preset: default, $options: ()) {
+	$preset: -preset-guard($preset);
+	$config: data.defaults($preset);
+
+	// validate and merge user config
+	@each $name, $value in $options {
+		$config: set($config, $name, $value);
+	}
+
+	@return $config;
+}
+
+/// Read a config value for a specific key or path.
+/// Checks that the config option exists, only checking the first path element.
+@function get($config, $path) {
+	$key: -option-guard(list.nth($path, 1));
+	$config: -config-guard($config, ($key));
+	@return map.get($config, $path...);
+}
+
+/// Check if any style name in $styles is a default style
+@function has-default-style($config, $styles) {
+	$defaults: filter-default-styles($config, $styles);
+	@return list.length($defaults) > 0;
+}
+
+/// Check if any style name in $styles is an optional style
+@function has-optional-style($config, $styles) {
+	$options: filter-optional-styles($config, $styles);
+	@return list.length($options) > 0;
+}
+
+/// Return style names that are default styles
+@function filter-default-styles($config, $styles) {
+	$defaults: get($config, default-styles);
+	$styles: -styles-guard($styles);
+	@return -filter-list($styles, $include: $defaults, $exclude: false);
+}
+
+/// Return style names that are optional styles
+@function filter-optional-styles($config, $styles) {
+	$optional: get($config, optional-styles);
+	$defaults: get($config, default-styles);
+	$styles: -styles-guard($styles);
+	@if $optional == false {
+		@return ();
+	} @else {
+		@return -filter-list($styles, $include: $optional, $exclude: $defaults);
+	}
+}
+
+/// Write a single configuration value
+@function set($config, $name, $value) {
+	$config: -config-guard($config);
+	$name: -option-guard($name);
+
+	// coerce some string values to a list of strings
+	@if list.index(default-styles optional-styles base-font code-font, $name) and type-of($value) == string {
+		$value: list.append((), $value, $separator: comma);
+	}
+
+	// validate option value
+	$err: check-option($name, $value);
+	@if $err {
+		@error $err;
+	}
+
+	// ensure margins have a default key
+	@if $name == margins and not map.get($value, default) {
+		$value: map.set($value, default, data.default-margins());
+	}
+
+	@return map.set($config, $name, $value);
+}
+
+/// Narrow down a list by checking it against other lists
+@function -filter-list($list, $include: true, $exclude: false) {
+	$acc: ();
+	@each $item in $list {
+		$included: $include == true or list.index($include, $item) != null;
+		$excluded: $exclude != false and list.index($exclude, $item) != null;
+		@if $included and not $excluded {
+			$acc: list.append($acc, $item, $separator: comma);
+		}
+	}
+	@return $acc;
+}
+
+@function -config-guard($config, $required-keys: ()) {
+	$err: require-map(config, $config, $required-keys);
+	@if $err {
+		@error $err;
+	}
+	@return $config;
+}
+
+@function -option-guard($name) {
+	$err: require-option($name);
+	@if $err {
+		@error $err;
+	}
+	@return $name;
+}
+
+@function -preset-guard($preset) {
+	$err: check-preset($preset);
+	@if $err {
+		@error $err;
+	}
+	@return $preset;
+}
+
+/// Check list of style names
+@function -styles-guard($styles) {
+	@if type-of($styles) == string {
+		$styles: list.append((), $styles, $separator: comma);
+	}
+	$err: require-style-list($styles);
+	@if $err {
+		@error $err;
+	}
+	@return $styles;
+}

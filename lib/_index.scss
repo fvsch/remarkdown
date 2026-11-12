@@ -5,16 +5,15 @@
 /// - `styles()`: generates the actual styles.
 
 @use "sass:list";
-@use "sass:map";
 
 @use "./config";
-@use "./info";
 @use "./styles";
 @use "./toolkit/arglist";
+@use "./toolkit/info";
 @use "./toolkit/str";
 
 /// Configures Remarkdown options.
-/// For a list of available options, see `lib/_defaults.scss`.
+/// For a list of available options, see `lib/presets/_default.scss`.
 /// This mixin can be called with keyword arguments:
 ///
 ///	@include rmd.config(
@@ -31,8 +30,7 @@
 ///
 @mixin config($args...) {
 	$options: arglist.merge($args);
-	$preset: map.get($options, preset);
-	@include config.set-all($preset, map.remove($options, preset));
+	@include config.set-all($options);
 }
 
 /// Generate a stylesheet header (i.e. a CSS comment)

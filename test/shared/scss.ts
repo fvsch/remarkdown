@@ -13,40 +13,48 @@ import {
 import { expect } from 'vitest';
 
 import { localPath } from './meta';
-import type { JSValue, ScssResult } from './types';
+import type { JSValue, ScssException, ScssResult } from './types';
 
 type TemplateStringFn<T> = (str: string | TemplateStringsArray, ...values: any[]) => T;
 
-const SASS_CONTEXT = `
-@use "sass:list";
-@use "sass:map";
-@use "sass:meta";
+export function scssTemplate(scssPrefix: string): TemplateStringFn<ScssResult> {
+	return (str, ...substitutions) => {
+		const input = tplToString(str, ...substitutions);
+		const source = `${scssPrefix.trim()}\n\n${input.trim()}\n`;
+		const result: ScssResult = {
+			scss: source,
+			css: '',
+			logs: [],
+			values: {},
+		};
+		try {
+			const options = getSassOptions(result);
+			result.css = compileString(source, options).css;
+		} catch (err) {
+			if (err instanceof Exception) {
+				const error = err as ScssException;
+				error.testMessage = trimQuotes(error.sassMessage);
+				result.logs.push({ type: 'error', message: error.testMessage });
+				result.error = error;
+			} else {
+				throw err;
+			}
+		}
+		return result;
+	};
+}
 
-@use "./lib" as rmd;
-@use "./lib/config" as config;
-@use "./lib/styles" as styles;
-`.trim();
-
-const tplToString: TemplateStringFn<string> = (str, ...values) => {
-	const raw = typeof str === 'string' ? [str] : str;
-	return String.raw({ raw }, ...values);
-};
-
-export const scss: TemplateStringFn<ScssResult> = (strings, ...tplValues) => {
-	const input = tplToString(strings, ...tplValues).trim();
-	const logs: ScssResult['logs'] = [];
-	const values: ScssResult['values'] = {};
-
-	const sassOptions: StringOptions<'sync'> = {
+function getSassOptions(result: Pick<ScssResult, 'logs' | 'values'>): StringOptions<'sync'> {
+	return {
 		alertColor: false,
 		loadPaths: [localPath()],
 		logger: {
-			debug(message, _options) {
-				logs.push({ type: 'debug', message });
+			debug(message, _opt) {
+				result.logs.push({ type: 'debug', message });
 			},
-			warn(message, options) {
-				if (!options.deprecation) {
-					logs.push({ type: 'warn', message });
+			warn(message, opt) {
+				if (!opt.deprecation) {
+					result.logs.push({ type: 'warn', message });
 				}
 			},
 		},
@@ -55,29 +63,24 @@ export const scss: TemplateStringFn<ScssResult> = (strings, ...tplValues) => {
 			// then pass the value through
 			'capture($id, $data)': ([id, data]) => {
 				const key = id.assertString('id').toString();
-				values[trimQuotes(key)] = sassValueToJS(data);
+				result.values[trimQuotes(key)] = sassValueToJS(data);
 				return data;
 			},
 		},
 	};
-
-	try {
-		const { css } = compileString(`${SASS_CONTEXT}\n\n${input}`, sassOptions);
-		return { css, logs, values };
-	} catch (error) {
-		if (error instanceof Exception) {
-			logs.push({ type: 'error', message: trimQuotes(error.sassMessage) });
-			return { css: '', error, logs, values };
-		} else {
-			throw error;
-		}
-	}
-};
+}
 
 export function expectScssExports(
 	module: 'rmd' | 'config' | 'styles',
 	keys: Record<'functions' | 'mixins' | 'variables', string[]>,
 ) {
+	const scss = scssTemplate(`
+		@use "sass:meta";
+		@use "sass:map";
+		@use "./lib" as rmd;
+		@use "./lib/config" as config;
+		@use "./lib/styles" as styles;
+	`);
 	const { values, error } = scss`
 		$mod: "${module}";
 		$functions: meta.module-functions($mod);
@@ -146,4 +149,9 @@ function sassValueToJS(value: Value): JSValue {
 		return result;
 	}
 	return value.toString();
+}
+
+function tplToString(str: string | TemplateStringsArray, ...substitutions: any[]): string {
+	const raw = typeof str === 'string' ? [str] : str;
+	return String.raw({ raw }, ...substitutions);
 }

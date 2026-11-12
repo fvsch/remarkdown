@@ -13,7 +13,7 @@ const rootDir = join(import.meta.dirname, '..');
 main();
 
 async function main() {
-	await writePkgInfo('lib/_info.scss');
+	await writePkgInfo('lib/toolkit/_info.scss');
 	await buildAll([
 		{ input: 'build/remarkdown.scss', dest: 'dist' },
 		{ input: 'build/remarkdown.attr.scss', dest: 'dist' },

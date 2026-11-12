@@ -2,7 +2,7 @@
 @use "sass:meta" as *;
 @use "sass:selector";
 
-@use "../config/read" as config;
+@use "../config";
 @use "./str";
 
 /// Wrap content in the default selector
@@ -28,12 +28,12 @@
 /// - Outputs nothing if none of the provided names are present in
 ///   `$default-styles` or `$optional-styles`.
 @mixin option($names, $default-scope: default) {
-	@if config.has-default($names) {
+	@if config.has-default-style($names) {
 		@include default($default-scope) {
 			@content;
 		}
 	} @else {
-		$options: config.in-options($names);
+		$options: config.filter-optional-styles($names);
 		@if list.length($options) > 0 {
 			#{option-selector($options)} {
 				@content;
@@ -58,9 +58,24 @@
 	$pattern: config.get(option-selector);
 	$selectors: ();
 	@each $name in $names {
-		$str: str.replace($pattern, "%s", $name);
-		$next: selector.parse($str);
-		$selectors: list.join($selectors, $next, $separator: comma);
+		$selector: -replace-option-selector($pattern, $name);
+		$selectors: list.append($selectors, $selector, $separator: comma);
 	}
 	@return $selectors;
+}
+
+@function -replace-option-selector($pattern, $option) {
+	$str: str.replace($pattern, "%s", $option);
+	$parsed: selector.parse($str);
+	// unwrap single-item selector list
+	@if list.length($parsed) == 1 {
+		$parsed: list.nth($parsed, 1);
+	}
+	@if type-of($parsed) == string {
+		@return $parsed;
+	} @else if list.separator($parsed) == space {
+		@return str.join($parsed, " ");
+	} @else {
+		@error "Unsupported $option-selector pattern: '#{$pattern}'";
+	}
 }

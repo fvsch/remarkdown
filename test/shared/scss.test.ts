@@ -1,6 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import { scss } from './scss';
+import { scssTemplate } from './scss';
+
+const scss = scssTemplate('');
 
 describe(`scss() helper`, () => {
 	test('compiles basic sass', () => {
@@ -36,7 +38,7 @@ describe(`scss() helper`, () => {
 
 		// First error is captured
 		expect(error).toBeDefined();
-		expect(error?.sassMessage).toMatch('First error message');
+		expect(error?.testMessage).toMatch('First error message');
 
 		// compilation and logs should stop after first error
 		expect(logs).toEqual([
