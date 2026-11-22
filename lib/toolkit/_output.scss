@@ -4,8 +4,8 @@
 @use "sass:meta" as *;
 @use "sass:string";
 
-@use "../config/read" as config;
-@use "../config/data" as data;
+@use "../config";
+@use "../config/data";
 @use "./str";
 
 /// Define a CSS custom property

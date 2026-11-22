@@ -1,0 +1,56 @@
+/// Read and write the Remarkdown configuration
+/// (This module behaves as a singleton of sorts,
+/// and maintains a single state map in `$-state`.)
+
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta" as *;
+
+@use "./core";
+@use "./data";
+
+/// Holds the configuration state
+$-state: data.$DEFAULTS;
+
+/// Read a config value for a specific key or path
+@function get($path) {
+	@return core.get($-state, $path);
+}
+
+/// Get the current config map
+@function get-all() {
+	@return map.merge((), $-state);
+}
+
+/// Set a single configuration value
+@mixin set($name, $value) {
+	$config: core.set($-state, $name, $value);
+	$-state: $config !global;
+}
+
+/// Replace all configuration values
+@mixin set-all($options: ()) {
+	$preset: map.get($options, preset);
+	$config: core.new($preset, map.remove($options, preset));
+	$-state: $config !global;
+}
+
+/// Check if any style name in $styles is a default style
+@function has-default-style($styles) {
+	@return core.has-default-style($-state, $styles);
+}
+
+/// Check if any style name in $styles is an optional style
+@function has-optional-style($styles) {
+	@return core.has-optional-style($-state, $styles);
+}
+
+/// Return style names that are default styles
+@function filter-default-styles($styles) {
+	@return core.filter-default-styles($-state, $styles);
+}
+
+/// Return style names that are optional styles
+@function filter-optional-styles($styles) {
+	@return core.filter-optional-styles($-state, $styles);
+}

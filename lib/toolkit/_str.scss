@@ -8,8 +8,11 @@
 @function join($list, $joiner: "") {
 	$acc: "";
 	@each $item in $list {
-		$sep: if(sass($acc): $joiner; else: "");
-		$acc: $acc + $sep + $item;
+		@if $acc == "" {
+			$acc: $acc + $item;
+		} @else {
+			$acc: $acc + $joiner + $item;
+		}
 	}
 	@return string.quote($acc);
 }

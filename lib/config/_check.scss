@@ -6,27 +6,29 @@
 @use "../toolkit/str";
 @use "./data";
 
+/// Check a single option and its value
 @function check-option($name, $value) {
 	$name: string.unquote($name);
-	$msg: null;
+	$msg: require-option($name);
+	@if $msg {
+		@return $msg;
+	}
 
 	// fail for unknown and invalid options
-	@if not map.has-key(data.$DEFAULTS, $name) {
-		$msg: "Unknown option $#{$name}, expected #{-print-list(map.keys(data.$DEFAULTS))}";
-	} @else if $name == base-selector or $name == default-selector or $name == option-selector {
+	@if list.index(base-selector default-selector option-selector, $name) {
 		$msg: check-selector($name, $value);
 	} @else if $name == css-vars {
 		$msg: require-type($name, $value, "string") or require-substring($name, $value, "--") or
 			require-substring($name, $value, "%s");
 	} @else if $name == default-styles {
-		$msg: require-type($name, $value, "string" "list") or check-style-list($name, $value);
+		$msg: require-type($name, $value, "list") or check-style-list($name, $value);
 	} @else if $name == optional-styles {
-		$msg: require-type($name, $value, "bool" "string" "list");
+		$msg: require-type($name, $value, "bool" "list");
 		@if type-of($value) != bool {
 			$msg: $msg or check-style-list($name, $value);
 		}
-	} @else if $name == base-font or $name == code-font {
-		$msg: require-type($name, $value, "null" "string" "list");
+	} @else if list.index(base-font code-font, $name) {
+		$msg: require-list-of-type($name, $value, "string");
 	} @else {
 		// fall back to checking that the type matches the default value's type
 		$msg: require-type($name, $value, type-of(map.get(data.$DEFAULTS, $name)));
@@ -53,21 +55,13 @@
 }
 
 @function check-style-list($name, $list) {
-	@each $item in $list {
-		@if not data.is-style($item) {
-			@return "$#{$name} has unknown style name #{-print-string($item)}, expected #{-print-list(data.styles())}";
-		}
+	$err: require-style-list($list);
+	@if $err {
+		@return str.replace($err, "Unknown style name", "$#{$name} has unknown style name")
 	}
 	@return null;
 }
 
-@function require-type($name, $value, $expected) {
-	$type: type-of($value);
-	@if not list.index($expected, $type) {
-		@return "$#{$name}'s type must be #{-print-list($expected)}, got: #{-print-any($type)}";
-	}
-	@return null;
-}
 
 @function require-enum($name, $value, $required) {
 	@if not list.index($required, $value) {
@@ -76,9 +70,66 @@
 	@return null;
 }
 
+@function require-map($name, $value, $required-keys: ()) {
+	$err: require-type($name, $value, "map");
+	@if $err {
+		@return $err;
+	}
+	@each $key in $required-keys {
+		@if not map.has-key($value, $key) {
+			@return "Missing #{-print-string($key)} key in map: #{inspect($value)}";
+		}
+	}
+	@return null;
+}
+
+@function require-option($name) {
+	@if not data.is-option($name) {
+		@return "Unknown option $#{$name}, expected #{-print-list(data.$ALL-OPTIONS)}";
+	}
+	@return null;
+}
+
+@function require-style-list($list) {
+	@each $item in $list {
+		@if not data.is-style($item) {
+			@return "Unknown style name #{-print-string($item)}, expected #{-print-list(data.$ALL-STYLES)}";
+		}
+	}
+	@return null;
+}
+
 @function require-substring($name, $value, $sub) {
 	@if not str.contains($value, $sub) {
 		@return "$#{$name} must contain the substring #{-print-string($sub)}, got #{-print-string($value)}";
+	}
+	@return null;
+}
+
+@function require-type($name, $value, $expected) {
+	$type: type-of($value);
+	@if not list.index($expected, $type) {
+		@return "Type of $#{$name} must be #{-print-list($expected)}, got: #{-print-any($type)}";
+	}
+	@return null;
+}
+
+@function require-list-of-type($name, $value, $expected) {
+	$err: require-type($name, $value, "list");
+	@if $err {
+		@return $err;
+	}
+	$types: ();
+	@each $item in $value {
+		$type: type-of($item);
+		@if not list.index($types, $type) {
+			$types: list.append($types, $type, $separator: comma);
+		}
+	}
+	@each $type in $types {
+		@if not list.index($expected, $type) {
+			@return "$#{$name} must be a list of type #{-print-list($expected)}, got: #{-print-list($types)}";
+		}
 	}
 	@return null;
 }

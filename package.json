@@ -46,12 +46,12 @@
 	"devDependencies": {
 		"@types/node": "^26.6.6",
 		"happy-dom": "^21.0.4",
-		"oxfmt": "^0.76.0",
-		"postcss": "^8.5.32",
+		"oxfmt": "^0.79.0",
+		"postcss": "^8.5.33",
 		"postcss-combine-duplicated-selectors": "^11.0.0",
-		"sass": "^1.107.1",
+		"sass": "^1.108.2",
 		"servitsy": "^0.6.0",
 		"typescript": "^7.0.2",
-		"vitest": "^5.1.0"
+		"vitest": "^5.1.1"
 	}
 }
